@@ -1,0 +1,83 @@
+@import '~@taiga-ui/core/styles/taiga-ui-local';
+
+@tablet:    ~"only screen and (min-width: 720px) and (max-width: 1010px)";
+@mobile:    ~"only screen and (max-width: 719px)";
+
+.container {
+  height: 72px;
+  padding: 0px 24px 0px 24px;
+  display: flex;
+
+  background-color: #252525;
+  color: #FFFFFF;
+}
+
+.header {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-left,
+.header__auth,
+.header__links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-right {
+  width: calc(100% - 602px);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+
+  app-search-bar {
+    width: calc(100% - 131px);
+  }
+}
+
+.header__auth *,
+.header__links *,
+.logo {
+  cursor: pointer;
+}
+
+@media @tablet {
+  .header__links {
+    display: none;
+  }
+
+  .header-right {
+    width: calc(100% - 173px);
+  
+    app-search-bar {
+      width: calc(100% - 131px);
+    }
+  }
+}
+
+@media @mobile {
+  .header__links,
+  .header__auth__log-in {
+    display: none;
+  }
+
+  .header-right {
+    width: calc(100% - 173px);
+  
+    app-search-bar {
+      width: calc(100% - 71px);
+    }
+  }
+}

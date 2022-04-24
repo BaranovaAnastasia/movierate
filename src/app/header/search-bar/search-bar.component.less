@@ -1,0 +1,28 @@
+.container {
+  height: 24px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.icon {
+  height: 24px;
+  opacity: .4;
+}
+
+input {
+  outline: none;
+  border: none;
+  background: none;
+  padding-left: 10px;
+  width: 100px;
+}
+input:focus {
+  flex-grow: 1;
+}
+form:focus-within {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+}
