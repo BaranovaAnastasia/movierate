@@ -1,3 +1,7 @@
+@desktop:   ~"only screen and (min-width: 1011px)";
+@tablet:    ~"only screen and (min-width: 720px) and (max-width: 1010px)";
+@mobile:    ~"only screen and (max-width: 719px)";
+
 .container {
   height: 24px;
   width: 100%;
@@ -25,4 +29,10 @@ input:focus {
 }
 form:focus-within {
   border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+@media @mobile {
+  input {
+    display: none;
+  }
 }

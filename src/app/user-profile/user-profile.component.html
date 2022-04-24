@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="main">
+    <img class="picture" [src]="user.picture">
+    <div class="name-stats-wrapper">
+      <div class="name tui-text_h6">{{ user.name }}</div>
+      <app-user-statistics [statistics]="user.statistics"></app-user-statistics>
+    </div>
+
+    <div class="controls">
+      <button *ngIf="!isMyProfile" class="controls__follow">
+        {{ followText }}
+      </button>
+      <div class="controls__links">
+        
+        <div class="controls__links__item">
+          <a href="">Favourites</a>
+        </div>
+        
+        <div class="controls__links__item">
+          <a href="">Lists</a>
+        </div>
+        
+        <div class="controls__links__item">
+          <a href="">{{ activityText }}</a>
+        </div>
+        
+        <div class="controls__links__item" *ngIf="isMyProfile">
+          <a href="">Log Out</a>
+        </div>
+        <hr *ngIf="isMyProfile"/>
+      </div>
+    </div>
+  </div>
+</div>

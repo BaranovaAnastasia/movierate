@@ -11,6 +11,9 @@ import { AuthorizationModule } from "./authorization/authorization.module";
 import { IMovieApiServiceToken } from "src/shared/interfaces/IMovieApiService";
 import { MovieMockApiService } from "src/shared/services/movie-mock-api.service";
 import { MovieModule } from "./movie/movie.module";
+import { UserMockApiService } from "src/shared/services/user-mock-api.service";
+import { IUserApiServiceToken } from "src/shared/interfaces/IUserApiService";
+import { UserProfileModule } from "./user-profile/user-profile.module";
 
 @NgModule({
   declarations: [
@@ -24,11 +27,13 @@ import { MovieModule } from "./movie/movie.module";
     BrowserAnimationsModule,
     TuiDialogModule,
     AuthorizationModule,
-    MovieModule
+    MovieModule,
+    UserProfileModule
 ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},
-    {provide: IMovieApiServiceToken, useClass: MovieMockApiService}
+    {provide: IMovieApiServiceToken, useClass: MovieMockApiService},
+    {provide: IUserApiServiceToken, useClass: UserMockApiService}
   ],
   bootstrap: [AppComponent]
 })

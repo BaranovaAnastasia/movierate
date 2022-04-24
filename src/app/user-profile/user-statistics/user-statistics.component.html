@@ -1,0 +1,60 @@
+<div class="container">
+
+  <div class="wrapper">
+    <div class="stats__movies">
+      <div class="stats-data">
+        <div class="tui-text_body-s">{{ statistics.movies }}</div>
+        <div class="tui-text_body-s">Movies</div>
+      </div>
+      <progress
+        class="stats-bar"
+        tuiProgressBar
+        size="s"
+        [value]="statistics.movies"
+        [max]="getNextGoal(statistics.movies)"
+      ></progress>
+    </div>
+  
+    <div class="stats__hours">
+      <div class="stats-data">
+        <div class="tui-text_body-s">{{ statistics.hours }}</div>
+        <div class="tui-text_body-s">Hours</div>
+      </div>
+      <progress
+        class="stats-bar"
+        tuiProgressBar
+        size="s"
+        [value]="statistics.hours"
+        [max]="getNextGoal(statistics.hours)"
+      ></progress>
+    </div>
+  
+    <div class="stats__reviews">
+      <div class="stats-data">
+        <div class="tui-text_body-s">{{ statistics.reviews }}</div>
+        <div class="tui-text_body-s">Reviews</div>
+      </div>
+      <progress
+        class="stats-bar"
+        tuiProgressBar
+        size="s"
+        [value]="statistics.reviews"
+        [max]="getNextGoal(statistics.reviews)"
+      ></progress>
+    </div>
+  </div>
+
+  <tui-pie-chart
+    size="m"
+    [value]="genresValues"
+    [hintContent]="content"
+  ></tui-pie-chart>
+
+</div>
+
+<ng-template
+  #content
+  let-index
+  >
+  <div>{{ genresNames[index] }}</div>
+</ng-template>
