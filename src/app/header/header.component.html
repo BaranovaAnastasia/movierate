@@ -13,10 +13,14 @@
     <div class="header-right">
       <app-search-bar></app-search-bar>
       <div class="header__auth">
-        <a class="header__auth__log-in">
+        <a
+          class="header__auth__log-in"
+          [routerLink]="['/authorization', 'log-in']">
           Log In
         </a>
-        <a class="header__auth__sign-up">
+        <a
+          class="header__auth__sign-up"
+          [routerLink]="['/authorization', 'sign-up']">
           Sign Up
         </a>
       </div>

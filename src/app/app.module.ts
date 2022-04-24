@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './header/header.module';
+import { AuthorizationModule } from "./authorization/authorization.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HeaderModule } from './header/header.module';
     HeaderModule,
     TuiRootModule,
     BrowserAnimationsModule,
-    TuiDialogModule
+    TuiDialogModule,
+    AuthorizationModule,
 ],
   providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}],
   bootstrap: [AppComponent]

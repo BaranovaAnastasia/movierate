@@ -1,0 +1,48 @@
+<form class="form">
+  <div class="tui-form__header">{{ formTitle }}</div>
+  
+  <div *ngIf="isSignUp" class="form__field">
+    <div class="form__field__title">Name</div>
+    <input class="form__field__input">
+  </div>
+
+  <div class="form__field">
+    <div class="form__field__title">Email</div>
+    <input class="form__field__input">
+  </div>
+
+  <div class="form__field">
+    <div class="form__field__title">Password</div>
+    <input class="form__field__input">
+  </div>
+
+  <div *ngIf="isSignUp" class="form__field">
+    <div class="form__field__title">Confirm password</div>
+    <input class="form__field__input">
+  </div>
+
+  <div class="form__footer">
+    <div>
+      {{ alternativeText }}<br/>
+      <a
+        *ngIf="isSignUp"
+        [routerLink]="['/authorization', 'log-in']">
+        Log-In
+      </a>
+      <a
+        *ngIf="!isSignUp"
+        [routerLink]="['/authorization', 'sign-up']">
+        Sign-Up
+      </a>
+    </div>
+    <button
+      tuiButton
+      size="m"
+      type="submit"
+      class="tui-form__button"
+      appearance="authorization-submit">
+      {{ submitText }}
+    </button>
+  </div>
+
+</form>

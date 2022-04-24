@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { SearchBarModule } from './search-bar/search-bar.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -11,7 +12,8 @@ import { SearchBarModule } from './search-bar/search-bar.module';
   ],
   imports: [
     CommonModule,
-    SearchBarModule
+    SearchBarModule,
+    AppRoutingModule
   ],
   exports: [
     HeaderComponent
