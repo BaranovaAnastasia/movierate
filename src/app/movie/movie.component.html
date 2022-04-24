@@ -1,0 +1,34 @@
+<div class="movie">
+  <div class="movie__main">
+    <div class="row">
+      <img class="movie__poster" [src]="movie.posterUrl">
+      <div class="movie__trailer">
+        <iframe class="movie__trailer__video" [src]="safeTrailerUrl" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+    
+    <div class="row">
+      <app-movie-controls [statistics]="movie.statistics!"></app-movie-controls>
+    </div>
+  </div>
+
+  <div class="movie__info">
+    <div class="movie__info__title tui-text_h5">{{ movie.title }}</div>
+    <div class="movie__info__line2">{{ movie.year }} ‧ {{ movie.genres }} ‧ {{ movie.runtimeStr }}</div>
+    <div class="movie__info__description">{{ movie.plot }}</div>
+    <table class="movie__info__people">
+      <tr>
+        <td class="movie__info__people__role">Director</td>
+        <td>{{ movie.directors }}</td>
+      </tr>
+      <tr>
+        <td class="movie__info__people__role">Writers</td>
+        <td>{{ movie.writers }}</td>
+      </tr>
+      <tr>
+        <td class="movie__info__people__role">Stars</td>
+        <td>{{ movie.stars }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

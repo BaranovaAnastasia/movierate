@@ -10,7 +10,7 @@ type AuthorizationMode = 'log-in' | 'sign-up';
   styleUrls: ['./authorization.component.less']
 })
 export class AuthorizationComponent implements OnInit {
-  @Input() mode!: AuthorizationMode;
+  mode!: AuthorizationMode;
 
   constructor(
     private fb: FormBuilder,
