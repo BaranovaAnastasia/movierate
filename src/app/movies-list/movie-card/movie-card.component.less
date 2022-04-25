@@ -1,0 +1,114 @@
+@desktop:   ~"only screen and (min-width: 1011px)";
+@tablet:    ~"only screen and (min-width: 720px) and (max-width: 1010px)";
+@mobile:    ~"only screen and (max-width: 719px)";
+
+.container {
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 80px;
+}
+
+.link {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.black-screen {
+  display: none;
+  position: absolute;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.4);
+}
+.link:hover .black-screen {
+  display: block;
+}
+
+.poster {
+  position: absolute;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.info {
+  border-radius: 10px;
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-end;
+}
+.info * {
+  color: #FFFFFF;
+  opacity: 0.8;
+}
+.container:hover {
+  .info * {
+    opacity: 1;
+  }
+}
+
+.info__right {
+  text-align: right;
+  text-decoration: none;
+}
+.info__title {
+  text-decoration: none;
+}
+.info__title:hover {
+  text-decoration: underline;
+}
+
+
+@media @desktop {
+  @card-width: 280px;
+  @card-height: 180px;
+
+  .container {
+    width: @card-width;
+    height: @card-height;
+  }
+  .black-screen {
+    width: @card-width;
+    height: @card-height;
+  }
+  .poster {
+    width: @card-width;
+    height: @card-height;
+  }
+}
+
+@media @tablet {
+  @card-width: 230px;
+  @card-height: 148px;
+
+  .container {
+    width: @card-width;
+    height: @card-height;
+  }
+  .black-screen {
+    width: @card-width;
+    height: @card-height;
+  }
+  .poster {
+    width: @card-width;
+    height: @card-height;
+  }
+}
+
+@media @mobile {
+  @card-width: 200px;
+  @card-height: 100px;
+
+  .container {
+    width: @card-width;
+    height: @card-height;
+  }
+  .black-screen {
+    width: @card-width;
+    height: @card-height;
+  }
+  .poster {
+    width: @card-width;
+    height: @card-height;
+  }
+}

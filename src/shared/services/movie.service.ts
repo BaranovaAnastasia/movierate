@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IMovieApiService, IMovieApiServiceToken } from '../interfaces/IMovieApiService';
 import { Movie } from '../models/movie';
+import { MoviesList } from '../models/movies-list';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +15,9 @@ export class MovieService {
 
   getMovieById(id: string): Observable<Movie> {
     return this.movieApiService.getMovieById(id);
+  }
+
+  getMoviesListById(id: string): Observable<MoviesList> {
+    return this.movieApiService.getMoviesListById(id);
   }
 }

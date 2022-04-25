@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="title tui-text_body-xl">
+    <div class="title__tag"></div>
+    <a>{{ list.title }}</a>
+    <div
+      *ngIf="list.visibility"
+      class="title__visibility tui-text_body-xs">
+      {{ list.visibility }}
+    </div>
+  </div>
+  <div class="content">
+    <app-movie-card
+      *ngFor="let movieId of list.moviesIds"
+      [movieId]="movieId">
+    </app-movie-card>
+  </div>
+</div>

@@ -6,6 +6,6 @@ export interface MoviesList {
   id: string,
   title: string,
   visibility?: Visibility,
-  movies: Movie[],
+  moviesIds: string[],
   owner?: User
 }

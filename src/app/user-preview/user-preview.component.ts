@@ -21,6 +21,6 @@ export class UserPreviewComponent implements OnInit {
         this.user = user;
       }
     );
-}
+  }
 
 }

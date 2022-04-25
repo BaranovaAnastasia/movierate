@@ -6,6 +6,6 @@ export interface User {
   name: string,
   picture: string,
   statistics: UserStatistics,
-  following?: User[],
+  followingIds?: string[],
   lists?: MoviesList[],
 }

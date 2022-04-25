@@ -1,0 +1,36 @@
+<div class="container">
+  <a
+    class="link"
+    [routerLink]="['/movie', movieId]">
+    <img
+      class="poster"
+      [src]="movie.posterUrl!"
+      alt="poster"/>
+    <div class="black-screen"></div>
+  </a>
+
+  <div class="info">
+
+    <div class="info__rating">
+      <label tuiProgressLabel>
+        <span class="percent">{{ formattedRating }}</span>
+
+        <tui-progress-circle
+          [color]="ratingColor"
+          size="m"
+          [max]="10"
+          [value]="movie.statistics!.rating">
+        </tui-progress-circle>
+      </label>
+    </div>
+
+    <div class="info__right">
+      <a
+        class="info__title"
+        [routerLink]="['/movie', movieId]">
+        {{ movie.title }}
+      </a>
+      <div class="info__year">{{ movie.year }}</div>
+    </div>
+  </div>
+</div>
