@@ -17,17 +17,23 @@
   gap: 24px;
   width: 100%;
 
-  .picture {
-    object-fit: cover;
-    border-radius: 5px;
-  }
-
-  .name-stats-wrapper {
-    flex-grow: 1;
-
+  .picture-stats-wrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-grow: 1;
+    gap: 24px;
+
+    .picture {
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  
+    .name-stats-wrapper {
+      flex-grow: 1;
+  
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -52,9 +58,23 @@
       color: #ffffff;
     }
   }
+
+  .controls__following {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .controls__following__title {
+      font-weight: bold;
+    }
+  }
 }
 
 @media @desktop {
+  .picture-stats-wrapper {
+    height: 149px;
+  }
   .controls__follow {
     width: 100%;
   }

@@ -1,9 +1,11 @@
 <div class="container">
   <div class="main">
-    <img class="picture" [src]="user.picture">
-    <div class="name-stats-wrapper">
-      <div class="name tui-text_h6">{{ user.name }}</div>
-      <app-user-statistics [statistics]="user.statistics"></app-user-statistics>
+    <div class="picture-stats-wrapper">
+      <img class="picture" [src]="user.picture">
+      <div class="name-stats-wrapper">
+        <div class="name tui-text_h6">{{ user.name }}</div>
+        <app-user-statistics [statistics]="user.statistics"></app-user-statistics>
+      </div>
     </div>
 
     <div class="controls">
@@ -28,6 +30,14 @@
           <a href="">Log Out</a>
         </div>
         <hr *ngIf="isMyProfile"/>
+      </div>
+
+      <div class="controls__following">
+        <div class="controls__following__title">Following</div>
+        <app-user-preview
+          *ngFor="let userId of user.followingIds"
+          [userId]="userId">
+        </app-user-preview>
       </div>
     </div>
   </div>

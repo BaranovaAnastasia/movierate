@@ -20,7 +20,7 @@ export class UserStatisticsComponent {
   getNextGoal(current: number): number {
     const steps = [0, 10, 50, 100, 500, 1000, 2000, 5000];
     const result = steps.reduce((prev, curr) => 
-      (prev < current) || (curr - current < prev - current) ? curr : prev
+      (prev <= current) || (curr - current < prev - current) ? curr : prev
     );
     console.log(result)
     if (result === 0) {
