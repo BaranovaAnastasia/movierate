@@ -15,6 +15,7 @@ import { UserMockApiService } from "src/shared/services/user-mock-api.service";
 import { IUserApiServiceToken } from "src/shared/interfaces/IUserApiService";
 import { UserProfileModule } from "./user-profile/user-profile.module";
 import { MoviesListModule } from "./movies-list/movies-list.module";
+import { FrontPageModule } from "./front-page/front-page.module";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MoviesListModule } from "./movies-list/movies-list.module";
     AuthorizationModule,
     MovieModule,
     UserProfileModule,
-    MoviesListModule
+    MoviesListModule,
+    FrontPageModule
 ],
   providers: [
     {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer},

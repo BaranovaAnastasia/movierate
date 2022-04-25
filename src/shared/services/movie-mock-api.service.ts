@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IMovieApiService } from '../interfaces/IMovieApiService';
+import { IMovieApiService, MainListName } from '../interfaces/IMovieApiService';
 import { Movie } from '../models/movie';
 import { MovieStatistics } from '../models/movie-statistics';
 import { MoviesList } from '../models/movies-list';
@@ -137,5 +137,17 @@ export class MovieMockApiService implements IMovieApiService {
   }
   getMoviesListById(id: string): Observable<MoviesList> {
     return of(mockLists.find(list => list.id === id)!);
+  }
+
+
+  getMainListId(listName: MainListName): Observable<string> {
+    switch (listName) {
+      case 'ranked':
+        return of("0");
+      case 'popular':
+        return of("1");
+      case 'new':
+        return of("2")
+    }
   }
 }
