@@ -1,6 +1,6 @@
 import { InjectionToken } from "@angular/core";
 import { Observable } from "rxjs";
-import { User } from "../models/user";
+import { User } from "../models/user/user";
 
 export const IUserApiServiceToken = new InjectionToken('IUserApiService');
 

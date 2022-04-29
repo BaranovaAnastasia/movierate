@@ -1,11 +1,12 @@
-import { MoviesList } from "./movies-list";
+import { MoviesList } from "../movies-list/movies-list";
 import { UserStatistics } from "./user-statistics";
 
 export interface User {
-  id: string,
+  username: string,
   name: string,
-  picture: string,
-  statistics: UserStatistics,
+  avatar_path: string,
+  
+  statistics?: UserStatistics,
   followingIds?: string[],
   lists?: MoviesList[],
 }

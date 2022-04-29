@@ -1,0 +1,20 @@
+<div class="review">
+  <div class="review__header">
+    <app-user-preview [user]="review.author_details"></app-user-preview>
+    <!-- <div class="review__rating">
+      <img class="review__rating-star" *ngFor="let s of stars" src="/assets/icons/star-filled.svg">
+    </div> -->
+    <div class="review__date tui-text_body-m">
+      {{ review.created_at | dateStrigify }}
+    </div>
+  </div>
+
+  <div class="review__content">
+    <div class="review__content__title tui-text_body-l">
+      {{ review.title }}
+    </div>
+    <div class="review__content__text">
+      {{ review.content }}
+    </div>
+  </div>
+</div>

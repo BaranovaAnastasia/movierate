@@ -1,17 +1,17 @@
 <div class="container">
   <a
     class="link"
-    [routerLink]="['/movie', movieId]">
+    [routerLink]="['/movie', movie.id]">
     <img
       class="poster"
-      [src]="movie.posterUrl!"
+      [src]="movie.poster_path"
       alt="poster"/>
     <div class="black-screen"></div>
   </a>
 
   <div class="info">
 
-    <div class="info__rating">
+    <div class="info__rating" *ngIf="movie.vote_average">
       <label tuiProgressLabel>
         <span class="percent">{{ formattedRating }}</span>
 
@@ -19,7 +19,7 @@
           [color]="ratingColor"
           size="m"
           [max]="10"
-          [value]="movie.statistics!.rating">
+          [value]="movie.vote_average!">
         </tui-progress-circle>
       </label>
     </div>
@@ -27,7 +27,7 @@
     <div class="info__right">
       <a
         class="info__title"
-        [routerLink]="['/movie', movieId]">
+        [routerLink]="['/movie', movie.id]">
         {{ movie.title }}
       </a>
       <div class="info__year">{{ movie.year }}</div>

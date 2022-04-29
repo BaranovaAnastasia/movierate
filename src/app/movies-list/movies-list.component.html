@@ -10,8 +10,8 @@
   </div>
   <div class="content">
     <app-movie-card
-      *ngFor="let movieId of list.moviesIds"
-      [movieId]="movieId">
+      *ngFor="let movie of list.movies"
+      [movie]="movie">
     </app-movie-card>
   </div>
 </div>

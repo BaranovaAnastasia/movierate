@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MovieStatistics } from 'src/shared/models/movie-statistics';
 
 @Component({
   selector: 'app-movie-controls',
@@ -8,6 +7,8 @@ import { MovieStatistics } from 'src/shared/models/movie-statistics';
 })
 export class MovieControlsComponent {
 
-  @Input() statistics!: MovieStatistics;
+  @Input() vote_average: number | undefined;
+  @Input() vote_count: number | undefined;
+  @Input() watched: number | undefined;
 
 }

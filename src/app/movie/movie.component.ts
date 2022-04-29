@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Movie } from 'src/shared/models/movie';
+import { IReviewsApiService, IReviewsApiServiceToken } from 'src/shared/interfaces/IReviewsApiService';
+import { DEFAULT_MOVIE, Movie } from 'src/shared/models/movie/movie';
+import { Review } from 'src/shared/models/movie/review';
 import { MovieService } from 'src/shared/services/movie.service';
 
 @Component({
@@ -10,28 +12,30 @@ import { MovieService } from 'src/shared/services/movie.service';
   styleUrls: ['./movie.component.less']
 })
 export class MovieComponent implements OnInit {
-  movie!: Movie;
+  movie: Movie = DEFAULT_MOVIE;
+  reviews: Review[] = [];
 
   constructor(
     private movieService: MovieService,
+    @Inject(IReviewsApiServiceToken)
+    private reviewsApiService: IReviewsApiService,
     private activatedroute: ActivatedRoute,
-    private _sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
-    this.activatedroute.params.subscribe(routeParams => {
-      this.movieService.getMovieById(routeParams.id).subscribe(
-        movie => {
-          this.movie = movie;
-        }
-      )
-    });
+    this.activatedroute.params
+      .subscribe(routeParams => {
+        this.movieService.constructFullMovie(routeParams.id, this.movie);
+
+        this.reviewsApiService.getMovieReviews(routeParams.id).subscribe(
+          result => this.reviews = result
+        );
+      });
   }
 
-  get safeTrailerUrl(): SafeResourceUrl {
-    return this._sanitizer.bypassSecurityTrustResourceUrl(
-      this.movie.trailerUrl!
-    );
+  get safeTrailerUrl(): SafeResourceUrl | undefined {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.movie?.trailer?.embededUrl!);
   }
-
+  
 }

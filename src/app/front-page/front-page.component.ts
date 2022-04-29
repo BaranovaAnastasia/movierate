@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MovieService } from 'src/shared/services/movie.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { IMoviesListApiService, IMoviesListApiServiceToken } from 'src/shared/interfaces/IMoviesListApi';
+import { MoviesList } from 'src/shared/models/movies-list/movies-list';
 
 @Component({
   selector: 'app-front-page',
@@ -7,21 +8,28 @@ import { MovieService } from 'src/shared/services/movie.service';
   styleUrls: ['./front-page.component.less']
 })
 export class FrontPageComponent implements OnInit {
-  highestRankedId!: string;
-  popularId!: string;
-  newId!: string;
+  highestRanked!: MoviesList;
+  popular!: MoviesList;
+  // new!: MoviesList;
+  upcoming!: MoviesList;
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    @Inject(IMoviesListApiServiceToken)
+    private moviesListApiService: IMoviesListApiService
+  ) { }
 
   ngOnInit(): void {
-    this.movieService.getMainListId('ranked').subscribe(id => {
-      this.highestRankedId = id;
+    this.moviesListApiService.getTopRated().subscribe(list => {
+      this.highestRanked = list;
     });
-    this.movieService.getMainListId('popular').subscribe(id => {
-      this.popularId = id;
+    this.moviesListApiService.getPopular().subscribe(list => {
+      this.popular = list;
     });
-    this.movieService.getMainListId('new').subscribe(id => {
-      this.newId = id;
+    // this.moviesListApiService.getNew().subscribe(list => {
+    //   this.new = list;
+    // });
+    this.moviesListApiService.getUpcoming().subscribe(list => {
+      this.upcoming = list;
     });
   }
 

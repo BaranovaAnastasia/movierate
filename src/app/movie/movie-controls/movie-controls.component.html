@@ -1,10 +1,10 @@
 <div class="container">
   <div class="stats-item rating">
     <img class="rating__icon" src="/assets/icons/star-filled.svg">
-    <div class="rating__value tui-text_body-l">{{ statistics.rating }}
+    <div class="rating__value tui-text_body-l">{{ vote_average }}
       <span class="rating__max tui-text_body-s gray">/10</span>
     </div>
-    <div class="rating__votes tui-text_body-s">{{ statistics.graded }}</div>
+    <div class="rating__votes tui-text_body-s">{{ vote_count }}</div>
   </div>
 
   <div class="stats-item my-rating">
@@ -16,7 +16,7 @@
   </div>
 
   <div class="stats-item watched">
-    <div class="watched__value tui-text_body-l">{{ statistics.watched }}</div>
+    <div class="watched__value tui-text_body-l">{{ watched }}</div>
     <div class="stats-item__text tui-text_body-s gray">watched</div>
   </div>
 
