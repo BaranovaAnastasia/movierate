@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IUserApiService } from '../interfaces/IUserApiService';
-import { Movie } from '../models/movie';
-import { User } from '../models/user';
-import { UserStatistics } from '../models/user-statistics';
+import { User } from '../models/user/user';
+import { UserStatistics } from '../models/user/user-statistics';
 
 const mockStats: UserStatistics[] = [
   {
