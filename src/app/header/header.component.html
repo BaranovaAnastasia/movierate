@@ -17,14 +17,18 @@
       <div class="header__auth">
         <a
           class="header__auth__log-in"
-          [routerLink]="['/authorization', 'log-in']">
+          routerLink="/signin">
           Log In
         </a>
         <a
           class="header__auth__sign-up"
-          [routerLink]="['/authorization', 'sign-up']">
+          routerLink="/signup">
           Sign Up
         </a>
+      </div>
+
+      <div *ngIf="authService.loggedInUser$ | async as user">
+        <app-user-preview [user]="user"></app-user-preview>
       </div>
     </div>
   </div>

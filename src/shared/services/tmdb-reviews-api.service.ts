@@ -26,7 +26,7 @@ export class TMDBReviewsApiService implements IReviewsApiService {
           {
             author_details: Object.assign(
               { ...review.author_details },
-              { avatar_path: review.author_details.avatar_path.substring(1) }
+              { avatar_path: review.author_details.avatar_path?.substring(1) }
             )
           }
         ))

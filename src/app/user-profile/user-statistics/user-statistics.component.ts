@@ -22,7 +22,6 @@ export class UserStatisticsComponent {
     const result = steps.reduce((prev, curr) => 
       (prev <= current) || (curr - current < prev - current) ? curr : prev
     );
-    console.log(result)
     if (result === 0) {
       return Math.ceil(current / 5000) * 5000;
     }

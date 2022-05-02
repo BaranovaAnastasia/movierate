@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IUserApiService, IUserApiServiceToken } from 'src/shared/interfaces/IUserApiService';
 import { User } from 'src/shared/models/user/user';
-import { UserService } from 'src/shared/services/user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,15 +12,14 @@ export class UserProfileComponent implements OnInit {
   user!: User;
 
   constructor(
-    private userService: UserService,
+    @Inject(IUserApiServiceToken) private userApiService: IUserApiService,
     private activatedroute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.activatedroute.params.subscribe(routeParams => {
-      this.userService.getUserById(routeParams.id).subscribe(
+      this.userApiService.getUserById(routeParams.id).subscribe(
         user => {
-          console.log(user)
           this.user = user;
         }
       )

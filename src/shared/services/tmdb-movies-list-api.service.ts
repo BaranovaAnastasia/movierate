@@ -62,7 +62,6 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
       `${url}movie/upcoming?api_key=${api_keys.TMDB_API_KEY}`
     ).pipe(
       map(result => {
-        console.log('getUpcoming', result)
         return {
           id: result.id,
           title: 'Coming Soon',

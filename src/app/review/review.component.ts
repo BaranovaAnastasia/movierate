@@ -12,7 +12,6 @@ export class ReviewComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.review)
   }
 
 }

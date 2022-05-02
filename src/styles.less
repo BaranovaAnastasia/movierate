@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+
+tui-wrapper[data-appearance='auth-submit'] {
+  background: #FDCE25;
+  color: #000;
+  border-radius: 5px;
+  height: 40px;
+  font-weight: bold;
+
+  &[data-state='hovered'] {
+    background: #fdce25dd;
+  }
+
+  &[data-state='disabled'] {
+    opacity: 0.5;
+  }
+}

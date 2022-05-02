@@ -1,0 +1,54 @@
+<form
+  class="form"
+  [formGroup]="form"
+  (submit)="signup()">
+  <div class="tui-form__header">Create Account</div>
+  
+  <tui-input
+    class="form__field"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="name">
+    Name
+  </tui-input>
+
+  <tui-input
+    class="form__field"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="email">
+    Email
+  </tui-input>
+
+  <tui-input-password
+    class="form__field"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="password">
+    Password
+  </tui-input-password>
+
+  <tui-input-password
+    class="form__field"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="confirmPassword">
+    Confirm password
+  </tui-input-password>
+
+  <div class="form__footer">
+    <div>
+      Already have an account?<br/>
+      <a routerLink="/login">
+        Log-In
+      </a>
+    </div>
+    
+    <button
+      type="submit"
+      class="form__footer__submit">
+      Sign Up
+    </button>
+  </div>
+
+</form>

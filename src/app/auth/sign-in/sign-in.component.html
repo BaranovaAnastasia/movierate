@@ -1,0 +1,41 @@
+<form
+  class="form"
+  [formGroup]="form"
+  (submit)="signin()">
+
+  <div class="tui-form__header">Log In</div>
+
+  <tui-input
+    class="form__field"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="email">
+    Email
+  </tui-input>
+
+  <tui-input-password
+    class="form__field"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="password">
+    Password
+  </tui-input-password>
+
+  <div class="form__footer">
+    <div>
+      Don't have an account?<br />
+      <a routerLink="/signup">
+        Sign-Up
+      </a>
+    </div>
+
+    <button
+      tuiButton
+      type="submit"
+      appearance="auth-submit"
+      [disabled]="form.invalid">
+      Log In
+    </button>
+  </div>
+
+</form>

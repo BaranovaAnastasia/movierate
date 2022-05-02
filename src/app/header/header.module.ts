@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { SearchBarModule } from './search-bar/search-bar.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { UserPreviewModule } from '../user-preview/user-preview.module';
 
 
 
@@ -13,7 +14,8 @@ import { AppRoutingModule } from '../app-routing.module';
   imports: [
     CommonModule,
     SearchBarModule,
-    AppRoutingModule
+    AppRoutingModule,
+    UserPreviewModule
   ],
   exports: [
     HeaderComponent

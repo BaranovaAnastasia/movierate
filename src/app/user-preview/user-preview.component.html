@@ -1,17 +1,11 @@
 <div class="container">
-  <a class="image-link" [routerLink]="['/user', user.username]">
+  <a class="image-link" [routerLink]="['/user', user.id]">
     <img class="image" [src]="user.avatar_path">
   </a>
   <a
     *ngIf="user.name"
     class="name tui-text_body-m"
-    [routerLink]="['/user', user.username]">
+    [routerLink]="['/user', user.id]">
     {{ user.name }}
-  </a>
-  <a
-    *ngIf="!user.name"
-    class="name tui-text_body-m"
-    [routerLink]="['/user', user.username]">
-    {{ user.username }}
   </a>
 </div>

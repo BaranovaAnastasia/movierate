@@ -7,18 +7,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './header/header.module';
-import { AuthorizationModule } from "./authorization/authorization.module";
 import { IMovieApiServiceToken } from "src/shared/interfaces/IMovieApiService";
 import { MovieModule } from "./movie/movie.module";
 import { UserProfileModule } from "./user-profile/user-profile.module";
 import { MoviesListModule } from "./movies-list/movies-list.module";
 import { FrontPageModule } from "./front-page/front-page.module";
 import { TMDBMovieApiService } from "src/shared/services/tmdb-movie-api.service";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { IMoviesListApiServiceToken } from "src/shared/interfaces/IMoviesListApi";
 import { TMDBMoviesListApiService } from "src/shared/services/tmdb-movies-list-api.service";
 import { IReviewsApiServiceToken } from "src/shared/interfaces/IReviewsApiService";
 import { TMDBReviewsApiService } from "src/shared/services/tmdb-reviews-api.service";
+import { IAuthApiServiceToken } from "src/shared/interfaces/IAuthApiService";
+import { AuthApiService } from "src/shared/services/auth-api.service";
+import { AuthModule } from "./auth/auth.module";
+import { AuthInterceptor } from "src/shared/interceptors/auth.interceptor";
+import { UserApiService } from "src/shared/services/user-api.service";
+import { IUserApiServiceToken } from "src/shared/interfaces/IUserApiService";
 
 @NgModule({
   declarations: [
@@ -31,7 +36,7 @@ import { TMDBReviewsApiService } from "src/shared/services/tmdb-reviews-api.serv
     TuiRootModule,
     BrowserAnimationsModule,
     TuiDialogModule,
-    AuthorizationModule,
+    AuthModule,
     MovieModule,
     UserProfileModule,
     MoviesListModule,
@@ -41,9 +46,11 @@ import { TMDBReviewsApiService } from "src/shared/services/tmdb-reviews-api.serv
   providers: [
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
     { provide: IMovieApiServiceToken, useClass: TMDBMovieApiService },
-    // { provide: IUserApiServiceToken, useClass: UserMockApiService },
+    { provide: IUserApiServiceToken, useClass: UserApiService },
     { provide: IMoviesListApiServiceToken, useClass: TMDBMoviesListApiService },
-    { provide: IReviewsApiServiceToken, useClass: TMDBReviewsApiService}
+    { provide: IReviewsApiServiceToken, useClass: TMDBReviewsApiService },
+    { provide: IAuthApiServiceToken, useClass: AuthApiService },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
