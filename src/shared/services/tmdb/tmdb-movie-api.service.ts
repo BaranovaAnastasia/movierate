@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IMovieApiService } from '../interfaces/IMovieApiService';
-import { Movie } from '../models/movie/movie';
+import { IMovieApiService } from '../../interfaces/IMovieApiService';
+import { Movie } from '../../models/movie/movie';
 import { HttpClient } from '@angular/common/http';
 import { api_keys } from 'src/environments/api_keys';
-import { Trailer } from '../models/movie/trailer';
-import { TMDBVideos } from '../models/tmdb/tmdb-videos';
-import { TMDBCredits } from '../models/tmdb/tmdb-credits'
-import { Credits } from '../models/movie/credits';
-import { TMBDMovie } from '../models/tmdb/tmdb-movie';
+import { Trailer } from '../../models/movie/trailer';
+import { TMDBVideos } from '../../models/tmdb/tmdb-videos';
+import { TMDBCredits } from '../../models/tmdb/tmdb-credits'
+import { Credits } from '../../models/movie/credits';
+import { TMBDMovie } from '../../models/tmdb/tmdb-movie';
 
 const url = 'https://api.themoviedb.org/3/';
 const posterUrl = 'https://image.tmdb.org/t/p/w1280/';

@@ -2,9 +2,9 @@ import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IAuthApiService } from '../interfaces/IAuthApiService';
-import { Tokens } from '../models/tokens';
-import { User } from '../models/user/user';
+import { IAuthApiService } from '../../interfaces/IAuthApiService';
+import { Tokens } from '../../models/tokens';
+import { User } from '../../models/user/user';
 
 const host = 'http://localhost:3000/auth';
 

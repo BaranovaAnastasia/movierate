@@ -11,10 +11,13 @@ import { Observable } from 'rxjs';
 export class AuthInterceptor implements HttpInterceptor {
 
   private static addHeader(request: HttpRequest<any>): HttpRequest<any> {
+    const isSignin = request.url.includes('signin');
+    if (isSignin) return request;
+
     const token = request.url.includes('refresh')
       ? localStorage.getItem('refresh_token')
       : localStorage.getItem('access_token');
-    
+
     const headers = request.headers.set('Authorization', `Bearer ${token}`);
 
     return request.clone({ headers });

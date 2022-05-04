@@ -12,18 +12,19 @@ import { MovieModule } from "./movie/movie.module";
 import { UserProfileModule } from "./user-profile/user-profile.module";
 import { MoviesListModule } from "./movies-list/movies-list.module";
 import { FrontPageModule } from "./front-page/front-page.module";
-import { TMDBMovieApiService } from "src/shared/services/tmdb-movie-api.service";
+import { TMDBMovieApiService } from "src/shared/services/tmdb/tmdb-movie-api.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { IMoviesListApiServiceToken } from "src/shared/interfaces/IMoviesListApi";
-import { TMDBMoviesListApiService } from "src/shared/services/tmdb-movies-list-api.service";
 import { IReviewsApiServiceToken } from "src/shared/interfaces/IReviewsApiService";
-import { TMDBReviewsApiService } from "src/shared/services/tmdb-reviews-api.service";
 import { IAuthApiServiceToken } from "src/shared/interfaces/IAuthApiService";
-import { AuthApiService } from "src/shared/services/auth-api.service";
+import { AuthApiService } from "src/shared/services/auth/auth-api.service";
 import { AuthModule } from "./auth/auth.module";
 import { AuthInterceptor } from "src/shared/interceptors/auth.interceptor";
 import { UserApiService } from "src/shared/services/user-api.service";
 import { IUserApiServiceToken } from "src/shared/interfaces/IUserApiService";
+import { TMDBMoviesListApiService } from "src/shared/services/tmdb/tmdb-movies-list-api.service";
+import { TMDBReviewsApiService } from "src/shared/services/tmdb/tmdb-reviews-api.service";
+import { ErrorInterceptor } from "src/shared/interceptors/error.interceptor";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { IUserApiServiceToken } from "src/shared/interfaces/IUserApiService";
     { provide: IMoviesListApiServiceToken, useClass: TMDBMoviesListApiService },
     { provide: IReviewsApiServiceToken, useClass: TMDBReviewsApiService },
     { provide: IAuthApiServiceToken, useClass: AuthApiService },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

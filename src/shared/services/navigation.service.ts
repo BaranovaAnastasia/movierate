@@ -11,4 +11,8 @@ export class NavigationService {
   toProfile(userId: number) : void{
     this.router.navigate(['/user', userId])
   }
+
+  toMain() : void{
+    this.router.navigate([''])
+  }
 }

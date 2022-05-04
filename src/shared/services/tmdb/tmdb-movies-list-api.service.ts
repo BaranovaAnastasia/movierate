@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { api_keys } from 'src/environments/api_keys';
-import { IMoviesListApiService } from '../interfaces/IMoviesListApi';
-import { MoviesList } from '../models/movies-list/movies-list';
-import { TMDBMoviesList } from '../models/tmdb/tmdb-movies-list';
+import { IMoviesListApiService } from 'src/shared/interfaces/IMoviesListApi';
+import { MoviesList } from 'src/shared/models/movies-list/movies-list';
+import { TMDBMoviesList } from 'src/shared/models/tmdb/tmdb-movies-list';
 
 const url = 'https://api.themoviedb.org/3/';
 const posterUrl = 'https://image.tmdb.org/t/p/w1280/';

@@ -4,6 +4,7 @@ import { HeaderComponent } from './header.component';
 import { SearchBarModule } from './search-bar/search-bar.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { UserPreviewModule } from '../user-preview/user-preview.module';
+import { TuiLetModule } from '@taiga-ui/cdk';
 
 
 
@@ -15,7 +16,8 @@ import { UserPreviewModule } from '../user-preview/user-preview.module';
     CommonModule,
     SearchBarModule,
     AppRoutingModule,
-    UserPreviewModule
+    UserPreviewModule,
+    TuiLetModule
   ],
   exports: [
     HeaderComponent

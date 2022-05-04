@@ -1,5 +1,8 @@
 <div class="container">
-  <div class="header">
+  <div
+    class="header"
+    *tuiLet="authService.loggedInUser$ | async as user">
+
     <div class="header-left">
       <a routerLink="">
         <img class="logo" src="/assets/icons/logo.svg" alt="logo">
@@ -12,9 +15,21 @@
       </div>
     </div>
 
-    <div class="header-right">
+    <div
+      *ngIf="user !== undefined"
+      class="header-right">
+
       <app-search-bar></app-search-bar>
-      <div class="header__auth">
+      
+      <div
+        *ngIf="user"
+        class="header__user">
+        <app-user-preview [user]="user"></app-user-preview>
+      </div>
+
+      <div
+        *ngIf="!user"
+        class="header__auth">
         <a
           class="header__auth__log-in"
           routerLink="/signin">
@@ -25,10 +40,6 @@
           routerLink="/signup">
           Sign Up
         </a>
-      </div>
-
-      <div *ngIf="authService.loggedInUser$ | async as user">
-        <app-user-preview [user]="user"></app-user-preview>
       </div>
     </div>
   </div>

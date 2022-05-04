@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { api_keys } from 'src/environments/api_keys';
-import { IReviewsApiService } from '../interfaces/IReviewsApiService';
-import { Review } from '../models/movie/review';
-import { TMBDReviews } from '../models/tmdb/tmdb-reviews';
+import { IReviewsApiService } from 'src/shared/interfaces/IReviewsApiService';
+import { Review } from 'src/shared/models/movie/review';
+import { TMBDReviews } from 'src/shared/models/tmdb/tmdb-reviews';
 
 const url = 'https://api.themoviedb.org/3/';
 
