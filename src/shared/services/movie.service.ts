@@ -1,8 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IMovieApiService, IMovieApiServiceToken } from '../interfaces/IMovieApiService';
+import { IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from '../interfaces/IUserMovieInteractionApiService';
 import { Credits } from '../models/movie/credits';
 import { Movie } from '../models/movie/movie';
+import { MovieStats } from '../models/movie/movie-stats';
 import { Trailer } from '../models/movie/trailer';
 
 @Injectable({
@@ -11,22 +13,29 @@ import { Trailer } from '../models/movie/trailer';
 export class MovieService {
   constructor(
     @Inject(IMovieApiServiceToken)
-    private movieApiService: IMovieApiService
+    private movieApiService: IMovieApiService,
+
+    @Inject(IUserMovieInteractionApiServiceToken)
+    private userMovieService: IUserMovieInteractionApiService
   ) { }
 
-  getMovie(id: string): Observable<Movie> {
+  getMovie(id: number): Observable<Movie> {
     return this.movieApiService.getMovie(id);
   }
 
-  getTrailer(id: string): Observable<Trailer> {
+  getTrailer(id: number): Observable<Trailer> {
     return this.movieApiService.getTrailer(id);
   }
 
-  getCredits(id: string): Observable<Credits> {
+  getCredits(id: number): Observable<Credits> {
     return this.movieApiService.getCredits(id);
   }
 
-  constructFullMovie(id: string, movie: Movie): void {
+  getStats(id: string): Observable<MovieStats> {
+    return this.userMovieService.getStats$(id);
+  }
+
+  constructFullMovie(id: number, movie: Movie): void {
     this.getMovie(id)
       .subscribe(
         result => {

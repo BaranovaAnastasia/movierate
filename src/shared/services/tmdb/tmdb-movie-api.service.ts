@@ -21,7 +21,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getMovie(id: string): Observable<Movie> {
+  getMovie(id: number): Observable<Movie> {
     return this.httpClient.get<TMBDMovie>(
       `${url}/movie/${id}?api_key=${api_keys.TMDB_API_KEY}`
     ).pipe(
@@ -36,7 +36,7 @@ export class TMDBMovieApiService implements IMovieApiService {
     );
   }
 
-  getTrailer(id: string): Observable<Trailer> {
+  getTrailer(id: number): Observable<Trailer> {
     return this.httpClient.get<TMDBVideos>(
       `${url}/movie/${id}/videos?api_key=${api_keys.TMDB_API_KEY}`
     ).pipe(
@@ -48,7 +48,7 @@ export class TMDBMovieApiService implements IMovieApiService {
     );
   }
 
-  getCredits(id: string): Observable<Credits> {
+  getCredits(id: number): Observable<Credits> {
     return this.httpClient.get<TMDBCredits>(
       `${url}/movie/${id}/credits?api_key=${api_keys.TMDB_API_KEY}`
     ).pipe(

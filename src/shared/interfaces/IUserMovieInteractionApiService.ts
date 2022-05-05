@@ -5,6 +5,8 @@ import { MovieStats } from "../models/movie/movie-stats";
 export const IUserMovieInteractionApiServiceToken = new InjectionToken('IUserMovieInteractionApiService');
 
 export interface IUserMovieInteractionApiService {
-  rateMovie$(movieId: number, rating: number ): Observable<MovieStats>;
-  watchMovie$(movieId: number): Observable<MovieStats>;
+  rateMovie$(movieId: string, rating: number ): Observable<MovieStats>;
+  watchMovie$(movieId: string): Observable<MovieStats>;
+  isWatched$(movieId: string): Observable<boolean>;
+  getStats$(movieId: string): Observable<MovieStats>;
 }

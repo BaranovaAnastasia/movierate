@@ -25,6 +25,8 @@ import { IUserApiServiceToken } from "src/shared/interfaces/IUserApiService";
 import { TMDBMoviesListApiService } from "src/shared/services/tmdb/tmdb-movies-list-api.service";
 import { TMDBReviewsApiService } from "src/shared/services/tmdb/tmdb-reviews-api.service";
 import { ErrorInterceptor } from "src/shared/interceptors/error.interceptor";
+import { IUserMovieInteractionApiServiceToken } from "src/shared/interfaces/IUserMovieInteractionApiService";
+import { UserMovieInteractionApiService } from "src/shared/services/user-movie-interaction/user-movie-interaction-api.service";
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { ErrorInterceptor } from "src/shared/interceptors/error.interceptor";
     { provide: IMoviesListApiServiceToken, useClass: TMDBMoviesListApiService },
     { provide: IReviewsApiServiceToken, useClass: TMDBReviewsApiService },
     { provide: IAuthApiServiceToken, useClass: AuthApiService },
+    { provide: IUserMovieInteractionApiServiceToken, useClass: UserMovieInteractionApiService },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],

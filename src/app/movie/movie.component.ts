@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { IReviewsApiService, IReviewsApiServiceToken } from 'src/shared/interfaces/IReviewsApiService';
 import { DEFAULT_MOVIE, Movie } from 'src/shared/models/movie/movie';
+import { MovieStats } from 'src/shared/models/movie/movie-stats';
 import { Review } from 'src/shared/models/movie/review';
 import { MovieService } from 'src/shared/services/movie.service';
 
@@ -13,6 +14,7 @@ import { MovieService } from 'src/shared/services/movie.service';
 })
 export class MovieComponent implements OnInit {
   movie: Movie = DEFAULT_MOVIE;
+  
   reviews: Review[] = [];
 
   constructor(
@@ -25,7 +27,7 @@ export class MovieComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedroute.params
-      .subscribe(routeParams => {
+      .subscribe(async routeParams => {
         this.movieService.constructFullMovie(routeParams.id, this.movie);
 
         this.reviewsApiService.getMovieReviews(routeParams.id).subscribe(

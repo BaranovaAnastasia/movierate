@@ -1,19 +1,22 @@
 <div class="container">
   <div class="stats-item rating">
     <img class="rating__icon" src="/assets/icons/star-filled.svg">
-    <div class="rating__value tui-text_body-l">{{ vote_average }}
+    <div class="rating__value tui-text_body-l">{{ voteAvg }}
       <span class="rating__max tui-text_body-s gray">/10</span>
     </div>
-    <div class="rating__votes tui-text_body-s">{{ vote_count }}</div>
+    <div class="rating__votes tui-text_body-s">{{ voteCount }}</div>
   </div>
 
-  <div class="stats-item my-rating">
+  <form
+    [formGroup]="ratingForm"
+    class="stats-item my-rating">
     <tui-rating
+      formControlName="rating"
       iconNormal="/assets/icons/star.svg"
       iconFilled="/assets/icons/star-filled.svg">
     </tui-rating>
     <div class="stats-item__text tui-text_body-s gray">my rating</div>
-  </div>
+  </form>
 
   <div class="stats-item watched">
     <div class="watched__value tui-text_body-l">{{ watched }}</div>
@@ -23,11 +26,11 @@
   <div class="break"></div>
 
   <div class="control watched">
-    <svg class="control__icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg [ngClass]="{'control-active': isWatched}" class="control__icon" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M1.99219 15L3.52734 16.5352C9.85547 22.8633 20.1504 22.8633 26.4785 16.5352L28.0078 15L26.4727 13.4648C20.1445 7.13672 9.84961 7.13672 3.52149 13.4648L1.99219 15ZM15 22.3945C10.5586 22.3945 6.11719 20.7012 2.73633 17.3203L0.808594 15.3926C0.591797 15.1758 0.591797 14.8242 0.808594 14.6016L2.73633 12.6738C9.49805 5.91211 20.502 5.91211 27.2637 12.6738L29.1914 14.6016C29.4082 14.8184 29.4082 15.1699 29.1914 15.3926L27.2637 17.3203C23.8828 20.7012 19.4414 22.3945 15 22.3945Z" fill="white"/>
       <path d="M15 10.752C12.6563 10.752 10.752 12.6562 10.752 15C10.752 17.3438 12.6563 19.248 15 19.248C17.3438 19.248 19.248 17.3438 19.248 15C19.248 12.6562 17.3438 10.752 15 10.752ZM15 20.3613C12.041 20.3613 9.63867 17.9531 9.63867 15C9.63867 12.041 12.0469 9.63867 15 9.63867C17.9531 9.63867 20.3613 12.0469 20.3613 15C20.3613 17.959 17.959 20.3613 15 20.3613Z" fill="white"/>
     </svg>      
-    <div class="control__text tui-text_body-s gray">add to watched</div>
+    <div class="control__text tui-text_body-s gray">{{watchedText}}</div>
   </div>
 
   <div class="control favourite">

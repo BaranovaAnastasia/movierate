@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { url } from 'inspector';
 import { Observable } from 'rxjs';
 import { IUserMovieInteractionApiService } from '../../interfaces/IUserMovieInteractionApiService';
 import { MovieStats } from '../../models/movie/movie-stats';
@@ -14,15 +13,27 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   constructor(private httpClient: HttpClient) { }
   
-  rateMovie$(movieId: number, rating: number): Observable<MovieStats> {
+  rateMovie$(movieId: string, rating: number): Observable<MovieStats> {
     return this.httpClient.post<MovieStats>(
-      `${url}/rate`,
+      `${host}/rate`,
       { movieId, rating }
-    )
+    );
   }
   
-  watchMovie$(movieId: number): Observable<MovieStats> {
+  watchMovie$(movieId: string): Observable<MovieStats> {
     throw new Error('Method not implemented.');
+  }
+
+  isWatched$(movieId: string): Observable<boolean> {
+    return this.httpClient.get<boolean>(
+      `${host}/iswatched/${movieId}`
+    );
+  }
+
+  getStats$(movieId: string): Observable<MovieStats> {
+    return this.httpClient.get<MovieStats>(
+      `${host}/stats/${movieId}`
+    );
   }
 
 }

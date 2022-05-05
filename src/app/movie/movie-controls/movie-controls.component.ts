@@ -1,14 +1,80 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { debounceTime, switchMap } from 'rxjs/operators';
+import { IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from 'src/shared/interfaces/IUserMovieInteractionApiService';
+import { MovieStats } from 'src/shared/models/movie/movie-stats';
 
 @Component({
   selector: 'app-movie-controls',
   templateUrl: './movie-controls.component.html',
   styleUrls: ['./movie-controls.component.less']
 })
-export class MovieControlsComponent {
+export class MovieControlsComponent implements OnInit, OnChanges {
 
-  @Input() vote_average: number | undefined;
-  @Input() vote_count: number | undefined;
-  @Input() watched: number | undefined;
+  @Input() movieId!: string;
+
+  voteAvg: number | undefined;
+  voteCount: number | undefined;
+  watched: number | undefined;
+
+  ratingForm = this.fb.group({
+    rating: [0]
+  });
+
+  isWatched: boolean | undefined;
+
+  constructor(
+    @Inject(IUserMovieInteractionApiServiceToken)
+    private userMovieInteractionApiService: IUserMovieInteractionApiService,
+    private fb: FormBuilder
+  ) { }
+
+  ngOnInit(): void {
+    this.requestStats();
+    this.requestIsWatched();
+
+    const rating = this.ratingForm.get('rating')!;
+
+    rating.valueChanges.pipe(
+      switchMap(value =>
+        this.userMovieInteractionApiService.rateMovie$(this.movieId, value)
+      )
+    ).subscribe(stats => {
+      this.updateStats(stats);
+      this.isWatched = true;
+    });
+  }
+
+  ngOnChanges(): void {
+    this.requestStats();
+    this.requestIsWatched();
+  }
+
+  get watchedText(): string {
+    return this.isWatched ? "watched!" : "add to watched";
+  }
+
+  private requestStats(): void {
+    if (!this.movieId) return;
+
+    this.userMovieInteractionApiService.getStats$(this.movieId).subscribe(
+      stats => this.updateStats(stats)
+    )
+  }
+
+  private requestIsWatched(): void {
+    if (!this.movieId) return;
+
+    this.userMovieInteractionApiService.isWatched$(this.movieId).subscribe(
+      isWatched => this.isWatched = isWatched
+    );
+  }
+
+  private updateStats(stats: MovieStats): void {
+    this.voteAvg = stats.voteAvg,
+      this.voteCount = stats.voteCount,
+      this.watched = stats.watched
+  }
 
 }
