@@ -33,6 +33,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.requestStats();
     this.requestIsWatched();
+    this.requestRating();
 
     const rating = this.ratingForm.get('rating')!;
 
@@ -49,6 +50,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.requestStats();
     this.requestIsWatched();
+    this.requestRating();
   }
 
   get watchedText(): string {
@@ -61,6 +63,17 @@ export class MovieControlsComponent implements OnInit, OnChanges {
     this.userMovieInteractionApiService.getStats$(this.movieId).subscribe(
       stats => this.updateStats(stats)
     )
+  }
+
+  private requestRating(): void {
+    if (!this.movieId) return;
+
+    this.userMovieInteractionApiService.getRating$(this.movieId).subscribe(
+      rating => this.ratingForm.setValue(
+        { rating: rating },
+        { emitEvent: false }
+      )
+    );
   }
 
   private requestIsWatched(): void {

@@ -7,6 +7,7 @@ export const IUserMovieInteractionApiServiceToken = new InjectionToken('IUserMov
 export interface IUserMovieInteractionApiService {
   rateMovie$(movieId: string, rating: number ): Observable<MovieStats>;
   watchMovie$(movieId: string): Observable<MovieStats>;
+  getRating$(movieId: string): Observable<number>;
   isWatched$(movieId: string): Observable<boolean>;
   getStats$(movieId: string): Observable<MovieStats>;
 }

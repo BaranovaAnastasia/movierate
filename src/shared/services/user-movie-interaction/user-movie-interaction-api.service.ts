@@ -24,6 +24,12 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     throw new Error('Method not implemented.');
   }
 
+  getRating$(movieId: string): Observable<number> {
+    return this.httpClient.get<number>(
+      `${host}/rating/${movieId}`
+    );
+  }
+
   isWatched$(movieId: string): Observable<boolean> {
     return this.httpClient.get<boolean>(
       `${host}/iswatched/${movieId}`
