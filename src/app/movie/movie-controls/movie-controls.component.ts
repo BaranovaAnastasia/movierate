@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { debounceTime, switchMap } from 'rxjs/operators';
@@ -8,7 +8,8 @@ import { MovieStats } from 'src/shared/models/movie/movie-stats';
 @Component({
   selector: 'app-movie-controls',
   templateUrl: './movie-controls.component.html',
-  styleUrls: ['./movie-controls.component.less']
+  styleUrls: ['./movie-controls.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieControlsComponent implements OnInit, OnChanges {
 

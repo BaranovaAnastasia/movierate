@@ -1,7 +1,7 @@
 import { Credits } from "../movie/credits"
 import { Trailer } from "../movie/trailer"
 
-export interface TMBDMovie {
+export interface TMDBMovie {
   id: string,
   title: string,
   release_date: Date,
@@ -15,6 +15,7 @@ export interface TMBDMovie {
   production_countries: {
     name: string
   },
+  popularity?: number,
 
   trailer?: Trailer,
   credits?: Credits,

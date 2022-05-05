@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { api_keys } from 'src/environments/api_keys';
 import { IReviewsApiService } from 'src/shared/interfaces/IReviewsApiService';
 import { Review } from 'src/shared/models/movie/review';
-import { TMBDReviews } from 'src/shared/models/tmdb/tmdb-reviews';
+import { TMDBReviews } from 'src/shared/models/tmdb/tmdb-reviews';
 
 const url = 'https://api.themoviedb.org/3/';
 
@@ -17,7 +17,7 @@ export class TMDBReviewsApiService implements IReviewsApiService {
   constructor(private httpClient: HttpClient) { }
 
   getMovieReviews(movieId: string): Observable<Review[]> {
-    return this.httpClient.get<TMBDReviews>(
+    return this.httpClient.get<TMDBReviews>(
       `${url}movie/${movieId}/reviews?api_key=${api_keys.TMDB_API_KEY}`
     ).pipe(
       map(result =>

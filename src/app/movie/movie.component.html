@@ -1,22 +1,22 @@
-<div class="movie">
+<div class="movie" *ngIf="movie$ | async as movie">
   <div class="movie__main">
     <div class="row">
       <img class="movie__poster" [src]="movie?.poster_path">
       <div class="movie__trailer">
-        <iframe class="movie__trailer__video" [src]="safeTrailerUrl" frameborder="0" allowfullscreen></iframe>
+        <iframe class="movie__trailer__video" [src]="getSafeTrailerUrl(movie)" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
-    
+
     <div class="row">
-      <app-movie-controls
-        [movieId]="movie.id">
+      <app-movie-controls [movieId]="movie.id">
       </app-movie-controls>
     </div>
   </div>
 
   <div class="movie__info">
     <div class="movie__info__title tui-text_h5">{{ movie?.title }}</div>
-    <div class="movie__info__line2">{{ movie?.year }} ‧ {{ movie?.genres! | listStringify : '/' }} ‧ {{ movie?.runtime | runtimeStrigify }}</div>
+    <div class="movie__info__line2">{{ movie?.year }} ‧ {{ movie?.genres! | listStringify : '/' }} ‧ {{ movie?.runtime |
+      runtimeStrigify }}</div>
 
     <div class="movie__info__tagline">{{ movie?.tagline }}</div>
     <div class="movie__info__description">{{ movie?.overview }}</div>
@@ -35,9 +35,17 @@
       </tr>
     </table>
   </div>
+</div>
 
-  <app-review
-    *ngFor="let review of reviews"
-    [review]="review">
-  </app-review>
+
+
+<div *ngIf="reviews$ | async as reviews">
+  <div class="reviews__title">
+    <div class="reviews__title__tag"></div>
+    <div class="tui-text_body-l">Reviews</div>
+  </div>
+  <div>
+    <app-review *ngFor="let review of reviews" [review]="review">
+    </app-review>
+  </div>
 </div>

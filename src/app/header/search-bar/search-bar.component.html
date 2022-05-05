@@ -1,10 +1,24 @@
-<form class="container" [formGroup]="form">
+<form class="container" [formGroup]="form" *tuiLet="results$ | async as results">
   <tui-svg
     src="tuiIconSearchLarge"
     class="icon"
   ></tui-svg>
   <input
+    tuiTextfield
     type="text"
     placeholder="search movies"
     formControlName="search">
+
+  <tui-data-list class="results" *ngIf="results">
+      <tui-opt-group *ngFor="let movie of results">
+        <a tuiOption class="results__item" [routerLink]="['/movie', movie.id]" (click)="reset()">
+          <img class="results__item__poster" [src]="movie.poster_path">
+          <div class="results__item__info">
+            <div class="results__item__info__title tui-text_body-m">{{movie.title}}</div>
+            <div class="results__item__info__year">{{ movie.year }}</div>
+            <div class="results__item__info__overview">{{ movie.overview }}</div>
+          </div>
+        </a>
+      </tui-opt-group>
+  </tui-data-list>
 </form>

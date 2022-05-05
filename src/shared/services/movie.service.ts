@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { IMovieApiService, IMovieApiServiceToken } from '../interfaces/IMovieApiService';
 import { IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from '../interfaces/IUserMovieInteractionApiService';
 import { Credits } from '../models/movie/credits';
@@ -35,24 +36,20 @@ export class MovieService {
     return this.userMovieService.getStats$(id);
   }
 
-  constructFullMovie(id: number, movie: Movie): void {
-    this.getMovie(id)
-      .subscribe(
-        result => {
-          Object.assign(movie, result);
+  constructFullMovie(id: number, movieSubject: Subject<Movie>): void {
+    this.getMovie(id).subscribe(
+      async result => {
+        const movie = { ...result };
 
-          this.getTrailer(id).subscribe(
-            trailer => {
-              movie.trailer = trailer;
-            }
-          );
+        movie.trailer = await this.getTrailer(id).toPromise();
+        movie.credits = await this.getCredits(id).toPromise();
 
-          this.getCredits(id).subscribe(
-            credits => { 
-              movie.credits = credits;
-            }
-          )
-        }
-      )
+        movieSubject.next(movie);
+      }
+    );
+  }
+
+  searchMovies(query: string, page: number = 1): Observable<Movie[]> {
+    return this.movieApiService.searchMovies(query, page);
   }
 }
