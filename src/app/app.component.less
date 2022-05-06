@@ -1,10 +1,25 @@
+@desktop:   ~"only screen and (min-width: 1011px)";
+@tablet:    ~"only screen and (min-width: 720px) and (max-width: 1010px)";
+@mobile:    ~"only screen and (max-width: 719px)";
+
 tui-root {
   min-height: 100vh;
   background: #1C1C1C;
 }
 
 .content {
-  padding: 24px;
   max-width: 1280px;
   margin: auto;
+}
+
+@media @desktop, @tablet {
+  .content {
+    padding: 24px;
+  }
+}
+
+@media @mobile {
+  .content {
+    padding: 10px;
+  }
 }

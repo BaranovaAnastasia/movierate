@@ -30,15 +30,11 @@ export class TMDBMovieApiService implements IMovieApiService {
     );
   }
 
-  getTrailer(id: number): Observable<Trailer> {
+  getTrailer(id: number): Observable<Trailer | undefined> {
     return this.httpClient.get<TMDBVideos>(
       `${url}/movie/${id}/videos?api_key=${api_keys.TMDB_API_KEY}`
     ).pipe(
-      map(result => result.results.find(video => video.type === 'Trailer')),
-      map(result => Object.assign(
-        { ...result },
-        { embededUrl: `http://www.youtube.com/embed/${result?.key}` }
-      ))
+      map(result => result.results.find(video => video.type === 'Trailer'))
     );
   }
 

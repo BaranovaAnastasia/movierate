@@ -1,8 +1,9 @@
 <div class="container">
   <div *ngIf="!videoShown" class="preview">
-    <img class="preview__image" [src]="previewUrl">
+    <img *ngIf="previewUrl" class="preview__image" [src]="previewUrl">
     <div class="preview__black-screen">
-      <div class="wrapper">
+
+      <div *ngIf="previewUrl" class="wrapper">
         <button class="preview__play" (click)="showVideo()">
           <img class="preview__play__icon" src="assets/icons/play.svg">
         </button>
@@ -15,6 +16,13 @@
           </div>
         </div>
       </div>
+
+      <div *ngIf="!previewUrl" class="wrapper">
+        <div class="preview__name">
+          No Trailer Available :(
+        </div>
+      </div>
+
     </div>
   </div>
   <iframe *ngIf="videoShown"

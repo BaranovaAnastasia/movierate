@@ -8,7 +8,7 @@ export const IMovieApiServiceToken = new InjectionToken('IMovieApiService');
 
 export interface IMovieApiService {
   getMovie(id: number): Observable<Movie>;
-  getTrailer(id: number): Observable<Trailer>;
+  getTrailer(id: number): Observable<Trailer | undefined>;
   getCredits(id: number): Observable<Credits>;
   searchMovies(query: string, page: number): Observable<Movie[]>;
 }

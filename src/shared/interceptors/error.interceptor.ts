@@ -9,6 +9,9 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
+    if (req.url.includes('refresh')) {
+      return next.handle(req)
+    }
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {

@@ -24,7 +24,7 @@ export class MovieService {
     return this.movieApiService.getMovie(id);
   }
 
-  getTrailer(id: number): Observable<Trailer> {
+  getTrailer(id: number): Observable<Trailer | undefined> {
     return this.movieApiService.getTrailer(id);
   }
 
