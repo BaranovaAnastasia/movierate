@@ -4,7 +4,7 @@
       <img class="picture" [src]="user.avatar_path">
       <div class="name-stats-wrapper">
         <div class="name tui-text_h6">{{ user.name }}</div>
-        <!-- <app-user-statistics [statistics]="user.statistics"></app-user-statistics> -->
+        <app-user-statistics [userId]="user.id"></app-user-statistics>
       </div>
     </div>
 

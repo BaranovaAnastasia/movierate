@@ -3,50 +3,50 @@
   <div class="wrapper">
     <div class="stats__movies">
       <div class="stats-data">
-        <div class="tui-text_body-s">{{ statistics.movies }}</div>
+        <div class="tui-text_body-s">{{ stats.movies_count }}</div>
         <div class="tui-text_body-s">Movies</div>
       </div>
       <progress
         class="stats-bar"
         tuiProgressBar
         size="s"
-        [value]="statistics.movies"
-        [max]="getNextGoal(statistics.movies)"
+        [value]="stats.movies_count"
+        [max]="getNextGoal(stats.movies_count)"
       ></progress>
     </div>
   
     <div class="stats__hours">
       <div class="stats-data">
-        <div class="tui-text_body-s">{{ statistics.hours }}</div>
+        <div class="tui-text_body-s">{{ stats.hours_count }}</div>
         <div class="tui-text_body-s">Hours</div>
       </div>
       <progress
         class="stats-bar"
         tuiProgressBar
         size="s"
-        [value]="statistics.hours"
-        [max]="getNextGoal(statistics.hours)"
+        [value]="stats.hours_count"
+        [max]="getNextGoal(stats.hours_count)"
       ></progress>
     </div>
   
     <div class="stats__reviews">
       <div class="stats-data">
-        <div class="tui-text_body-s">{{ statistics.reviews }}</div>
+        <div class="tui-text_body-s">{{ stats.reviews_count }}</div>
         <div class="tui-text_body-s">Reviews</div>
       </div>
       <progress
         class="stats-bar"
         tuiProgressBar
         size="s"
-        [value]="statistics.reviews"
-        [max]="getNextGoal(statistics.reviews)"
+        [value]="stats.reviews_count"
+        [max]="getNextGoal(stats.reviews_count)"
       ></progress>
     </div>
   </div>
 
   <tui-pie-chart
     size="m"
-    [value]="genresValues"
+    [value]="genresCounts"
     [hintContent]="content"
   ></tui-pie-chart>
 
@@ -56,5 +56,5 @@
   #content
   let-index
   >
-  <div>{{ genresNames[index] }}</div>
+  <div>{{ genresNames[index] }}: {{ genresCounts[index] }}</div>
 </ng-template>

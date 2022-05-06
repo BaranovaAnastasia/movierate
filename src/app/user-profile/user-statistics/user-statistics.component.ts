@@ -1,20 +1,32 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserStatistics } from 'src/shared/models/user/user-statistics';
+import { UserStats } from 'src/shared/models/user/user-stats';
+import { UserService } from 'src/shared/services/user/user.service';
 
 @Component({
   selector: 'app-user-statistics',
   templateUrl: './user-statistics.component.html',
   styleUrls: ['./user-statistics.component.less']
 })
-export class UserStatisticsComponent {
-  @Input() statistics!: UserStatistics;
+export class UserStatisticsComponent implements OnInit {
+  @Input() userId!: number;
 
-  get genresNames(): string[] {
-    return this.statistics.genres.map(item => item.genre);
-  }
+  genresNames: string[] = [];
+  genresCounts: number[] = [];
 
-  get genresValues(): number[] {
-    return this.statistics.genres.map(item => item.watched);
+  stats!: UserStats;
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.userService.getUserGenresStats(this.userId).subscribe(
+      result => {
+        this.genresNames = result.map(elem => elem.genre_name);
+        this.genresCounts = result.map(elem => elem.movies_count);
+      }
+    );
+    this.userService.getUserStats(this.userId).subscribe(
+      result => this.stats = result
+    );
   }
 
   getNextGoal(current: number): number {

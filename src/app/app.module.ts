@@ -20,7 +20,7 @@ import { IAuthApiServiceToken } from "src/shared/interfaces/IAuthApiService";
 import { AuthApiService } from "src/shared/services/auth/auth-api.service";
 import { AuthModule } from "./auth/auth.module";
 import { AuthInterceptor } from "src/shared/interceptors/auth.interceptor";
-import { UserApiService } from "src/shared/services/user-api.service";
+import { UserApiService } from "src/shared/services/user/user-api.service";
 import { IUserApiServiceToken } from "src/shared/interfaces/IUserApiService";
 import { TMDBMoviesListApiService } from "src/shared/services/tmdb/tmdb-movies-list-api.service";
 import { TMDBReviewsApiService } from "src/shared/services/tmdb/tmdb-reviews-api.service";
