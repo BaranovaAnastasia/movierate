@@ -2,9 +2,8 @@
   <div class="movie__main">
     <div class="row">
       <img class="movie__poster" [src]="movie?.poster_path">
-      <div class="movie__trailer">
-        <iframe class="movie__trailer__video" [src]="getSafeTrailerUrl(movie)" frameborder="0" allowfullscreen></iframe>
-      </div>
+      <app-movie-trailer class="movie__trailer" [trailer]="movie?.trailer!">
+      </app-movie-trailer>
     </div>
 
     <div class="row">

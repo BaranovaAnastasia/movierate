@@ -11,8 +11,7 @@ import { MovieService } from 'src/shared/services/movie.service';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./movie.component.less']
 })
 export class MovieComponent implements OnInit {
   movie$ = new Subject<Movie>();
@@ -22,8 +21,7 @@ export class MovieComponent implements OnInit {
     private movieService: MovieService,
     @Inject(IReviewsApiServiceToken)
     private reviewsApiService: IReviewsApiService,
-    private activatedroute: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private activatedroute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -34,10 +32,6 @@ export class MovieComponent implements OnInit {
         this.reviewsApiService.getMovieReviews(routeParams.id)
           .subscribe(result => this.reviews$.next(result));
       });
-  }
-
-  getSafeTrailerUrl(movie: Movie): SafeResourceUrl | undefined {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(movie.trailer?.embededUrl!);
   }
 
 }

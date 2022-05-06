@@ -4,12 +4,14 @@ import { MovieComponent } from './movie.component';
 import { MovieControlsModule } from './movie-controls/movie-controls.module';
 import { StringifyPipesModule } from '../pipes/stringify-pipes.module';
 import { ReviewModule } from '../review/review.module';
+import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
 
 
 
 @NgModule({
   declarations: [
-    MovieComponent
+    MovieComponent,
+    MovieTrailerComponent
   ],
   imports: [
     CommonModule,

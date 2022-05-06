@@ -8,8 +8,7 @@ import { MovieStats } from 'src/shared/models/movie/movie-stats';
 @Component({
   selector: 'app-movie-controls',
   templateUrl: './movie-controls.component.html',
-  styleUrls: ['./movie-controls.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./movie-controls.component.less']
 })
 export class MovieControlsComponent implements OnInit, OnChanges {
 
