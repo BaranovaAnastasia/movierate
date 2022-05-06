@@ -57,6 +57,31 @@ export class MovieControlsComponent implements OnInit, OnChanges {
     return this.isWatched ? "watched!" : "add to watched";
   }
 
+  markMovieAsWatched(): void {
+    if (this.isWatched) {
+      this.userMovieInteractionApiService.unwatchMovie$(this.movieId)
+        .subscribe(
+          stats => {
+            this.updateStats(stats);
+            this.isWatched = false;
+            this.ratingForm.setValue(
+              { rating: null },
+              { emitEvent: false }
+            )
+          }
+        )
+      return;
+    }
+
+    this.userMovieInteractionApiService.watchMovie$(this.movieId)
+      .subscribe(
+        stats => {
+          this.updateStats(stats);
+          this.isWatched = true;
+        }
+      )
+  }
+
   private requestStats(): void {
     if (!this.movieId) return;
 

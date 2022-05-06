@@ -21,7 +21,17 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
   }
   
   watchMovie$(movieId: string): Observable<MovieStats> {
-    throw new Error('Method not implemented.');
+    return this.httpClient.post<MovieStats>(
+      `${host}/watch`,
+      { movieId }
+    );
+  }
+
+  unwatchMovie$(movieId: string): Observable<MovieStats> {
+    return this.httpClient.post<MovieStats>(
+      `${host}/unwatch`,
+      { movieId }
+    );
   }
 
   getRating$(movieId: string): Observable<number> {
