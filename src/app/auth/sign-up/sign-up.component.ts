@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { AuthService } from 'src/shared/services/auth/auth.service';
+import { AuthService } from 'src/shared/services';
 
 @Component({
   selector: 'app-sign-up',

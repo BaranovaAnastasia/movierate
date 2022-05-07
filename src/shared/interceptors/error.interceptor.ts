@@ -1,8 +1,8 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { catchError, concatMap, map, tap } from "rxjs/operators";
-import { AuthService } from "../services/auth/auth.service";
+import { catchError, concatMap } from "rxjs/operators";
+import { AuthService } from "../services";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {

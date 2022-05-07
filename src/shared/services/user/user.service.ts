@@ -1,11 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUserApiService, IUserApiServiceToken } from 'src/shared/interfaces/IUserApiService';
-import { User } from 'src/shared/models/user/user';
-import { UserGenresStats } from 'src/shared/models/user/user-genre-stats';
-import { UserStats } from 'src/shared/models/user/user-stats';
-import { UserTopEntry } from 'src/shared/models/user/user-top-entry';
-import { UserTopOption } from 'src/shared/models/user/user-top-option';
+import { IUserApiService, IUserApiServiceToken } from 'src/shared/interfaces';
+import { User, UserGenresStats, UserStats, UserTopEntry, UserTopOption } from 'src/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +9,8 @@ import { UserTopOption } from 'src/shared/models/user/user-top-option';
 export class UserService {
 
   constructor(
-    @Inject(IUserApiServiceToken) private userApiService: IUserApiService
+    @Inject(IUserApiServiceToken)
+    private userApiService: IUserApiService
   ) {}
 
   getUserById(id: number): Observable<User> {

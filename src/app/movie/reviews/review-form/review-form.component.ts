@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from 'src/shared/interfaces/IUserMovieInteractionApiService';
-import { Review } from 'src/shared/models/movie/review';
+import { Review } from 'src/shared/models';
+import { UserMovieInteractionService } from 'src/shared/services';
 
 @Component({
   selector: 'app-review-form',
@@ -20,15 +20,14 @@ export class ReviewFormComponent implements OnInit {
   });
 
   constructor(
-    @Inject(IUserMovieInteractionApiServiceToken)
-    private userMovieInteractionApiService: IUserMovieInteractionApiService,
+    private userMovieInteractionService: UserMovieInteractionService,
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     if(!this.movieId) return;
 
-    this.userMovieInteractionApiService.getRating$(this.movieId).subscribe(
+    this.userMovieInteractionService.getRating$(this.movieId).subscribe(
       rating => this.form.patchValue(
         { rating },
         { emitEvent: false }

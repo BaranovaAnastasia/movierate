@@ -1,16 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { IMovieApiService } from '../../interfaces/IMovieApiService';
-import { Movie } from '../../models/movie/movie';
-import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { api_keys } from 'src/environments/api_keys';
-import { Trailer } from '../../models/movie/trailer';
-import { TMDBVideos } from '../../models/tmdb/tmdb-videos';
-import { TMDBCredits } from '../../models/tmdb/tmdb-credits'
-import { Credits } from '../../models/movie/credits';
-import { TMDBMovie } from '../../models/tmdb/tmdb-movie';
-import { TMDBSearchResult } from 'src/shared/models/tmdb/tmdb-search-result';
+import { IMovieApiService } from 'src/shared/interfaces';
+import { Credits, Movie, TMDBCredits, TMDBMovie, TMDBSearchResult, TMDBVideos, Trailer } from 'src/shared/models';
 
 const url = 'https://api.themoviedb.org/3';
 const posterUrl = 'https://image.tmdb.org/t/p/w1280';
@@ -61,7 +55,7 @@ export class TMDBMovieApiService implements IMovieApiService {
       ))
     );
   }
-  
+
   searchMovies(query: string, page: number): Observable<Movie[]> {
     return this.httpClient.get<TMDBSearchResult>(
       `${url}/search/movie?api_key=${api_keys.TMDB_API_KEY}&query=${query}&page=${page}`

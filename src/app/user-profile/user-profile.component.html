@@ -1,7 +1,9 @@
 <div class="container">
   <div class="main">
     <div class="picture-stats-wrapper">
-      <img class="picture" [src]="user.avatar_path">
+      <img
+        class="picture"
+        [src]="user.avatar_path">
       <div class="name-stats-wrapper">
         <div class="name tui-text_h6">{{ user.name }}</div>
         <app-user-statistics [userId]="user.id"></app-user-statistics>
@@ -9,7 +11,9 @@
     </div>
 
     <div class="controls">
-      <button *ngIf="!isMyProfile" class="controls__follow">
+      <button
+        *ngIf="!isMyProfile"
+        class="controls__follow">
         {{ followText }}
       </button>
       <div class="controls__links">
@@ -32,13 +36,13 @@
         <hr *ngIf="isMyProfile"/>
       </div>
 
-      <div class="controls__following">
+      <!-- <div class="controls__following">
         <div class="controls__following__title">Following</div>
-        <!-- <app-user-preview
+        <app-user-preview
           *ngFor="let userId of user.followingIds"
           [user]="userId">
-        </app-user-preview> -->
-      </div>
+        </app-user-preview>
+      </div> -->
     </div>
   </div>
 </div>

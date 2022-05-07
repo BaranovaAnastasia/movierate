@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MoviesList } from 'src/shared/models/movies-list/movies-list';
-import { MovieService } from 'src/shared/services/movie.service';
+import { Component, Input } from '@angular/core';
+import { MoviesList } from 'src/shared/models';
 
 @Component({
   selector: 'app-movies-list',

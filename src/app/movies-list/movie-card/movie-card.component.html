@@ -11,7 +11,9 @@
 
   <div class="info">
 
-    <div class="info__rating" *ngIf="movie.vote_average">
+    <div
+      class="info__rating"
+      *ngIf="movie.vote_average">
       <label tuiProgressLabel>
         <span class="percent">{{ formattedRating }}</span>
 

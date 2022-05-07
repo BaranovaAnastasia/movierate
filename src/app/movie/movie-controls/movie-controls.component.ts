@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { debounceTime, switchMap } from 'rxjs/operators';
-import { IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from 'src/shared/interfaces/IUserMovieInteractionApiService';
-import { MovieStats } from 'src/shared/models/movie/movie-stats';
+import { switchMap } from 'rxjs/operators';
+import { MovieStats } from 'src/shared/models';
+import { UserMovieInteractionService } from 'src/shared/services';
 
 @Component({
   selector: 'app-movie-controls',
@@ -25,8 +24,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   isWatched: boolean | undefined;
 
   constructor(
-    @Inject(IUserMovieInteractionApiServiceToken)
-    private userMovieInteractionApiService: IUserMovieInteractionApiService,
+    private userMovieInteractionService: UserMovieInteractionService,
     private fb: FormBuilder
   ) { }
 
@@ -39,7 +37,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
     rating.valueChanges.pipe(
       switchMap(value =>
-        this.userMovieInteractionApiService.rateMovie$(this.movieId!, value)
+        this.userMovieInteractionService.rateMovie$(this.movieId!, value)
       )
     ).subscribe(stats => {
       this.updateStats(stats);
@@ -59,7 +57,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
   markMovieAsWatched(): void {
     if (this.isWatched) {
-      this.userMovieInteractionApiService.unwatchMovie$(this.movieId!)
+      this.userMovieInteractionService.unwatchMovie$(this.movieId!)
         .subscribe(
           stats => {
             this.updateStats(stats);
@@ -73,7 +71,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.userMovieInteractionApiService.watchMovie$(this.movieId!)
+    this.userMovieInteractionService.watchMovie$(this.movieId!)
       .subscribe(
         stats => {
           this.updateStats(stats);
@@ -85,7 +83,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   private requestStats(): void {
     if (!this.movieId) return;
 
-    this.userMovieInteractionApiService.getStats$(this.movieId).subscribe(
+    this.userMovieInteractionService.getStats$(this.movieId).subscribe(
       stats => this.updateStats(stats)
     );
   }
@@ -93,7 +91,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   private requestRating(): void {
     if (!this.movieId) return;
 
-    this.userMovieInteractionApiService.getRating$(this.movieId).subscribe(
+    this.userMovieInteractionService.getRating$(this.movieId).subscribe(
       rating => this.ratingForm.setValue(
         { rating: rating },
         { emitEvent: false }
@@ -104,7 +102,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   private requestIsWatched(): void {
     if (!this.movieId) return;
 
-    this.userMovieInteractionApiService.isWatched$(this.movieId).subscribe(
+    this.userMovieInteractionService.isWatched$(this.movieId).subscribe(
       isWatched => this.isWatched = isWatched
     );
   }

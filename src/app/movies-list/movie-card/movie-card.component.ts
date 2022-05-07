@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Movie } from 'src/shared/models/movie/movie';
-import { MovieService } from 'src/shared/services/movie.service';
+import { Component, Input } from '@angular/core';
+import { Movie } from 'src/shared/models';
 
 @Component({
   selector: 'app-movie-card',

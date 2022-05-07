@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserStats } from 'src/shared/models/user/user-stats';
-import { UserService } from 'src/shared/services/user/user.service';
+import { UserStats } from 'src/shared/models';
+import { UserService } from 'src/shared/services';
 
 @Component({
   selector: 'app-user-statistics',

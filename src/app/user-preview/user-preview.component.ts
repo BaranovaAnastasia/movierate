@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/shared/models/user/user';
+import { Component, Input } from '@angular/core';
+import { User } from 'src/shared/models';
 
 @Component({
   selector: 'app-user-preview',

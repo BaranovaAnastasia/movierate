@@ -1,10 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Tokens } from 'src/shared/models/tokens';
-import { User } from 'src/shared/models/user/user';
-import { IAuthApiService, IAuthApiServiceToken } from '../../interfaces/IAuthApiService';
-import { NavigationService } from '../navigation.service';
+import { IAuthApiService, IAuthApiServiceToken } from 'src/shared/interfaces';
+import { Tokens, User } from 'src/shared/models';
+import { NavigationService } from '..';
 
 @Injectable({
   providedIn: 'root'

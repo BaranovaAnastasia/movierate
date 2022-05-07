@@ -1,12 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { IMovieApiService, IMovieApiServiceToken } from '../interfaces/IMovieApiService';
-import { IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from '../interfaces/IUserMovieInteractionApiService';
-import { Credits } from '../models/movie/credits';
-import { Movie } from '../models/movie/movie';
-import { MovieStats } from '../models/movie/movie-stats';
-import { Trailer } from '../models/movie/trailer';
+import { Observable } from 'rxjs';
+import { IMovieApiService, IMovieApiServiceToken, IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from '../interfaces';
+import { Credits, Movie, MovieStats, Trailer } from '../models';
 
 @Injectable({
   providedIn: 'root'

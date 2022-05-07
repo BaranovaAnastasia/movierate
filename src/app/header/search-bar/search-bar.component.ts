@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { EMPTY, Observable, of, Subject } from 'rxjs';
-import { debounceTime, filter, map, switchMap, take, takeUntil } from 'rxjs/operators';
-import { Movie } from 'src/shared/models/movie/movie';
-import { MovieService } from 'src/shared/services/movie.service';
+import { Observable, of, Subject } from 'rxjs';
+import { debounceTime, map, switchMap, takeUntil } from 'rxjs/operators';
+import { Movie } from 'src/shared/models';
+import { MovieService } from 'src/shared/services';
 
 @Component({
   selector: 'app-search-bar',

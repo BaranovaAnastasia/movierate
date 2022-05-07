@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IReviewsApiService } from '../../interfaces/IReviewsApiService';
-import { Review } from '../../models/movie/review';
+import { IReviewsApiService } from 'src/shared/interfaces';
+import { Review } from 'src/shared/models';
 
 const host = 'http://localhost:3000/review';
 

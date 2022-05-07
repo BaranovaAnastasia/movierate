@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { api_keys } from 'src/environments/api_keys';
-import { IMoviesListApiService } from 'src/shared/interfaces/IMoviesListApi';
-import { MoviesList } from 'src/shared/models/movies-list/movies-list';
-import { TMDBMoviesList } from 'src/shared/models/tmdb/tmdb-movies-list';
+import { IMoviesListApiService } from 'src/shared/interfaces';
+import { MoviesList, TMDBMoviesList } from 'src/shared/models';
 
 const url = 'https://api.themoviedb.org/3/';
 const posterUrl = 'https://image.tmdb.org/t/p/w1280/';
@@ -25,11 +24,12 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
         return {
           id: result.id,
           title: 'Top Rated',
-          movies: result.results.map(movie => 
-            Object.assign(
-              {...movie}, 
-              {poster_path: `${posterUrl}${movie.poster_path}`})
-            )
+          movies: result.results.map(
+            movie =>
+              Object.assign(
+                { ...movie },
+                { poster_path: `${posterUrl}${movie.poster_path}` })
+          )
         }
       })
     )
@@ -43,11 +43,11 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
         return {
           id: result.id,
           title: 'Popular',
-          movies: result.results.map(movie => 
+          movies: result.results.map(movie =>
             Object.assign(
-              {...movie}, 
-              {poster_path: `${posterUrl}${movie.poster_path}`})
-            )
+              { ...movie },
+              { poster_path: `${posterUrl}${movie.poster_path}` })
+          )
         }
       })
     )
@@ -65,9 +65,9 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
         return {
           id: result.id,
           title: 'Coming Soon',
-          movies: result.results.map(movie => 
+          movies: result.results.map(movie =>
             Object.assign(
-              {...movie}, 
+              { ...movie },
               {
                 poster_path: `${posterUrl}${movie.poster_path}`,
                 statistics: {

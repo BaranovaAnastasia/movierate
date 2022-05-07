@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Trailer } from 'src/shared/models/movie/trailer';
-import { MovieService } from 'src/shared/services/movie.service';
+import { Trailer } from 'src/shared/models';
+import { MovieService } from 'src/shared/services';
 
 @Component({
   selector: 'app-movie-trailer',

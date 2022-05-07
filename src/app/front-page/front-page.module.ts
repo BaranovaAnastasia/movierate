@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FrontPageComponent } from './front-page.component';
 import { MoviesListModule } from '../movies-list/movies-list.module';
-import { UserTopModule } from './user-top/user-top.module';
 import { LeaderboardModule } from './leaderboard/leaderboard.module';
 
 

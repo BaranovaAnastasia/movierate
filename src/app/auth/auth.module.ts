@@ -5,7 +5,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit';
-import { TuiButtonModule, TuiModeModule, TuiTextfieldComponent, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiModeModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 
 
 

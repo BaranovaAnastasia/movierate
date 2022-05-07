@@ -1,8 +1,8 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
-import { Review } from 'src/shared/models/movie/review';
-import { ReviewsService } from 'src/shared/services/reviews/reviews.service';
+import { Review } from 'src/shared/models';
+import { ReviewsService } from 'src/shared/services';
 
 @Component({
   selector: 'app-reviews',

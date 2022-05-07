@@ -1,4 +1,3 @@
-import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TuiRootModule, TuiDialogModule, TUI_SANITIZER } from "@taiga-ui/core";
 import { NgModule } from '@angular/core';
@@ -7,26 +6,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './header/header.module';
-import { IMovieApiServiceToken } from "src/shared/interfaces/IMovieApiService";
 import { MovieModule } from "./movie/movie.module";
 import { UserProfileModule } from "./user-profile/user-profile.module";
 import { MoviesListModule } from "./movies-list/movies-list.module";
 import { FrontPageModule } from "./front-page/front-page.module";
-import { TMDBMovieApiService } from "src/shared/services/tmdb/tmdb-movie-api.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { IMoviesListApiServiceToken } from "src/shared/interfaces/IMoviesListApi";
-import { IReviewsApiServiceToken } from "src/shared/interfaces/IReviewsApiService";
-import { IAuthApiServiceToken } from "src/shared/interfaces/IAuthApiService";
-import { AuthApiService } from "src/shared/services/auth/auth-api.service";
 import { AuthModule } from "./auth/auth.module";
-import { AuthInterceptor } from "src/shared/interceptors/auth.interceptor";
-import { UserApiService } from "src/shared/services/user/user-api.service";
-import { IUserApiServiceToken } from "src/shared/interfaces/IUserApiService";
-import { TMDBMoviesListApiService } from "src/shared/services/tmdb/tmdb-movies-list-api.service";
-import { ErrorInterceptor } from "src/shared/interceptors/error.interceptor";
-import { IUserMovieInteractionApiServiceToken } from "src/shared/interfaces/IUserMovieInteractionApiService";
-import { UserMovieInteractionApiService } from "src/shared/services/user-movie-interaction/user-movie-interaction-api.service";
-import { ReviewsApiService } from "src/shared/services/reviews/reviews-api.service";
+import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
+import { IAuthApiServiceToken, IMovieApiServiceToken, IMoviesListApiServiceToken, IReviewsApiServiceToken, IUserApiServiceToken, IUserMovieInteractionApiServiceToken } from "src/shared/interfaces";
+import { AuthApiService, ReviewsApiService, TMDBMovieApiService, TMDBMoviesListApiService, UserApiService, UserMovieInteractionApiService } from "src/shared/services";
+import { ErrorInterceptor, AuthInterceptor } from "src/shared/interceptors";
 
 @NgModule({
   declarations: [

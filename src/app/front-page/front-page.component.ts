@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IMoviesListApiService, IMoviesListApiServiceToken } from 'src/shared/interfaces/IMoviesListApi';
-import { MoviesList } from 'src/shared/models/movies-list/movies-list';
+import { IMoviesListApiService, IMoviesListApiServiceToken } from 'src/shared/interfaces';
+import { MoviesList } from 'src/shared/models';
 
 @Component({
   selector: 'app-front-page',
@@ -15,8 +14,7 @@ export class FrontPageComponent implements OnInit {
 
   constructor(
     @Inject(IMoviesListApiServiceToken)
-    private moviesListApiService: IMoviesListApiService,
-    private route: ActivatedRoute
+    private moviesListApiService: IMoviesListApiService
   ) { }
 
   ngOnInit(): void {
@@ -29,12 +27,6 @@ export class FrontPageComponent implements OnInit {
     this.moviesListApiService.getUpcoming().subscribe(list => {
       this.upcoming = list;
     });
-
-    // this.route.fragment.subscribe(fragment => {  
-    //   if (fragment) {
-    //     document.querySelector('#' + fragment)!.scrollIntoView();
-    //   }
-    // });
   }
 
 }

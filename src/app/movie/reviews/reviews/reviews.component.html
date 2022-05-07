@@ -2,16 +2,27 @@
   <div class="header">
     <div class="header__title-tag"></div>
     <div class="header__title tui-text_body-xl">Reviews</div>
-    <button class="expand-button" type="button" (click)="toggle()">
-      <tui-svg src="tuiIconEdit" class="icon"></tui-svg>
+    <button
+      class="expand-button"
+      type="button"
+      (click)="toggle()">
+      <tui-svg
+        src="tuiIconEdit"
+        class="icon">
+      </tui-svg>
       Write a Review
     </button>
   </div>
   <tui-expand [expanded]="expanded">
-    <app-review-form [movieId]="movieId" (postReview)="postReview($event)"></app-review-form>
+    <app-review-form
+      [movieId]="movieId"
+      (postReview)="postReview($event)">
+    </app-review-form>
   </tui-expand>
   <div *ngIf="reviews$ | async as reviews">
-    <app-review *ngFor="let review of reviews" [review]="review">
+    <app-review
+      *ngFor="let review of reviews"
+      [review]="review">
     </app-review>
   </div>
 </div>

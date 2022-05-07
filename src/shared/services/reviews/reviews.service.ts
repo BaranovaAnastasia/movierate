@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IReviewsApiService, IReviewsApiServiceToken } from 'src/shared/interfaces/IReviewsApiService';
-import { Review } from 'src/shared/models/movie/review';
+import { IReviewsApiService, IReviewsApiServiceToken } from 'src/shared/interfaces';
+import { Review } from 'src/shared/models';
 
 @Injectable({
   providedIn: 'root'

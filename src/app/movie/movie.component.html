@@ -8,15 +8,15 @@
     </div>
 
     <div class="row">
-      <app-movie-controls [movieId]="movie?.id">
-      </app-movie-controls>
+      <app-movie-controls [movieId]="movie?.id"></app-movie-controls>
     </div>
   </div>
 
   <div class="movie__info">
     <div class="movie__info__title tui-text_h5">{{ movie?.title }}</div>
-    <div class="movie__info__line2">{{ movie?.year }} ‧ {{ movie?.genres! | listStringify : '/' }} ‧ {{ movie?.runtime |
-      runtimeStrigify }}</div>
+    <div class="movie__info__line2">
+      {{ movie?.year }} ‧ {{ movie?.genres! | listStringify : '/' }} ‧ {{ movie?.runtime | runtimeStrigify }}
+    </div>
 
     <div class="movie__info__tagline">{{ movie?.tagline }}</div>
     <div class="movie__info__description">{{ movie?.overview }}</div>

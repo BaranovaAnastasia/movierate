@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
-import { Credits } from 'src/shared/models/movie/credits';
-import { MovieService } from 'src/shared/services/movie.service';
+import { Credits } from 'src/shared/models';
+import { MovieService } from 'src/shared/services';
 
 @Component({
   selector: 'app-movie-credits',

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUserMovieInteractionApiService } from '../../interfaces/IUserMovieInteractionApiService';
-import { MovieStats } from '../../models/movie/movie-stats';
+import { IUserMovieInteractionApiService } from 'src/shared/interfaces';
+import { MovieStats } from 'src/shared/models';
 
 const host = 'http://localhost:3000/movie';
 
@@ -12,14 +12,14 @@ const host = 'http://localhost:3000/movie';
 export class UserMovieInteractionApiService implements IUserMovieInteractionApiService {
 
   constructor(private httpClient: HttpClient) { }
-  
+
   rateMovie$(movieId: string, rating: number): Observable<MovieStats> {
     return this.httpClient.post<MovieStats>(
       `${host}/rate`,
       { movieId, rating }
     );
   }
-  
+
   watchMovie$(movieId: string): Observable<MovieStats> {
     return this.httpClient.post<MovieStats>(
       `${host}/watch`,

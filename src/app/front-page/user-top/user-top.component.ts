@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from 'src/shared/models/user/user';
-import { UserTopEntry } from 'src/shared/models/user/user-top-entry';
-import { UserTopOption } from 'src/shared/models/user/user-top-option';
-import { UserService } from 'src/shared/services/user/user.service';
+import { UserTopEntry, UserTopOption } from 'src/shared/models';
+import { UserService } from 'src/shared/services';
 
 @Component({
   selector: 'app-user-top',
