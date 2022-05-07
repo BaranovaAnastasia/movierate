@@ -1,6 +1,15 @@
 <div class="container">
-  <app-movies-list [list]="highestRanked"></app-movies-list>
-  <app-movies-list [list]="popular"></app-movies-list>
-  <!-- <app-movies-list [list]="new"></app-movies-list> -->
-  <app-movies-list [list]="upcoming"></app-movies-list>
+  <div class="list-wrapper" id="top">
+    <app-movies-list [list]="highestRanked"></app-movies-list>
+  </div>
+  <div class="list-wrapper" id="popular">
+    <app-movies-list [list]="popular"></app-movies-list>
+  </div>
+  <div class="list-wrapper" id="soon">
+    <app-movies-list [list]="upcoming"></app-movies-list>
+  </div>
+
+  <div id="leaderboard">
+    <app-leaderboard></app-leaderboard>
+  </div>
 </div>

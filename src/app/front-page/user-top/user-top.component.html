@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="top">
+    <div class="top__title tui-text_body-l">{{ topTitle }}</div>
+    <table>
+      <tr
+        *ngFor="let user of users; let i = index"
+        class="top__entry">
+        <td class="top__entry__user">
+          <app-user-preview [user]="user"></app-user-preview>
+        </td>
+        <td class="top__entry__value">
+          <div [class]="positions[i]">{{ getValue(user) }}</div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

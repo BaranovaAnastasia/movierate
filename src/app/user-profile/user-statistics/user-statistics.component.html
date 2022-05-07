@@ -15,17 +15,17 @@
       ></progress>
     </div>
   
-    <div class="stats__hours">
+    <div class="stats__minutes">
       <div class="stats-data">
-        <div class="tui-text_body-s">{{ stats.hours_count }}</div>
-        <div class="tui-text_body-s">Hours</div>
+        <div class="tui-text_body-s">{{ stats.minutes_count }}</div>
+        <div class="tui-text_body-s">Minutes</div>
       </div>
       <progress
         class="stats-bar"
         tuiProgressBar
         size="s"
-        [value]="stats.hours_count"
-        [max]="getNextGoal(stats.hours_count)"
+        [value]="stats.minutes_count"
+        [max]="getNextGoal(stats.minutes_count)"
       ></progress>
     </div>
   

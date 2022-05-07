@@ -4,6 +4,8 @@ import { IUserApiService, IUserApiServiceToken } from 'src/shared/interfaces/IUs
 import { User } from 'src/shared/models/user/user';
 import { UserGenresStats } from 'src/shared/models/user/user-genre-stats';
 import { UserStats } from 'src/shared/models/user/user-stats';
+import { UserTopEntry } from 'src/shared/models/user/user-top-entry';
+import { UserTopOption } from 'src/shared/models/user/user-top-option';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,9 @@ export class UserService {
 
   getUserGenresStats(id: number): Observable<UserGenresStats[]> {
     return this.userApiService.getUserGenresStats(id);
+  }
+
+  getUserTop(top: UserTopOption, limit: number): Observable<UserTopEntry[]> {
+    return this.userApiService.getUserTop(top, limit);
   }
 }

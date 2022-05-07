@@ -6,15 +6,8 @@ import { AuthService } from 'src/shared/services/auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor(public authService: AuthService) { }
-
-  ngOnInit(): void {
-  }
-
-  str(smth: any) {
-    return String(smth);
-  }
 
 }

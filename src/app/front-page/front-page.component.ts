@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IMoviesListApiService, IMoviesListApiServiceToken } from 'src/shared/interfaces/IMoviesListApi';
 import { MoviesList } from 'src/shared/models/movies-list/movies-list';
 
@@ -10,12 +11,12 @@ import { MoviesList } from 'src/shared/models/movies-list/movies-list';
 export class FrontPageComponent implements OnInit {
   highestRanked!: MoviesList;
   popular!: MoviesList;
-  // new!: MoviesList;
   upcoming!: MoviesList;
 
   constructor(
     @Inject(IMoviesListApiServiceToken)
-    private moviesListApiService: IMoviesListApiService
+    private moviesListApiService: IMoviesListApiService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -25,12 +26,15 @@ export class FrontPageComponent implements OnInit {
     this.moviesListApiService.getPopular().subscribe(list => {
       this.popular = list;
     });
-    // this.moviesListApiService.getNew().subscribe(list => {
-    //   this.new = list;
-    // });
     this.moviesListApiService.getUpcoming().subscribe(list => {
       this.upcoming = list;
     });
+
+    // this.route.fragment.subscribe(fragment => {  
+    //   if (fragment) {
+    //     document.querySelector('#' + fragment)!.scrollIntoView();
+    //   }
+    // });
   }
 
 }
