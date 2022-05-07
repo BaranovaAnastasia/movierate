@@ -1,4 +1,6 @@
-<div class="container">
+<div
+  *ngIf="user"
+  class="container">
   <div class="main">
     <div class="picture-stats-wrapper">
       <img
@@ -10,7 +12,9 @@
       </div>
     </div>
 
-    <div class="controls">
+    <div
+      *tuiLet="isMyProfile$ | async as isMyProfile"
+      class="controls">
       <button
         *ngIf="!isMyProfile"
         class="controls__follow">
@@ -18,22 +22,32 @@
       </button>
       <div class="controls__links">
         
-        <div class="controls__links__item">
-          <a href="">Favourites</a>
-        </div>
+        <hr *ngIf="isMyProfile">
         
         <div class="controls__links__item">
-          <a href="">Lists</a>
+          <a class="tui-text_body-m" href="">Favourites</a>
         </div>
+
+        <hr>
         
         <div class="controls__links__item">
-          <a href="">{{ activityText }}</a>
+          <a class="tui-text_body-m" href="">Lists</a>
         </div>
+
+        <hr>
+        
+        <div class="controls__links__item">
+          <a class="tui-text_body-m" href="">
+            {{ isMyProfile ? "Friends Activity" : "Activity" }}
+          </a>
+        </div>
+
+        <hr *ngIf="isMyProfile">
         
         <div class="controls__links__item" *ngIf="isMyProfile">
-          <a href="">Log Out</a>
+          <a class="tui-text_body-m" href="">Log Out</a>
         </div>
-        <hr *ngIf="isMyProfile"/>
+        <hr *ngIf="isMyProfile">
       </div>
 
       <!-- <div class="controls__following">

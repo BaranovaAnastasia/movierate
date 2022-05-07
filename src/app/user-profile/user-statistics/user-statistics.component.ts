@@ -13,7 +13,7 @@ export class UserStatisticsComponent implements OnInit {
   genresNames: string[] = [];
   genresCounts: number[] = [];
 
-  stats!: UserStats;
+  stats?: UserStats;
 
   constructor(private userService: UserService) { }
 

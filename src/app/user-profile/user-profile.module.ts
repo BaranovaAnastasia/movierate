@@ -5,6 +5,7 @@ import { UserStatisticsComponent } from './user-statistics/user-statistics.compo
 import { TuiProgressModule } from '@taiga-ui/kit';
 import { TuiPieChartModule } from '@taiga-ui/addon-charts';
 import { UserPreviewModule } from '../user-preview/user-preview.module';
+import { TuiLetModule } from '@taiga-ui/cdk';
 
 
 
@@ -17,7 +18,8 @@ import { UserPreviewModule } from '../user-preview/user-preview.module';
     CommonModule,
     TuiProgressModule,
     TuiPieChartModule,
-    UserPreviewModule
+    UserPreviewModule,
+    TuiLetModule
   ],
   exports: [
     UserProfileComponent

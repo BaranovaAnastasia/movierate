@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { User } from 'src/shared/models';
-import { UserService } from 'src/shared/services';
+import { AuthService, UserService } from 'src/shared/services';
 
 @Component({
   selector: 'app-user-profile',
@@ -10,9 +12,11 @@ import { UserService } from 'src/shared/services';
 })
 export class UserProfileComponent implements OnInit {
   user!: User;
+  isMyProfile$?: Observable<boolean>;
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private activatedroute: ActivatedRoute
   ) { }
 
@@ -22,20 +26,16 @@ export class UserProfileComponent implements OnInit {
         user => {
           this.user = user;
         }
-      )
-    });
-  }
+      );
 
-  get isMyProfile(): boolean {
-    return false;
+      this.isMyProfile$ = this.authService.loggedInUser$.pipe(
+        map(user => user ? user.id === this.user.id : false)
+      );
+    });
   }
 
   get isFollowing(): boolean {
     return false;
-  }
-
-  get activityText(): string {
-    return this.isMyProfile ? "Friends Activity" : "Activity";
   }
 
   get followText(): string {

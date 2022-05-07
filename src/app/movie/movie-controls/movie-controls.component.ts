@@ -13,7 +13,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
   @Input() movieId?: string;
 
-  voteAvg: number | undefined;
+  voteAvg: string | undefined;
   voteCount: number | undefined;
   watched: number | undefined;
 
@@ -108,9 +108,9 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   }
 
   private updateStats(stats: MovieStats): void {
-    this.voteAvg = stats.voteAvg,
-      this.voteCount = stats.voteCount,
-      this.watched = stats.watched
+    this.voteAvg = (stats.voteAvg * 2).toFixed(1),
+    this.voteCount = stats.voteCount,
+    this.watched = stats.watched
   }
 
 }

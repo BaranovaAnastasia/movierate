@@ -4,7 +4,7 @@
     [routerLink]="['/user', user.id]">
     <img
       class="image"
-      [src]="user.avatar_path">
+      [src]="user?.avatar_path">
   </a>
   <a
     *ngIf="user.name"
