@@ -1,4 +1,6 @@
-<div class="movie" *ngIf="movie$ | async as movie">
+<div
+  class="movie"
+  *ngIf="movie$ | async as movie">
   <div class="movie__main">
     <div class="row">
       <img class="movie__poster" [src]="movie?.poster_path">
@@ -7,7 +9,7 @@
     </div>
 
     <div class="row">
-      <app-movie-controls [movieId]="movie.id">
+      <app-movie-controls [movieId]="movie?.id">
       </app-movie-controls>
     </div>
   </div>
@@ -34,17 +36,6 @@
       </tr>
     </table>
   </div>
-</div>
 
-
-
-<div *ngIf="reviews$ | async as reviews">
-  <div class="reviews__title">
-    <div class="reviews__title__tag"></div>
-    <div class="tui-text_body-l">Reviews</div>
-  </div>
-  <div>
-    <app-review *ngFor="let review of reviews" [review]="review">
-    </app-review>
-  </div>
+  <app-reviews [movieId]="movie?.id"></app-reviews>
 </div>

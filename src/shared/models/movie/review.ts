@@ -1,11 +1,11 @@
-import { User } from "../user/user";
-
 export interface Review {
-  id: string,
-  author_details: User,
-  content: string,
-  created_at: Date,
+  movie_id: number;
+  rating: number;
+  title: string;
+  review: string;
+  created_at: Date;
 
-  title?: string,
-  rating: number
+  user_id: number;
+  user_name: string;
+  avatar_path: string;
 }

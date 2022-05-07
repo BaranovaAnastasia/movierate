@@ -15,12 +15,9 @@ import { MovieService } from 'src/shared/services/movie.service';
 })
 export class MovieComponent implements OnInit {
   movie$ = new Subject<Movie>();
-  reviews$ = new Subject<Review[]>();
 
   constructor(
     private movieService: MovieService,
-    @Inject(IReviewsApiServiceToken)
-    private reviewsApiService: IReviewsApiService,
     private activatedroute: ActivatedRoute
   ) { }
 
@@ -28,9 +25,6 @@ export class MovieComponent implements OnInit {
     this.activatedroute.params
       .subscribe(async routeParams => {
         this.movieService.constructFullMovie(routeParams.id, this.movie$);
-        
-        this.reviewsApiService.getMovieReviews(routeParams.id)
-          .subscribe(result => this.reviews$.next(result));
       });
   }
 

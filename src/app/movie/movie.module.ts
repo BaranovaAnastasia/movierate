@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MovieComponent } from './movie.component';
 import { MovieControlsModule } from './movie-controls/movie-controls.module';
 import { StringifyPipesModule } from '../pipes/stringify-pipes.module';
-import { ReviewModule } from '../review/review.module';
 import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
+import { TuiSvgModule } from '@taiga-ui/core';
+import { ReviewsModule } from './reviews/reviews.module';
 
 
 
@@ -17,7 +18,8 @@ import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
     CommonModule,
     MovieControlsModule,
     StringifyPipesModule,
-    ReviewModule
+    ReviewsModule,
+    TuiSvgModule
   ],
   exports: [
     MovieComponent

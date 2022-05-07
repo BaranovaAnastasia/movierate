@@ -12,7 +12,7 @@ import { MovieStats } from 'src/shared/models/movie/movie-stats';
 })
 export class MovieControlsComponent implements OnInit, OnChanges {
 
-  @Input() movieId!: string;
+  @Input() movieId?: string;
 
   voteAvg: number | undefined;
   voteCount: number | undefined;
@@ -39,7 +39,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
     rating.valueChanges.pipe(
       switchMap(value =>
-        this.userMovieInteractionApiService.rateMovie$(this.movieId, value)
+        this.userMovieInteractionApiService.rateMovie$(this.movieId!, value)
       )
     ).subscribe(stats => {
       this.updateStats(stats);
@@ -59,7 +59,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
   markMovieAsWatched(): void {
     if (this.isWatched) {
-      this.userMovieInteractionApiService.unwatchMovie$(this.movieId)
+      this.userMovieInteractionApiService.unwatchMovie$(this.movieId!)
         .subscribe(
           stats => {
             this.updateStats(stats);
@@ -73,7 +73,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.userMovieInteractionApiService.watchMovie$(this.movieId)
+    this.userMovieInteractionApiService.watchMovie$(this.movieId!)
       .subscribe(
         stats => {
           this.updateStats(stats);
@@ -87,7 +87,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
     this.userMovieInteractionApiService.getStats$(this.movieId).subscribe(
       stats => this.updateStats(stats)
-    )
+    );
   }
 
   private requestRating(): void {

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { ReviewComponent } from './review.component';
 import { UserPreviewModule } from '../user-preview/user-preview.module';
 import { StringifyPipesModule } from '../pipes/stringify-pipes.module';
+import { TuiRatingModule } from '@taiga-ui/kit';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +15,10 @@ import { StringifyPipesModule } from '../pipes/stringify-pipes.module';
   imports: [
     CommonModule,
     UserPreviewModule,
-    StringifyPipesModule
+    StringifyPipesModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TuiRatingModule
   ],
   exports: [
     ReviewComponent
