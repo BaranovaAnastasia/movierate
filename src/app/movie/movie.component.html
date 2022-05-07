@@ -4,8 +4,7 @@
   <div class="movie__main">
     <div class="row">
       <img class="movie__poster" [src]="movie?.poster_path">
-      <app-movie-trailer class="movie__trailer" [trailer]="movie?.trailer!">
-      </app-movie-trailer>
+      <app-movie-trailer class="movie__trailer"></app-movie-trailer>
     </div>
 
     <div class="row">
@@ -21,21 +20,8 @@
 
     <div class="movie__info__tagline">{{ movie?.tagline }}</div>
     <div class="movie__info__description">{{ movie?.overview }}</div>
-    <table class="movie__info__people">
-      <tr>
-        <td class="movie__info__people__role">Director</td>
-        <td>{{ movie?.credits?.directors | listStringify : ', ' }}</td>
-      </tr>
-      <tr>
-        <td class="movie__info__people__role">Writers</td>
-        <td>{{ movie?.credits?.writers | listStringify : ', ' }}</td>
-      </tr>
-      <tr>
-        <td class="movie__info__people__role">Stars</td>
-        <td>{{ movie?.credits?.cast | listStringify : ', ' }}</td>
-      </tr>
-    </table>
+    <app-movie-credits></app-movie-credits>
   </div>
 
-  <app-reviews [movieId]="movie?.id"></app-reviews>
+  <app-reviews></app-reviews>
 </div>

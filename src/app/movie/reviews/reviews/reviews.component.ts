@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
-import { IReviewsApiService, IReviewsApiServiceToken } from 'src/shared/interfaces/IReviewsApiService';
 import { Review } from 'src/shared/models/movie/review';
 import { ReviewsService } from 'src/shared/services/reviews/reviews.service';
 
@@ -10,18 +10,24 @@ import { ReviewsService } from 'src/shared/services/reviews/reviews.service';
   styleUrls: ['./reviews.component.less']
 })
 export class ReviewsComponent implements OnInit {
-  @Input() movieId?: string;
+  movieId!: string;
   reviews$ = new Subject<Review[]>();
 
   expanded = false;
 
   constructor(
     private reviewsService: ReviewsService,
+    private activatedroute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.reviewsService.getMovieReviews(this.movieId!)
-      .subscribe(result => this.reviews$.next(result));
+    this.activatedroute.params.subscribe(
+      async routeParams => {
+        this.movieId = routeParams.id;
+        this.reviewsService.getMovieReviews(routeParams.id)
+          .subscribe(result => this.reviews$.next(result))
+      }
+    );
   }
 
   toggle() {
@@ -30,7 +36,7 @@ export class ReviewsComponent implements OnInit {
 
   postReview(review: Review) {
     this.expanded = false;
-    this.reviewsService.postReview(this.movieId!, review)
+    this.reviewsService.postReview(this.movieId, review)
       .subscribe(result => this.reviews$.next(result));
   }
 

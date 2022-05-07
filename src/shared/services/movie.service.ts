@@ -36,19 +36,6 @@ export class MovieService {
     return this.userMovieService.getStats$(id);
   }
 
-  constructFullMovie(id: number, movieSubject: Subject<Movie>): void {
-    this.getMovie(id).subscribe(
-      async result => {
-        const movie = { ...result };
-
-        movie.trailer = await this.getTrailer(id).toPromise();
-        movie.credits = await this.getCredits(id).toPromise();
-
-        movieSubject.next(movie);
-      }
-    );
-  }
-
   searchMovies(query: string, page: number = 1): Observable<Movie[]> {
     return this.movieApiService.searchMovies(query, page);
   }

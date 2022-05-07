@@ -24,7 +24,8 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
     this.activatedroute.params
       .subscribe(async routeParams => {
-        this.movieService.constructFullMovie(routeParams.id, this.movie$);
+        this.movieService.getMovie(routeParams.id)
+          .subscribe(result => this.movie$.next(result));
       });
   }
 

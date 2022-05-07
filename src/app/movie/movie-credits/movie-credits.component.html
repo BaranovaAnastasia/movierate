@@ -1,0 +1,16 @@
+<table
+  *ngIf="credits$ | async as credits"
+  class="container">
+  <tr *ngIf="credits.directors">
+    <td class="role">Director</td>
+    <td>{{ credits.directors | listStringify : ', ' }}</td>
+  </tr>
+  <tr *ngIf="credits.writers">
+    <td class="role">Writers</td>
+    <td>{{ credits.writers | listStringify : ', ' }}</td>
+  </tr>
+  <tr *ngIf="credits.cast">
+    <td class="role">Stars</td>
+    <td>{{ credits.cast | listStringify : ', ' }}</td>
+  </tr>
+</table>

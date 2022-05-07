@@ -6,13 +6,15 @@ import { StringifyPipesModule } from '../pipes/stringify-pipes.module';
 import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
 import { TuiSvgModule } from '@taiga-ui/core';
 import { ReviewsModule } from './reviews/reviews.module';
+import { MovieCreditsComponent } from './movie-credits/movie-credits.component';
 
 
 
 @NgModule({
   declarations: [
     MovieComponent,
-    MovieTrailerComponent
+    MovieTrailerComponent,
+    MovieCreditsComponent
   ],
   imports: [
     CommonModule,
