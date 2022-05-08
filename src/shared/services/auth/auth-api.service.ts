@@ -27,8 +27,8 @@ export class AuthApiService implements IAuthApiService {
     );
   }
 
-  logout$(): void {
-    this.httpClient.post(`${host}/logout`, {});
+  logout$(): Observable<void> {
+    return this.httpClient.post<void>(`${host}/logout`, {});
   }
 
   refresh$(): Observable<Tokens> {

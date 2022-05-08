@@ -9,7 +9,7 @@ export interface IAuthApiService {
   signin$(email: string, password: string): Observable<Tokens>;
   signup$(email: string, name: string, password: string): Observable<Tokens>;
 
-  logout$(): void;
+  logout$(): Observable<void>;
   refresh$(): Observable<Tokens>;
   getUser$(): Observable<User>;
 }

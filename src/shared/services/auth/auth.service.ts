@@ -21,7 +21,6 @@ export class AuthService {
   }
 
   initialize() {
-
     if (!localStorage.getItem('access_token')) {
       this.loggedInUser = null;
       return;
@@ -62,7 +61,16 @@ export class AuthService {
       })
   }
 
-  logout() { }
+  logout$(): Observable<void> {
+    return this.authApiService.logout$().pipe(
+      tap(() => {
+        this.loggedInUser = null;
+        this.navigationService.toMain();
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+      })
+    );
+  }
 
   refresh$(): Observable<Tokens> {
     return this.authApiService.refresh$().pipe(

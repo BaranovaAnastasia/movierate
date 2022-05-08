@@ -17,36 +17,39 @@
       class="controls">
       <button
         *ngIf="!isMyProfile"
-        class="controls__follow">
+        class="controls__follow"
+        [disabled]="true">
         {{ followText }}
       </button>
       <div class="controls__links">
         
         <hr *ngIf="isMyProfile">
         
-        <div class="controls__links__item">
-          <a class="tui-text_body-m" href="">Favourites</a>
-        </div>
+        <a class="controls__links__item disabled tui-text_body-m">
+          Favourites
+        </a>
 
         <hr>
         
-        <div class="controls__links__item">
-          <a class="tui-text_body-m" href="">Lists</a>
-        </div>
+        <a class="controls__links__item disabled tui-text_body-m">
+          Lists
+        </a>
 
         <hr>
         
-        <div class="controls__links__item">
-          <a class="tui-text_body-m" href="">
-            {{ isMyProfile ? "Friends Activity" : "Activity" }}
-          </a>
-        </div>
+        <a class="controls__links__item disabled tui-text_body-m">
+          {{ isMyProfile ? "Friends Activity" : "Activity" }}
+        </a>
 
         <hr *ngIf="isMyProfile">
         
-        <div class="controls__links__item" *ngIf="isMyProfile">
-          <a class="tui-text_body-m" href="">Log Out</a>
-        </div>
+        <button
+          class="controls__links__item logout tui-text_body-m"
+          *ngIf="isMyProfile"
+          (click)="logout()">
+          Log Out
+        </button>
+
         <hr *ngIf="isMyProfile">
       </div>
 

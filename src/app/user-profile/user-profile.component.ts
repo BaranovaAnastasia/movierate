@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit {
       );
 
       this.isMyProfile$ = this.authService.loggedInUser$.pipe(
-        map(user => user ? user.id === this.user.id : false)
+        map(user => user ? user.id == routeParams.id : false)
       );
     });
   }
@@ -40,6 +40,11 @@ export class UserProfileComponent implements OnInit {
 
   get followText(): string {
     return this.isFollowing ? "Unfollow" : "Follow";
+  }
+
+  logout() {
+    this.authService.logout$()
+      .subscribe(() => { });
   }
 
 }
