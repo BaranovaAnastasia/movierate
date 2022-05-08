@@ -31,7 +31,7 @@
             {{movie.title}}
           </div>
           <div class="results__item__info__year">
-            {{ movie.year }}
+            {{ movie.release_date | dateStrigify : true }}
           </div>
           <div class="results__item__info__overview">
             {{ movie.overview }}

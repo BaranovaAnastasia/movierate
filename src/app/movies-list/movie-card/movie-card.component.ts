@@ -33,4 +33,10 @@ export class MovieCardComponent {
     return "#FF5B45"
   }
 
+  get isUpcoming(): boolean {
+    return this.movie.release_date
+      ? this.movie.release_date > new Date()
+      : false;
+  }
+
 }

@@ -16,21 +16,21 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
   rateMovie$(movieId: string, rating: number): Observable<MovieStats> {
     return this.httpClient.post<MovieStats>(
       `${host}/rate`,
-      { movieId, rating }
+      { movieId: String(movieId), rating }
     );
   }
 
   watchMovie$(movieId: string): Observable<MovieStats> {
     return this.httpClient.post<MovieStats>(
       `${host}/watch`,
-      { movieId }
+      { movieId: String(movieId) }
     );
   }
 
   unwatchMovie$(movieId: string): Observable<MovieStats> {
     return this.httpClient.post<MovieStats>(
       `${host}/unwatch`,
-      { movieId }
+      { movieId: String(movieId) }
     );
   }
 

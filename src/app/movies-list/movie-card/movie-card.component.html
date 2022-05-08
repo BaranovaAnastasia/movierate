@@ -2,7 +2,13 @@
   <a
     class="link"
     [routerLink]="['/movie', movie.id]">
+    <div
+      *ngIf="!movie.poster_path"
+      class="no-poster">
+      No poster :(
+    </div>
     <img
+      *ngIf="movie.poster_path"
       class="poster"
       [src]="movie.poster_path"
       alt="poster"/>
@@ -32,7 +38,9 @@
         [routerLink]="['/movie', movie.id]">
         {{ movie.title }}
       </a>
-      <div class="info__year">{{ movie.year }}</div>
+      <div class="info__date tui-text_body-xs">
+        {{ movie.release_date | dateStrigify : !isUpcoming }}
+      </div>
     </div>
   </div>
 </div>

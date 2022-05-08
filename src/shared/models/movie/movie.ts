@@ -4,7 +4,7 @@ import { Trailer } from "./trailer"
 export interface Movie {
   id: string,
   title?: string,
-  year?: number,
+  release_date?: Date,
   poster_path?: string,
   runtime?: number,
   overview?: string,

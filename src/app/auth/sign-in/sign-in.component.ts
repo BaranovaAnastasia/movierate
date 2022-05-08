@@ -10,7 +10,7 @@ import { AuthService } from 'src/shared/services';
 export class SignInComponent {
   
   form = this.fb.group({
-    email: [null, Validators.required, Validators.email],
+    email: [null, [Validators.required, Validators.email]],
     password: [null, Validators.required]
   });
 

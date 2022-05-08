@@ -1,6 +1,16 @@
 .container {
-  padding-bottom: 24px;
   color: #FFFFFF;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  min-height: fit-content;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  overflow: scroll;
 }
 
 .title {
@@ -25,11 +35,4 @@
     border-radius: 20px;
     padding: 2px 14px 2px 14px;
   }
-}
-
-.content {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  overflow: scroll;
 }

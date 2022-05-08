@@ -71,9 +71,9 @@ export class TMDBMovieApiService implements IMovieApiService {
   private TMDBMovie2Movie(tmdbMovie: TMDBMovie): Movie {
     return Object.assign(
       { ...tmdbMovie },
-      { poster_path: `${posterUrl}${tmdbMovie.poster_path}` },
-      tmdbMovie.genres && { genres: tmdbMovie.genres.map(genre => genre.name).slice(2) },
-      { year: new Date(tmdbMovie.release_date).getFullYear() },
+      { poster_path: tmdbMovie.poster_path ? `${posterUrl}${tmdbMovie.poster_path}` : undefined },
+      { release_date: new Date(tmdbMovie.release_date) },
+      tmdbMovie.genres && { genres: tmdbMovie.genres.map(genre => genre.name).slice(0, 2) }
     );
   }
 

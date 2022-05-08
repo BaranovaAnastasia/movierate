@@ -7,7 +7,6 @@ export const IMoviesListApiServiceToken = new InjectionToken('IMoviesListApiServ
 export interface IMoviesListApiService {
   getTopRated(): Observable<MoviesList>;
   getPopular(): Observable<MoviesList>;
-  getNew(): Observable<MoviesList>;
   getUpcoming(): Observable<MoviesList>;
   getUserLists(userId: string): Observable<MoviesList[]>;
 }

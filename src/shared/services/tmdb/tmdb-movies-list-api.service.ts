@@ -28,9 +28,22 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
             movie =>
               Object.assign(
                 { ...movie },
-                { poster_path: `${posterUrl}${movie.poster_path}` })
+                {
+                  poster_path: movie.poster_path ? `${posterUrl}${movie.poster_path}` : undefined,
+                  vote_average: undefined,
+                  vote_count: undefined
+                }
+              )
           )
         }
+      }),
+      map(result => {
+        result.movies.map(movie => {
+          movie.release_date = new Date(movie.release_date!);
+          return movie;
+        });
+
+        return result;
       })
     )
   }
@@ -46,20 +59,32 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
           movies: result.results.map(movie =>
             Object.assign(
               { ...movie },
-              { poster_path: `${posterUrl}${movie.poster_path}` })
+              {
+                poster_path: movie.poster_path ? `${posterUrl}${movie.poster_path}` : undefined,
+                vote_average: undefined,
+                vote_count: undefined
+              }
+            )
           )
         }
+      }),
+      map(result => {
+        result.movies.map(movie => {
+          movie.release_date = new Date(movie.release_date!);
+          return movie;
+        });
+
+        return result;
       })
     )
   }
 
-  getNew(): Observable<MoviesList> {
-    throw new Error('Method not implemented.');
-  }
-
   getUpcoming(): Observable<MoviesList> {
+    const today = new Date();
+    const todayReq = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
+
     return this.httpClient.get<TMDBMoviesList>(
-      `${url}movie/upcoming?api_key=${api_keys.TMDB_API_KEY}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${api_keys.TMDB_API_KEY}&primary_release_date.gte=${todayReq}`
     ).pipe(
       map(result => {
         return {
@@ -69,15 +94,25 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
             Object.assign(
               { ...movie },
               {
-                poster_path: `${posterUrl}${movie.poster_path}`,
-                statistics: {
-                  vote_average: movie.vote_average,
-                  vote_count: movie.vote_count
-                }
+                poster_path: movie.poster_path ? `${posterUrl}${movie.poster_path}` : undefined,
+                vote_average: undefined,
+                vote_count: undefined
               }
             )
           )
         }
+      }),
+      map(result => {
+        result.movies.map(movie => {
+          movie.release_date = new Date(movie.release_date!);
+          return movie;
+        });
+        result.movies.sort(
+          (a, b) => a.release_date && b.release_date
+            ? (new Date(a.release_date)).getTime() - (new Date(b.release_date)).getTime()
+            : 0
+        );
+        return result;
       })
     )
   }

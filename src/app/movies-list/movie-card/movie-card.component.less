@@ -3,15 +3,13 @@
 @mobile:    ~"only screen and (max-width: 719px)";
 
 .container {
-  position: relative;
   border-radius: 10px;
-  margin-bottom: 80px;
+  height: fit-content;
 }
 
 .link {
+  position: relative;
   display: block;
-  height: 100%;
-  width: 100%;
 }
 
 .black-screen {
@@ -24,13 +22,21 @@
   display: block;
 }
 
-.poster {
+.poster,
+.no-poster {
   position: absolute;
   border-radius: 10px;
   object-fit: cover;
 }
+.no-poster {
+  box-sizing: border-box;
+  background-color: #252525;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
 
 .info {
+  width: 100%;
   border-radius: 10px;
   padding: 10px 0px 10px 0px;
   display: flex;
@@ -39,7 +45,7 @@
 }
 .info * {
   color: #FFFFFF;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 .container:hover {
   .info * {
@@ -50,8 +56,10 @@
 .info__right {
   text-align: right;
   text-decoration: none;
+  flex-grow: 1;
 }
 .info__title {
+  font-weight: bold;
   text-decoration: none;
 }
 .info__title:hover {
@@ -60,54 +68,39 @@
 
 
 @media @desktop {
-  @card-width: 180px;
+  @card-width: 189px;
   @card-height: 280px;
 
-  .container {
-    width: @card-width;
-    height: @card-height;
-  }
-  .black-screen {
-    width: @card-width;
-    height: @card-height;
-  }
-  .poster {
+  .link,
+  .black-screen,
+  .poster,
+  .no-poster {
     width: @card-width;
     height: @card-height;
   }
 }
 
 @media @tablet {
-  @card-width: 172px;
+  @card-width: 155px;
   @card-height: 230px;
 
-  .container {
-    width: @card-width;
-    height: @card-height;
-  }
-  .black-screen {
-    width: @card-width;
-    height: @card-height;
-  }
-  .poster {
+  .link,
+  .black-screen,
+  .poster,
+  .no-poster {
     width: @card-width;
     height: @card-height;
   }
 }
 
 @media @mobile {
-  @card-width: 150px;
+  @card-width: 135px;
   @card-height: 200px;
 
-  .container {
-    width: @card-width;
-    height: @card-height;
-  }
-  .black-screen {
-    width: @card-width;
-    height: @card-height;
-  }
-  .poster {
+  .link,
+  .black-screen,
+  .poster,
+  .no-poster {
     width: @card-width;
     height: @card-height;
   }
