@@ -43,6 +43,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# keys
-/src/environments/api_keys.ts

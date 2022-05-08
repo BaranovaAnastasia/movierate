@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { api_keys } from 'src/environments/api_keys';
+import { environment } from 'src/environments/environment';
 import { IMoviesListApiService } from 'src/shared/interfaces';
 import { MoviesList, TMDBMoviesList } from 'src/shared/models';
 
@@ -18,7 +18,7 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
 
   getTopRated(): Observable<MoviesList> {
     return this.httpClient.get<TMDBMoviesList>(
-      `${url}movie/top_rated?api_key=${api_keys.TMDB_API_KEY}`
+      `${url}movie/top_rated?api_key=${environment.TMDB_API_KEY}`
     ).pipe(
       map(result => {
         return {
@@ -50,7 +50,7 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
 
   getPopular(): Observable<MoviesList> {
     return this.httpClient.get<TMDBMoviesList>(
-      `${url}movie/popular?api_key=${api_keys.TMDB_API_KEY}`
+      `${url}movie/popular?api_key=${environment.TMDB_API_KEY}`
     ).pipe(
       map(result => {
         return {
@@ -84,7 +84,7 @@ export class TMDBMoviesListApiService implements IMoviesListApiService {
     const todayReq = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 
     return this.httpClient.get<TMDBMoviesList>(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${api_keys.TMDB_API_KEY}&primary_release_date.gte=${todayReq}`
+      `https://api.themoviedb.org/3/discover/movie?api_key=${environment.TMDB_API_KEY}&primary_release_date.gte=${todayReq}`
     ).pipe(
       map(result => {
         return {

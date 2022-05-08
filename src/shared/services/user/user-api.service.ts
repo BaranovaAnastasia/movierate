@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IUserApiService } from 'src/shared/interfaces';
 import { User, UserGenresStats, UserStats, UserTopEntry, UserTopOption } from 'src/shared/models';
 
-const host = 'https://git.heroku.com/movierate-backend/user';
+const host = 'https://movierate-backend.herokuapp.com/user';
 
 @Injectable({
   providedIn: 'root'

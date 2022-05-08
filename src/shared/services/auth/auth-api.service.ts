@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IAuthApiService } from 'src/shared/interfaces';
 import { Tokens, User } from 'src/shared/models';
 
-const host = 'https://git.heroku.com/movierate-backend/auth';
+const host = 'https://movierate-backend.herokuapp.com/auth';
 
 @Injectable({
   providedIn: 'root'

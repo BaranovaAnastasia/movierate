@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { api_keys } from 'src/environments/api_keys';
+import { environment } from 'src/environments/environment';
 import { IMovieApiService } from 'src/shared/interfaces';
 import { Credits, Movie, TMDBCredits, TMDBMovie, TMDBSearchResult, TMDBVideos, Trailer } from 'src/shared/models';
 
@@ -18,7 +18,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   getMovie(id: number): Observable<Movie> {
     return this.httpClient.get<TMDBMovie>(
-      `${url}/movie/${id}?api_key=${api_keys.TMDB_API_KEY}`
+      `${url}/movie/${id}?api_key=${environment.TMDB_API_KEY}`
     ).pipe(
       map(result => this.TMDBMovie2Movie(result))
     );
@@ -26,7 +26,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   getTrailer(id: number): Observable<Trailer | undefined> {
     return this.httpClient.get<TMDBVideos>(
-      `${url}/movie/${id}/videos?api_key=${api_keys.TMDB_API_KEY}`
+      `${url}/movie/${id}/videos?api_key=${environment.TMDB_API_KEY}`
     ).pipe(
       map(result => result.results.find(video => video.type === 'Trailer'))
     );
@@ -34,7 +34,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   getCredits(id: number): Observable<Credits> {
     return this.httpClient.get<TMDBCredits>(
-      `${url}/movie/${id}/credits?api_key=${api_keys.TMDB_API_KEY}`
+      `${url}/movie/${id}/credits?api_key=${environment.TMDB_API_KEY}`
     ).pipe(
       map(result => Object.assign(
         {
@@ -58,7 +58,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   searchMovies(query: string, page: number): Observable<Movie[]> {
     return this.httpClient.get<TMDBSearchResult>(
-      `${url}/search/movie?api_key=${api_keys.TMDB_API_KEY}&query=${query}&page=${page}`
+      `${url}/search/movie?api_key=${environment.TMDB_API_KEY}&query=${query}&page=${page}`
     ).pipe(
       map(result => result.results),
       map(result => result.sort(
