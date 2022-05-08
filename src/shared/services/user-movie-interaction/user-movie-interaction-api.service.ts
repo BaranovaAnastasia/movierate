@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { IUserMovieInteractionApiService } from 'src/shared/interfaces';
 import { MovieStats } from 'src/shared/models';
 
-const host = 'http://localhost:3000/movie';
+const host = 'https://movierate-backend.herokuapp.com/movie';
 
 @Injectable({
   providedIn: 'root'

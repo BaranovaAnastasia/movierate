@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { IReviewsApiService } from 'src/shared/interfaces';
 import { Review } from 'src/shared/models';
 
-const host = 'http://localhost:3000/review';
+const host = 'https://git.heroku.com/movierate-backend/review';
 
 @Injectable({
   providedIn: 'root'
