@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  TMDB_API_KEY: '40e857020dcae37a13f421b08addb019'
+  tmdbApiKey: '40e857020dcae37a13f421b08addb019',
+  serverUrl: 'https://movierate-backend.herokuapp.com',
+  tmdbApiUrl: 'https://api.themoviedb.org/3',
+  tmdbPosterUrl: 'https://image.tmdb.org/t/p/w1280',
 };
 
 /*

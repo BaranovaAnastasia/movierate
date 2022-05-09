@@ -9,4 +9,8 @@ import { MoviesList } from 'src/shared/models';
 export class MoviesListComponent {
   @Input() list!: MoviesList;
 
+  get visibilityText(): string {
+    return this.list.isPublic ? 'Public' : 'Private';
+  }
+
 }

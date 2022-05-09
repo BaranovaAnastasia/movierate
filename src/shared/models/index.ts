@@ -5,7 +5,6 @@ export * from './movie/review';
 export * from './movie/trailer';
 
 export * from './movies-list/movies-list';
-export * from './movies-list/visibility';
 
 export * from './tmdb/tmdb-credits';
 export * from './tmdb/tmdb-movie';

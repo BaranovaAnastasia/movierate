@@ -21,7 +21,3 @@ export interface Movie {
   vote_count?: number,
   watched?: number,
 }
-
-export const DEFAULT_MOVIE: Movie = {
-  id: ""
-}

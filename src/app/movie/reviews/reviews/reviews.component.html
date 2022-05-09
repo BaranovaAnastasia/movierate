@@ -24,5 +24,10 @@
       *ngFor="let review of reviews"
       [review]="review">
     </app-review>
+    <div
+      *ngIf="reviews.length === 0"
+      class="no-reviews tui-text_body-l">
+      No reviews yet
+    </div>
   </div>
 </div>

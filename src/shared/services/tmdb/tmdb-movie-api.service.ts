@@ -6,9 +6,6 @@ import { environment } from 'src/environments/environment';
 import { IMovieApiService } from 'src/shared/interfaces';
 import { Credits, Movie, TMDBCredits, TMDBMovie, TMDBSearchResult, TMDBVideos, Trailer } from 'src/shared/models';
 
-const url = 'https://api.themoviedb.org/3';
-const posterUrl = 'https://image.tmdb.org/t/p/w1280';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +15,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   getMovie(id: number): Observable<Movie> {
     return this.httpClient.get<TMDBMovie>(
-      `${url}/movie/${id}?api_key=${environment.TMDB_API_KEY}`
+      `${environment.tmdbApiUrl}/movie/${id}?api_key=${environment.tmdbApiKey}`
     ).pipe(
       map(result => this.TMDBMovie2Movie(result))
     );
@@ -26,7 +23,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   getTrailer(id: number): Observable<Trailer | undefined> {
     return this.httpClient.get<TMDBVideos>(
-      `${url}/movie/${id}/videos?api_key=${environment.TMDB_API_KEY}`
+      `${environment.tmdbApiUrl}/movie/${id}/videos?api_key=${environment.tmdbApiKey}`
     ).pipe(
       map(result => result.results.find(video => video.type === 'Trailer'))
     );
@@ -34,7 +31,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   getCredits(id: number): Observable<Credits> {
     return this.httpClient.get<TMDBCredits>(
-      `${url}/movie/${id}/credits?api_key=${environment.TMDB_API_KEY}`
+      `${environment.tmdbApiUrl}/movie/${id}/credits?api_key=${environment.tmdbApiKey}`
     ).pipe(
       map(result => Object.assign(
         {
@@ -58,7 +55,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   searchMovies(query: string, page: number): Observable<Movie[]> {
     return this.httpClient.get<TMDBSearchResult>(
-      `${url}/search/movie?api_key=${environment.TMDB_API_KEY}&query=${query}&page=${page}`
+      `${environment.tmdbApiUrl}/search/movie?api_key=${environment.tmdbApiKey}&query=${query}&page=${page}`
     ).pipe(
       map(result => result.results),
       map(result => result.sort(
@@ -71,7 +68,7 @@ export class TMDBMovieApiService implements IMovieApiService {
   private TMDBMovie2Movie(tmdbMovie: TMDBMovie): Movie {
     return Object.assign(
       { ...tmdbMovie },
-      { poster_path: tmdbMovie.poster_path ? `${posterUrl}${tmdbMovie.poster_path}` : undefined },
+      { poster_path: tmdbMovie.poster_path ? `${environment.tmdbPosterUrl}/${tmdbMovie.poster_path}` : undefined },
       { release_date: new Date(tmdbMovie.release_date) },
       tmdbMovie.genres && { genres: tmdbMovie.genres.map(genre => genre.name).slice(0, 2) }
     );

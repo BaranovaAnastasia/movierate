@@ -54,11 +54,14 @@
   min-width: 80px;
 }
 
-.control:hover * {
+.control:not(.disabled):hover * {
   opacity: 1;
   color: #FDCE25;
   stroke: #FDCE25;
   fill: #FDCE25;
+}
+.disabled {
+  opacity: 0.3;
 }
 
 .control-active {

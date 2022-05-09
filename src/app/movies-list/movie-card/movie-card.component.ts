@@ -10,8 +10,7 @@ export class MovieCardComponent {
   @Input() movie!: Movie;
 
   get formattedRating(): string {
-    const ratingStr = this.movie.vote_average!.toString();
-    return ratingStr.length === 3 ? ratingStr : ratingStr + '.0'
+    return this.movie.vote_average!.toFixed(1)
   }
 
   get ratingColor(): string {

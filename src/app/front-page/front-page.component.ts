@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { IMoviesListApiService, IMoviesListApiServiceToken } from 'src/shared/interfaces';
+import { Component, OnInit } from '@angular/core';
 import { MoviesList } from 'src/shared/models';
+import { ListsService } from 'src/shared/services';
 
 @Component({
   selector: 'app-front-page',
@@ -13,18 +13,17 @@ export class FrontPageComponent implements OnInit {
   upcoming!: MoviesList;
 
   constructor(
-    @Inject(IMoviesListApiServiceToken)
-    private moviesListApiService: IMoviesListApiService
+    private listsService: ListsService
   ) { }
 
   ngOnInit(): void {
-    this.moviesListApiService.getTopRated().subscribe(list => {
+    this.listsService.getTopRated().subscribe(list => {
       this.highestRanked = list;
     });
-    this.moviesListApiService.getPopular().subscribe(list => {
+    this.listsService.getPopular().subscribe(list => {
       this.popular = list;
     });
-    this.moviesListApiService.getUpcoming().subscribe(list => {
+    this.listsService.getUpcoming().subscribe(list => {
       this.upcoming = list;
     });
   }

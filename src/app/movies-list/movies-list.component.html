@@ -3,11 +3,11 @@
   class="container">
   <div class="title tui-text_body-xl">
     <div class="title__tag"></div>
-    <a>{{ list.title }}</a>
+    <a>{{ list.listName }}</a>
     <div
-      *ngIf="list.visibility"
+      *ngIf="list.isPublic !== undefined"
       class="title__visibility tui-text_body-xs">
-      {{ list.visibility }}
+      {{ visibilityText }}
     </div>
   </div>
   <div class="content">

@@ -9,7 +9,9 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
-    if (req.url.includes('refresh')) {
+    const rt = localStorage.getItem('refresh_token');
+    
+    if (req.url.includes('refresh') || !rt) {
       return next.handle(req)
     }
     return next.handle(req).pipe(

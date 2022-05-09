@@ -37,7 +37,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
     rating.valueChanges.pipe(
       switchMap(value =>
-        this.userMovieInteractionService.rateMovie$(this.movieId!, value)
+        this.userMovieInteractionService.rateMovie$(this.movieId!, value * 2)
       )
     ).subscribe(stats => {
       this.updateStats(stats);
@@ -93,7 +93,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
     this.userMovieInteractionService.getRating$(this.movieId).subscribe(
       rating => this.ratingForm.setValue(
-        { rating: rating },
+        { rating: rating / 2 },
         { emitEvent: false }
       )
     );
@@ -108,7 +108,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   }
 
   private updateStats(stats: MovieStats): void {
-    this.voteAvg = (stats.voteAvg * 2).toFixed(1),
+    this.voteAvg = stats.voteAvg.toFixed(1),
     this.voteCount = stats.voteCount,
     this.watched = stats.watched
   }

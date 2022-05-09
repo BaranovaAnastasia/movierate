@@ -13,8 +13,8 @@ import { FrontPageModule } from "./front-page/front-page.module";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthModule } from "./auth/auth.module";
 import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
-import { IAuthApiServiceToken, IMovieApiServiceToken, IMoviesListApiServiceToken, IReviewsApiServiceToken, IUserApiServiceToken, IUserMovieInteractionApiServiceToken } from "src/shared/interfaces";
-import { AuthApiService, ReviewsApiService, TMDBMovieApiService, TMDBMoviesListApiService, UserApiService, UserMovieInteractionApiService } from "src/shared/services";
+import { IAuthApiServiceToken, IMovieApiServiceToken, IMainListsApiServiceToken, IReviewsApiServiceToken, IUserApiServiceToken, IUserMovieInteractionApiServiceToken } from "src/shared/interfaces";
+import { AuthApiService, ReviewsApiService, TMDBMovieApiService, MainListsApiService, UserApiService, UserMovieInteractionApiService } from "src/shared/services";
 import { ErrorInterceptor, AuthInterceptor } from "src/shared/interceptors";
 
 @NgModule({
@@ -39,7 +39,7 @@ import { ErrorInterceptor, AuthInterceptor } from "src/shared/interceptors";
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
     { provide: IMovieApiServiceToken, useClass: TMDBMovieApiService },
     { provide: IUserApiServiceToken, useClass: UserApiService },
-    { provide: IMoviesListApiServiceToken, useClass: TMDBMoviesListApiService },
+    { provide: IMainListsApiServiceToken, useClass: MainListsApiService },
     { provide: IReviewsApiServiceToken, useClass: ReviewsApiService },
     { provide: IAuthApiServiceToken, useClass: AuthApiService },
     { provide: IUserMovieInteractionApiServiceToken, useClass: UserMovieInteractionApiService },
