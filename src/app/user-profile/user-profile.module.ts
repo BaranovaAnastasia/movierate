@@ -6,6 +6,7 @@ import { TuiProgressModule } from '@taiga-ui/kit';
 import { TuiPieChartModule } from '@taiga-ui/addon-charts';
 import { UserPreviewModule } from '../user-preview/user-preview.module';
 import { TuiLetModule } from '@taiga-ui/cdk';
+import { MoviesListModule } from '../movies-list/movies-list.module';
 
 
 
@@ -19,7 +20,8 @@ import { TuiLetModule } from '@taiga-ui/cdk';
     TuiProgressModule,
     TuiPieChartModule,
     UserPreviewModule,
-    TuiLetModule
+    TuiLetModule,
+    MoviesListModule
   ],
   exports: [
     UserProfileComponent

@@ -17,13 +17,13 @@ export class FrontPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.listsService.getTopRated().subscribe(list => {
+    this.listsService.getTopRated$().subscribe(list => {
       this.highestRanked = list;
     });
-    this.listsService.getPopular().subscribe(list => {
+    this.listsService.getPopular$().subscribe(list => {
       this.popular = list;
     });
-    this.listsService.getUpcoming().subscribe(list => {
+    this.listsService.getUpcoming$().subscribe(list => {
       this.upcoming = list;
     });
   }

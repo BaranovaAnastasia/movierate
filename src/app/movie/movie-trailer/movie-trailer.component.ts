@@ -46,7 +46,7 @@ export class MovieTrailerComponent implements OnInit {
   ngOnInit(): void {
     this.activatedroute.params.subscribe(
       async routeParams => {
-        this.movieService.getTrailer(routeParams.id)
+        this.movieService.getTrailer$(routeParams.id)
           .subscribe(result => this.trailer$?.next(result));
       }
     );

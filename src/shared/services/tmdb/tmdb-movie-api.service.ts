@@ -13,7 +13,7 @@ export class TMDBMovieApiService implements IMovieApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getMovie(id: number): Observable<Movie> {
+  getMovie$(id: string): Observable<Movie> {
     return this.httpClient.get<TMDBMovie>(
       `${environment.tmdbApiUrl}/movie/${id}?api_key=${environment.tmdbApiKey}`
     ).pipe(
@@ -21,7 +21,7 @@ export class TMDBMovieApiService implements IMovieApiService {
     );
   }
 
-  getTrailer(id: number): Observable<Trailer | undefined> {
+  getTrailer$(id: string): Observable<Trailer | undefined> {
     return this.httpClient.get<TMDBVideos>(
       `${environment.tmdbApiUrl}/movie/${id}/videos?api_key=${environment.tmdbApiKey}`
     ).pipe(
@@ -29,7 +29,7 @@ export class TMDBMovieApiService implements IMovieApiService {
     );
   }
 
-  getCredits(id: number): Observable<Credits> {
+  getCredits$(id: string): Observable<Credits> {
     return this.httpClient.get<TMDBCredits>(
       `${environment.tmdbApiUrl}/movie/${id}/credits?api_key=${environment.tmdbApiKey}`
     ).pipe(
@@ -53,7 +53,7 @@ export class TMDBMovieApiService implements IMovieApiService {
     );
   }
 
-  searchMovies(query: string, page: number): Observable<Movie[]> {
+  searchMovies$(query: string, page: number): Observable<Movie[]> {
     return this.httpClient.get<TMDBSearchResult>(
       `${environment.tmdbApiUrl}/search/movie?api_key=${environment.tmdbApiKey}&query=${query}&page=${page}`
     ).pipe(
@@ -68,8 +68,10 @@ export class TMDBMovieApiService implements IMovieApiService {
   private TMDBMovie2Movie(tmdbMovie: TMDBMovie): Movie {
     return Object.assign(
       { ...tmdbMovie },
-      { poster_path: tmdbMovie.poster_path ? `${environment.tmdbPosterUrl}/${tmdbMovie.poster_path}` : undefined },
-      { release_date: new Date(tmdbMovie.release_date) },
+      {
+        id: String(tmdbMovie.id),
+        poster_path: tmdbMovie.poster_path ? `${environment.tmdbPosterUrl}/${tmdbMovie.poster_path}` : undefined
+      },
       tmdbMovie.genres && { genres: tmdbMovie.genres.map(genre => genre.name).slice(0, 2) }
     );
   }

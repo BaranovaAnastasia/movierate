@@ -7,8 +7,8 @@ import { Credits } from "../models/movie/credits";
 export const IMovieApiServiceToken = new InjectionToken('IMovieApiService');
 
 export interface IMovieApiService {
-  getMovie(id: number): Observable<Movie>;
-  getTrailer(id: number): Observable<Trailer | undefined>;
-  getCredits(id: number): Observable<Credits>;
-  searchMovies(query: string, page: number): Observable<Movie[]>;
+  getMovie$(id: string): Observable<Movie>;
+  getTrailer$(id: string): Observable<Trailer | undefined>;
+  getCredits$(id: string): Observable<Credits>;
+  searchMovies$(query: string, page: number): Observable<Movie[]>;
 }

@@ -13,7 +13,7 @@ export class DateStrigifyPipe implements PipeTransform {
   transform(value: Date | undefined, onlyYear: boolean = false): string {
     if (!value) return '';
     
-    const {year, month, day} = TuiDay.fromLocalNativeDate(value);
+    const {year, month, day} = TuiDay.fromLocalNativeDate(new Date (value));
     return onlyYear ? `${year}` : `${day} ${monthsNames[month]} ${year}`;
   }
 

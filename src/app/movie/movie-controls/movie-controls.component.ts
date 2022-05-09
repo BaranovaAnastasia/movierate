@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { switchMap } from 'rxjs/operators';
 import { MovieStats } from 'src/shared/models';
-import { UserMovieInteractionService } from 'src/shared/services';
+import { ListsService, UserMovieInteractionService } from 'src/shared/services';
 
 @Component({
   selector: 'app-movie-controls',
@@ -22,15 +22,18 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   });
 
   isWatched: boolean | undefined;
+  isFavourite: boolean | undefined;
 
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
+    private listsService: ListsService,
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.requestStats();
     this.requestIsWatched();
+    this.requestIsFavourite();
     this.requestRating();
 
     const rating = this.ratingForm.get('rating')!;
@@ -48,11 +51,15 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.requestStats();
     this.requestIsWatched();
+    this.requestIsFavourite();
     this.requestRating();
   }
 
   get watchedText(): string {
     return this.isWatched ? "watched!" : "add to watched";
+  }
+  get favouritesText(): string {
+    return this.isFavourite ? "favourite!" : "add to favourites";
   }
 
   markMovieAsWatched(): void {
@@ -78,6 +85,16 @@ export class MovieControlsComponent implements OnInit, OnChanges {
           this.isWatched = true;
         }
       )
+  }
+
+  markAsFavourites(): void {
+    if (this.isFavourite) {
+      this.listsService.removeMovieFromFavourites$(this.movieId!)
+        .subscribe(() => this.isFavourite = false);
+      return;
+    }
+    this.listsService.addMovieToFavourites$(this.movieId!)
+      .subscribe(() => this.isFavourite = true);
   }
 
   private requestStats(): void {
@@ -107,10 +124,18 @@ export class MovieControlsComponent implements OnInit, OnChanges {
     );
   }
 
+  private requestIsFavourite(): void {
+    if (!this.movieId) return;
+
+    this.listsService.isFavourite$(this.movieId).subscribe(
+      isFavourite => this.isFavourite = isFavourite
+    );
+  }
+
   private updateStats(stats: MovieStats): void {
     this.voteAvg = stats.voteAvg.toFixed(1),
-    this.voteCount = stats.voteCount,
-    this.watched = stats.watched
+      this.voteCount = stats.voteCount,
+      this.watched = stats.watched
   }
 
 }

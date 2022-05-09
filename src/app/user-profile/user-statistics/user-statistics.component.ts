@@ -10,8 +10,8 @@ import { UserService } from 'src/shared/services';
 export class UserStatisticsComponent implements OnInit {
   @Input() userId!: number;
 
-  genresNames: string[] = [];
-  genresCounts: number[] = [];
+  genresNames?: string[];
+  genresCounts?: number[];
 
   stats?: UserStats;
 

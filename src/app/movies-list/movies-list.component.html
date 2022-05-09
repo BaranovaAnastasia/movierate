@@ -11,6 +11,11 @@
     </div>
   </div>
   <div class="content">
+    <div
+      *ngIf="list.movies.length === 0"
+      class="content__empty tui-text_body-m">
+      This list has no movies yet
+    </div>
     <app-movie-card
       *ngFor="let movie of list.movies"
       [movie]="movie">

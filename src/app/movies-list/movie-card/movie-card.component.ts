@@ -34,7 +34,7 @@ export class MovieCardComponent {
 
   get isUpcoming(): boolean {
     return this.movie.release_date
-      ? this.movie.release_date > new Date()
+      ? new Date(this.movie.release_date) > new Date()
       : false;
   }
 

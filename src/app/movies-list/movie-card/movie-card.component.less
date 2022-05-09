@@ -36,7 +36,6 @@
 }
 
 .info {
-  width: 100%;
   border-radius: 10px;
   padding: 10px 0px 10px 0px;
   display: flex;
@@ -78,6 +77,9 @@
     width: @card-width;
     height: @card-height;
   }
+  .info {
+    width: @card-width;
+  }
 }
 
 @media @tablet {
@@ -91,6 +93,9 @@
     width: @card-width;
     height: @card-height;
   }
+  .info {
+    width: @card-width;
+  }
 }
 
 @media @mobile {
@@ -103,5 +108,8 @@
   .no-poster {
     width: @card-width;
     height: @card-height;
+  }
+  .info {
+    width: @card-width;
   }
 }

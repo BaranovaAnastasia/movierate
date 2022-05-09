@@ -15,23 +15,23 @@ export class MovieService {
     private userMovieService: IUserMovieInteractionApiService
   ) { }
 
-  getMovie(id: number): Observable<Movie> {
-    return this.movieApiService.getMovie(id);
+  getMovie$(id: string): Observable<Movie> {
+    return this.movieApiService.getMovie$(id);
   }
 
-  getTrailer(id: number): Observable<Trailer | undefined> {
-    return this.movieApiService.getTrailer(id);
+  getTrailer$(id: string): Observable<Trailer | undefined> {
+    return this.movieApiService.getTrailer$(id);
   }
 
-  getCredits(id: number): Observable<Credits> {
-    return this.movieApiService.getCredits(id);
+  getCredits$(id: string): Observable<Credits> {
+    return this.movieApiService.getCredits$(id);
   }
 
-  getStats(id: string): Observable<MovieStats> {
+  getStats$(id: string): Observable<MovieStats> {
     return this.userMovieService.getStats$(id);
   }
 
   searchMovies(query: string, page: number = 1): Observable<Movie[]> {
-    return this.movieApiService.searchMovies(query, page);
+    return this.movieApiService.searchMovies$(query, page);
   }
 }

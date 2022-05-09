@@ -16,13 +16,7 @@ export class ReviewsApiService implements IReviewsApiService {
   getMovieReviews(movieId: string): Observable<Review[]> {
     return this.httpClient.get<Review[]>(
       `${environment.serverUrl}/review/${movieId}`
-    )
-      .pipe(
-        map(reviews => reviews.map(review => Object.assign(
-          { ...review },
-          { created_at: new Date(review.created_at) }
-        )))
-      );
+    );
   }
 
   postReview(movieId: string, review: Review): Observable<Review[]> {

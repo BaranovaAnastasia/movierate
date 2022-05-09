@@ -20,7 +20,7 @@ export class MovieCreditsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedroute.params.subscribe(
       async routeParams => {
-        this.movieService.getCredits(routeParams.id)
+        this.movieService.getCredits$(routeParams.id)
           .subscribe(result => this.credits$?.next(result));
       }
     );

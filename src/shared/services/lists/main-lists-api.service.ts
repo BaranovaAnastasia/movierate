@@ -13,7 +13,7 @@ export class MainListsApiService implements IMainListsApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getPopular(): Observable<MoviesList> {
+  getPopular$(): Observable<MoviesList> {
     return this.httpClient.get<TMDBMoviesList>(
       `${environment.tmdbApiUrl}/movie/popular?api_key=${environment.tmdbApiKey}`
     ).pipe(
@@ -31,19 +31,11 @@ export class MainListsApiService implements IMainListsApiService {
             )
           )
         }
-      }),
-      map(result => {
-        result.movies.map(movie => {
-          movie.release_date = new Date(movie.release_date!);
-          return movie;
-        });
-
-        return result;
       })
     );
   }
 
-  getUpcoming(): Observable<MoviesList> {
+  getUpcoming$(): Observable<MoviesList> {
     const today = new Date();
     const todayReq = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 
@@ -66,10 +58,6 @@ export class MainListsApiService implements IMainListsApiService {
         }
       }),
       map(result => {
-        result.movies.map(movie => {
-          movie.release_date = new Date(movie.release_date!);
-          return movie;
-        });
         result.movies.sort(
           (a, b) => a.release_date && b.release_date
             ? (new Date(a.release_date)).getTime() - (new Date(b.release_date)).getTime()
@@ -80,17 +68,14 @@ export class MainListsApiService implements IMainListsApiService {
     )
   }
 
-  getTopRated(): Observable<MoviesList> {
+  getTopRated$(): Observable<MoviesList> {
     return this.httpClient.get<Movie[]>(
       `${environment.serverUrl}/movie/top`
     ).pipe(
       map(result => {
         return {
           listName: 'Highest Ranked',
-          movies: result.map(movie => Object.assign(
-            { ...movie },
-            { release_date: new Date(movie.release_date!) }
-          ))
+          movies: result
         }
       })
     )
