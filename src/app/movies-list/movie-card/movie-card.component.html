@@ -15,6 +15,18 @@
     <div class="black-screen"></div>
   </a>
 
+  <button
+    tuiIconButton
+    *ngIf="canDelete"
+    class="delete-button"
+    size="s"
+    type="button"
+    appearance="icon-delete"
+    icon="tuiIconCloseLarge"
+    tuiMode="onDark"
+    (click)="deleteMovie(); $event.stopPropagation()"
+  ></button>
+
   <div class="info">
 
     <div

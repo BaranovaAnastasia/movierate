@@ -4,6 +4,7 @@ import { MovieCardComponent } from './movie-card.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { TuiProgressModule } from '@taiga-ui/kit';
 import { StringifyPipesModule } from 'src/app/pipes/stringify-pipes.module';
+import { TuiButtonModule, TuiModeModule } from '@taiga-ui/core';
 
 
 
@@ -15,7 +16,9 @@ import { StringifyPipesModule } from 'src/app/pipes/stringify-pipes.module';
     CommonModule,
     AppRoutingModule,
     TuiProgressModule,
-    StringifyPipesModule
+    StringifyPipesModule,
+    TuiButtonModule,
+    TuiModeModule
   ],
   exports: [
     MovieCardComponent

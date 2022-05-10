@@ -13,4 +13,6 @@ export interface IUserListsApiService {
   addMovieToList$(movieId: string, listId: number): Observable<void>;
 
   editList$(listId: number, listName: string, isPublic: boolean): Observable<void>;
+  removeMovieFromList$(movieId: string, listId: number): Observable<void>;
+  deleteList$(listId: number): Observable<void>;
 }

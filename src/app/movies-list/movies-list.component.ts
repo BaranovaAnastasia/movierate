@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
-import { MoviesList } from 'src/shared/models';
+import { Movie, MoviesList } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
 
 @Component({
@@ -11,8 +11,8 @@ import { ListsService } from 'src/shared/services';
 })
 export class MoviesListComponent {
   @Input() list!: MoviesList;
-  @Input() titleEditable: boolean = false;
-  @Input() contentEditable: boolean = false;
+  @Input() editable: boolean = false;
+  @Output() onListDelete = new EventEmitter<number>();
 
   nowEditing: boolean = false;
 
@@ -36,6 +36,8 @@ export class MoviesListComponent {
   }
 
   startEditing(): void {
+    if(!this.editable) return;
+    
     this.form.patchValue({
       name: this.list.listName,
       visibility: this.list.isPublic ? 'public' : 'private'
@@ -73,6 +75,17 @@ export class MoviesListComponent {
         ).subscribe();
       }
     )
+  }
+
+  deleteMovie(movie: Movie): void {
+    this.listsService.removeMovieFromList$(movie.id, this.list.listId!)
+      .subscribe(
+        () => this.list.movies = this.list.movies?.filter(item => item.id !== movie.id)
+      );
+  }
+
+  deleteList(): void {
+    this.onListDelete.emit(this.list.listId);
   }
 
 }

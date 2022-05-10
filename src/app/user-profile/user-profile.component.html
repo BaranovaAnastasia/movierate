@@ -64,14 +64,13 @@
   </div>
 
   <app-movies-list
-    [list]="favourites!"
-    [contentEditable]="isMyProfile!">
+    [list]="favourites!">
   </app-movies-list>
 
   <app-movies-list
     *ngFor="let list of lists"
     [list]="list!"
-    [titleEditable]="isMyProfile!"
-    [contentEditable]="isMyProfile!">
+    [editable]="isMyProfile!"
+    (onListDelete)="deleteList($event)">
   </app-movies-list>
 </div>

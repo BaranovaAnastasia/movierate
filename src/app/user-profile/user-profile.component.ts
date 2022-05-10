@@ -64,4 +64,11 @@ export class UserProfileComponent implements OnInit {
     this.authService.logout$().subscribe();
   }
 
+  deleteList(listId: number): void {
+    this.listsService.deleteList$(listId)
+      .subscribe(() =>
+        this.lists = this.lists.filter(list => list.listId !== listId)
+      );
+  }
+
 }

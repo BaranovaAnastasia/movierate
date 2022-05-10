@@ -32,7 +32,9 @@
       (focus)="focus()"/>
   </tui-input-password>
 
-  <div class="error" *ngIf="unsuccessful">
+  <div
+    *ngIf="unsuccessful"
+    class="error">
     Invalid email or password
   </div>
 

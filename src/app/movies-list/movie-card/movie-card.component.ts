@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Movie } from 'src/shared/models';
 
 @Component({
@@ -8,6 +8,8 @@ import { Movie } from 'src/shared/models';
 })
 export class MovieCardComponent {
   @Input() movie!: Movie;
+  @Input() canDelete: boolean = false;
+  @Output() onMovieDelete = new EventEmitter<Movie>();
 
   get formattedRating(): string {
     return this.movie.vote_average!.toFixed(1)
@@ -36,6 +38,10 @@ export class MovieCardComponent {
     return this.movie.release_date
       ? new Date(this.movie.release_date) > new Date()
       : false;
+  }
+
+  deleteMovie(): void {
+    this.onMovieDelete.emit(this.movie);
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { MoviesList } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
 

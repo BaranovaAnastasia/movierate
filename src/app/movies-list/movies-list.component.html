@@ -13,15 +13,27 @@
       class="title__visibility tui-text_body-xs">
       {{ visibilityText }}
     </div>
+    
     <button
-      *ngIf="titleEditable"
       tuiIconButton
+      *ngIf="editable"
       size="s"
       type="button"
       appearance="icon"
       icon="tuiIconEdit"
       (click)="startEditing()"
     ></button>
+
+    <button
+      tuiIconButton
+      *ngIf="editable"
+      size="s"
+      type="button"
+      appearance="delete-list"
+      (click)="deleteList()">
+      <tui-svg src="tuiIconCloseLarge"></tui-svg>
+      <span class="delete-button__hint">delete</span>
+  </button>
   </div>
 
   <form
@@ -60,10 +72,9 @@
       size="s"
       type="submit"
       appearance="icon"
-      icon="tuiIconCheck"
+      icon="tuiIconCheckLarge"
     ></button>
   </form>
-
 
 
   <div class="content">
@@ -74,7 +85,9 @@
     </div>
     <app-movie-card
       *ngFor="let movie of list.movies"
-      [movie]="movie">
+      [movie]="movie"
+      [canDelete]="editable && nowEditing"
+      (onMovieDelete)="deleteMovie($event)">
     </app-movie-card>
   </div>
 </div>

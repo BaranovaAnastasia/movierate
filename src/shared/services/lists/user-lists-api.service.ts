@@ -51,4 +51,17 @@ export class UserListsApiService implements IUserListsApiService {
     );
   }
 
+  removeMovieFromList$(movieId: string, listId: number): Observable<void> {
+    return this.httpClient.post<void>(
+      `${environment.serverUrl}/lists/remove`,
+      { movieId, listId }
+    );
+  }
+
+  deleteList$(listId: number): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${environment.serverUrl}/lists/${listId}`
+    );
+  }
+
 }

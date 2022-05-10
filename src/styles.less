@@ -15,6 +15,34 @@ tui-wrapper[data-appearance='auth-submit'] {
   }
 }
 
+tui-wrapper[data-appearance='icon-delete'] {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &[data-state='hovered'] {
+    color: #fff;
+  }
+}
+
+tui-wrapper[data-appearance='delete-list'] {
+  width: fit-content;
+  background: none;
+  color: #fff;
+  opacity: 0.5;
+
+  .delete-button__hint {
+    display: none;
+  }
+
+  &[data-state='hovered'] {
+    color: var(--tui-negative-night);
+
+    .delete-button__hint {
+      display: block;
+    }
+  }
+}
+
 tui-dialog {
   background-color: #fdce25;
   border: 20px solid transparent !important;
