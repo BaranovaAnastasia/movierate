@@ -5,3 +5,4 @@ export * from './IReviewsApiService';
 export * from './IUserApiService';
 export * from './IUserMovieInteractionApiService';
 export * from './IMainListsApiService';
+export * from './IFavouritesApiService';

@@ -27,20 +27,25 @@ export class ListsService {
     return this.mainListApiService.getTopRated$();
   }
 
-  addMovieToFavourites$(movieId: string): Observable<void> {
-    return this.userListApiService.addMovieToFavourites$(movieId);
+
+  getAllListsCurrent$(): Observable<MoviesList[]> {
+    return this.userListApiService.getAllListsCurrent$();
   }
 
-  removeMovieFromFavourites$(movieId: string): Observable<void> {
-    return this.userListApiService.removeMovieFromFavourites$(movieId);
+  getAllUserLists$(userId: number): Observable<MoviesList[]> {
+    return this.userListApiService.getAllUserLists$(userId);
   }
 
-  getFavourites$(userId: number): Observable<MoviesList> {
-    return this.userListApiService.getFavourites$(userId);
+  getList$(listId: number): Observable<MoviesList> {
+    return this.userListApiService.getList$(listId);
   }
 
-  isFavourite$(movieId: string): Observable<boolean> {
-    return this.userListApiService.isFavourite$(movieId);
+  createList$(listName: string, isPublic: boolean): Observable<MoviesList> {
+    return this.userListApiService.createList$(listName, isPublic);
+  }
+
+  addMovieToList$(movieId: string, listId: number): Observable<void> {
+    return this.userListApiService.addMovieToList$(movieId, listId);
   }
 
 }

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MoviesList, User } from 'src/shared/models';
-import { AuthService, ListsService, UserService } from 'src/shared/services';
+import { AuthService, FavouritesService, ListsService, UserService } from 'src/shared/services';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,11 +15,13 @@ export class UserProfileComponent implements OnInit {
   isMyProfile$?: Observable<boolean>;
 
   favourites?: MoviesList;
+  lists: MoviesList[] = [];
 
   constructor(
     private userService: UserService,
     private authService: AuthService,
     private listsService: ListsService,
+    private favouritesService: FavouritesService,
     private activatedroute: ActivatedRoute
   ) { }
 
@@ -33,10 +35,20 @@ export class UserProfileComponent implements OnInit {
         map(user => user ? user.id == routeParams.id : false)
       );
 
-      this.listsService.getFavourites$(routeParams.id).subscribe(
+      this.favouritesService.getFavourites$(routeParams.id).subscribe(
         list => this.favourites = list
       );
 
+      this.listsService.getAllUserLists$(routeParams.id)
+        .subscribe(results => {
+          this.lists = Array(results.length).fill(null);
+          results.forEach((list, i) => {
+            this.listsService.getList$(list.listId!)
+              .subscribe(fullList => {
+                this.lists[i] = fullList;
+              });
+          });
+        });
     });
   }
 
@@ -49,8 +61,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout$()
-      .subscribe(() => { });
+    this.authService.logout$().subscribe();
   }
 
 }

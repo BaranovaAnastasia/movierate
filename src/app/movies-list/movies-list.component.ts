@@ -13,4 +13,8 @@ export class MoviesListComponent {
     return this.list.isPublic ? 'Public' : 'Private';
   }
 
+  get isEmpty(): boolean {
+    return !this.list.movies || this.list.movies.length === 0
+  }
+
 }

@@ -14,8 +14,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthModule } from "./auth/auth.module";
 import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import { IAuthApiServiceToken, IMovieApiServiceToken, IMainListsApiServiceToken, IReviewsApiServiceToken, IUserApiServiceToken, IUserMovieInteractionApiServiceToken, IUserListsApiServiceToken } from "src/shared/interfaces";
-import { AuthApiService, ReviewsApiService, TMDBMovieApiService, MainListsApiService, UserApiService, UserMovieInteractionApiService, UserListsApiService } from "src/shared/services";
+import { AuthApiService, ReviewsApiService, TMDBMovieApiService, MainListsApiService, UserApiService, UserMovieInteractionApiService, UserListsApiService, FavouritesApiService } from "src/shared/services";
 import { ErrorInterceptor, AuthInterceptor } from "src/shared/interceptors";
+import { IFavouritesApiServiceToken } from "src/shared/interfaces/IFavouritesApiService";
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ErrorInterceptor, AuthInterceptor } from "src/shared/interceptors";
     { provide: IMovieApiServiceToken, useClass: TMDBMovieApiService },
     { provide: IUserApiServiceToken, useClass: UserApiService },
     { provide: IMainListsApiServiceToken, useClass: MainListsApiService },
+    { provide: IFavouritesApiServiceToken, useClass: FavouritesApiService },
     { provide: IUserListsApiServiceToken, useClass: UserListsApiService },
     { provide: IReviewsApiServiceToken, useClass: ReviewsApiService },
     { provide: IAuthApiServiceToken, useClass: AuthApiService },

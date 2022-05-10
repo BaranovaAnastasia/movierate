@@ -1,8 +1,11 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Inject, Injector, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { TuiDialogService } from '@taiga-ui/core';
 import { switchMap } from 'rxjs/operators';
 import { MovieStats } from 'src/shared/models';
-import { ListsService, UserMovieInteractionService } from 'src/shared/services';
+import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
+import { FavouritesService, UserMovieInteractionService } from 'src/shared/services';
+import { ListSelectDialogComponent } from './list-select-dialog/list-select-dialog.component';
 
 @Component({
   selector: 'app-movie-controls',
@@ -26,8 +29,11 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
-    private listsService: ListsService,
-    private fb: FormBuilder
+    private favouritesService: FavouritesService,
+    private fb: FormBuilder,
+
+    @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
+    @Inject(Injector) private readonly injector: Injector,
   ) { }
 
   ngOnInit(): void {
@@ -89,11 +95,11 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
   markAsFavourites(): void {
     if (this.isFavourite) {
-      this.listsService.removeMovieFromFavourites$(this.movieId!)
+      this.favouritesService.removeMovieFromFavourites$(this.movieId!)
         .subscribe(() => this.isFavourite = false);
       return;
     }
-    this.listsService.addMovieToFavourites$(this.movieId!)
+    this.favouritesService.addMovieToFavourites$(this.movieId!)
       .subscribe(() => this.isFavourite = true);
   }
 
@@ -127,7 +133,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   private requestIsFavourite(): void {
     if (!this.movieId) return;
 
-    this.listsService.isFavourite$(this.movieId).subscribe(
+    this.favouritesService.isFavourite$(this.movieId).subscribe(
       isFavourite => this.isFavourite = isFavourite
     );
   }
@@ -136,6 +142,18 @@ export class MovieControlsComponent implements OnInit, OnChanges {
     this.voteAvg = stats.voteAvg.toFixed(1),
       this.voteCount = stats.voteCount,
       this.watched = stats.watched
+  }
+
+  openAddToListDialog(): void {
+    this.dialogService
+      .open(
+        new PolymorpheusComponent(ListSelectDialogComponent, this.injector),
+        {
+          data: this.movieId,
+          size: 's'
+        }
+      )
+      .subscribe();
   }
 
 }

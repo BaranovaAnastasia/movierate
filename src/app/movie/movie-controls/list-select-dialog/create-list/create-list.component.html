@@ -1,0 +1,46 @@
+<form
+  class="form"
+  [formGroup]="form"
+  (submit)="createAndAdd()">
+  
+  <tui-input
+    tuiTextfieldSize="m"
+    formControlName="name"
+    tuiMode="onDark">
+    List Title
+  </tui-input>
+  <div
+    tuiGroup
+    [adaptive]="true"
+    [collapsed]="true"
+    >
+
+    <tui-radio-block
+      contentAlign="right"
+      formControlName="visibility"
+      item="public"
+      size="m"
+      tuiMode="onDark">
+      Public
+    </tui-radio-block>
+    
+    <tui-radio-block
+      contentAlign="right"
+      formControlName="visibility"
+      item="private"
+      size="m"
+      tuiMode="onDark">
+      Private
+    </tui-radio-block>
+  </div>
+
+  <button
+    class="form__submit"
+    tuiButton
+    size="s"
+    appearance="auth-submit"
+    [disabled]="form.invalid"
+    type="submit">
+    Create & Add
+  </button>
+</form>

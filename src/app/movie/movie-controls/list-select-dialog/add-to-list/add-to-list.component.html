@@ -1,0 +1,29 @@
+<form
+  [formGroup]="form"
+  *ngIf="lists$ | async as lists"
+  class="form"
+  (submit)="add()">
+  <tui-checkbox-labeled
+    *ngFor="let list of lists; let i = index"
+    [formControlName]="i"
+    size="m"
+    class="form__list tui-form__checkbox tui-space_top-3"
+    tuiMode="onDark">
+     {{ list.listName }}
+  </tui-checkbox-labeled>
+
+  <button
+    *ngIf="lists!.length > 0"
+    tuiButton
+    class="form__submit"
+    size="s"
+    appearance="auth-submit"
+    [disabled]="!listSelected"
+    type="submit">
+    Add to List
+  </button>
+
+  <div *ngIf="lists!.length === 0">
+    <div>You don't have any lists yet.</div>
+  </div>
+</form>

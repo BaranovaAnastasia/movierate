@@ -1,6 +1,7 @@
 <div
   *ngIf="list"
-  class="container">
+  class="container"
+  [ngClass]="{'empty' : isEmpty}">
   <div class="title tui-text_body-xl">
     <div class="title__tag"></div>
     <a>{{ list.listName }}</a>
@@ -12,7 +13,7 @@
   </div>
   <div class="content">
     <div
-      *ngIf="list.movies.length === 0"
+      *ngIf="isEmpty"
       class="content__empty tui-text_body-m">
       This list has no movies yet
     </div>

@@ -36,32 +36,29 @@
 
 .control {
   display: flex;
-  justify-content: center;
-  position: relative;
+  flex-direction: column;
+  align-items: center;
   height: 40px;
-  cursor: pointer;
   background: none;
   border: none;
+  white-space: nowrap;
+  padding: 0;
+
+  cursor: pointer;
 }
 
 .favourite {
-  min-width: 105px;
+  min-width: 103px;
 }
 .watched {
-  min-width: 110px;
-}
-.list {
-  min-width: 80px;
+  min-width: 94px;
 }
 
-.control:not(.disabled):hover * {
+.control:hover * {
   opacity: 1;
   color: #FDCE25;
   stroke: #FDCE25;
   fill: #FDCE25;
-}
-.disabled {
-  opacity: 0.3;
 }
 
 .control-active * {
@@ -69,18 +66,6 @@
   color: #FDCE25;
   stroke: #FDCE25;
   fill: #FDCE25;
-}
-
-.control__icon {
-  height: 24px;
-}
-.favourite .control__icon {
-  height: 20px;
-}
-
-.control__text {
-  position: absolute;
-  bottom: 0px;
 }
 
 .stats {

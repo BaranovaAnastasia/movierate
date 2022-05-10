@@ -64,4 +64,9 @@
   </div>
 
   <app-movies-list [list]="favourites!"></app-movies-list>
+
+  <app-movies-list
+    *ngFor="let list of lists"
+    [list]="list!">
+  </app-movies-list>
 </div>

@@ -5,13 +5,10 @@ import { MoviesList } from '../models/movies-list/movies-list'
 export const IUserListsApiServiceToken = new InjectionToken('IUserListsApiService');
 
 export interface IUserListsApiService {
-  createList$(name: string, isPublic: boolean): Observable<MoviesList>;
-  addMovieToList$(movieId: string, listId: number): Observable<MoviesList>;
-  getList$(listId: number): Observable<MoviesList>;
+  getAllListsCurrent$(): Observable<MoviesList[]>;
   getAllUserLists$(userId: number): Observable<MoviesList[]>;
+  getList$(listId: number): Observable<MoviesList>;
 
-  addMovieToFavourites$(movieId: string): Observable<void>;
-  removeMovieFromFavourites$(movieId: string): Observable<void>;
-  getFavourites$(userId: number): Observable<MoviesList>;
-  isFavourite$(movieId: string): Observable<boolean>;
+  createList$(listName: string, isPublic: boolean): Observable<MoviesList>;
+  addMovieToList$(movieId: string, listId: number): Observable<void>;
 }

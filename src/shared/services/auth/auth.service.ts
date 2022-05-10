@@ -36,14 +36,14 @@ export class AuthService {
   signin$(email: string, password: string): void {
     this.authApiService.signin$(email, password).subscribe(
       result => {
+        AuthService.tokens = result;
+        
         this.authApiService.getUser$().subscribe(
           user => {
             this.loggedInUser = user;
             this.navigationService.toMain();
           }
         );
-
-        AuthService.tokens = result;
       }
     );
   }
