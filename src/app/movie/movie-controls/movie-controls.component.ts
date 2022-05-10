@@ -146,7 +146,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   }
 
   openAddToListDialog(): void {
-    if (this.authService.toSignInIfNotAuthorized()) {
+    if (!this.authService.toSignInIfNotAuthorized()) {
       return;
     }
     this.dialogService

@@ -48,4 +48,8 @@ export class ListsService {
     return this.userListApiService.addMovieToList$(movieId, listId);
   }
 
+  editList$(listId: number, listName: string, isPublic: boolean): Observable<void> {
+    return this.userListApiService.editList$(listId, listName, isPublic);
+  }
+
 }

@@ -86,13 +86,13 @@ export class SignUpComponent implements OnInit {
   signup() {
     const { email, name, password } = this.form.getRawValue();
     this.authService.signup$(email, name, password)
-      .subscribe(result => {
-        if (!result) {
+      .subscribe(
+        () => {
           this.form.controls.password.reset();
           this.form.controls.confirmPassword.reset();
-        }
-        this.unsuccessful = !result
-      });
+        },
+        () => this.unsuccessful = true
+      );
   }
 
 }

@@ -37,7 +37,7 @@ export class AuthService {
       );
   }
 
-  signin$(email: string, password: string): Observable<boolean> {
+  signin$(email: string, password: string): Observable<void> {
     return this.authApiService.signin$(email, password).pipe(
       tap(result => {
         AuthService.tokens = result;
@@ -49,12 +49,11 @@ export class AuthService {
           }
         );
       }),
-      map(() => true),
-      catchError(() => of(false))
+      map(() => { })
     );
   }
 
-  signup$(email: string, name: string, password: string): Observable<boolean> {
+  signup$(email: string, name: string, password: string): Observable<void> {
     return this.authApiService.signup$(email, name, password).pipe(
       tap(result => {
         AuthService.tokens = result;
@@ -65,8 +64,7 @@ export class AuthService {
           }
         );
       }),
-      map(() => true),
-      catchError(() => of(false))
+      map(() => { })
     )
   }
 
@@ -89,7 +87,7 @@ export class AuthService {
 
   toSignInIfNotAuthorized(): boolean {
     const isLoggedIn = this.isLoggedIn;
-    if (isLoggedIn) {
+    if (!isLoggedIn) {
       this.navigationService.toSignIn();
     }
     return isLoggedIn;

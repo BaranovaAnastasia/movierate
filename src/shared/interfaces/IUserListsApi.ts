@@ -11,4 +11,6 @@ export interface IUserListsApiService {
 
   createList$(listName: string, isPublic: boolean): Observable<MoviesList>;
   addMovieToList$(movieId: string, listId: number): Observable<void>;
+
+  editList$(listId: number, listName: string, isPublic: boolean): Observable<void>;
 }

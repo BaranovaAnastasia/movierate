@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   tmdbApiKey: '40e857020dcae37a13f421b08addb019',
-  serverUrl: 'https://movierate-backend.herokuapp.com',
+  serverUrl: 'http://localhost:8080', //'https://movierate-backend.herokuapp.com',
   tmdbApiUrl: 'https://api.themoviedb.org/3',
   tmdbPosterUrl: 'https://image.tmdb.org/t/p/w1280',
 };

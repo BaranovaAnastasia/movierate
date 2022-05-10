@@ -44,4 +44,11 @@ export class UserListsApiService implements IUserListsApiService {
     );
   }
 
+  editList$(listId: number, listName: string, isPublic: boolean): Observable<void> {
+    return this.httpClient.post<void>(
+      `${environment.serverUrl}/lists/edit/${listId}`,
+      { listName, isPublic }
+    );
+  }
+
 }

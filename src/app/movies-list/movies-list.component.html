@@ -2,15 +2,70 @@
   *ngIf="list"
   class="container"
   [ngClass]="{'empty' : isEmpty}">
-  <div class="title tui-text_body-xl">
+  <div
+    *ngIf="!nowEditing"
+    class="title tui-text_body-xl">
     <div class="title__tag"></div>
-    <a>{{ list.listName }}</a>
+
+    <div (dblclick)="startEditing()">{{ list.listName }}</div>
     <div
       *ngIf="list.isPublic !== undefined"
       class="title__visibility tui-text_body-xs">
       {{ visibilityText }}
     </div>
+    <button
+      *ngIf="titleEditable"
+      tuiIconButton
+      size="s"
+      type="button"
+      appearance="icon"
+      icon="tuiIconEdit"
+      (click)="startEditing()"
+    ></button>
   </div>
+
+  <form
+    *ngIf="nowEditing"
+    class="title tui-text_body-xl"
+    [formGroup]="form"
+    (submit)="submitEditing()">
+    <div class="title__tag"></div>
+    <input
+      autofocus
+      formControlName="name"
+      class="title__input"
+      placeholder="List Title"
+      [style.width.ch]="form.controls.name.value.length"
+    >
+    
+    <tui-radio-labeled
+      contentAlign="right"
+      formControlName="visibility"
+      item="public"
+      tuiMode="onDark">
+      Public
+    </tui-radio-labeled>
+      
+    <tui-radio-labeled
+      contentAlign="right"
+      formControlName="visibility"
+      item="private"
+      tuiMode="onDark">
+      Private
+    </tui-radio-labeled>
+
+    <button
+      *ngIf="nowEditing"
+      tuiIconButton
+      size="s"
+      type="submit"
+      appearance="icon"
+      icon="tuiIconCheck"
+    ></button>
+  </form>
+
+
+
   <div class="content">
     <div
       *ngIf="isEmpty"

@@ -1,7 +1,9 @@
 <div
-  *ngIf="user"
+  *tuiLet="isMyProfile$ | async as isMyProfile"
   class="container">
-  <div class="main">
+  <div
+    *ngIf="user"
+    class="main">
     <div class="picture-stats-wrapper">
       <img
         class="picture"
@@ -12,9 +14,7 @@
       </div>
     </div>
 
-    <div
-      *tuiLet="isMyProfile$ | async as isMyProfile"
-      class="controls">
+    <div class="controls">
       <button
         *ngIf="!isMyProfile"
         class="controls__follow"
@@ -63,10 +63,15 @@
     </div>
   </div>
 
-  <app-movies-list [list]="favourites!"></app-movies-list>
+  <app-movies-list
+    [list]="favourites!"
+    [contentEditable]="isMyProfile!">
+  </app-movies-list>
 
   <app-movies-list
     *ngFor="let list of lists"
-    [list]="list!">
+    [list]="list!"
+    [titleEditable]="isMyProfile!"
+    [contentEditable]="isMyProfile!">
   </app-movies-list>
 </div>

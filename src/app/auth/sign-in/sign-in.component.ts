@@ -24,10 +24,10 @@ export class SignInComponent {
   signin(): void {
     const { email, password } = this.form.getRawValue();
     this.authService.signin$(email, password)
-      .subscribe(result => {
-        if (!result) this.form.controls.password.reset();
-        this.unsuccessful = !result
-      });
+      .subscribe(
+        () => this.form.controls.password.reset(),
+        () => this.unsuccessful = true
+      );
   }
 
   focus(): void {

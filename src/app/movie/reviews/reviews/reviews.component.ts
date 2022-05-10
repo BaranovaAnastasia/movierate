@@ -32,7 +32,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   toggle(): void {
-    if (this.authService.toSignInIfNotAuthorized()) {
+    if (!this.authService.toSignInIfNotAuthorized()) {
       return;
     }
     this.expanded = !this.expanded;
