@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Review } from 'src/shared/models';
-import { ReviewsService } from 'src/shared/services';
+import { AuthService, ReviewsService } from 'src/shared/services';
 
 @Component({
   selector: 'app-reviews',
@@ -17,6 +17,7 @@ export class ReviewsComponent implements OnInit {
 
   constructor(
     private reviewsService: ReviewsService,
+    private authService: AuthService,
     private activatedroute: ActivatedRoute
   ) { }
 
@@ -30,11 +31,14 @@ export class ReviewsComponent implements OnInit {
     );
   }
 
-  toggle() {
+  toggle(): void {
+    if (this.authService.toSignInIfNotAuthorized()) {
+      return;
+    }
     this.expanded = !this.expanded;
   }
 
-  postReview(review: Review) {
+  postReview(review: Review): void {
     this.expanded = false;
     this.reviewsService.postReview(this.movieId, review)
       .subscribe(result => this.reviews$.next(result));

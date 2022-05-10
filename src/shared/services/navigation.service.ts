@@ -15,4 +15,8 @@ export class NavigationService {
   toMain() : void{
     this.router.navigate([''])
   }
+
+  toSignIn() : void{
+    this.router.navigate(['/signin'])
+  }
 }

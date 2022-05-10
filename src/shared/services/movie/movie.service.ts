@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IMovieApiService, IMovieApiServiceToken, IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from '../interfaces';
-import { Credits, Movie, MovieStats, Trailer } from '../models';
+import { IMovieApiService, IMovieApiServiceToken, IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from '../../interfaces';
+import { Credits, Movie, MovieStats, Trailer } from '../../models';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,7 @@ import { TuiDialogService } from '@taiga-ui/core';
 import { switchMap } from 'rxjs/operators';
 import { MovieStats } from 'src/shared/models';
 import { PolymorpheusComponent } from '@tinkoff/ng-polymorpheus';
-import { FavouritesService, UserMovieInteractionService } from 'src/shared/services';
+import { AuthService, FavouritesService, UserMovieInteractionService } from 'src/shared/services';
 import { ListSelectDialogComponent } from './list-select-dialog/list-select-dialog.component';
 
 @Component({
@@ -30,6 +30,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
     private favouritesService: FavouritesService,
+    private authService: AuthService,
     private fb: FormBuilder,
 
     @Inject(TuiDialogService) private readonly dialogService: TuiDialogService,
@@ -145,6 +146,9 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   }
 
   openAddToListDialog(): void {
+    if (this.authService.toSignInIfNotAuthorized()) {
+      return;
+    }
     this.dialogService
       .open(
         new PolymorpheusComponent(ListSelectDialogComponent, this.injector),

@@ -8,20 +8,33 @@
   </div>
 
   <tui-input
-    class="form__field"
+    class="form__email form__field"
+    [ngClass]="{form__field_invalid : unsuccessful}"
     tuiTextfieldSize="s"
     tuiMode="onDark"
-    formControlName="email">
+    formControlName="email"
+    (focus)="focus()">
     Email
+    <input
+      tuiTextfield
+      (focus)="focus()"/>
   </tui-input>
 
   <tui-input-password
-    class="form__field"
+    class="form__password form__field"
+    [ngClass]="{form__field_invalid : unsuccessful}"
     tuiTextfieldSize="s"
     tuiMode="onDark"
     formControlName="password">
     Password
+    <input
+      tuiTextfield
+      (focus)="focus()"/>
   </tui-input-password>
+
+  <div class="error" *ngIf="unsuccessful">
+    Invalid email or password
+  </div>
 
   <div class="form__footer">
     <div>
