@@ -9,6 +9,5 @@ export interface IUserMovieInteractionApiService {
   watchMovie$(movieId: string): Observable<MovieStats>;
   unwatchMovie$(movieId: string): Observable<MovieStats>;
   getRating$(movieId: string): Observable<number>;
-  isWatched$(movieId: string): Observable<boolean>;
   getStats$(movieId: string): Observable<MovieStats>;
 }

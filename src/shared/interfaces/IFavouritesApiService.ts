@@ -8,5 +8,4 @@ export interface IFavouritesApiService {
   addMovieToFavourites$(movieId: string): Observable<void>;
   removeMovieFromFavourites$(movieId: string): Observable<void>;
   getFavourites$(userId: number): Observable<Movie[]>;
-  isFavourite$(movieId: string): Observable<boolean>;
 }

@@ -39,12 +39,6 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     );
   }
 
-  isWatched$(movieId: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(
-      `${environment.serverUrl}/movie/iswatched/${movieId}`
-    );
-  }
-
   getStats$(movieId: string): Observable<MovieStats> {
     return this.httpClient.get<MovieStats>(
       `${environment.serverUrl}/movie/stats/${movieId}`

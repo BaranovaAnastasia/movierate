@@ -20,12 +20,12 @@ export class MovieControlsComponent implements OnInit, OnChanges {
   voteCount: number | undefined;
   watched: number | undefined;
 
+  isWatched: boolean | undefined;
+  isFavourite: boolean | undefined;
+
   ratingForm = this.fb.group({
     rating: [0]
   });
-
-  isWatched: boolean | undefined;
-  isFavourite: boolean | undefined;
 
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
@@ -39,9 +39,6 @@ export class MovieControlsComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.requestStats();
-    this.requestIsWatched();
-    this.requestIsFavourite();
-    this.requestRating();
 
     const rating = this.ratingForm.get('rating')!;
 
@@ -49,17 +46,11 @@ export class MovieControlsComponent implements OnInit, OnChanges {
       switchMap(value =>
         this.userMovieInteractionService.rateMovie$(this.movieId!, value * 2)
       )
-    ).subscribe(stats => {
-      this.updateStats(stats);
-      this.isWatched = true;
-    });
+    ).subscribe(stats => this.updateStats(stats));
   }
 
   ngOnChanges(): void {
     this.requestStats();
-    this.requestIsWatched();
-    this.requestIsFavourite();
-    this.requestRating();
   }
 
   get watchedText(): string {
@@ -86,12 +77,7 @@ export class MovieControlsComponent implements OnInit, OnChanges {
     }
 
     this.userMovieInteractionService.watchMovie$(this.movieId!)
-      .subscribe(
-        stats => {
-          this.updateStats(stats);
-          this.isWatched = true;
-        }
-      )
+      .subscribe(stats => this.updateStats(stats))
   }
 
   markAsFavourites(): void {
@@ -112,37 +98,17 @@ export class MovieControlsComponent implements OnInit, OnChanges {
     );
   }
 
-  private requestRating(): void {
-    if (!this.movieId) return;
-
-    this.userMovieInteractionService.getRating$(this.movieId).subscribe(
-      rating => this.ratingForm.setValue(
-        { rating: rating / 2 },
-        { emitEvent: false }
-      )
-    );
-  }
-
-  private requestIsWatched(): void {
-    if (!this.movieId) return;
-
-    this.userMovieInteractionService.isWatched$(this.movieId).subscribe(
-      isWatched => this.isWatched = isWatched
-    );
-  }
-
-  private requestIsFavourite(): void {
-    if (!this.movieId) return;
-
-    this.favouritesService.isFavourite$(this.movieId).subscribe(
-      isFavourite => this.isFavourite = isFavourite
-    );
-  }
-
   private updateStats(stats: MovieStats): void {
-    this.voteAvg = stats.voteAvg.toFixed(1),
-      this.voteCount = stats.voteCount,
-      this.watched = stats.watched
+    this.voteAvg = stats.voteAvg.toFixed(1);
+    this.voteCount = stats.voteCount;
+    this.watched = stats.watched;
+
+    this.isFavourite = stats.isFavourite;
+    this.isWatched = stats.isWatched;
+    this.ratingForm.patchValue(
+      { rating: stats.currentRating! / 2 },
+      { emitEvent: false }
+    )
   }
 
   openAddToListDialog(): void {

@@ -29,10 +29,6 @@ export class UserMovieInteractionService {
     return this.userMovieInteractionApiService.getRating$(movieId);
   }
 
-  isWatched$(movieId: string): Observable<boolean> {
-    return this.userMovieInteractionApiService.isWatched$(movieId);
-  }
-
   getStats$(movieId: string): Observable<MovieStats> {
     return this.userMovieInteractionApiService.getStats$(movieId);
   }

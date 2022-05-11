@@ -29,7 +29,7 @@ export class ReviewFormComponent implements OnInit {
 
     this.userMovieInteractionService.getRating$(this.movieId).subscribe(
       rating => this.form.patchValue(
-        { rating },
+        { rating: rating / 2 },
         { emitEvent: false }
       )
     );

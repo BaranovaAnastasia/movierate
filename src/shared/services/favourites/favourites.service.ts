@@ -33,8 +33,4 @@ export class FavouritesService {
         })
       );
   }
-
-  isFavourite$(movieId: string): Observable<boolean> {
-    return this.favouritesApiService.isFavourite$(movieId);
-  }
 }

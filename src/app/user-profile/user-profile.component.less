@@ -58,6 +58,8 @@
   width: 100%;
   text-align: center;
   padding: 10px 0 10px 0;
+  text-decoration: none;
+  color: #fff;
 }
 .controls__links__item:hover {
   background: rgba(255, 255, 255, 0.1);
@@ -101,7 +103,7 @@ hr {
     width: 180px;
   }
 
-  app-movies-list {
+  .lists-wrapper {
     width: calc(100% - 204px);
   }
 }
@@ -137,12 +139,15 @@ hr {
     gap: 24px;
     width: calc(100% - 149px);
   }
+  .controls__links__item {
+    width: fit-content;
+  }
 
   hr {
     display: none;
   }
 
-  app-movies-list {
+  .lists-wrapper {
     width: 100%;
   }
 }

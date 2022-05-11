@@ -30,10 +30,4 @@ export class FavouritesApiService implements IFavouritesApiService {
       `${environment.serverUrl}/favourites/${userId}`
     );
   }
-  
-  isFavourite$(movieId: string): Observable<boolean> {
-    return this.httpClient.get<boolean>(
-      `${environment.serverUrl}/favourites/isfavourite/${movieId}`
-    );
-  }
 }
