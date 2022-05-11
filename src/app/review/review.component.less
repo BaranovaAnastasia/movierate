@@ -1,34 +1,30 @@
-@mobile:    ~"only screen and (max-width: 719px)";
+@mobile: ~"only screen and (max-width: 719px)";
 
 .review {
   margin-top: 24px;
   color: #fff;
 }
 
-.review__header {
+.name-rating-wrapper {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 10px;
 }
 
 .review__rating-star {
   height: 20px;
 }
 
-@media @mobile {
-  .review__header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  .review__date, .review__rating {
-    padding-left: 60px;
-  }
+.review__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .review__date {
+  padding-left: 60px;
+  margin-top: -15px;
   opacity: 0.5;
 }
 

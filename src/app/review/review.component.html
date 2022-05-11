@@ -1,13 +1,16 @@
 <div class="review">
   <div class="review__header">
-    <app-user-preview [user]="author"></app-user-preview>
-    <tui-rating
-      iconNormal="/assets/icons/star.svg"
-      iconFilled="/assets/icons/star-filled.svg"
-      [(ngModel)]="review.rating"
-      [disabled]="true">
-    </tui-rating>
-    <div class="review__date tui-text_body-m">
+    <div class="name-rating-wrapper">
+      <app-user-preview [user]="author"></app-user-preview>
+      <tui-rating
+        class="review__rating"
+        iconNormal="/assets/icons/star.svg"
+        iconFilled="/assets/icons/star-filled.svg"
+        [(ngModel)]="review.rating"
+        [disabled]="true">
+      </tui-rating>
+    </div>
+    <div class="review__date tui-text_body-s">
       {{ review.created_at | dateStrigify }}
     </div>
   </div>
