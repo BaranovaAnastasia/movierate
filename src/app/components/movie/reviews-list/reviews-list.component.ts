@@ -5,7 +5,7 @@ import {
   OnChanges,
 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Review } from 'src/shared/models';
+import { Review, User } from 'src/shared/models';
 import { ReviewsService, AuthService } from 'src/shared/services';
 
 @Component({
@@ -24,11 +24,20 @@ export class ReviewsListComponent implements OnChanges {
   constructor(
     private reviewsService: ReviewsService,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   ngOnChanges(): void {
     this.expanded = false;
     this.reviews$ = this.reviewsService.getMovieReviews(this.movieId);
+  }
+
+  getAuthor(review: Review): User {
+    return {
+      id: review.user_id,
+      name: review.user_name,
+      avatar_path: review.avatar_path,
+      isCurrentUser: false,
+    }
   }
 
   toggle(): void {
