@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Movie } from 'src/shared/models';
 
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.less']
+  styleUrls: ['./movie-card.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieCardComponent {
   @Input() movie!: Movie;

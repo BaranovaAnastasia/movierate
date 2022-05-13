@@ -5,9 +5,12 @@
   <div
     *ngIf="!nowEditing"
     class="title tui-text_body-xl">
-    <div class="title__tag"></div>
 
-    <div (dblclick)="startEditing()">{{ list.listName }}</div>
+    <app-section-title
+      [title]="list.listName"
+      (dblclick)="startEditing()">
+    </app-section-title>
+
     <div
       *ngIf="list.isPublic !== undefined"
       class="title__visibility tui-text_body-xs">
@@ -33,48 +36,14 @@
       (click)="deleteList()">
       <tui-svg src="tuiIconCloseLarge"></tui-svg>
       <span class="delete-button__hint">delete</span>
-  </button>
+    </button>
   </div>
 
-  <form
+  <app-list-edit-form
     *ngIf="nowEditing"
-    class="title tui-text_body-xl"
-    [formGroup]="form"
-    (submit)="submitEditing()">
-    <div class="title__tag"></div>
-    <input
-      autofocus
-      formControlName="name"
-      class="title__input"
-      placeholder="List Title"
-      [style.width.ch]="form.controls.name.value.length"
-    >
-    
-    <tui-radio-labeled
-      contentAlign="right"
-      formControlName="visibility"
-      item="public"
-      tuiMode="onDark">
-      Public
-    </tui-radio-labeled>
-      
-    <tui-radio-labeled
-      contentAlign="right"
-      formControlName="visibility"
-      item="private"
-      tuiMode="onDark">
-      Private
-    </tui-radio-labeled>
-
-    <button
-      *ngIf="nowEditing"
-      tuiIconButton
-      size="s"
-      type="submit"
-      appearance="icon"
-      icon="tuiIconCheckLarge"
-    ></button>
-  </form>
+    [list]="list"
+    (onReady)="finishEditing($event)">
+  </app-list-edit-form>
 
 
   <div class="content">
@@ -83,11 +52,13 @@
       class="content__empty tui-text_body-m">
       This list has no movies yet
     </div>
-    <app-movie-card
-      *ngFor="let movie of list.movies"
-      [movie]="movie"
-      [canDelete]="editable && nowEditing"
-      (onMovieDelete)="deleteMovie($event)">
-    </app-movie-card>
+    <div *ngFor="let movie of displayMovies">
+      <app-movie-card
+        *ngIf="!isPreparedForDelete(movie)"
+        [movie]="movie"
+        [canDelete]="editable && nowEditing"
+        (onMovieDelete)="deleteMovie($event)">
+      </app-movie-card>
+    </div>
   </div>
 </div>

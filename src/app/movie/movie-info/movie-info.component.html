@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="title tui-text_h5">{{ movie.title }}</div>
+  <div class="info">
+    {{ movie.release_date | dateStrigify }} ‧ {{ movie.genres! | listStringify : '/' }} ‧ {{ movie.runtime | runtimeStrigify }}
+  </div>
+
+  <div class="tagline">{{ movie.tagline }}</div>
+  <div class="description">{{ movie.overview }}</div>
+  <app-movie-credits
+    class="credits"
+    [movieId]="movie.id">
+  </app-movie-credits>
+</div>

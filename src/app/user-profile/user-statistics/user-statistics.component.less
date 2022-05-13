@@ -12,42 +12,13 @@
   gap: 24px;
 }
 
-.wrapper {
+.main-stats {
   flex-grow: 1;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.stats-data {
-  color: #a2a2a2;
-  display: flex;
-  justify-content: space-between;
-}
-
-.stats__movies .stats-bar  {
-  color: #fdce25;
-}
-.stats__minutes .stats-bar {
-  color: #dd4c1e;
-}
-.stats__reviews .stats-bar {
-  color: #3aa981;
-}
-
-progress::-webkit-progress-bar {
-  background-color: #a2a2a2;
 }
 
 @media @tablet, @mobile {
   .container {
     align-items: center;
-  }
-}
-
-@media @mobile {
-  tui-pie-chart {
-    display: none;
   }
 }

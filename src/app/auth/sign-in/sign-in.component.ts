@@ -1,16 +1,17 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/shared/services';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.less']
+  styleUrls: ['./sign-in.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignInComponent {
 
   form = this.fb.group({
-    email: [null, [Validators.required, Validators.email]],
+    email: [null, Validators.required],
     password: [null, Validators.required]
   });
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { MoviesList } from 'src/shared/models';
@@ -7,7 +7,8 @@ import { ListsService } from 'src/shared/services';
 @Component({
   selector: 'app-add-to-list',
   templateUrl: './add-to-list.component.html',
-  styleUrls: ['./add-to-list.component.less']
+  styleUrls: ['./add-to-list.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddToListComponent implements OnInit {
   @Input() movieId!: string;

@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { MoviesListComponent } from './movies-list.component';
 import { MovieCardModule } from './movie-card/movie-card.module';
 import { TuiAlertModule, TuiButtonModule, TuiModeModule, TuiSvgModule } from '@taiga-ui/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiRadioLabeledModule } from '@taiga-ui/kit';
+import { SectionTitleModule } from '../section-title/section-title.module';
+import { ListEditFormModule } from './list-edit-form/list-edit-form.module';
 
 
 
@@ -15,13 +16,13 @@ import { TuiRadioLabeledModule } from '@taiga-ui/kit';
   imports: [
     CommonModule,
     MovieCardModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TuiButtonModule,
     TuiModeModule,
     TuiRadioLabeledModule,
     TuiAlertModule,
-    TuiSvgModule
+    TuiSvgModule,
+    SectionTitleModule,
+    ListEditFormModule,
+    TuiButtonModule
   ],
   exports: [
     MoviesListComponent

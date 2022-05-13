@@ -4,9 +4,9 @@ import { SearchBarComponent } from './search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TuiDataListModule, TuiSvgModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
 import { TuiDataListWrapperModule } from '@taiga-ui/kit';
-import { TuiLetModule } from '@taiga-ui/cdk';
 import { StringifyPipesModule } from 'src/app/pipes/stringify-pipes.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { SearchResultsModule } from './search-results/search-results.module';
 
 
 @NgModule({
@@ -20,9 +20,9 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     TuiDataListModule,
     TuiDataListWrapperModule,
     TuiTextfieldControllerModule,
-    TuiLetModule,
     StringifyPipesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SearchResultsModule
   ],
   exports: [
     SearchBarComponent

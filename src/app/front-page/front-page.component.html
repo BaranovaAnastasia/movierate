@@ -1,15 +1,26 @@
 <div class="container">
-  <div class="list-wrapper" id="top">
+  <div
+    *ngIf="highestRanked$ | async as highestRanked"
+    id="top"
+    class="list-wrapper">
     <app-movies-list [list]="highestRanked"></app-movies-list>
-  </div>
-  <div class="list-wrapper" id="popular">
-    <app-movies-list [list]="popular"></app-movies-list>
-  </div>
-  <div class="list-wrapper" id="soon">
-    <app-movies-list [list]="upcoming"></app-movies-list>
-  </div>
 
-  <div id="leaderboard">
-    <app-leaderboard></app-leaderboard>
+    <div
+      *ngIf="popular$ | async as popular"
+      id="popular"
+      class="list-wrapper">
+      <app-movies-list [list]="popular"></app-movies-list>
+
+      <div
+        *ngIf="upcoming$ | async as upcoming"
+        id="soon"
+        class="list-wrapper">
+        <app-movies-list [list]="upcoming"></app-movies-list>
+
+        <div id="leaderboard">
+          <app-leaderboard></app-leaderboard>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

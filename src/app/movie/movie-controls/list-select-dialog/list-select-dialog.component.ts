@@ -1,5 +1,5 @@
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ListsService } from 'src/shared/services';
 import { TuiDialogContext } from '@taiga-ui/core';
@@ -8,7 +8,8 @@ import { MoviesList } from 'src/shared/models';
 @Component({
   selector: 'app-list-select-dialog',
   templateUrl: './list-select-dialog.component.html',
-  styleUrls: ['./list-select-dialog.component.less']
+  styleUrls: ['./list-select-dialog.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListSelectDialogComponent implements OnInit {
   lists?: MoviesList[];

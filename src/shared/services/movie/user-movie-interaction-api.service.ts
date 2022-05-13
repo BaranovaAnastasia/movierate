@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IUserMovieInteractionApiService } from 'src/shared/interfaces';
-import { MovieStats } from 'src/shared/models';
+import { Movie, MovieStats } from 'src/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,18 @@ import { MovieStats } from 'src/shared/models';
 export class UserMovieInteractionApiService implements IUserMovieInteractionApiService {
 
   constructor(private httpClient: HttpClient) { }
+
+  getRating$(movieId: string): Observable<number> {
+    return this.httpClient.get<number>(
+      `${environment.serverUrl}/movie/rating/${movieId}`
+    );
+  }
+
+  getStats$(movieId: string): Observable<MovieStats> {
+    return this.httpClient.get<MovieStats>(
+      `${environment.serverUrl}/movie/stats/${movieId}`
+    );
+  }
 
   rateMovie$(movieId: string, rating: number): Observable<MovieStats> {
     return this.httpClient.post<MovieStats>(
@@ -33,15 +45,22 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     );
   }
 
-  getRating$(movieId: string): Observable<number> {
-    return this.httpClient.get<number>(
-      `${environment.serverUrl}/movie/rating/${movieId}`
+  addMovieToFavourites$(movieId: string): Observable<MovieStats> {
+    return this.httpClient.post<MovieStats>(
+      `${environment.serverUrl}/favourites`,
+      { movieId }
     );
   }
 
-  getStats$(movieId: string): Observable<MovieStats> {
-    return this.httpClient.get<MovieStats>(
-      `${environment.serverUrl}/movie/stats/${movieId}`
+  removeMovieFromFavourites$(movieId: string): Observable<MovieStats> {
+    return this.httpClient.delete<MovieStats>(
+      `${environment.serverUrl}/favourites/${movieId}`
+    );
+  }
+  
+  getFavourites$(userId: number): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>(
+      `${environment.serverUrl}/favourites/${userId}`
     );
   }
 

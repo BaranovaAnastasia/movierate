@@ -2,26 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieComponent } from './movie.component';
 import { MovieControlsModule } from './movie-controls/movie-controls.module';
-import { StringifyPipesModule } from '../pipes/stringify-pipes.module';
-import { MovieTrailerComponent } from './movie-trailer/movie-trailer.component';
-import { TuiSvgModule } from '@taiga-ui/core';
-import { ReviewsModule } from './reviews/reviews.module';
-import { MovieCreditsComponent } from './movie-credits/movie-credits.component';
+import { MoviePosterModule } from './movie-poster/movie-poster.module';
+import { MovieInfoModule } from './movie-info/movie-info.module';
+import { MovieTrailerModule } from './movie-trailer/movie-trailer.module';
+import { ReviewsListModule } from './reviews/reviews-list/reviews-list.module';
 
 
 
 @NgModule({
   declarations: [
-    MovieComponent,
-    MovieTrailerComponent,
-    MovieCreditsComponent
+    MovieComponent
   ],
   imports: [
     CommonModule,
     MovieControlsModule,
-    StringifyPipesModule,
-    ReviewsModule,
-    TuiSvgModule
+    ReviewsListModule,
+    MoviePosterModule,
+    MovieInfoModule,
+    MovieTrailerModule
   ],
   exports: [
     MovieComponent

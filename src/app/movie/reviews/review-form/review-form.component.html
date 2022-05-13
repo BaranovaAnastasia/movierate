@@ -1,10 +1,15 @@
-<form class="form" [formGroup]="form" (submit)="submit()">
+<form
+  class="form"
+  [formGroup]="form"
+  (submit)="submit()">
+
   <div class="form__rating">
     <tui-rating
       formControlName="rating"
       iconNormal="/assets/icons/star.svg"
       iconFilled="/assets/icons/star-filled.svg">
     </tui-rating>
+
     <div class="stats-item__text tui-text_body-s form__rating__text">
       my rating
     </div>

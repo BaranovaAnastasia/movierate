@@ -1,40 +1,49 @@
-<div class="container">
+<div
+  *tuiLet="trailer$ | async as trailer"
+  class="container">
+  
   <div
     *ngIf="!videoShown"
     class="preview">
-    <img
-      *ngIf="previewUrl$ | async as previewUrl"
-      class="preview__image"
-      [src]="previewUrl">
+    <div
+      *tuiLet="previewUrl$ | async as previewUrl"
+      class="preview-warpper">
 
-    <div class="preview__black-screen">
+      <img
+        *ngIf="previewUrl"
+        class="preview__image"
+        [src]="previewUrl">
 
-      <div
-        *ngIf="previewUrl$ | async as previewUrl"
-        class="wrapper">
-        <button
-          class="preview__play"
-          (click)="showVideo()">
-          <img
-            class="preview__play__icon"
-            src="assets/icons/play.svg">
-        </button>
-        <div>
-          <div
-            *ngIf="name$ | async as name"
-            class="preview__name">
-            {{name}}
-          </div>
-          <div class="preview__text">
-            Watch the Trailer
+      <div class="preview__black-screen">
+        <div
+          *ngIf="trailer"
+          class="wrapper">
+          <button
+            class="preview__play"
+            (click)="showVideo()">
+            <img
+              class="preview__play__icon"
+              src="assets/icons/play.svg">
+          </button>
+
+          <div>
+            <div
+              *ngIf="name$ | async as name"
+              class="preview__name">
+              {{name}}
+            </div>
+            <div class="preview__text">
+              Watch the Trailer
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        *ngIf="!(previewUrl$ | async)"
-        class="wrapper">
-        <div class="preview__name">
-          No Trailer Available :(
+
+        <div
+          *ngIf="!trailer"
+          class="wrapper">
+          <div class="preview__name">
+            No Trailer Available :(
+          </div>
         </div>
       </div>
 

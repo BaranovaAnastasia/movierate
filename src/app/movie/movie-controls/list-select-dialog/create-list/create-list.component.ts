@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { concatMap } from 'rxjs/operators';
 import { ListsService } from 'src/shared/services';
 
 @Component({
   selector: 'app-create-list',
   templateUrl: './create-list.component.html',
-  styleUrls: ['./create-list.component.less']
+  styleUrls: ['./create-list.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CreateListComponent implements OnInit {
   @Input() movieId!: string;
@@ -34,12 +36,11 @@ export class CreateListComponent implements OnInit {
     this.listsService.createList$(
       listData.name,
       listData.visibility === 'public'
-    ).subscribe(list => {
-      this.listsService.addMovieToList$(this.movieId, list.listId!)
-        .subscribe(
-          () => this.onReady.emit(),
-          () => this.unsuccessful = true
-        );
-    });
+    ).pipe(
+      concatMap(list => this.listsService.addMovieToList$(this.movieId, list.listId!))
+    ).subscribe(
+      () => this.onReady.emit(),
+      () => this.unsuccessful = true
+    );
   }
 }

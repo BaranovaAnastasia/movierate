@@ -1,0 +1,9 @@
+<div
+  *ngIf="!src"
+  class="no-poster tui-text_body-l">
+  No poster
+</div>
+<img
+  *ngIf="src"
+  class="poster"
+  [src]="src">

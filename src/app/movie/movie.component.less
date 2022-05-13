@@ -15,6 +15,29 @@
   width: 100%;
 }
 
+.row {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.movie__poster {
+  width: 25%;
+}
+
+.movie__trailer {
+  width: 75%;
+}
+
+.movie__info {
+  flex-grow: 1;
+}
+
+.movie__controls {
+  width: 100%;
+}
+
 @media @desktop {
   .movie__main, .movie__reviews {
     width: 63%;
@@ -25,44 +48,4 @@
   app-reviews {
     width: 63%;
   }
-}
-
-.row {
-  width: 100%;
-  display: flex;
-  gap: 10px;
-  padding-bottom: 10px;
-}
-
-.movie__poster,
-.movie__no-poster {
-  object-fit: cover;
-  width: 25%;
-}
-.movie__no-poster {
-  aspect-ratio: 27 / 40;
-  display: flex;
-  align-items: flex-end;
-  padding: 20px;
-  background: linear-gradient(rgba(0, 0, 0, 0) 0%, #000 100%);
-
-  font-weight: bold;
-}
-
-.movie__trailer {
-  width: 75%;
-}
-
-.movie__info__line2 {
-  opacity: 0.5;
-}
-
-.movie__info__tagline {
-  margin-top: 24px;
-  opacity: 0.5;
-}
-
-app-movie-controls,
-app-movie-credits {
-  width: 100%;
 }

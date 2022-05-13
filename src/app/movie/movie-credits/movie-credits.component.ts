@@ -1,29 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Credits } from 'src/shared/models';
 import { MovieService } from 'src/shared/services';
 
 @Component({
   selector: 'app-movie-credits',
   templateUrl: './movie-credits.component.html',
-  styleUrls: ['./movie-credits.component.less']
+  styleUrls: ['./movie-credits.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MovieCreditsComponent implements OnInit {
-  credits$ = new Subject<Credits>();
+  @Input() movieId!: string;
 
-  constructor(
-    private activatedroute: ActivatedRoute,
-    private movieService: MovieService
-  ) { }
+  credits$?: Observable<Credits>;
+
+  constructor(private movieService: MovieService) { }
 
   ngOnInit(): void {
-    this.activatedroute.params.subscribe(
-      async routeParams => {
-        this.movieService.getCredits$(routeParams.id)
-          .subscribe(result => this.credits$?.next(result));
-      }
-    );
+    this.credits$ = this.movieService.getCredits$(this.movieId);
   }
 
 }

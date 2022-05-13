@@ -1,0 +1,42 @@
+<div class="container">
+
+  <div class="header">
+
+    <app-section-title
+      class="title"
+      title="Reviews">
+    </app-section-title>
+
+    <button
+      class="expand-button"
+      type="button"
+      (click)="toggle()">
+      <tui-svg
+        src="tuiIconEdit"
+        class="icon">
+      </tui-svg>
+      Write a Review
+    </button>
+
+  </div>
+
+  <tui-expand [expanded]="expanded">
+    <app-review-form
+      [movieId]="movieId"
+      (postReview)="postReview($event)">
+    </app-review-form>
+  </tui-expand>
+
+  <div *ngIf="reviews$ | async as reviews">
+    <app-review
+      *ngFor="let review of reviews"
+      [review]="review">
+    </app-review>
+    <div
+      *ngIf="reviews.length === 0"
+      class="no-reviews tui-text_body-l">
+      No reviews yet
+    </div>
+  </div>
+
+</div>

@@ -1,28 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { Movie } from 'src/shared/models';
+import { switchMap } from 'rxjs/operators';
 import { MovieService } from 'src/shared/services';
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.less']
+  styleUrls: ['./movie.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovieComponent implements OnInit {
-  movie$ = new Subject<Movie>();
+export class MovieComponent {
+  movie$ = this.activatedRoute.params.pipe(
+    switchMap(params => this.movieService.getMovie$(params.id))
+  );
 
   constructor(
     private movieService: MovieService,
-    private activatedroute: ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) { }
-
-  ngOnInit(): void {
-    this.activatedroute.params
-      .subscribe(async routeParams => {
-        this.movieService.getMovie$(routeParams.id)
-          .subscribe(result => this.movie$.next(result));
-      });
-  }
-
 }

@@ -7,4 +7,6 @@ export interface User {
   avatar_path: string,
   followingIds?: string[],
   lists?: MoviesList[],
+
+  isCurrentUser: boolean,
 }

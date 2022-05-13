@@ -1,0 +1,10 @@
+<div
+    *ngFor="let list of lists"
+    id="lists"
+    class="list-wrapper">
+    <app-movies-list
+      [list]="list"
+      [editable]="user.isCurrentUser"
+      (onListDelete)="deleteList(list)">
+    </app-movies-list>
+  </div>

@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IUserMovieInteractionApiService, IUserMovieInteractionApiServiceToken } from 'src/shared/interfaces';
-import { MovieStats } from 'src/shared/models';
+import { MoviesList, MovieStats } from 'src/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,14 @@ export class UserMovieInteractionService {
     @Inject(IUserMovieInteractionApiServiceToken)
     private userMovieInteractionApiService: IUserMovieInteractionApiService,
   ) { }
+
+  getRating$(movieId: string): Observable<number> {
+    return this.userMovieInteractionApiService.getRating$(movieId);
+  }
+
+  getStats$(movieId: string): Observable<MovieStats> {
+    return this.userMovieInteractionApiService.getStats$(movieId);
+  }
 
   rateMovie$(movieId: string, rating: number): Observable<MovieStats> {
     return this.userMovieInteractionApiService.rateMovie$(movieId, rating);
@@ -25,11 +34,24 @@ export class UserMovieInteractionService {
     return this.userMovieInteractionApiService.unwatchMovie$(movieId);
   }
 
-  getRating$(movieId: string): Observable<number> {
-    return this.userMovieInteractionApiService.getRating$(movieId);
+  addMovieToFavourites$(movieId: string): Observable<MovieStats> {
+    return this.userMovieInteractionApiService.addMovieToFavourites$(movieId);
   }
 
-  getStats$(movieId: string): Observable<MovieStats> {
-    return this.userMovieInteractionApiService.getStats$(movieId);
+  removeMovieFromFavourites$(movieId: string): Observable<MovieStats> {
+    return this.userMovieInteractionApiService.removeMovieFromFavourites$(movieId);
+  }
+
+  getFavourites$(userId: number): Observable<MoviesList> {
+    return this.userMovieInteractionApiService.getFavourites$(userId)
+      .pipe(
+        map(result => {
+          return {
+            userId: userId,
+            listName: 'Favourites',
+            movies: result
+          }
+        })
+      );
   }
 }

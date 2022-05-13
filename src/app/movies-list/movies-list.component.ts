@@ -1,30 +1,26 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { concat } from 'rxjs';
 import { Movie, MoviesList } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
 
 @Component({
   selector: 'app-movies-list',
   templateUrl: './movies-list.component.html',
-  styleUrls: ['./movies-list.component.less']
+  styleUrls: ['./movies-list.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MoviesListComponent {
   @Input() list!: MoviesList;
   @Input() editable: boolean = false;
+
   @Output() onListDelete = new EventEmitter<number>();
 
   nowEditing: boolean = false;
 
-  form = this.fb.group({
-    name: [null, Validators.required],
-    visibility: [null, Validators.required]
-  });
+  toDelete: string[] = [];
 
   constructor(
-    private fb: FormBuilder,
-    private listsService: ListsService,
-    private readonly alertService: TuiAlertService,
+    private listsService: ListsService
   ) { }
 
   get visibilityText(): string {
@@ -32,60 +28,48 @@ export class MoviesListComponent {
   }
 
   get isEmpty(): boolean {
-    return !this.list.movies || this.list.movies.length === 0
+    return !this.list.movies
+      || this.list.movies.length === 0
+      || this.list.movies.length === this.toDelete.length;
+  }
+
+  get displayMovies(): Movie[] {
+    return this.list.movies!.filter(movie => !this.toDelete.includes(movie.id));
   }
 
   startEditing(): void {
-    if(!this.editable) return;
-    
-    this.form.patchValue({
-      name: this.list.listName,
-      visibility: this.list.isPublic ? 'public' : 'private'
-    });
-
+    if (!this.editable) return;
     this.nowEditing = true;
   }
 
-  submitEditing(): void {
-    const data = this.form.getRawValue();
-    const newIsPublic = data.visibility === 'public';
+  finishEditing(edit: boolean): void {
+    this.nowEditing = false;
 
-    if (data.name === this.list.listName && newIsPublic === this.list.isPublic) {
-      this.nowEditing = false;
+    if (edit) {
+      concat(
+        ...this.toDelete.map(
+          id => this.listsService.removeMovieFromList$(id, this.list.listId!)
+        )
+      ).subscribe(list => {
+        this.toDelete = [];
+        this.list = list;
+      });
+
       return;
     }
-
-    this.listsService.editList$(
-      this.list.listId!,
-      data.name,
-      newIsPublic
-    ).subscribe(
-      () => {
-        this.list.listName = data.name;
-        this.list.isPublic = newIsPublic;
-        this.nowEditing = false;
-      },
-      () => {
-        this.alertService.open(
-          'A list with this name already exists. Try something else.',
-          {
-            status: TuiNotification.Error,
-            label: 'Try another name.'
-          }
-        ).subscribe();
-      }
-    )
+    this.toDelete = [];
   }
 
   deleteMovie(movie: Movie): void {
-    this.listsService.removeMovieFromList$(movie.id, this.list.listId!)
-      .subscribe(
-        () => this.list.movies = this.list.movies?.filter(item => item.id !== movie.id)
-      );
+    this.toDelete.push(movie.id);
   }
 
   deleteList(): void {
     this.onListDelete.emit(this.list.listId);
+  }
+
+  isPreparedForDelete(movie: Movie): boolean {
+    return this.toDelete.includes(movie.id);
   }
 
 }

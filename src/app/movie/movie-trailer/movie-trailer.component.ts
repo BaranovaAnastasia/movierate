@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Trailer } from 'src/shared/models';
 import { MovieService } from 'src/shared/services';
@@ -12,44 +11,41 @@ import { MovieService } from 'src/shared/services';
   styleUrls: ['./movie-trailer.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovieTrailerComponent implements OnInit {
-  trailer$ = new BehaviorSubject<Trailer | undefined>(undefined);
+export class MovieTrailerComponent implements OnChanges {
+  @Input() movieId!: string;
 
-  safeUrl$: Observable<SafeResourceUrl | undefined> = this.trailer$.pipe(
-    map(trailer => {
-      if (!trailer) return undefined;
-      return this.sanitizer.bypassSecurityTrustResourceUrl(
-        `http://www.youtube.com/embed/${trailer.key}`
-      )
-    })
-  );
-
-  previewUrl$: Observable<string | undefined> = this.trailer$.pipe(
-    map(trailer => {
-      if (!trailer) return undefined;
-      return `https://img.youtube.com/vi/${trailer.key}/hqdefault.jpg`;
-    })
-  );
-
-  name$: Observable<string | undefined> = this.trailer$.pipe(
-    map(trailer => trailer?.name)
-  );
+  trailer$?: Observable<Trailer | undefined>;
+  safeUrl$?: Observable<SafeResourceUrl | undefined>;
+  previewUrl$?: Observable<string | undefined>;
+  name$?: Observable<string | undefined>;
 
   videoShown: boolean = false;
 
   constructor(
     private sanitizer: DomSanitizer,
-    private activatedroute: ActivatedRoute,
     private movieService: MovieService
   ) { }
 
-  ngOnInit(): void {
-    this.activatedroute.params.subscribe(
-      async routeParams => {
-        this.movieService.getTrailer$(routeParams.id)
-          .subscribe(result => this.trailer$?.next(result));
-      }
+  ngOnChanges(): void {
+    this.trailer$ = this.movieService.getTrailer$(this.movieId);
+
+    this.safeUrl$ = this.trailer$.pipe(
+      map(trailer => {
+        if (!trailer) return undefined;
+        return this.sanitizer.bypassSecurityTrustResourceUrl(
+          `http://www.youtube.com/embed/${trailer.key}`
+        )
+      })
     );
+
+    this.previewUrl$ = this.trailer$.pipe(
+      map(trailer => {
+        if (!trailer) return undefined;
+        return `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`;
+      })
+    );
+
+    this.name$ = this.trailer$.pipe(map(trailer => trailer?.name));
   }
 
   showVideo() {

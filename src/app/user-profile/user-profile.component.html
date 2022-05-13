@@ -1,85 +1,37 @@
 <div
-  *tuiLet="isMyProfile$ | async as isMyProfile"
+  *ngIf="user$ | async as user"
   class="container">
-  <div
-    *ngIf="user"
-    class="main">
+  <div class="main">
+
     <div class="picture-stats-wrapper">
       <img
         class="picture"
         [src]="user.avatar_path">
       <div class="name-stats-wrapper">
-        <div class="name tui-text_h6">{{ user.name }}</div>
-        <app-user-statistics [userId]="user.id"></app-user-statistics>
+        <div class="name tui-text_h6">
+          {{ user.name }}
+        </div>
+        <app-user-statistics
+          [userId]="user.id">
+        </app-user-statistics>
       </div>
     </div>
 
-    <div class="controls">
-      <button
-        *ngIf="!isMyProfile"
-        class="controls__follow"
-        [disabled]="true">
-        {{ followText }}
-      </button>
-      <div class="controls__links">
-        
-        <hr *ngIf="isMyProfile">
-        
-        <a
-          [routerLink]="['/user', user.id]" fragment="favourites"
-          class="controls__links__item disabled tui-text_body-m">
-          Favourites
-        </a>
-
-        <hr>
-        
-        <a
-          [routerLink]="['/user', user.id]" fragment="lists"
-          class="controls__links__item disabled tui-text_body-m">
-          Lists
-        </a>
-
-        <hr>
-        
-        <a class="controls__links__item disabled tui-text_body-m">
-          {{ isMyProfile ? "Friends Activity" : "Activity" }}
-        </a>
-
-        <hr *ngIf="isMyProfile">
-        
-        <button
-          class="controls__links__item logout tui-text_body-m"
-          *ngIf="isMyProfile"
-          (click)="logout()">
-          Log Out
-        </button>
-
-        <hr *ngIf="isMyProfile">
-      </div>
-
-      <!-- <div class="controls__following">
-        <div class="controls__following__title">Following</div>
-        <app-user-preview
-          *ngFor="let userId of user.followingIds"
-          [user]="userId">
-        </app-user-preview>
-      </div> -->
-    </div>
+    <app-user-profile-controls
+      [user]="user">
+    </app-user-profile-controls>
   </div>
-
-  <app-movies-list
-    id="favourites"
-    [list]="favourites!">
-  </app-movies-list>
 
   <div
-    id="lists"
-    class="lists-wrapper">
+    class="list-wrapper"
+    id="favourites">
     <app-movies-list
-      *ngFor="let list of lists"
-      [list]="list!"
-      [editable]="isMyProfile!"
-      (onListDelete)="deleteList($event)">
+      *ngIf="favourites$ | async as favourites"
+      [list]="favourites">
     </app-movies-list>
   </div>
+
+  <app-user-lists
+    [user]="user">
+  </app-user-lists>
 </div>

@@ -52,7 +52,7 @@ export class ListsService {
     return this.userListApiService.editList$(listId, listName, isPublic);
   }
 
-  removeMovieFromList$(movieId: string, listId: number): Observable<void> {
+  removeMovieFromList$(movieId: string, listId: number): Observable<MoviesList> {
     return this.userListApiService.removeMovieFromList$(movieId, listId);
   }
 
