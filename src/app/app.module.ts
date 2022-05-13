@@ -3,15 +3,10 @@ import { TuiRootModule, TuiDialogModule, TUI_SANITIZER } from '@taiga-ui/core';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderModule } from './header/header.module';
-import { MovieModule } from './movie/movie.module';
-import { UserProfileModule } from './user-profile/user-profile.module';
-import { MoviesListModule } from './movies-list/movies-list.module';
-import { FrontPageModule } from './front-page/front-page.module';
+import { FrontPageModule } from './components/front-page/front-page.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './components/auth/auth.module';
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
 import {
   IAuthApiServiceToken,
@@ -32,6 +27,11 @@ import {
   UserListsApiService,
 } from 'src/shared/services';
 import { ErrorInterceptor, AuthInterceptor } from 'src/shared/interceptors';
+import { HeaderModule } from './components/header/header.module';
+import { MovieModule } from './components/movie/movie.module';
+import { UserProfileModule } from './components/user-profile/user-profile.module';
+import { MoviesListModule } from './components/common';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],

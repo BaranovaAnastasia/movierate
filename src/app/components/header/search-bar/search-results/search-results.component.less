@@ -1,0 +1,60 @@
+.container {
+  width: 100%;
+  margin-top: 10px;
+  max-height: 500px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+
+  padding: 8px 0 8px 0;
+
+  overflow: scroll;
+  background: #2b2b2b;
+  z-index: 1;
+}
+
+.container * {
+  color: #fff;
+}
+
+tui-opt-group {
+  padding: 0 0 8px 0;
+}
+
+.results {
+  margin-bottom: 0;
+
+  color: #fff;
+  text-decoration: none;
+}
+.results__item {
+  display: flex;
+  gap: 10px;
+  padding: 8px 16px 8px 16px;
+}
+.results__item:hover {
+  background: #474747;
+}
+.results__item__poster {
+  max-height: 120px;
+}
+.results__item__info {
+  display: flex;
+  flex-direction: column;
+}
+.results__item__info * {
+  color: #fff;
+  white-space: normal;
+  line-height: 20px;
+}
+.results__item__info__title {
+  font-weight: bold;
+}
+.results__item__info__year {
+  opacity: 0.7;
+}
+.results__item__info__overview {
+  opacity: 0.7;
+  margin-top: 10px;
+  max-height: 70px;
+  overflow: scroll;
+  align-self: flex-end;
+}
