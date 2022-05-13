@@ -24,7 +24,7 @@ export class ReviewsListComponent implements OnChanges {
   constructor(
     private reviewsService: ReviewsService,
     private authService: AuthService,
-  ) { }
+  ) {}
 
   ngOnChanges(): void {
     this.expanded = false;
@@ -37,7 +37,7 @@ export class ReviewsListComponent implements OnChanges {
       name: review.user_name,
       avatar_path: review.avatar_path,
       isCurrentUser: false,
-    }
+    };
   }
 
   toggle(): void {

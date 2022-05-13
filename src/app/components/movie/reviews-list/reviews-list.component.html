@@ -14,7 +14,12 @@
   </tui-expand>
 
   <div *ngIf="reviews$ | async as reviews">
-    <app-review *ngFor="let review of reviews" [review]="review" [author]="getAuthor(review)"> </app-review>
+    <app-review
+      *ngFor="let review of reviews"
+      [review]="review"
+      [author]="getAuthor(review)"
+    >
+    </app-review>
     <div *ngIf="reviews.length === 0" class="no-reviews tui-text_body-l">
       No reviews yet
     </div>
