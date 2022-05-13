@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -24,9 +24,19 @@ export class MovieRatingFormComponent implements OnInit, OnChanges {
       );
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.value.currentValue === null) return;
+
+    if (changes.value.currentValue === undefined) {
+      this.ratingForm.reset(
+        { rating: null },
+        { emitEvent: false }
+      );
+      return;
+    }
+
     this.ratingForm.patchValue(
-      { rating: this.value! / 2 },
+      { rating: changes.value.currentValue / 2 },
       { emitEvent: false }
     );
   }

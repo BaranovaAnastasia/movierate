@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-movie-to-favourite',
@@ -6,9 +6,15 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   styleUrls: ['./movie-to-favourite.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovieToFavouriteComponent {
+export class MovieToFavouriteComponent implements OnChanges {
   @Input() isFavourite?: boolean;
   @Output() onFavouriteChanges = new EventEmitter<boolean>();
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.isFavourite = typeof changes.isFavourite.currentValue === 'boolean'
+      ? changes.isFavourite.currentValue
+      : changes.isFavourite.previousValue;
+  }
 
   get favouritesText(): string {
     return this.isFavourite ? "favourite!" : "add to favourites";

@@ -8,5 +8,5 @@ export interface User {
   followingIds?: string[],
   lists?: MoviesList[],
 
-  isCurrentUser: boolean,
+  isCurrentUser?: boolean,
 }

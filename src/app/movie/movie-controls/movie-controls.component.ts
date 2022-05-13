@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MovieStats } from 'src/shared/models';
 import { UserMovieInteractionService } from 'src/shared/services';
 
@@ -11,47 +12,36 @@ import { UserMovieInteractionService } from 'src/shared/services';
 export class MovieControlsComponent implements OnChanges {
   @Input() movieId!: string;
 
-  movieStats!: MovieStats;
+  movieStats$!: Observable<MovieStats>;
 
   constructor(
-    private userMovieInteractionService: UserMovieInteractionService,
-    private changeDetectorRef: ChangeDetectorRef
+    private userMovieInteractionService: UserMovieInteractionService
   ) { }
 
   ngOnChanges(): void {
-    this.userMovieInteractionService.getStats$(this.movieId)
-      .subscribe(stats => this.newMovieStats = stats);
-  }
-
-  set newMovieStats(stats: MovieStats) {
-    this.movieStats = stats;
-    this.changeDetectorRef.detectChanges();
+    this.movieStats$ = this.userMovieInteractionService.getStats$(this.movieId);
   }
 
   postRating(value: number) {
-    this.userMovieInteractionService.rateMovie$(this.movieId, value)
-      .subscribe(stats => this.newMovieStats = stats);
+    this.movieStats$ = this.userMovieInteractionService.rateMovie$(this.movieId, value);
   }
 
   watchMovie(doWatch: boolean): void {
     if (doWatch) {
-      this.userMovieInteractionService.watchMovie$(this.movieId)
-        .subscribe(stats => this.newMovieStats = stats);
+      this.movieStats$ = this.userMovieInteractionService.watchMovie$(this.movieId);
       return;
     }
 
-    this.userMovieInteractionService.unwatchMovie$(this.movieId)
-      .subscribe(stats => this.newMovieStats = stats);
+    this.movieStats$ = this.userMovieInteractionService.unwatchMovie$(this.movieId);
   }
 
   movieToFavourites(addToFavourites: boolean): void {
     if (addToFavourites) {
-      this.userMovieInteractionService.addMovieToFavourites$(this.movieId)
-        .subscribe(stats => this.newMovieStats = stats);
+      this.movieStats$ = this.userMovieInteractionService.addMovieToFavourites$(this.movieId);
       return;
     }
-    this.userMovieInteractionService.removeMovieFromFavourites$(this.movieId)
-      .subscribe(stats => this.newMovieStats = stats);
+
+    this.movieStats$ = this.userMovieInteractionService.removeMovieFromFavourites$(this.movieId);
   }
 
 }

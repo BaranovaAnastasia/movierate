@@ -11,7 +11,7 @@ import { UserMovieInteractionService, UserService } from 'src/shared/services';
 })
 export class UserProfileComponent {
   user$ = this.activatedroute.params.pipe(
-    mergeMap(params => this.userService.getUserById(params.id)),
+    mergeMap(params => this.userService.getUserById$(params.id)),
   );
 
   favourites$ = this.activatedroute.params.pipe(

@@ -19,7 +19,7 @@ export class UserGenresStatsComponent implements OnChanges {
   ) { }
 
   ngOnChanges(): void {
-    this.userService.getUserGenresStats(this.userId)
+    this.userService.getUserGenresStats$(this.userId)
       .subscribe(
         genresStats => {
           this.genresCounts = genresStats.map(stats => stats.movies_count);

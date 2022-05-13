@@ -1,30 +1,30 @@
 <div
-  *ngIf="movieStats"
+  *tuiLet="movieStats$ | async as movieStats"
   class="container">
 
   <app-movie-rating
-    [voteAvg]="movieStats.voteAvg"
-    [voteCount]="movieStats.voteCount">
+    [voteAvg]="movieStats?.voteAvg"
+    [voteCount]="movieStats?.voteCount">
   </app-movie-rating>
 
   <app-movie-rating-form
-    [value]="movieStats.currentRating"
+    [value]="movieStats?.currentRating"
     (onValueChanges)="postRating($event)">
   </app-movie-rating-form>
 
   <app-movie-watched-stats
-    [value]="movieStats.watched">
+    [value]="movieStats?.watched">
   </app-movie-watched-stats>
 
   <div class="break"></div>
 
   <app-movie-watch
-    [isWatched]="movieStats.isWatched"
+    [isWatched]="movieStats?.isWatched"
     (onWatchedChanges)="watchMovie($event)">
   </app-movie-watch>
 
   <app-movie-to-favourite
-    [isFavourite]="movieStats.isFavourite"
+    [isFavourite]="movieStats?.isFavourite"
     (onFavouriteChanges)="movieToFavourites($event)">
   </app-movie-to-favourite>
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-movie-watch',
@@ -6,9 +6,15 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   styleUrls: ['./movie-watch.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovieWatchComponent {
+export class MovieWatchComponent implements OnChanges {
   @Input() isWatched?: boolean;
   @Output() onWatchedChanges = new EventEmitter<boolean>();
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    this.isWatched = typeof changes.isWatched.currentValue === 'boolean'
+      ? changes.isWatched.currentValue
+      : changes.isWatched.previousValue;
+  }
   
   get watchedText(): string {
     return this.isWatched ? "watched!" : "add to watched";

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Credits } from 'src/shared/models';
 import { MovieService } from 'src/shared/services';
@@ -9,14 +9,14 @@ import { MovieService } from 'src/shared/services';
   styleUrls: ['./movie-credits.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MovieCreditsComponent implements OnInit {
+export class MovieCreditsComponent implements OnChanges {
   @Input() movieId!: string;
 
   credits$?: Observable<Credits>;
 
   constructor(private movieService: MovieService) { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.credits$ = this.movieService.getCredits$(this.movieId);
   }
 

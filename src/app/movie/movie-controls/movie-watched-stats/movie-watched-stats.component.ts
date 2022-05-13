@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-movie-watched-stats',
@@ -9,4 +9,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class MovieWatchedStatsComponent {
   @Input() value?: number;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.value = typeof changes.value.currentValue === 'number'
+      ? changes.value.currentValue
+      : changes.value.previousValue;
+  }
 }

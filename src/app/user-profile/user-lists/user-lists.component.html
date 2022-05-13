@@ -4,7 +4,7 @@
     class="list-wrapper">
     <app-movies-list
       [list]="list"
-      [editable]="user.isCurrentUser"
+      [editable]="user.isCurrentUser!"
       (onListDelete)="deleteList(list)">
     </app-movies-list>
   </div>

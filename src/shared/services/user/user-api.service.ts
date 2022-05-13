@@ -12,19 +12,19 @@ export class UserApiService implements IUserApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getUserById(id: number): Observable<User> {
+  getUserById$(id: number): Observable<User> {
     return this.httpClient.get<User>(`${environment.serverUrl}/user/${id}`);
   }
 
-  getUserStats(id: number): Observable<UserStats> {
+  getUserStats$(id: number): Observable<UserStats> {
     return this.httpClient.get<UserStats>(`${environment.serverUrl}/user/stats/${id}`);
   }
 
-  getUserGenresStats(id: number): Observable<UserGenresStats[]> {
+  getUserGenresStats$(id: number): Observable<UserGenresStats[]> {
     return this.httpClient.get<UserGenresStats[]>(`${environment.serverUrl}/user/genres/${id}`);
   }
 
-  getUserTop(top: UserTopOption, limit: number): Observable<UserTopEntry[]> {
+  getUserTop$(top: UserTopOption, limit: number): Observable<UserTopEntry[]> {
     return this.httpClient.get<UserTopEntry[]>(`${environment.serverUrl}/user/top?by=${top}&limit=${limit}`);
   }
 }

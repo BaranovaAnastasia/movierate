@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
 import { MoviesList, User } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
 
@@ -20,17 +22,15 @@ export class UserListsComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.listsService.getAllUserLists$(this.user.id)
-      .subscribe(lists => {
-        this.lists = Array(lists.length);
-
-        lists.forEach((list, index) => {
-          this.listsService.getList$(list.listId!)
-            .subscribe(result => {
-              this.lists[index] = result;
-              this.changeDetectorRef.detectChanges();
-            });
-        }
-        );
+      .pipe(
+        concatMap(lists =>
+          forkJoin(
+            lists.map(list => this.listsService.getList$(list.listId!))
+          )
+        )
+      ).subscribe(result => {
+        this.lists = result;
+        this.changeDetectorRef.detectChanges();
       });
   }
 

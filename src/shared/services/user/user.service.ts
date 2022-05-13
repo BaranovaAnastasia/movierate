@@ -13,19 +13,19 @@ export class UserService {
     private userApiService: IUserApiService
   ) {}
 
-  getUserById(id: number): Observable<User> {
-    return this.userApiService.getUserById(id);
+  getUserById$(id: number): Observable<User> {
+    return this.userApiService.getUserById$(id);
   }
 
-  getUserStats(id: number): Observable<UserStats> {
-    return this.userApiService.getUserStats(id);
+  getUserStats$(id: number): Observable<UserStats> {
+    return this.userApiService.getUserStats$(id);
   }
 
-  getUserGenresStats(id: number): Observable<UserGenresStats[]> {
-    return this.userApiService.getUserGenresStats(id);
+  getUserGenresStats$(id: number): Observable<UserGenresStats[]> {
+    return this.userApiService.getUserGenresStats$(id);
   }
 
-  getUserTop(top: UserTopOption, limit: number): Observable<UserTopEntry[]> {
-    return this.userApiService.getUserTop(top, limit);
+  getUserTop$(top: UserTopOption, limit: number): Observable<UserTopEntry[]> {
+    return this.userApiService.getUserTop$(top, limit);
   }
 }

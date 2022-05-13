@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { concatMap, map, tap } from 'rxjs/operators';
 import { IAuthApiService, IAuthApiServiceToken } from 'src/shared/interfaces';
 import { Tokens, User } from 'src/shared/models';
 import { NavigationService } from '..';
@@ -39,15 +39,11 @@ export class AuthService {
 
   signin$(email: string, password: string): Observable<void> {
     return this.authApiService.signin$(email, password).pipe(
-      tap(result => {
-        AuthService.tokens = result;
-
-        this.authApiService.getUser$().subscribe(
-          user => {
-            this.loggedInUser = user;
-            this.navigationService.toMain();
-          }
-        );
+      tap(result => AuthService.tokens = result),
+      concatMap(() => this.authApiService.getUser$()),
+      tap(user => {
+        this.loggedInUser = user;
+        this.navigationService.toMain();
       }),
       map(() => { })
     );
@@ -55,17 +51,14 @@ export class AuthService {
 
   signup$(email: string, name: string, password: string): Observable<void> {
     return this.authApiService.signup$(email, name, password).pipe(
-      tap(result => {
-        AuthService.tokens = result;
-        this.authApiService.getUser$().subscribe(
-          user => {
-            this.loggedInUser = user;
-            this.navigationService.toMain();
-          }
-        );
+      tap(result => AuthService.tokens = result),
+      concatMap(() => this.authApiService.getUser$()),
+      tap(user => {
+        this.loggedInUser = user;
+        this.navigationService.toMain();
       }),
       map(() => { })
-    )
+    );
   }
 
   logout$(): Observable<void> {

@@ -17,7 +17,7 @@ export class UserMainStatsComponent implements OnChanges {
   constructor(private userService: UserService) { }
 
   ngOnChanges(): void {
-    this.stats$ = this.userService.getUserStats(this.userId);
+    this.stats$ = this.userService.getUserStats$(this.userId);
   }
 
   getNextGoal(current: number): number {
