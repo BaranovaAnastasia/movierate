@@ -1,15 +1,10 @@
-<div
-  *ngIf="stats$ | async as stats"
-  class="container">
-
+<div *ngIf="stats$ | async as stats" class="container">
   <div class="stats__movies">
     <div class="stats-data">
       <span class="tui-text_body-s">
         {{ stats.movies_count }}
       </span>
-      <span class="tui-text_body-s">
-        Movies
-      </span>
+      <span class="tui-text_body-s"> Movies </span>
     </div>
 
     <progress
@@ -17,8 +12,8 @@
       tuiProgressBar
       size="s"
       [value]="stats.movies_count"
-      [max]="getNextGoal(stats.movies_count)">
-    </progress>
+      [max]="getNextGoal(stats.movies_count)"
+    ></progress>
   </div>
 
   <div class="stats__minutes">
@@ -26,9 +21,7 @@
       <span class="tui-text_body-s">
         {{ stats.minutes_count }}
       </span>
-      <span class="tui-text_body-s">
-        Minutes
-      </span>
+      <span class="tui-text_body-s"> Minutes </span>
     </div>
 
     <progress
@@ -36,8 +29,8 @@
       tuiProgressBar
       size="s"
       [value]="stats.minutes_count"
-      [max]="getNextGoal(stats.minutes_count)">
-    </progress>
+      [max]="getNextGoal(stats.minutes_count)"
+    ></progress>
   </div>
 
   <div class="stats__reviews">
@@ -45,9 +38,7 @@
       <span class="tui-text_body-s">
         {{ stats.reviews_count }}
       </span>
-      <span class="tui-text_body-s">
-        Reviews
-      </span>
+      <span class="tui-text_body-s"> Reviews </span>
     </div>
 
     <progress
@@ -55,7 +46,7 @@
       tuiProgressBar
       size="s"
       [value]="stats.reviews_count"
-      [max]="getNextGoal(stats.reviews_count)">
-    </progress>
+      [max]="getNextGoal(stats.reviews_count)"
+    ></progress>
   </div>
 </div>

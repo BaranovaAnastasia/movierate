@@ -6,21 +6,15 @@ import { AppRoutingModule } from '../app-routing.module';
 import { UserPreviewModule } from '../user-preview/user-preview.module';
 import { TuiLetModule } from '@taiga-ui/cdk';
 
-
-
 @NgModule({
-  declarations: [
-    HeaderComponent
-  ],
+  declarations: [HeaderComponent],
   imports: [
     CommonModule,
     SearchBarModule,
     AppRoutingModule,
     UserPreviewModule,
-    TuiLetModule
+    TuiLetModule,
   ],
-  exports: [
-    HeaderComponent
-  ]
+  exports: [HeaderComponent],
 })
-export class HeaderModule { }
+export class HeaderModule {}

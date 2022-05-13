@@ -5,20 +5,14 @@ import { StringifyPipesModule } from 'src/app/pipes/stringify-pipes.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { TuiDataListModule } from '@taiga-ui/core';
 
-
-
 @NgModule({
-  declarations: [
-    SearchResultsComponent
-  ],
+  declarations: [SearchResultsComponent],
   imports: [
     CommonModule,
     StringifyPipesModule,
     AppRoutingModule,
-    TuiDataListModule
+    TuiDataListModule,
   ],
-  exports: [
-    SearchResultsComponent
-  ]
+  exports: [SearchResultsComponent],
 })
-export class SearchResultsModule { }
+export class SearchResultsModule {}

@@ -1,37 +1,21 @@
-<div
-  class="movie"
-  *ngIf="movie$ | async as movie">
-
+<div class="movie" *ngIf="movie$ | async as movie">
   <div class="movie__main">
-
     <div class="row">
-      <app-movie-poster
-        class="movie__poster"
-        [src]="movie.poster_path">
+      <app-movie-poster class="movie__poster" [src]="movie.poster_path">
       </app-movie-poster>
 
-      <app-movie-trailer
-        class="movie__trailer"
-        [movieId]="movie.id">
+      <app-movie-trailer class="movie__trailer" [movieId]="movie.id">
       </app-movie-trailer>
     </div>
 
     <div class="row">
-      <app-movie-controls
-        class="movie__controls"
-        [movieId]="movie.id">
+      <app-movie-controls class="movie__controls" [movieId]="movie.id">
       </app-movie-controls>
     </div>
-
   </div>
 
-  <app-movie-info
-    class="movie__info"
-    [movie]="movie">
-  </app-movie-info>
+  <app-movie-info class="movie__info" [movie]="movie"> </app-movie-info>
 
-  <app-reviews-list
-    class="movie__reviews"
-    [movieId]="movie.id">
+  <app-reviews-list class="movie__reviews" [movieId]="movie.id">
   </app-reviews-list>
 </div>

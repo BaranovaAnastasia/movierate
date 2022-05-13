@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { MoviesList } from 'src/shared/models';
@@ -8,29 +15,25 @@ import { ListsService } from 'src/shared/services';
   selector: 'app-add-to-list',
   templateUrl: './add-to-list.component.html',
   styleUrls: ['./add-to-list.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddToListComponent implements OnInit {
   @Input() movieId!: string;
-  @Output() onReady = new EventEmitter<void>();
+  @Output() ready = new EventEmitter<void>();
 
   lists$ = new BehaviorSubject<MoviesList[] | undefined>(undefined);
 
   form = this.fb.group({});
 
-  constructor(
-    private fb: FormBuilder,
-    private listsService: ListsService
-  ) { }
+  constructor(private fb: FormBuilder, private listsService: ListsService) {}
 
   ngOnInit(): void {
-    this.listsService.getAllListsCurrent$()
-      .subscribe(lists => {
-        this.lists$.next(lists);
-        lists.forEach(
-          (_, i) => this.form.addControl(String(i), this.fb.control(false))
-        )
-      })
+    this.listsService.getAllListsCurrent$().subscribe(lists => {
+      this.lists$.next(lists);
+      lists.forEach((_, i) =>
+        this.form.addControl(String(i), this.fb.control(false)),
+      );
+    });
   }
 
   get listSelected(): boolean {
@@ -52,7 +55,6 @@ export class AddToListComponent implements OnInit {
       }
     });
 
-    this.onReady.emit();
+    this.ready.emit();
   }
-
 }

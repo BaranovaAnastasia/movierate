@@ -1,7 +1,7 @@
 @import '~@taiga-ui/core/styles/taiga-ui-local';
 
-@tablet:    ~"only screen and (min-width: 720px) and (max-width: 1010px)";
-@mobile:    ~"only screen and (max-width: 719px)";
+@tablet: ~'only screen and (min-width: 720px) and (max-width: 1010px)';
+@mobile: ~'only screen and (max-width: 719px)';
 
 .container {
   height: 72px;
@@ -9,7 +9,7 @@
   display: flex;
 
   background-color: #252525;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .header {
@@ -57,10 +57,18 @@
   cursor: pointer;
 }
 
-a { color: #ffffff; }
-a:link { text-decoration: none; }
-a:visited { text-decoration: none; }
-a:active { text-decoration: none; }
+a {
+  color: #ffffff;
+}
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
 
 @media @tablet {
   .header__links {
@@ -69,7 +77,7 @@ a:active { text-decoration: none; }
 
   .header-right {
     width: calc(100% - 173px);
-  
+
     app-search-bar {
       width: calc(100% - 131px);
     }
@@ -88,7 +96,7 @@ a:active { text-decoration: none; }
 
   .header-right {
     width: calc(100% - 173px);
-  
+
     app-search-bar {
       width: calc(100% - 71px);
     }

@@ -4,19 +4,9 @@ import { FrontPageComponent } from './front-page.component';
 import { MoviesListModule } from '../movies-list/movies-list.module';
 import { LeaderboardModule } from '../leaderboard/leaderboard.module';
 
-
-
 @NgModule({
-  declarations: [
-    FrontPageComponent
-  ],
-  imports: [
-    CommonModule,
-    MoviesListModule,
-    LeaderboardModule
-  ],
-  exports: [
-    FrontPageComponent
-  ]
+  declarations: [FrontPageComponent],
+  imports: [CommonModule, MoviesListModule, LeaderboardModule],
+  exports: [FrontPageComponent],
 })
-export class FrontPageModule { }
+export class FrontPageModule {}

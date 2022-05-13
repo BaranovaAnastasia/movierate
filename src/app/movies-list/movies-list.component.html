@@ -1,22 +1,15 @@
-<div
-  *ngIf="list"
-  class="container"
-  [ngClass]="{'empty' : isEmpty}">
-  <div
-    *ngIf="!nowEditing"
-    class="title tui-text_body-xl">
-
-    <app-section-title
-      [title]="list.listName"
-      (dblclick)="startEditing()">
+<div *ngIf="list" class="container" [ngClass]="{ empty: isEmpty }">
+  <div *ngIf="!nowEditing" class="title tui-text_body-xl">
+    <app-section-title [title]="list.listName" (dblclick)="startEditing()">
     </app-section-title>
 
     <div
       *ngIf="list.isPublic !== undefined"
-      class="title__visibility tui-text_body-xs">
+      class="title__visibility tui-text_body-xs"
+    >
       {{ visibilityText }}
     </div>
-    
+
     <button
       tuiIconButton
       *ngIf="editable"
@@ -33,7 +26,8 @@
       size="s"
       type="button"
       appearance="delete-list"
-      (click)="deleteList()">
+      (click)="deleteList()"
+    >
       <tui-svg src="tuiIconCloseLarge"></tui-svg>
       <span class="delete-button__hint">delete</span>
     </button>
@@ -42,14 +36,12 @@
   <app-list-edit-form
     *ngIf="nowEditing"
     [list]="list"
-    (onReady)="finishEditing($event)">
+    (ready)="finishEditing($event)"
+  >
   </app-list-edit-form>
 
-
   <div class="content">
-    <div
-      *ngIf="isEmpty"
-      class="content__empty tui-text_body-m">
+    <div *ngIf="isEmpty" class="content__empty tui-text_body-m">
       This list has no movies yet
     </div>
     <div *ngFor="let movie of displayMovies">
@@ -57,7 +49,8 @@
         *ngIf="!isPreparedForDelete(movie)"
         [movie]="movie"
         [canDelete]="editable && nowEditing"
-        (onMovieDelete)="deleteMovie($event)">
+        (delete)="deleteMovie($event)"
+      >
       </app-movie-card>
     </div>
   </div>

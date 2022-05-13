@@ -6,22 +6,16 @@ import { ReviewModule } from '../review/review.module';
 import { TuiExpandModule, TuiSvgModule } from '@taiga-ui/core';
 import { SectionTitleModule } from 'src/app/section-title/section-title.module';
 
-
-
 @NgModule({
-  declarations: [
-    ReviewsListComponent
-  ],
+  declarations: [ReviewsListComponent],
   imports: [
     CommonModule,
     ReviewFormModule,
     ReviewModule,
     TuiExpandModule,
     TuiSvgModule,
-    SectionTitleModule
+    SectionTitleModule,
   ],
-  exports: [
-    ReviewsListComponent
-  ]
+  exports: [ReviewsListComponent],
 })
-export class ReviewsListModule { }
+export class ReviewsListModule {}

@@ -5,14 +5,14 @@ import { UserTopEntry, UserTopOption } from 'src/shared/models';
   selector: 'app-user-top',
   templateUrl: './user-top.component.html',
   styleUrls: ['./user-top.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserTopComponent {
   @Input() topOption!: UserTopOption;
   @Input() users!: UserTopEntry[];
 
   get topTitle() {
-    switch(this.topOption) {
+    switch (this.topOption) {
       case 'movies':
         return 'Watched the most movies';
       case 'minutes':

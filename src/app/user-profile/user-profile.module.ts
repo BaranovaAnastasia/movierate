@@ -9,12 +9,8 @@ import { UserStatisticsModule } from './user-statistics/user-statistics.module';
 import { UserProfileControlsModule } from './user-profile-controls/user-profile-controls.module';
 import { UserListsModule } from './user-lists/user-lists.module';
 
-
-
 @NgModule({
-  declarations: [
-    UserProfileComponent
-  ],
+  declarations: [UserProfileComponent],
   imports: [
     CommonModule,
     UserPreviewModule,
@@ -23,10 +19,8 @@ import { UserListsModule } from './user-lists/user-lists.module';
     AppRoutingModule,
     UserStatisticsModule,
     UserProfileControlsModule,
-    UserListsModule
+    UserListsModule,
   ],
-  exports: [
-    UserProfileComponent
-  ]
+  exports: [UserProfileComponent],
 })
-export class UserProfileModule { }
+export class UserProfileModule {}

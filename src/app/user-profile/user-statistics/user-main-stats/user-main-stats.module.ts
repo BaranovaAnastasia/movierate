@@ -3,18 +3,9 @@ import { CommonModule } from '@angular/common';
 import { UserMainStatsComponent } from './user-main-stats.component';
 import { TuiProgressModule } from '@taiga-ui/kit';
 
-
-
 @NgModule({
-  declarations: [
-    UserMainStatsComponent
-  ],
-  imports: [
-    CommonModule,
-    TuiProgressModule
-  ],
-  exports: [
-    UserMainStatsComponent
-  ]
+  declarations: [UserMainStatsComponent],
+  imports: [CommonModule, TuiProgressModule],
+  exports: [UserMainStatsComponent],
 })
-export class UserMainStatsModule { }
+export class UserMainStatsModule {}

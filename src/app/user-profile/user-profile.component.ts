@@ -7,7 +7,7 @@ import { UserMovieInteractionService, UserService } from 'src/shared/services';
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserProfileComponent {
   user$ = this.activatedroute.params.pipe(
@@ -21,7 +21,6 @@ export class UserProfileComponent {
   constructor(
     private userService: UserService,
     private favouritesService: UserMovieInteractionService,
-    private activatedroute: ActivatedRoute
-  ) { }
-
+    private activatedroute: ActivatedRoute,
+  ) {}
 }

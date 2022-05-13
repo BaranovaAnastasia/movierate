@@ -5,8 +5,6 @@
   [hintContent]="content"
 ></tui-pie-chart>
 
-<ng-template
-  #content
-  let-index>
+<ng-template #content let-index>
   <div>{{ genresNames![index] }}: {{ genresCounts![index] }}</div>
 </ng-template>

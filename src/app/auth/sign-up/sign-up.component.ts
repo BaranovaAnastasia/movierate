@@ -1,43 +1,46 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from 'src/shared/services';
 
 function isInvalid(control: AbstractControl): boolean {
-  return control.invalid && control.touched
+  return control.invalid && control.touched;
 }
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignUpComponent implements OnInit {
-
   form = this.fb.group({
     name: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
-    password: [null, [
-      Validators.required,
-      Validators.minLength(8),
-      Validators.pattern(new RegExp(`^(?=.*[a-z])(?=.*[0-9]).{8}`))
-    ]],
-    confirmPassword: [null, [
-      Validators.required,
-      this.checkPasswords()
-    ]]
+    password: [
+      null,
+      [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(new RegExp(`^(?=.*[a-z])(?=.*[0-9]).{8}`)),
+      ],
+    ],
+    confirmPassword: [null, [Validators.required, this.checkPasswords()]],
   });
 
   unsuccessful: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService
-  ) { }
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.form.controls.email.valueChanges
-      .subscribe(() => this.unsuccessful = false)
+    this.form.controls.email.valueChanges.subscribe(
+      () => (this.unsuccessful = false),
+    );
   }
 
   get emailError(): string | undefined {
@@ -50,7 +53,7 @@ export class SignUpComponent implements OnInit {
       return 'Invalid email address format';
     }
     if (this.unsuccessful) {
-      return 'The email address is already in use'
+      return 'The email address is already in use';
     }
     return undefined;
   }
@@ -80,20 +83,18 @@ export class SignUpComponent implements OnInit {
 
       if (!data) return null;
 
-      return data.password === data.confirmPassword ? null : { match: true }
-    }
+      return data.password === data.confirmPassword ? null : { match: true };
+    };
   }
 
   signup() {
     const { email, name, password } = this.form.getRawValue();
-    this.authService.signup$(email, name, password)
-      .subscribe(
-        () => {
-          this.form.controls.password.reset();
-          this.form.controls.confirmPassword.reset();
-        },
-        () => this.unsuccessful = true
-      );
+    this.authService.signup$(email, name, password).subscribe(
+      () => {
+        this.form.controls.password.reset();
+        this.form.controls.confirmPassword.reset();
+      },
+      () => (this.unsuccessful = true),
+    );
   }
-
 }

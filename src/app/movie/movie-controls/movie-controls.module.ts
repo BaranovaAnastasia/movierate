@@ -10,12 +10,8 @@ import { MovieWatchModule } from './movie-watch/movie-watch.module';
 import { MovieToFavouriteModule } from './movie-to-favourite/movie-to-favourite.module';
 import { MovieToListModule } from './movie-to-list/movie-to-list.module';
 
-
-
 @NgModule({
-  declarations: [
-    MovieControlsComponent
-  ],
+  declarations: [MovieControlsComponent],
   imports: [
     CommonModule,
     MovieRatingModule,
@@ -25,10 +21,8 @@ import { MovieToListModule } from './movie-to-list/movie-to-list.module';
     MovieToFavouriteModule,
     MovieToListModule,
     ListSelectDialogModule,
-    TuiLetModule
+    TuiLetModule,
   ],
-  exports: [
-    MovieControlsComponent
-  ]
+  exports: [MovieControlsComponent],
 })
-export class MovieControlsModule { }
+export class MovieControlsModule {}

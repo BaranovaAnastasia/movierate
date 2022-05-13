@@ -6,22 +6,16 @@ import { StringifyPipesModule } from '../../../pipes/stringify-pipes.module';
 import { TuiRatingModule } from '@taiga-ui/kit';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [
-    ReviewComponent
-  ],
+  declarations: [ReviewComponent],
   imports: [
     CommonModule,
     UserPreviewModule,
     StringifyPipesModule,
     FormsModule,
     ReactiveFormsModule,
-    TuiRatingModule
+    TuiRatingModule,
   ],
-  exports: [
-    ReviewComponent
-  ]
+  exports: [ReviewComponent],
 })
-export class ReviewModule { }
+export class ReviewModule {}

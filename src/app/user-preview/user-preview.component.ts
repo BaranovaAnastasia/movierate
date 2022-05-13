@@ -5,9 +5,8 @@ import { User } from 'src/shared/models';
   selector: 'app-user-preview',
   templateUrl: './user-preview.component.html',
   styleUrls: ['./user-preview.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserPreviewComponent{
+export class UserPreviewComponent {
   @Input() user!: User;
-
 }

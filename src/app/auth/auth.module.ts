@@ -5,15 +5,14 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiInputModule, TuiInputPasswordModule } from '@taiga-ui/kit';
-import { TuiButtonModule, TuiModeModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
-
-
+import {
+  TuiButtonModule,
+  TuiModeModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
 
 @NgModule({
-  declarations: [
-    SignInComponent,
-    SignUpComponent
-  ],
+  declarations: [SignInComponent, SignUpComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -23,11 +22,8 @@ import { TuiButtonModule, TuiModeModule, TuiTextfieldControllerModule } from '@t
     TuiInputPasswordModule,
     TuiModeModule,
     TuiTextfieldControllerModule,
-    TuiButtonModule
+    TuiButtonModule,
   ],
-  exports: [
-    SignInComponent,
-    SignUpComponent
-  ]
+  exports: [SignInComponent, SignUpComponent],
 })
-export class AuthModule { }
+export class AuthModule {}

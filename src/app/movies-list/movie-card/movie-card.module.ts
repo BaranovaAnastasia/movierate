@@ -6,22 +6,16 @@ import { TuiProgressModule } from '@taiga-ui/kit';
 import { StringifyPipesModule } from 'src/app/pipes/stringify-pipes.module';
 import { TuiButtonModule, TuiModeModule } from '@taiga-ui/core';
 
-
-
 @NgModule({
-  declarations: [
-    MovieCardComponent
-  ],
+  declarations: [MovieCardComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
     TuiProgressModule,
     StringifyPipesModule,
     TuiButtonModule,
-    TuiModeModule
+    TuiModeModule,
   ],
-  exports: [
-    MovieCardComponent
-  ]
+  exports: [MovieCardComponent],
 })
-export class MovieCardModule { }
+export class MovieCardModule {}

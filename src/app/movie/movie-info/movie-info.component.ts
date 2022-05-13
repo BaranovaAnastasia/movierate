@@ -5,9 +5,8 @@ import { Movie } from 'src/shared/models';
   selector: 'app-movie-info',
   templateUrl: './movie-info.component.html',
   styleUrls: ['./movie-info.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieInfoComponent {
   @Input() movie!: Movie;
-
 }

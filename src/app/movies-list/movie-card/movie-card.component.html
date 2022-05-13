@@ -1,17 +1,12 @@
 <div class="container">
-  <a
-    class="link"
-    [routerLink]="['/movie', movie.id]">
-    <div
-      *ngIf="!movie.poster_path"
-      class="no-poster">
-      No poster :(
-    </div>
+  <a class="link" [routerLink]="['/movie', movie.id]">
+    <div *ngIf="!movie.poster_path" class="no-poster">No poster :(</div>
     <img
       *ngIf="movie.poster_path"
       class="poster"
       [src]="movie.poster_path"
-      alt="poster"/>
+      alt="poster"
+    />
     <div class="black-screen"></div>
   </a>
 
@@ -28,10 +23,7 @@
   ></button>
 
   <div class="info">
-
-    <div
-      class="info__rating"
-      *ngIf="movie.vote_average">
+    <div class="info__rating" *ngIf="movie.vote_average">
       <label tuiProgressLabel>
         <span class="percent">{{ formattedRating }}</span>
 
@@ -39,19 +31,18 @@
           [color]="ratingColor"
           size="m"
           [max]="10"
-          [value]="movie.vote_average!">
+          [value]="movie.vote_average!"
+        >
         </tui-progress-circle>
       </label>
     </div>
 
     <div class="info__right">
-      <a
-        class="info__title"
-        [routerLink]="['/movie', movie.id]">
+      <a class="info__title" [routerLink]="['/movie', movie.id]">
         {{ movie.title }}
       </a>
       <div class="info__date tui-text_body-xs">
-        {{ movie.release_date | dateStrigify : !isUpcoming }}
+        {{ movie.release_date | dateStrigify: !isUpcoming }}
       </div>
     </div>
   </div>

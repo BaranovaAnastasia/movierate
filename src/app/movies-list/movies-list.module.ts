@@ -2,17 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MoviesListComponent } from './movies-list.component';
 import { MovieCardModule } from './movie-card/movie-card.module';
-import { TuiAlertModule, TuiButtonModule, TuiModeModule, TuiSvgModule } from '@taiga-ui/core';
+import {
+  TuiAlertModule,
+  TuiButtonModule,
+  TuiModeModule,
+  TuiSvgModule,
+} from '@taiga-ui/core';
 import { TuiRadioLabeledModule } from '@taiga-ui/kit';
 import { SectionTitleModule } from '../section-title/section-title.module';
 import { ListEditFormModule } from './list-edit-form/list-edit-form.module';
 
-
-
 @NgModule({
-  declarations: [
-    MoviesListComponent
-  ],
+  declarations: [MoviesListComponent],
   imports: [
     CommonModule,
     MovieCardModule,
@@ -22,10 +23,8 @@ import { ListEditFormModule } from './list-edit-form/list-edit-form.module';
     TuiSvgModule,
     SectionTitleModule,
     ListEditFormModule,
-    TuiButtonModule
+    TuiButtonModule,
   ],
-  exports: [
-    MoviesListComponent
-  ]
+  exports: [MoviesListComponent],
 })
-export class MoviesListModule { }
+export class MoviesListModule {}

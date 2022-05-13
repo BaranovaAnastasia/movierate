@@ -1,58 +1,44 @@
-<form
-  class="form"
-  [formGroup]="form"
-  (submit)="signin()">
-
-  <div class="tui-form__header">
-    Log In
-  </div>
+<form class="form" [formGroup]="form" (submit)="signin()">
+  <div class="tui-form__header">Log In</div>
 
   <tui-input
     class="form__email form__field"
-    [ngClass]="{form__field_invalid : unsuccessful}"
+    [ngClass]="{ form__field_invalid: unsuccessful }"
     tuiTextfieldSize="s"
     tuiMode="onDark"
     formControlName="email"
-    (focus)="focus()">
+    (focus)="focus()"
+  >
     Email
-    <input
-      tuiTextfield
-      (focus)="focus()"/>
+    <input tuiTextfield (focus)="focus()" />
   </tui-input>
 
   <tui-input-password
     class="form__password form__field"
-    [ngClass]="{form__field_invalid : unsuccessful}"
+    [ngClass]="{ form__field_invalid: unsuccessful }"
     tuiTextfieldSize="s"
     tuiMode="onDark"
-    formControlName="password">
+    formControlName="password"
+  >
     Password
-    <input
-      tuiTextfield
-      (focus)="focus()"/>
+    <input tuiTextfield (focus)="focus()" />
   </tui-input-password>
 
-  <div
-    *ngIf="unsuccessful"
-    class="error">
-    Invalid email or password
-  </div>
+  <div *ngIf="unsuccessful" class="error">Invalid email or password</div>
 
   <div class="form__footer">
     <div>
       Don't have an account?<br />
-      <a routerLink="/signup">
-        Sign-Up
-      </a>
+      <a routerLink="/signup"> Sign-Up </a>
     </div>
 
     <button
       tuiButton
       type="submit"
       appearance="auth-submit"
-      [disabled]="form.invalid">
+      [disabled]="form.invalid"
+    >
       Log In
     </button>
   </div>
-
 </form>

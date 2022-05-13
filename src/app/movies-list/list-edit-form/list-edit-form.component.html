@@ -1,30 +1,28 @@
-<form
-  class="title tui-text_body-xl"
-  [formGroup]="form"
-  (submit)="submit()">
-  
+<form class="title tui-text_body-xl" [formGroup]="form" (submit)="submit()">
   <div class="title__tag"></div>
   <input
-    autofocus
+    appAutofocus
     formControlName="name"
     class="title__input"
     placeholder="Title"
     [style.width.ch]="inputWidth"
-  >
-  
+  />
+
   <tui-radio-labeled
     contentAlign="right"
     formControlName="visibility"
     item="public"
-    tuiMode="onDark">
+    tuiMode="onDark"
+  >
     Public
   </tui-radio-labeled>
-    
+
   <tui-radio-labeled
     contentAlign="right"
     formControlName="visibility"
     item="private"
-    tuiMode="onDark">
+    tuiMode="onDark"
+  >
     Private
   </tui-radio-labeled>
 
@@ -33,14 +31,14 @@
     size="s"
     type="submit"
     appearance="icon"
-    icon="tuiIconCheckLarge">
-  </button>
+    icon="tuiIconCheckLarge"
+  ></button>
   <button
     tuiIconButton
     size="s"
     type="button"
     appearance="icon"
     icon="tuiIconCloseLarge"
-    (click)="cancelEditing()">
-  </button>
+    (click)="cancelEditing()"
+  ></button>
 </form>

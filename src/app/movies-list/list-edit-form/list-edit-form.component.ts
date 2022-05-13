@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
 import { MoviesList } from 'src/shared/models';
@@ -8,27 +15,27 @@ import { ListsService } from 'src/shared/services';
   selector: 'app-list-edit-form',
   templateUrl: './list-edit-form.component.html',
   styleUrls: ['./list-edit-form.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListEditFormComponent implements OnInit {
   @Input() list!: MoviesList;
-  @Output() onReady = new EventEmitter<boolean>();
+  @Output() ready = new EventEmitter<boolean>();
 
   form = this.fb.group({
     name: [null, Validators.required],
-    visibility: [null, Validators.required]
+    visibility: [null, Validators.required],
   });
 
   constructor(
     private fb: FormBuilder,
     private listsService: ListsService,
     private readonly alertService: TuiAlertService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.form.patchValue({
       name: this.list.listName,
-      visibility: this.list.isPublic ? 'public' : 'private'
+      visibility: this.list.isPublic ? 'public' : 'private',
     });
   }
 
@@ -40,8 +47,11 @@ export class ListEditFormComponent implements OnInit {
     const data = this.form.getRawValue();
     const newIsPublic = data.visibility === 'public';
 
-    if (data.name === this.list.listName && newIsPublic === this.list.isPublic) {
-      this.onReady.emit(true);
+    if (
+      data.name === this.list.listName &&
+      newIsPublic === this.list.isPublic
+    ) {
+      this.ready.emit(true);
       return;
     }
 
@@ -51,22 +61,20 @@ export class ListEditFormComponent implements OnInit {
         () => {
           this.list.listName = data.name;
           this.list.isPublic = newIsPublic;
-          this.onReady.emit(true);
+          this.ready.emit(true);
         },
         () => {
-          this.alertService.open(
-            'A list with this name already exists. Try something else.',
-            {
+          this.alertService
+            .open('A list with this name already exists. Try something else.', {
               status: TuiNotification.Error,
-              label: 'Try another name.'
-            }
-          ).subscribe();
-        }
-      )
+              label: 'Try another name.',
+            })
+            .subscribe();
+        },
+      );
   }
 
   cancelEditing(): void {
-    this.onReady.emit(false);
+    this.ready.emit(false);
   }
-
 }

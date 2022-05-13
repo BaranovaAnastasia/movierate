@@ -7,20 +7,20 @@ import { TuiDialogContext } from '@taiga-ui/core';
   selector: 'app-list-select-dialog',
   templateUrl: './list-select-dialog.component.html',
   styleUrls: ['./list-select-dialog.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListSelectDialogComponent {
   activeItemIndex = 0;
 
   form = this.fb.group({
     name: [null, Validators.required],
-    visibility: ['Public', Validators.required]
+    visibility: ['Public', Validators.required],
   });
 
   constructor(
     private fb: FormBuilder,
-    @Inject(POLYMORPHEUS_CONTEXT) readonly context: TuiDialogContext<boolean>
-  ) { }
+    @Inject(POLYMORPHEUS_CONTEXT) readonly context: TuiDialogContext<boolean>,
+  ) {}
 
   close(): void {
     this.context.completeWith(true);

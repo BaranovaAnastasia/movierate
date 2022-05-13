@@ -7,22 +7,16 @@ import { MovieInfoModule } from './movie-info/movie-info.module';
 import { MovieTrailerModule } from './movie-trailer/movie-trailer.module';
 import { ReviewsListModule } from './reviews/reviews-list/reviews-list.module';
 
-
-
 @NgModule({
-  declarations: [
-    MovieComponent
-  ],
+  declarations: [MovieComponent],
   imports: [
     CommonModule,
     MovieControlsModule,
     ReviewsListModule,
     MoviePosterModule,
     MovieInfoModule,
-    MovieTrailerModule
+    MovieTrailerModule,
   ],
-  exports: [
-    MovieComponent
-  ]
+  exports: [MovieComponent],
 })
-export class MovieModule { }
+export class MovieModule {}

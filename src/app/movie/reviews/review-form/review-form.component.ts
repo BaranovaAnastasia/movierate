@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Review } from 'src/shared/models';
 import { UserMovieInteractionService } from 'src/shared/services';
@@ -7,7 +14,7 @@ import { UserMovieInteractionService } from 'src/shared/services';
   selector: 'app-review-form',
   templateUrl: './review-form.component.html',
   styleUrls: ['./review-form.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewFormComponent implements OnChanges {
   @Input() movieId?: string;
@@ -16,21 +23,20 @@ export class ReviewFormComponent implements OnChanges {
   form = this.fb.group({
     rating: [null, Validators.required],
     title: [null, [Validators.required, Validators.minLength(3)]],
-    review: [null, [Validators.required, Validators.minLength(20)]]
+    review: [null, [Validators.required, Validators.minLength(20)]],
   });
 
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+  ) {}
 
   ngOnChanges(): void {
-    this.userMovieInteractionService.getRating$(this.movieId!).subscribe(
-      rating => this.form.patchValue(
-        { rating: rating / 2 },
-        { emitEvent: false }
-      )
-    );
+    this.userMovieInteractionService
+      .getRating$(this.movieId!)
+      .subscribe(rating =>
+        this.form.patchValue({ rating: rating / 2 }, { emitEvent: false }),
+      );
   }
 
   submit() {
@@ -38,5 +44,4 @@ export class ReviewFormComponent implements OnChanges {
     this.postReview.next(review);
     this.form.reset();
   }
-
 }

@@ -1,35 +1,25 @@
-<form
-  class="form"
-  [formGroup]="form"
-  (submit)="createAndAdd()">
-  
-  <tui-input
-    tuiTextfieldSize="m"
-    formControlName="name"
-    tuiMode="onDark">
+<form class="form" [formGroup]="form" (submit)="createAndAdd()">
+  <tui-input tuiTextfieldSize="m" formControlName="name" tuiMode="onDark">
     List Title
   </tui-input>
-  <div
-    tuiGroup
-    [adaptive]="true"
-    [collapsed]="true"
-    >
-
+  <div tuiGroup [adaptive]="true" [collapsed]="true">
     <tui-radio-block
       contentAlign="right"
       formControlName="visibility"
       item="public"
       size="m"
-      tuiMode="onDark">
+      tuiMode="onDark"
+    >
       Public
     </tui-radio-block>
-    
+
     <tui-radio-block
       contentAlign="right"
       formControlName="visibility"
       item="private"
       size="m"
-      tuiMode="onDark">
+      tuiMode="onDark"
+    >
       Private
     </tui-radio-block>
   </div>
@@ -40,7 +30,8 @@
     size="s"
     appearance="auth-submit"
     [disabled]="form.invalid"
-    type="submit">
+    type="submit"
+  >
     Create & Add
   </button>
 </form>

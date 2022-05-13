@@ -1,46 +1,49 @@
 <div class="controls">
-
   <button
     *ngIf="!user.isCurrentUser"
     class="controls__follow"
-    [disabled]="true">
+    [disabled]="true"
+  >
     {{ followText }}
   </button>
 
   <div class="controls__links">
-    
-    <hr *ngIf="user.isCurrentUser">
-    
+    <hr *ngIf="user.isCurrentUser" />
+
     <a
       [routerLink]="['/user', user.id]"
       fragment="favourites"
-      class="controls__links__item tui-text_body-m">
+      class="controls__links__item tui-text_body-m"
+    >
       Favourites
     </a>
 
-    <hr>
-    
+    <hr />
+
     <a
-      [routerLink]="['/user', user.id]" fragment="lists"
-      class="controls__links__item tui-text_body-m">
+      [routerLink]="['/user', user.id]"
+      fragment="lists"
+      class="controls__links__item tui-text_body-m"
+    >
       Lists
     </a>
 
-    <hr>
-    
+    <hr />
+
     <a class="controls__links__item tui-text_body-m">
-      {{ user.isCurrentUser ? "Friends Activity" : "Activity" }}
+      {{ user.isCurrentUser ? 'Friends Activity' : 'Activity' }}
     </a>
 
-    <hr *ngIf="user.isCurrentUser">
-    
+    <hr *ngIf="user.isCurrentUser" />
+
     <button
       class="controls__links__item logout tui-text_body-m"
       *ngIf="user.isCurrentUser"
-      (click)="logout()">
+      (click)="logout()"
+    >
       Log Out
     </button>
 
-    <hr *ngIf="user.isCurrentUser">
+    <hr *ngIf="user.isCurrentUser" />
   </div>
 </div>

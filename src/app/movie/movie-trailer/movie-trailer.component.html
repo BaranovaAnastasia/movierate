@@ -1,64 +1,37 @@
-<div
-  *tuiLet="trailer$ | async as trailer"
-  class="container">
-  
-  <div
-    *ngIf="!videoShown"
-    class="preview">
-    <div
-      *tuiLet="previewUrl$ | async as previewUrl"
-      class="preview-warpper">
-
-      <img
-        *ngIf="previewUrl"
-        class="preview__image"
-        [src]="previewUrl">
+<div *tuiLet="trailer$ | async as trailer" class="container">
+  <div *ngIf="!videoShown" class="preview">
+    <div *tuiLet="previewUrl$ | async as previewUrl" class="preview-warpper">
+      <img *ngIf="previewUrl" class="preview__image" [src]="previewUrl" />
 
       <div class="preview__black-screen">
-        <div
-          *ngIf="trailer"
-          class="wrapper">
-          <button
-            class="preview__play"
-            (click)="showVideo()">
-            <img
-              class="preview__play__icon"
-              src="assets/icons/play.svg">
+        <div *ngIf="trailer" class="wrapper">
+          <button class="preview__play" (click)="showVideo()">
+            <img class="preview__play__icon" src="assets/icons/play.svg" />
           </button>
 
           <div>
-            <div
-              *ngIf="name$ | async as name"
-              class="preview__name">
-              {{name}}
+            <div *ngIf="name$ | async as name" class="preview__name">
+              {{ name }}
             </div>
-            <div class="preview__text">
-              Watch the Trailer
-            </div>
+            <div class="preview__text">Watch the Trailer</div>
           </div>
         </div>
 
-        <div
-          *ngIf="!trailer"
-          class="wrapper">
-          <div class="preview__name">
-            No Trailer Available :(
-          </div>
+        <div *ngIf="!trailer" class="wrapper">
+          <div class="preview__name">No Trailer Available :(</div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <div
-    *ngIf="videoShown"
-    class="trailer-wrapper">
+  <div *ngIf="videoShown" class="trailer-wrapper">
     <iframe
       *ngIf="safeUrl$ | async as safeUrl"
       class="trailer"
       [src]="safeUrl"
       frameborder="0"
-      allowfullscreen>
+      allowfullscreen
+    >
     </iframe>
   </div>
 </div>

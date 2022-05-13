@@ -5,7 +5,7 @@ import { UserTopEntry, UserTopOption } from 'src/shared/models';
   selector: 'app-user-top-entry',
   templateUrl: './user-top-entry.component.html',
   styleUrls: ['./user-top-entry.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserTopEntryComponent {
   @Input() topOption!: UserTopOption;
@@ -17,7 +17,7 @@ export class UserTopEntryComponent {
   }
 
   get result(): string {
-    switch(this.topOption) {
+    switch (this.topOption) {
       case 'movies':
         return `${this.user.movies_count} movies`;
       case 'minutes':

@@ -5,9 +5,8 @@ import { AuthService } from 'src/shared/services';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  constructor(public authService: AuthService) { }
-
+  constructor(public authService: AuthService) {}
 }

@@ -8,7 +8,7 @@ import { MovieService } from 'src/shared/services';
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchBarComponent implements OnDestroy {
   readonly destroy$ = new Subject<void>();
@@ -19,18 +19,15 @@ export class SearchBarComponent implements OnDestroy {
     debounceTime(200),
     switchMap(value => {
       if (!value) return of(null);
-      
-      return this.movieService.searchMovies(value).pipe(
-        map(movies => movies.slice(0, 10))
-      )
+
+      return this.movieService
+        .searchMovies(value)
+        .pipe(map(movies => movies.slice(0, 10)));
     }),
-    takeUntil(this.destroy$)
+    takeUntil(this.destroy$),
   );
 
-  constructor(
-    private fb: FormBuilder,
-    private movieService: MovieService
-  ) { }
+  constructor(private fb: FormBuilder, private movieService: MovieService) {}
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -39,5 +36,4 @@ export class SearchBarComponent implements OnDestroy {
   reset(): void {
     this.search.reset();
   }
-
 }

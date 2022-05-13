@@ -3,18 +3,9 @@ import { CommonModule } from '@angular/common';
 import { UserPreviewComponent } from './user-preview.component';
 import { AppRoutingModule } from '../app-routing.module';
 
-
-
 @NgModule({
-  declarations: [
-    UserPreviewComponent
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule
-  ],
-  exports: [
-    UserPreviewComponent
-  ]
+  declarations: [UserPreviewComponent],
+  imports: [CommonModule, AppRoutingModule],
+  exports: [UserPreviewComponent],
 })
-export class UserPreviewModule { }
+export class UserPreviewModule {}

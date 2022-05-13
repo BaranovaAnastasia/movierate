@@ -14,16 +14,18 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent, canActivate: [AuthGuard] },
   { path: 'movie/:id', component: MovieComponent },
   { path: 'user/:id', component: UserProfileComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    onSameUrlNavigation: 'reload',
-    anchorScrolling: 'enabled',
-    enableTracing: false
-  })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      onSameUrlNavigation: 'reload',
+      anchorScrolling: 'enabled',
+      enableTracing: false,
+    }),
+  ],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -2,19 +2,14 @@
   <div
     *ngIf="highestRanked$ | async as highestRanked"
     id="top"
-    class="list-wrapper">
+    class="list-wrapper"
+  >
     <app-movies-list [list]="highestRanked"></app-movies-list>
 
-    <div
-      *ngIf="popular$ | async as popular"
-      id="popular"
-      class="list-wrapper">
+    <div *ngIf="popular$ | async as popular" id="popular" class="list-wrapper">
       <app-movies-list [list]="popular"></app-movies-list>
 
-      <div
-        *ngIf="upcoming$ | async as upcoming"
-        id="soon"
-        class="list-wrapper">
+      <div *ngIf="upcoming$ | async as upcoming" id="soon" class="list-wrapper">
         <app-movies-list [list]="upcoming"></app-movies-list>
 
         <div id="leaderboard">

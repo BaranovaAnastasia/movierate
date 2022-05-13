@@ -1,16 +1,14 @@
-<table
-  *ngIf="credits$ | async as credits"
-  class="container">
+<table *ngIf="credits$ | async as credits" class="container">
   <tr *ngIf="credits.directors && credits.directors.length > 0">
     <td class="role">Director</td>
-    <td>{{ credits.directors | listStringify : ', ' }}</td>
+    <td>{{ credits.directors | listStringify: ', ' }}</td>
   </tr>
   <tr *ngIf="credits.writers && credits.writers.length > 0">
     <td class="role">Writers</td>
-    <td>{{ credits.writers | listStringify : ', ' }}</td>
+    <td>{{ credits.writers | listStringify: ', ' }}</td>
   </tr>
   <tr *ngIf="credits.cast && credits.cast.length > 0">
     <td class="role">Stars</td>
-    <td>{{ credits.cast | listStringify : ', ' }}</td>
+    <td>{{ credits.cast | listStringify: ', ' }}</td>
   </tr>
 </table>

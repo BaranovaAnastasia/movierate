@@ -5,12 +5,12 @@ import { ListsService } from 'src/shared/services';
   selector: 'app-front-page',
   templateUrl: './front-page.component.html',
   styleUrls: ['./front-page.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FrontPageComponent {
   highestRanked$ = this.listsService.getTopRated$();
   popular$ = this.listsService.getPopular$();
   upcoming$ = this.listsService.getUpcoming$();
 
-  constructor(private listsService: ListsService) { }
+  constructor(private listsService: ListsService) {}
 }

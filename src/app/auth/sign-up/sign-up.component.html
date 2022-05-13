@@ -1,83 +1,69 @@
-<form
-  class="form"
-  [formGroup]="form"
-  (submit)="signup()">
-  
-  <div class="tui-form__header">
-    Create Account
-  </div>
-  
-  <tui-input
-    class="form__field"
-    [ngClass]="{form__field_invalid : getIsInvalid('name')}"
-    tuiTextfieldSize="s"
-    tuiMode="onDark"
-    formControlName="name">
-    Name
-  </tui-input>
-  <div
-    *ngIf="getIsInvalid('name')"
-    class="error">
-    Name is required
-  </div>
+<form class="form" [formGroup]="form" (submit)="signup()">
+  <div class="tui-form__header">Create Account</div>
 
   <tui-input
     class="form__field"
-    [ngClass]="{form__field_invalid : getIsInvalid('email') || unsuccessful}"
+    [ngClass]="{ form__field_invalid: getIsInvalid('name') }"
     tuiTextfieldSize="s"
     tuiMode="onDark"
-    formControlName="email">
+    formControlName="name"
+  >
+    Name
+  </tui-input>
+  <div *ngIf="getIsInvalid('name')" class="error">Name is required</div>
+
+  <tui-input
+    class="form__field"
+    [ngClass]="{ form__field_invalid: getIsInvalid('email') || unsuccessful }"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="email"
+  >
     Email
   </tui-input>
-  <div
-    *ngIf="getIsInvalid('email') || unsuccessful"
-    class="error">
+  <div *ngIf="getIsInvalid('email') || unsuccessful" class="error">
     {{ emailError }}
   </div>
 
   <tui-input-password
     class="form__field"
-    [ngClass]="{form__field_invalid : getIsInvalid('password')}"
+    [ngClass]="{ form__field_invalid: getIsInvalid('password') }"
     tuiTextfieldSize="s"
     tuiMode="onDark"
-    formControlName="password">
+    formControlName="password"
+  >
     Password
   </tui-input-password>
-  <div
-    *ngIf="getIsInvalid('password')"
-    class="error">
+  <div *ngIf="getIsInvalid('password')" class="error">
     {{ passwordError }}
   </div>
 
   <tui-input-password
     class="form__field"
-    [ngClass]="{form__field_invalid : getIsInvalid('confirmPassword')}"
+    [ngClass]="{ form__field_invalid: getIsInvalid('confirmPassword') }"
     tuiTextfieldSize="s"
     tuiMode="onDark"
-    formControlName="confirmPassword">
+    formControlName="confirmPassword"
+  >
     Confirm password
   </tui-input-password>
-  <div
-    *ngIf="getIsInvalid('confirmPassword')"
-    class="error">
+  <div *ngIf="getIsInvalid('confirmPassword')" class="error">
     Passwords do not match
   </div>
 
   <div class="form__footer">
     <div>
-      Already have an account?<br/>
-      <a routerLink="/login">
-        Log-In
-      </a>
+      Already have an account?<br />
+      <a routerLink="/login"> Log-In </a>
     </div>
-    
+
     <button
       tuiButton
       type="submit"
       appearance="auth-submit"
-      [disabled]="form.invalid">
+      [disabled]="form.invalid"
+    >
       Sign Up
     </button>
   </div>
-
 </form>

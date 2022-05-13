@@ -1,25 +1,20 @@
 <div class="container">
   <tui-data-list *ngIf="results">
-    <tui-opt-group
-      *ngFor="let movie of results"
-      class="results">
-
+    <tui-opt-group *ngFor="let movie of results" class="results">
       <a
         tuiOption
         class="results__item"
         [routerLink]="['/movie', movie.id]"
-        (click)="select()">
-
-        <img
-          class="results__item__poster"
-          [src]="movie.poster_path">
+        (click)="select()"
+      >
+        <img class="results__item__poster" [src]="movie.poster_path" />
 
         <div class="results__item__info">
           <div class="results__item__info__title tui-text_body-m">
-            {{movie.title}}
+            {{ movie.title }}
           </div>
           <div class="results__item__info__year">
-            {{ movie.release_date | dateStrigify : true }}
+            {{ movie.release_date | dateStrigify: true }}
           </div>
           <div class="results__item__info__overview">
             {{ movie.overview }}

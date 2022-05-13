@@ -1,22 +1,18 @@
-<tui-tabs
-  [(activeItemIndex)]="activeItemIndex"
-  tuiMode="onDark">
-  <button tuiTab tuiMode="onDark">
-    Select List
-  </button>
-  <button tuiTab>
-    Create New
-  </button>
+<tui-tabs [(activeItemIndex)]="activeItemIndex" tuiMode="onDark">
+  <button tuiTab tuiMode="onDark">Select List</button>
+  <button tuiTab>Create New</button>
 </tui-tabs>
 
 <app-add-to-list
   *ngIf="activeItemIndex === 0"
   [movieId]="context.data!"
-  (onReady)="close()">
+  (ready)="close()"
+>
 </app-add-to-list>
 
 <app-create-list
   *ngIf="activeItemIndex === 1"
   [movieId]="context.data!"
-  (onReady)="close()">
+  (ready)="close()"
+>
 </app-create-list>

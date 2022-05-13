@@ -1,19 +1,17 @@
 <div class="container">
-  
-  <tui-svg
-    src="tuiIconSearchLarge"
-    class="icon">
-  </tui-svg>
+  <tui-svg src="tuiIconSearchLarge" class="icon"> </tui-svg>
 
   <input
     tuiTextfield
     type="text"
     placeholder="search movies"
-    [formControl]="search">
+    [formControl]="search"
+  />
 
   <app-search-results
     *ngIf="results$ | async as results"
     [results]="results"
-    (onSelected)="reset()">
+    (selected)="reset()"
+  >
   </app-search-results>
 </div>

@@ -1,11 +1,8 @@
 <div class="container">
-  <div
-    class="header"
-    *tuiLet="authService.loggedInUser$ | async as user">
-
+  <div class="header" *tuiLet="authService.loggedInUser$ | async as user">
     <div class="header-left">
       <a routerLink="">
-        <img class="logo" src="/assets/icons/logo.svg" alt="logo">
+        <img class="logo" src="/assets/icons/logo.svg" alt="logo" />
       </a>
       <div class="header__links">
         <a href="#top" class="tui-text_body-s">Top Rated</a>
@@ -15,31 +12,16 @@
       </div>
     </div>
 
-    <div
-      *ngIf="user !== undefined"
-      class="header-right">
-
+    <div *ngIf="user !== undefined" class="header-right">
       <app-search-bar></app-search-bar>
-      
-      <div
-        *ngIf="user"
-        class="header__user">
+
+      <div *ngIf="user" class="header__user">
         <app-user-preview [user]="user"></app-user-preview>
       </div>
 
-      <div
-        *ngIf="!user"
-        class="header__auth">
-        <a
-          class="header__auth__log-in"
-          routerLink="/signin">
-          Log In
-        </a>
-        <a
-          class="header__auth__sign-up"
-          routerLink="/signup">
-          Sign Up
-        </a>
+      <div *ngIf="!user" class="header__auth">
+        <a class="header__auth__log-in" routerLink="/signin"> Log In </a>
+        <a class="header__auth__sign-up" routerLink="/signup"> Sign Up </a>
       </div>
     </div>
   </div>

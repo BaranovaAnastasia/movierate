@@ -1,35 +1,32 @@
-<div
-  *tuiLet="movieStats$ | async as movieStats"
-  class="container">
-
+<div *tuiLet="movieStats$ | async as movieStats" class="container">
   <app-movie-rating
     [voteAvg]="movieStats?.voteAvg"
-    [voteCount]="movieStats?.voteCount">
+    [voteCount]="movieStats?.voteCount"
+  >
   </app-movie-rating>
 
   <app-movie-rating-form
     [value]="movieStats?.currentRating"
-    (onValueChanges)="postRating($event)">
+    (valueChanges)="postRating($event)"
+  >
   </app-movie-rating-form>
 
-  <app-movie-watched-stats
-    [value]="movieStats?.watched">
+  <app-movie-watched-stats [value]="movieStats?.watched">
   </app-movie-watched-stats>
 
   <div class="break"></div>
 
   <app-movie-watch
     [isWatched]="movieStats?.isWatched"
-    (onWatchedChanges)="watchMovie($event)">
+    (watchedChanges)="watchMovie($event)"
+  >
   </app-movie-watch>
 
   <app-movie-to-favourite
     [isFavourite]="movieStats?.isFavourite"
-    (onFavouriteChanges)="movieToFavourites($event)">
+    (favouriteChanges)="movieToFavourites($event)"
+  >
   </app-movie-to-favourite>
 
-  <app-movie-to-list
-    [movieId]="movieId">
-  </app-movie-to-list>
-
+  <app-movie-to-list [movieId]="movieId"> </app-movie-to-list>
 </div>

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+} from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,7 +14,7 @@ import { MovieService } from 'src/shared/services';
   selector: 'app-movie-trailer',
   templateUrl: './movie-trailer.component.html',
   styleUrls: ['./movie-trailer.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieTrailerComponent implements OnChanges {
   @Input() movieId!: string;
@@ -23,8 +28,8 @@ export class MovieTrailerComponent implements OnChanges {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private movieService: MovieService
-  ) { }
+    private movieService: MovieService,
+  ) {}
 
   ngOnChanges(): void {
     this.trailer$ = this.movieService.getTrailer$(this.movieId);
@@ -33,16 +38,16 @@ export class MovieTrailerComponent implements OnChanges {
       map(trailer => {
         if (!trailer) return undefined;
         return this.sanitizer.bypassSecurityTrustResourceUrl(
-          `http://www.youtube.com/embed/${trailer.key}`
-        )
-      })
+          `http://www.youtube.com/embed/${trailer.key}`,
+        );
+      }),
     );
 
     this.previewUrl$ = this.trailer$.pipe(
       map(trailer => {
         if (!trailer) return undefined;
         return `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`;
-      })
+      }),
     );
 
     this.name$ = this.trailer$.pipe(map(trailer => trailer?.name));
@@ -51,5 +56,4 @@ export class MovieTrailerComponent implements OnChanges {
   showVideo() {
     this.videoShown = true;
   }
-
 }

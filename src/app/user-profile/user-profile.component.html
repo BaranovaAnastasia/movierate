@@ -1,37 +1,25 @@
-<div
-  *ngIf="user$ | async as user"
-  class="container">
+<div *ngIf="user$ | async as user" class="container">
   <div class="main">
-
     <div class="picture-stats-wrapper">
-      <img
-        class="picture"
-        [src]="user.avatar_path">
+      <img class="picture" [src]="user.avatar_path" />
       <div class="name-stats-wrapper">
         <div class="name tui-text_h6">
           {{ user.name }}
         </div>
-        <app-user-statistics
-          [userId]="user.id">
-        </app-user-statistics>
+        <app-user-statistics [userId]="user.id"> </app-user-statistics>
       </div>
     </div>
 
-    <app-user-profile-controls
-      [user]="user">
-    </app-user-profile-controls>
+    <app-user-profile-controls [user]="user"> </app-user-profile-controls>
   </div>
 
-  <div
-    class="list-wrapper"
-    id="favourites">
+  <div class="list-wrapper" id="favourites">
     <app-movies-list
       *ngIf="favourites$ | async as favourites"
-      [list]="favourites">
+      [list]="favourites"
+    >
     </app-movies-list>
   </div>
 
-  <app-user-lists
-    [user]="user">
-  </app-user-lists>
+  <app-user-lists [user]="user"> </app-user-lists>
 </div>

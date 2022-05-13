@@ -4,21 +4,15 @@ import { MovieRatingFormComponent } from './movie-rating-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiRatingModule } from '@taiga-ui/kit';
 
-
-
 @NgModule({
-  declarations: [
-    MovieRatingFormComponent
-  ],
+  declarations: [MovieRatingFormComponent],
   imports: [
     CommonModule,
     FormsModule,
     FormsModule,
     ReactiveFormsModule,
-    TuiRatingModule
+    TuiRatingModule,
   ],
-  exports: [
-    MovieRatingFormComponent
-  ]
+  exports: [MovieRatingFormComponent],
 })
-export class MovieRatingFormModule { }
+export class MovieRatingFormModule {}

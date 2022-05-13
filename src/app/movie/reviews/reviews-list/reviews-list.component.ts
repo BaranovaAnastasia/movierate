@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Review } from 'src/shared/models';
 import { ReviewsService, AuthService } from 'src/shared/services';
@@ -7,9 +12,9 @@ import { ReviewsService, AuthService } from 'src/shared/services';
   selector: 'app-reviews-list',
   templateUrl: './reviews-list.component.html',
   styleUrls: ['./reviews-list.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReviewsListComponent {
+export class ReviewsListComponent implements OnChanges {
   @Input() movieId!: string;
 
   reviews$?: Observable<Review[]>;
@@ -18,8 +23,8 @@ export class ReviewsListComponent {
 
   constructor(
     private reviewsService: ReviewsService,
-    private authService: AuthService
-  ) { }
+    private authService: AuthService,
+  ) {}
 
   ngOnChanges(): void {
     this.expanded = false;
@@ -36,5 +41,4 @@ export class ReviewsListComponent {
     this.expanded = false;
     this.reviews$ = this.reviewsService.postReview(this.movieId!, review);
   }
-
 }

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserStats } from 'src/shared/models';
 import { UserService } from 'src/shared/services';
@@ -7,14 +12,14 @@ import { UserService } from 'src/shared/services';
   selector: 'app-user-main-stats',
   templateUrl: './user-main-stats.component.html',
   styleUrls: ['./user-main-stats.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserMainStatsComponent implements OnChanges {
   @Input() userId!: number;
 
   stats$!: Observable<UserStats>;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnChanges(): void {
     this.stats$ = this.userService.getUserStats$(this.userId);
@@ -23,12 +28,11 @@ export class UserMainStatsComponent implements OnChanges {
   getNextGoal(current: number): number {
     const steps = [0, 10, 50, 100, 500, 1000, 2000, 5000];
     const result = steps.reduce((prev, curr) =>
-      (prev <= current) || (curr - current < prev - current) ? curr : prev
+      prev <= current || curr - current < prev - current ? curr : prev,
     );
     if (result === 0) {
       return Math.ceil(current / 5000) * 5000;
     }
     return result;
   }
-
 }

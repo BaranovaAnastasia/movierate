@@ -4,19 +4,9 @@ import { MovieInfoComponent } from './movie-info.component';
 import { MovieCreditsModule } from '../movie-credits/movie-credits.module';
 import { StringifyPipesModule } from 'src/app/pipes/stringify-pipes.module';
 
-
-
 @NgModule({
-  declarations: [
-    MovieInfoComponent
-  ],
-  imports: [
-    CommonModule,
-    MovieCreditsModule,
-    StringifyPipesModule
-  ],
-  exports: [
-    MovieInfoComponent
-  ]
+  declarations: [MovieInfoComponent],
+  imports: [CommonModule, MovieCreditsModule, StringifyPipesModule],
+  exports: [MovieInfoComponent],
 })
-export class MovieInfoModule { }
+export class MovieInfoModule {}

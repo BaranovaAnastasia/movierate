@@ -1,14 +1,10 @@
-<form
-  class="container"
-  [formGroup]="ratingForm">
-
+<form class="container" [formGroup]="ratingForm">
   <tui-rating
     formControlName="rating"
     iconNormal="/assets/icons/star.svg"
-    iconFilled="/assets/icons/star-filled.svg">
+    iconFilled="/assets/icons/star-filled.svg"
+  >
   </tui-rating>
 
-  <div class="text tui-text_body-s">
-    my rating
-  </div>
+  <div class="text tui-text_body-s">my rating</div>
 </form>

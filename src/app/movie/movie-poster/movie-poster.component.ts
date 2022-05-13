@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'app-movie-poster',
   templateUrl: './movie-poster.component.html',
   styleUrls: ['./movie-poster.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoviePosterComponent {
   @Input() src?: string;
