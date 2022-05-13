@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { IS_ACCESS_TOKEN_REQURED } from 'src/shared/interceptors';
 import { IReviewsApiService } from 'src/shared/interfaces';
 import { Review } from 'src/shared/models';
 
@@ -15,7 +15,8 @@ export class ReviewsApiService implements IReviewsApiService {
 
   getMovieReviews(movieId: string): Observable<Review[]> {
     return this.httpClient.get<Review[]>(
-      `${environment.serverUrl}/review/${movieId}`
+      `${environment.serverUrl}/review/${movieId}`,
+      { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     );
   }
 
@@ -24,7 +25,8 @@ export class ReviewsApiService implements IReviewsApiService {
       `${environment.serverUrl}/review`,
       Object.assign(
         { ...review }, { movie_id: movieId }
-      )
+      ),
+      { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     );
   }
 

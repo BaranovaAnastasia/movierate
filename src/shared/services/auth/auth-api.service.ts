@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { IS_ACCESS_TOKEN_REQURED, IS_REFRESH_TOKEN_REQURED } from 'src/shared/interceptors';
 import { IAuthApiService } from 'src/shared/interfaces';
 import { Tokens, User } from 'src/shared/models';
 
@@ -27,20 +28,23 @@ export class AuthApiService implements IAuthApiService {
   }
 
   logout$(): Observable<void> {
-    return this.httpClient.post<void>(`${environment.serverUrl}/auth/logout`, {});
+    return this.httpClient.post<void>(
+      `${environment.serverUrl}/auth/logout`, {},
+      { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
+    );
   }
 
   refresh$(): Observable<Tokens> {
-    const token = localStorage.getItem('refresh_token');
-
-    return this.httpClient.post<Tokens>(`${environment.serverUrl}/auth/refresh`, {}, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    });
+    return this.httpClient.post<Tokens>(
+      `${environment.serverUrl}/auth/refresh`, {},
+      { context: new HttpContext().set(IS_REFRESH_TOKEN_REQURED, true) }
+    );
   }
 
   getUser$(): Observable<User> {
-    return this.httpClient.post<User>(`${environment.serverUrl}/auth/user`, {});
+    return this.httpClient.post<User>(
+      `${environment.serverUrl}/auth/user`, {},
+      { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
+    );
   }
 }
