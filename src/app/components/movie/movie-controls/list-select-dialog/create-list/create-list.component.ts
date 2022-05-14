@@ -28,7 +28,7 @@ export class CreateListComponent implements OnInit {
 
   unsuccessful: boolean = false;
 
-  constructor(private fb: FormBuilder, private listsService: ListsService) { }
+  constructor(private fb: FormBuilder, private listsService: ListsService) {}
 
   ngOnInit(): void {
     this.form.controls.name.valueChanges.subscribe(
@@ -41,12 +41,14 @@ export class CreateListComponent implements OnInit {
 
     this.listsService
       .createList$(listData.name, listData.visibility === 'public')
-      .pipe(concatMap(list =>
-        this.listsService.addMovieToList$(this.movieId, list.listId!),
-      ))
+      .pipe(
+        concatMap(list =>
+          this.listsService.addMovieToList$(this.movieId, list.listId!),
+        ),
+      )
       .subscribe(
         () => this.ready.emit(),
-        () => { }
+        () => {},
       );
   }
 }

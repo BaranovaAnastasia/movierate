@@ -30,7 +30,7 @@ export class ListEditFormComponent implements OnInit {
     private fb: FormBuilder,
     private listsService: ListsService,
     private readonly alertService: TuiAlertService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.form.patchValue({
@@ -63,7 +63,7 @@ export class ListEditFormComponent implements OnInit {
           this.list.isPublic = newIsPublic;
           this.ready.emit(true);
         },
-        () => { },
+        () => {},
       );
   }
 

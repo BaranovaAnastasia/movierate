@@ -4,7 +4,8 @@ import {
   Input,
   OnChanges,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { MovieStats } from 'src/shared/models';
 import { UserMovieInteractionService } from 'src/shared/services';
 
@@ -28,8 +29,10 @@ export class MovieControlsComponent implements OnChanges {
   }
 
   postRating(value: number) {
-    this.movieStats$ = this.userMovieInteractionService
-      .rateMovie$(this.movieId, value);
+    this.movieStats$ = this.userMovieInteractionService.rateMovie$(
+      this.movieId,
+      value,
+    );
   }
 
   watchMovie(doWatch: boolean): void {

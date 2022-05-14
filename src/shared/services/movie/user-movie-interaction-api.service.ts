@@ -42,7 +42,7 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     );
   }
 
-  rateMovie$(movieId: string, rating: number): Observable<MovieStats> {
+  rateMovie$(movieId: string, rating: number): Observable<MovieStats | undefined> {
     return this.httpClient.post<MovieStats>(
       `${environment.serverUrl}/movie/rate`,
       { movieId: String(movieId), rating },
@@ -50,12 +50,12 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, 'Cannot rate movie.');
-        return throwError(error);
+        return of(undefined);
       })
     );
   }
 
-  watchMovie$(movieId: string): Observable<MovieStats> {
+  watchMovie$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.post<MovieStats>(
       `${environment.serverUrl}/movie/watch`,
       { movieId: String(movieId) },
@@ -63,12 +63,12 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, 'Cannot mark movie as watched.');
-        return throwError(error);
+        return of(undefined);
       })
     );
   }
 
-  unwatchMovie$(movieId: string): Observable<MovieStats> {
+  unwatchMovie$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.post<MovieStats>(
       `${environment.serverUrl}/movie/unwatch`,
       { movieId: String(movieId) },
@@ -76,12 +76,12 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, 'Cannot remove movie from watched.');
-        return throwError(error);
+        return of(undefined);
       })
     );
   }
 
-  addMovieToFavourites$(movieId: string): Observable<MovieStats> {
+  addMovieToFavourites$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.post<MovieStats>(
       `${environment.serverUrl}/favourites`,
       { movieId },
@@ -89,23 +89,23 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, 'Cannot add movie to favourites.');
-        return throwError(error);
+        return of(undefined);
       })
     );
   }
 
-  removeMovieFromFavourites$(movieId: string): Observable<MovieStats> {
+  removeMovieFromFavourites$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.delete<MovieStats>(
       `${environment.serverUrl}/favourites/${movieId}`,
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, 'Cannot remove movie from favourites.');
-        return throwError(error);
+        return of(undefined);
       })
     );
   }
-  
+
   getFavourites$(userId: number): Observable<Movie[]> {
     return this.httpClient.get<Movie[]>(
       `${environment.serverUrl}/favourites/${userId}`,

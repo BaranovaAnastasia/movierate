@@ -10,10 +10,10 @@
           <app-user-statistics [userId]="user.id"> </app-user-statistics>
         </div>
       </div>
-  
+
       <app-user-profile-controls [user]="user"> </app-user-profile-controls>
     </div>
-  
+
     <div class="list-wrapper" id="favourites">
       <app-movies-list
         *ngIf="favourites$ | async as favourites"
@@ -21,7 +21,7 @@
       >
       </app-movies-list>
     </div>
-  
+
     <app-user-lists [user]="user"></app-user-lists>
   </div>
 

@@ -35,7 +35,7 @@ export class SignUpComponent {
 
   signUpErrorMsg?: string;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   get emailError(): string | undefined {
     const email = this.form.controls.email;
@@ -88,8 +88,10 @@ export class SignUpComponent {
       error => {
         this.form.controls.password.reset();
         this.form.controls.confirmPassword.reset();
-        this.signUpErrorMsg = error.error.message ? error.error.message : 'An error occured :(';
-      }
+        this.signUpErrorMsg = error.error.message
+          ? error.error.message
+          : 'An error occured :(';
+      },
     );
   }
 }

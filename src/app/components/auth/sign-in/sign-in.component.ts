@@ -22,12 +22,14 @@ export class SignInComponent {
     const { email, password } = this.form.getRawValue();
     this.authService.signin$(email, password).subscribe(
       () => {
-        this.form.controls.password.reset()
+        this.form.controls.password.reset();
       },
       error => {
-        this.form.controls.password.reset()
-        this.signInErrorMsg = error.error.message ? error.error.message : 'An error occured :(';
-      }
+        this.form.controls.password.reset();
+        this.signInErrorMsg = error.error.message
+          ? error.error.message
+          : 'An error occured :(';
+      },
     );
   }
 

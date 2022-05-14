@@ -28,8 +28,8 @@ export class MoviesListComponent {
 
   constructor(
     private listsService: ListsService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) { }
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   get visibilityText(): string {
     return this.list!.isPublic ? 'Public' : 'Private';
@@ -44,7 +44,9 @@ export class MoviesListComponent {
   }
 
   get displayMovies(): Movie[] {
-    return this.list!.movies!.filter(movie => !this.toDelete.includes(movie.id));
+    return this.list!.movies!.filter(
+      movie => !this.toDelete.includes(movie.id),
+    );
   }
 
   startEditing(): void {
@@ -65,7 +67,8 @@ export class MoviesListComponent {
           this.nowEditing = false;
           this.changeDetectorRef.detectChanges();
         },
-        () => { });
+        () => {},
+      );
 
       return;
     }

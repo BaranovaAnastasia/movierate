@@ -24,7 +24,7 @@ export class UserListsComponent implements OnChanges {
   constructor(
     private listsService: ListsService,
     private changeDetectorRef: ChangeDetectorRef,
-  ) { }
+  ) {}
 
   ngOnChanges(): void {
     this.listsService
@@ -32,7 +32,7 @@ export class UserListsComponent implements OnChanges {
       .pipe(
         concatMap(lists =>
           forkJoin(lists.map(list => this.listsService.getList$(list.listId!))),
-        )
+        ),
       )
       .subscribe(result => {
         this.lists = result;
@@ -48,6 +48,7 @@ export class UserListsComponent implements OnChanges {
         );
         this.changeDetectorRef.detectChanges();
       },
-      () => { });
+      () => {},
+    );
   }
 }

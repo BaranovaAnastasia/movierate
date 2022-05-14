@@ -22,23 +22,23 @@ export class UserMovieInteractionService {
     return this.userMovieInteractionApiService.getStats$(movieId);
   }
 
-  rateMovie$(movieId: string, rating: number): Observable<MovieStats> {
+  rateMovie$(movieId: string, rating: number): Observable<MovieStats | undefined> {
     return this.userMovieInteractionApiService.rateMovie$(movieId, rating);
   }
   
-  watchMovie$(movieId: string): Observable<MovieStats> {
+  watchMovie$(movieId: string): Observable<MovieStats | undefined> {
     return this.userMovieInteractionApiService.watchMovie$(movieId);
   }
 
-  unwatchMovie$(movieId: string): Observable<MovieStats> {
+  unwatchMovie$(movieId: string): Observable<MovieStats | undefined> {
     return this.userMovieInteractionApiService.unwatchMovie$(movieId);
   }
 
-  addMovieToFavourites$(movieId: string): Observable<MovieStats> {
+  addMovieToFavourites$(movieId: string): Observable<MovieStats | undefined> {
     return this.userMovieInteractionApiService.addMovieToFavourites$(movieId);
   }
 
-  removeMovieFromFavourites$(movieId: string): Observable<MovieStats> {
+  removeMovieFromFavourites$(movieId: string): Observable<MovieStats | undefined> {
     return this.userMovieInteractionApiService.removeMovieFromFavourites$(movieId);
   }
 

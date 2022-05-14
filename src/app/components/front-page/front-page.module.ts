@@ -7,12 +7,7 @@ import { TuiLetModule } from '@taiga-ui/cdk';
 
 @NgModule({
   declarations: [FrontPageComponent],
-  imports: [
-    CommonModule,
-    MoviesListModule,
-    LeaderboardModule,
-    TuiLetModule
-  ],
+  imports: [CommonModule, MoviesListModule, LeaderboardModule, TuiLetModule],
   exports: [FrontPageComponent],
 })
 export class FrontPageModule {}

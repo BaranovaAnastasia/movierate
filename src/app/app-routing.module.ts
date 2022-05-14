@@ -10,11 +10,21 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: FrontPageComponent },
-  { path: 'signin', pathMatch: 'full', component: SignInComponent, canActivate: [AuthGuard] },
-  { path: 'signup', pathMatch: 'full', component: SignUpComponent, canActivate: [AuthGuard] },
+  {
+    path: 'signin',
+    pathMatch: 'full',
+    component: SignInComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'signup',
+    pathMatch: 'full',
+    component: SignUpComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'movie/:id', pathMatch: 'full', component: MovieComponent },
   { path: 'user/:id', pathMatch: 'full', component: UserProfileComponent },
-  { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 
 @NgModule({

@@ -28,26 +28,25 @@ export class MovieTrailerComponent implements OnChanges {
 
   constructor(
     private sanitizer: DomSanitizer,
-    private movieService: MovieService
-  ) { }
+    private movieService: MovieService,
+  ) {}
 
   ngOnChanges(): void {
-    this.trailer$ = this.movieService.getTrailer$(this.movieId)
-      .pipe(
-        tap(trailer => {
-          this.safeUrl = trailer
-            ? this.sanitizer.bypassSecurityTrustResourceUrl(
+    this.trailer$ = this.movieService.getTrailer$(this.movieId).pipe(
+      tap(trailer => {
+        this.safeUrl = trailer
+          ? this.sanitizer.bypassSecurityTrustResourceUrl(
               `http://www.youtube.com/embed/${trailer.key}`,
             )
-            : undefined;
+          : undefined;
 
-          this.previewUrl = trailer
-            ? `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`
-            : undefined;
+        this.previewUrl = trailer
+          ? `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`
+          : undefined;
 
-          this.name = trailer?.name
-        })
-      );
+        this.name = trailer?.name;
+      }),
+    );
   }
 
   showVideo() {
