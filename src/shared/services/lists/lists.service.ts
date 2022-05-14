@@ -15,15 +15,15 @@ export class ListsService {
     private userListApiService: IUserListsApiService
   ) { }
 
-  getPopular$(): Observable<MoviesList> {
+  getPopular$(): Observable<MoviesList | undefined> {
     return this.mainListApiService.getPopular$();
   }
 
-  getUpcoming$(): Observable<MoviesList> {
+  getUpcoming$(): Observable<MoviesList | undefined> {
     return this.mainListApiService.getUpcoming$();
   }
 
-  getTopRated$(): Observable<MoviesList> {
+  getTopRated$(): Observable<MoviesList | undefined> {
     return this.mainListApiService.getTopRated$();
   }
 
@@ -36,7 +36,7 @@ export class ListsService {
     return this.userListApiService.getAllUserLists$(userId);
   }
 
-  getList$(listId: number): Observable<MoviesList> {
+  getList$(listId: number): Observable<MoviesList | undefined> {
     return this.userListApiService.getList$(listId);
   }
 
@@ -52,7 +52,7 @@ export class ListsService {
     return this.userListApiService.editList$(listId, listName, isPublic);
   }
 
-  removeMovieFromList$(movieId: string, listId: number): Observable<MoviesList> {
+  removeMovieFromList$(movieId: string, listId: number): Observable<MoviesList | undefined> {
     return this.userListApiService.removeMovieFromList$(movieId, listId);
   }
 

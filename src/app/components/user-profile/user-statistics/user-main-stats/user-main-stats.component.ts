@@ -17,7 +17,7 @@ import { UserService } from 'src/shared/services';
 export class UserMainStatsComponent implements OnChanges {
   @Input() userId!: number;
 
-  stats$!: Observable<UserStats>;
+  stats$!: Observable<UserStats | undefined>;
 
   constructor(private userService: UserService) {}
 

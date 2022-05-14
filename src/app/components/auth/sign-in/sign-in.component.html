@@ -3,7 +3,7 @@
 
   <tui-input
     class="form__email form__field"
-    [ngClass]="{ form__field_invalid: unsuccessful }"
+    [ngClass]="{ form__field_invalid: signInErrorMsg }"
     tuiTextfieldSize="s"
     tuiMode="onDark"
     formControlName="email"
@@ -15,7 +15,7 @@
 
   <tui-input-password
     class="form__password form__field"
-    [ngClass]="{ form__field_invalid: unsuccessful }"
+    [ngClass]="{ form__field_invalid: signInErrorMsg }"
     tuiTextfieldSize="s"
     tuiMode="onDark"
     formControlName="password"
@@ -24,7 +24,7 @@
     <input tuiTextfield (focus)="focus()" />
   </tui-input-password>
 
-  <div *ngIf="unsuccessful" class="error">Invalid email or password</div>
+  <div *ngIf="signInErrorMsg" class="error">{{ signInErrorMsg }}</div>
 
   <div class="form__footer">
     <div>

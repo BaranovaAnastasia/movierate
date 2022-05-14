@@ -9,8 +9,8 @@ import { UserTopOption } from "../models/user/user-top-option";
 export const IUserApiServiceToken = new InjectionToken('IUserApiService');
 
 export interface IUserApiService {
-  getUserById$(id: number): Observable<User>;
-  getUserStats$(id: number): Observable<UserStats>;
+  getUserById$(id: number): Observable<User | undefined>;
+  getUserStats$(id: number): Observable<UserStats | undefined>;
   getUserGenresStats$(id: number): Observable<UserGenresStats[]>;
   getUserTop$(top: UserTopOption, limit: number): Observable<UserTopEntry[]>;
 }

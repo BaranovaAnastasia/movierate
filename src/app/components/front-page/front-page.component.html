@@ -1,19 +1,25 @@
-<div class="container">
+<div
+  class="container"
+  *tuiLet="highestRanked$ | async as highestRanked">
   <div
-    *ngIf="highestRanked$ | async as highestRanked"
+    *ngIf="highestRanked !== null"
     id="top"
     class="list-wrapper"
   >
     <app-movies-list [list]="highestRanked"></app-movies-list>
 
-    <div *ngIf="popular$ | async as popular" id="popular" class="list-wrapper">
-      <app-movies-list [list]="popular"></app-movies-list>
-
-      <div *ngIf="upcoming$ | async as upcoming" id="soon" class="list-wrapper">
-        <app-movies-list [list]="upcoming"></app-movies-list>
-
-        <div id="leaderboard">
-          <app-leaderboard></app-leaderboard>
+    <div *tuiLet="popular$ | async as popular">
+      <div *ngIf="popular !== null" id="popular" class="list-wrapper">
+        <app-movies-list [list]="popular"></app-movies-list>
+  
+        <div *tuiLet="upcoming$ | async as upcoming">
+          <div *ngIf="upcoming !== null" id="soon" class="list-wrapper">
+            <app-movies-list [list]="upcoming"></app-movies-list>
+    
+            <div id="leaderboard">
+              <app-leaderboard></app-leaderboard>
+            </div>
+          </div>
         </div>
       </div>
     </div>

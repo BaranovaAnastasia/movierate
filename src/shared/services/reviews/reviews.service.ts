@@ -13,11 +13,11 @@ export class ReviewsService {
     private reviewsApiService: IReviewsApiService
   ) { }
 
-  getMovieReviews(movieId: string): Observable<Review[]> {
-    return this.reviewsApiService.getMovieReviews(movieId);
+  getMovieReviews$(movieId: string): Observable<Review[]> {
+    return this.reviewsApiService.getMovieReviews$(movieId);
   }
 
-  postReview(movieId: string, review: Review): Observable<Review[]> {
-    return this.reviewsApiService.postReview(movieId, review);
+  postReview$(movieId: string, review: Review): Observable<Review[]> {
+    return this.reviewsApiService.postReview$(movieId, review);
   }
 }

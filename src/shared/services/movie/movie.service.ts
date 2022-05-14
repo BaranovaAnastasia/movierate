@@ -15,7 +15,7 @@ export class MovieService {
     private userMovieService: IUserMovieInteractionApiService
   ) { }
 
-  getMovie$(id: string): Observable<Movie> {
+  getMovie$(id: string): Observable<Movie | undefined> {
     return this.movieApiService.getMovie$(id);
   }
 
@@ -23,11 +23,11 @@ export class MovieService {
     return this.movieApiService.getTrailer$(id);
   }
 
-  getCredits$(id: string): Observable<Credits> {
+  getCredits$(id: string): Observable<Credits | undefined> {
     return this.movieApiService.getCredits$(id);
   }
 
-  getStats$(id: string): Observable<MovieStats> {
+  getStats$(id: string): Observable<MovieStats | undefined> {
     return this.userMovieService.getStats$(id);
   }
 

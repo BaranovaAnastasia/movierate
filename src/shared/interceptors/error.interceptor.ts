@@ -1,8 +1,11 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpContextToken, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, concatMap } from "rxjs/operators";
 import { AuthService, NavigationService } from "../services";
+import { IS_REFRESH_TOKEN_REQURED } from "./auth.interceptor";
+
+export const IS_API_REQUEST = new HttpContextToken<boolean>(() => false);
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -12,9 +15,11 @@ export class ErrorInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
+    if (req.context.get(IS_API_REQUEST)) return next.handle(req);
+
     const rt = localStorage.getItem('refresh_token');
 
-    if (req.url.includes('refresh') || !rt) {
+    if (req.context.get(IS_REFRESH_TOKEN_REQURED) || !rt) {
       return next.handle(req)
         .pipe(
           catchError((error: HttpErrorResponse) => {

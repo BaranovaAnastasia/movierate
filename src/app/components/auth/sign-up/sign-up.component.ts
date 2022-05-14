@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -18,7 +18,7 @@ function isInvalid(control: AbstractControl): boolean {
   styleUrls: ['./sign-up.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
   form = this.fb.group({
     name: [null, Validators.required],
     email: [null, [Validators.required, Validators.email]],
@@ -33,15 +33,9 @@ export class SignUpComponent implements OnInit {
     confirmPassword: [null, [Validators.required, this.checkPasswords()]],
   });
 
-  unsuccessful: boolean = false;
+  signUpErrorMsg?: string;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.form.controls.email.valueChanges.subscribe(
-      () => (this.unsuccessful = false),
-    );
-  }
+  constructor(private fb: FormBuilder, private authService: AuthService) { }
 
   get emailError(): string | undefined {
     const email = this.form.controls.email;
@@ -51,9 +45,6 @@ export class SignUpComponent implements OnInit {
     }
     if (email?.errors?.['email']) {
       return 'Invalid email address format';
-    }
-    if (this.unsuccessful) {
-      return 'The email address is already in use';
     }
     return undefined;
   }
@@ -94,7 +85,11 @@ export class SignUpComponent implements OnInit {
         this.form.controls.password.reset();
         this.form.controls.confirmPassword.reset();
       },
-      () => (this.unsuccessful = true),
+      error => {
+        this.form.controls.password.reset();
+        this.form.controls.confirmPassword.reset();
+        this.signUpErrorMsg = error.error.message ? error.error.message : 'An error occured :(';
+      }
     );
   }
 }

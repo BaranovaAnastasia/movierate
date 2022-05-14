@@ -5,8 +5,8 @@ import {
   OnChanges,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Trailer } from 'src/shared/models';
 import { MovieService } from 'src/shared/services';
 
@@ -20,37 +20,34 @@ export class MovieTrailerComponent implements OnChanges {
   @Input() movieId!: string;
 
   trailer$?: Observable<Trailer | undefined>;
-  safeUrl$?: Observable<SafeResourceUrl | undefined>;
-  previewUrl$?: Observable<string | undefined>;
-  name$?: Observable<string | undefined>;
+  safeUrl?: SafeResourceUrl | undefined;
+  previewUrl?: string | undefined;
+  name?: string | undefined;
 
   videoShown: boolean = false;
 
   constructor(
     private sanitizer: DomSanitizer,
-    private movieService: MovieService,
-  ) {}
+    private movieService: MovieService
+  ) { }
 
   ngOnChanges(): void {
-    this.trailer$ = this.movieService.getTrailer$(this.movieId);
+    this.trailer$ = this.movieService.getTrailer$(this.movieId)
+      .pipe(
+        tap(trailer => {
+          this.safeUrl = trailer
+            ? this.sanitizer.bypassSecurityTrustResourceUrl(
+              `http://www.youtube.com/embed/${trailer.key}`,
+            )
+            : undefined;
 
-    this.safeUrl$ = this.trailer$.pipe(
-      map(trailer => {
-        if (!trailer) return undefined;
-        return this.sanitizer.bypassSecurityTrustResourceUrl(
-          `http://www.youtube.com/embed/${trailer.key}`,
-        );
-      }),
-    );
+          this.previewUrl = trailer
+            ? `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`
+            : undefined;
 
-    this.previewUrl$ = this.trailer$.pipe(
-      map(trailer => {
-        if (!trailer) return undefined;
-        return `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`;
-      }),
-    );
-
-    this.name$ = this.trailer$.pipe(map(trailer => trailer?.name));
+          this.name = trailer?.name
+        })
+      );
   }
 
   showVideo() {

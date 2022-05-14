@@ -29,14 +29,14 @@ export class ReviewFormComponent implements OnChanges {
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
     private fb: FormBuilder,
-  ) {}
+  ) { }
 
   ngOnChanges(): void {
     this.form.reset();
     this.userMovieInteractionService
       .getRating$(this.movieId!)
       .subscribe(rating =>
-        this.form.patchValue({ rating: rating / 2 }, { emitEvent: false }),
+        this.form.patchValue({ rating: rating! / 2 }, { emitEvent: false })
       );
   }
 

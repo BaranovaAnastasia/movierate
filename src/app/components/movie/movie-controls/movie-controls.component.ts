@@ -17,21 +17,19 @@ import { UserMovieInteractionService } from 'src/shared/services';
 export class MovieControlsComponent implements OnChanges {
   @Input() movieId!: string;
 
-  movieStats$!: Observable<MovieStats>;
+  movieStats$!: Observable<MovieStats | undefined>;
 
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
-  ) {}
+  ) { }
 
   ngOnChanges(): void {
     this.movieStats$ = this.userMovieInteractionService.getStats$(this.movieId);
   }
 
   postRating(value: number) {
-    this.movieStats$ = this.userMovieInteractionService.rateMovie$(
-      this.movieId,
-      value,
-    );
+    this.movieStats$ = this.userMovieInteractionService
+      .rateMovie$(this.movieId, value);
   }
 
   watchMovie(doWatch: boolean): void {

@@ -17,7 +17,7 @@ import { MovieService } from 'src/shared/services';
 export class MovieCreditsComponent implements OnChanges {
   @Input() movieId!: string;
 
-  credits$?: Observable<Credits>;
+  credits$?: Observable<Credits | undefined>;
 
   constructor(private movieService: MovieService) {}
 

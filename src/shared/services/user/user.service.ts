@@ -13,11 +13,11 @@ export class UserService {
     private userApiService: IUserApiService
   ) {}
 
-  getUserById$(id: number): Observable<User> {
+  getUserById$(id: number): Observable<User | undefined> {
     return this.userApiService.getUserById$(id);
   }
 
-  getUserStats$(id: number): Observable<UserStats> {
+  getUserStats$(id: number): Observable<UserStats | undefined> {
     return this.userApiService.getUserStats$(id);
   }
 

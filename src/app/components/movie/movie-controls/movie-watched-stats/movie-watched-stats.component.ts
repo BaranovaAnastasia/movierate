@@ -20,5 +20,7 @@ export class MovieWatchedStatsComponent implements OnChanges {
       typeof changes.value.currentValue === 'number'
         ? changes.value.currentValue
         : changes.value.previousValue;
+
+    this.value = this.value ? this.value : 0;
   }
 }

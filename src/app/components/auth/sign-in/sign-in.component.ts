@@ -14,19 +14,24 @@ export class SignInComponent {
     password: [null, Validators.required],
   });
 
-  unsuccessful: boolean = false;
+  signInErrorMsg?: string;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   signin(): void {
     const { email, password } = this.form.getRawValue();
     this.authService.signin$(email, password).subscribe(
-      () => this.form.controls.password.reset(),
-      () => (this.unsuccessful = true),
+      () => {
+        this.form.controls.password.reset()
+      },
+      error => {
+        this.form.controls.password.reset()
+        this.signInErrorMsg = error.error.message ? error.error.message : 'An error occured :(';
+      }
     );
   }
 
   focus(): void {
-    this.unsuccessful = false;
+    this.signInErrorMsg = undefined;
   }
 }

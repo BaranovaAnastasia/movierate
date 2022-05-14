@@ -1,6 +1,6 @@
 <div *tuiLet="trailer$ | async as trailer" class="container">
   <div *ngIf="!videoShown" class="preview">
-    <div *tuiLet="previewUrl$ | async as previewUrl" class="preview-warpper">
+    <div class="preview-warpper">
       <img *ngIf="previewUrl" class="preview__image" [src]="previewUrl" />
 
       <div class="preview__black-screen">
@@ -10,7 +10,7 @@
           </button>
 
           <div>
-            <div *ngIf="name$ | async as name" class="preview__name">
+            <div *ngIf="name" class="preview__name">
               {{ name }}
             </div>
             <div class="preview__text">Watch the Trailer</div>
@@ -26,7 +26,7 @@
 
   <div *ngIf="videoShown" class="trailer-wrapper">
     <iframe
-      *ngIf="safeUrl$ | async as safeUrl"
+      *ngIf="safeUrl"
       class="trailer"
       [src]="safeUrl"
       frameborder="0"

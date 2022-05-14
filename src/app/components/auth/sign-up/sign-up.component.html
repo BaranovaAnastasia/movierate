@@ -14,14 +14,14 @@
 
   <tui-input
     class="form__field"
-    [ngClass]="{ form__field_invalid: getIsInvalid('email') || unsuccessful }"
+    [ngClass]="{ form__field_invalid: getIsInvalid('email') }"
     tuiTextfieldSize="s"
     tuiMode="onDark"
     formControlName="email"
   >
     Email
   </tui-input>
-  <div *ngIf="getIsInvalid('email') || unsuccessful" class="error">
+  <div *ngIf="getIsInvalid('email')" class="error">
     {{ emailError }}
   </div>
 
@@ -49,6 +49,10 @@
   </tui-input-password>
   <div *ngIf="getIsInvalid('confirmPassword')" class="error">
     Passwords do not match
+  </div>
+
+  <div *ngIf="signUpErrorMsg" class="signup-error">
+    {{ signUpErrorMsg }}
   </div>
 
   <div class="form__footer">

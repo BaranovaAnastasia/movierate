@@ -9,12 +9,12 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: 'signin', component: SignInComponent, canActivate: [AuthGuard] },
-  { path: 'signup', component: SignUpComponent, canActivate: [AuthGuard] },
-  { path: 'movie/:id', component: MovieComponent },
-  { path: 'user/:id', component: UserProfileComponent },
-  { path: '', component: FrontPageComponent },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '', pathMatch: 'full', component: FrontPageComponent },
+  { path: 'signin', pathMatch: 'full', component: SignInComponent, canActivate: [AuthGuard] },
+  { path: 'signup', pathMatch: 'full', component: SignUpComponent, canActivate: [AuthGuard] },
+  { path: 'movie/:id', pathMatch: 'full', component: MovieComponent },
+  { path: 'user/:id', pathMatch: 'full', component: UserProfileComponent },
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent }
 ];
 
 @NgModule({

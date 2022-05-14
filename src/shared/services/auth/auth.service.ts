@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { concatMap, map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { catchError, concatMap, map, tap } from 'rxjs/operators';
 import { IAuthApiService, IAuthApiServiceToken } from 'src/shared/interfaces';
 import { Tokens, User } from 'src/shared/models';
 import { NavigationService } from '..';
+import { ErrorService } from '../error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthService {
 
   constructor(
     @Inject(IAuthApiServiceToken) private authApiService: IAuthApiService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private errorService: ErrorService
   ) { }
 
   private set loggedInUser(user: User | null | undefined) {
@@ -45,7 +47,12 @@ export class AuthService {
         this.loggedInUser = user;
         this.navigationService.toMain();
       }),
-      map(() => { })
+      map(() => { }),
+
+      catchError(error => {
+        this.errorService.showError(error, 'Cannot sign in.');
+        return throwError(error);
+      })
     );
   }
 
@@ -57,24 +64,29 @@ export class AuthService {
         this.loggedInUser = user;
         this.navigationService.toMain();
       }),
-      map(() => { })
+      map(() => { }),
+
+      catchError(error => {
+        this.errorService.showError(error, 'Cannot sign up.');
+        return throwError(error);
+      })
     );
   }
 
   logout$(): Observable<void> {
     return this.authApiService.logout$().pipe(
-      tap(() => {
-        this.loggedInUser = null;
-        this.navigationService.toMain();
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+      tap(() => this.logout()),
+      catchError(error => {
+        this.errorService.showError(error, 'Cannot logout.');
+        return of(void 0);
       })
     );
   }
 
-  refresh$(): Observable<Tokens> {
+  refresh$(): Observable<Tokens | undefined> {
     return this.authApiService.refresh$().pipe(
-      tap(tokens => AuthService.tokens = tokens)
+      tap(tokens => AuthService.tokens = tokens),
+      catchError(() => of(undefined))
     )
   }
 
@@ -84,6 +96,13 @@ export class AuthService {
       this.navigationService.toSignIn();
     }
     return isLoggedIn;
+  }
+
+  private logout(): void {
+    this.loggedInUser = null;
+    this.navigationService.toMain();
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
   }
 
   private static set tokens(tokens: Tokens) {

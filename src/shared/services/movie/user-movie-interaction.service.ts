@@ -14,11 +14,11 @@ export class UserMovieInteractionService {
     private userMovieInteractionApiService: IUserMovieInteractionApiService,
   ) { }
 
-  getRating$(movieId: string): Observable<number> {
+  getRating$(movieId: string): Observable<number | undefined> {
     return this.userMovieInteractionApiService.getRating$(movieId);
   }
 
-  getStats$(movieId: string): Observable<MovieStats> {
+  getStats$(movieId: string): Observable<MovieStats | undefined> {
     return this.userMovieInteractionApiService.getStats$(movieId);
   }
 

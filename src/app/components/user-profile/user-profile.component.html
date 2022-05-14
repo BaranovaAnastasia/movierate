@@ -1,25 +1,29 @@
-<div *ngIf="user$ | async as user" class="container">
-  <div class="main">
-    <div class="picture-stats-wrapper">
-      <img class="picture" [src]="user.avatar_path" />
-      <div class="name-stats-wrapper">
-        <div class="name tui-text_h6">
-          {{ user.name }}
+<div *tuiLet="user$ | async as user" class="container">
+  <div *ngIf="user" class="wrapper">
+    <div class="main">
+      <div class="picture-stats-wrapper">
+        <img class="picture" [src]="user.avatar_path" />
+        <div class="name-stats-wrapper">
+          <div class="name tui-text_h6">
+            {{ user.name }}
+          </div>
+          <app-user-statistics [userId]="user.id"> </app-user-statistics>
         </div>
-        <app-user-statistics [userId]="user.id"> </app-user-statistics>
       </div>
+  
+      <app-user-profile-controls [user]="user"> </app-user-profile-controls>
     </div>
-
-    <app-user-profile-controls [user]="user"> </app-user-profile-controls>
+  
+    <div class="list-wrapper" id="favourites">
+      <app-movies-list
+        *ngIf="favourites$ | async as favourites"
+        [list]="favourites"
+      >
+      </app-movies-list>
+    </div>
+  
+    <app-user-lists [user]="user"></app-user-lists>
   </div>
 
-  <div class="list-wrapper" id="favourites">
-    <app-movies-list
-      *ngIf="favourites$ | async as favourites"
-      [list]="favourites"
-    >
-    </app-movies-list>
-  </div>
-
-  <app-user-lists [user]="user"> </app-user-lists>
+  <div *ngIf="!user" class="not-found tui-text_body-xl">User Not Found</div>
 </div>

@@ -28,7 +28,7 @@ export class ReviewsListComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.expanded = false;
-    this.reviews$ = this.reviewsService.getMovieReviews(this.movieId);
+    this.reviews$ = this.reviewsService.getMovieReviews$(this.movieId);
   }
 
   getAuthor(review: Review): User {
@@ -48,6 +48,6 @@ export class ReviewsListComponent implements OnChanges {
 
   postReview(review: Review): void {
     this.expanded = false;
-    this.reviews$ = this.reviewsService.postReview(this.movieId!, review);
+    this.reviews$ = this.reviewsService.postReview$(this.movieId!, review);
   }
 }
