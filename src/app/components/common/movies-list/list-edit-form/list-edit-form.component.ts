@@ -28,10 +28,7 @@ export class ListEditFormComponent implements OnInit {
 
   visibility = [VISIBILITY_PUBLIC, VISIBILITY_PRIVATE];
 
-  constructor(
-    private fb: FormBuilder,
-    private listsService: ListsService
-  ) {}
+  constructor(private fb: FormBuilder, private listsService: ListsService) {}
 
   ngOnInit(): void {
     this.form.patchValue({

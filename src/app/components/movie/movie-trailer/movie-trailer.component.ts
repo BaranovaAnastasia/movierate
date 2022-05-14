@@ -9,7 +9,11 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Trailer } from 'src/shared/models';
 import { MovieService } from 'src/shared/services';
-import { TRAILER_PREVIEW_QUALITY_URL, TRAILER_PREVIEW_URL, TRAILER_URL } from './constants';
+import {
+  TRAILER_PREVIEW_QUALITY_URL,
+  TRAILER_PREVIEW_URL,
+  TRAILER_URL,
+} from './constants';
 
 @Component({
   selector: 'app-movie-trailer',

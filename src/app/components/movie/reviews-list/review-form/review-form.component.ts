@@ -23,20 +23,20 @@ export class ReviewFormComponent implements OnChanges {
 
   form = this.fb.group({
     rating: [null, Validators.required],
-    title: [null, [
-      Validators.required,
-      Validators.minLength(REVIEW_TITLE_MIN_LENGTH)]
+    title: [
+      null,
+      [Validators.required, Validators.minLength(REVIEW_TITLE_MIN_LENGTH)],
     ],
-    review: [null, [
-      Validators.required,
-      Validators.minLength(REVIEW_MIN_LENGTH)]
+    review: [
+      null,
+      [Validators.required, Validators.minLength(REVIEW_MIN_LENGTH)],
     ],
   });
 
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
     private fb: FormBuilder,
-  ) { }
+  ) {}
 
   ngOnChanges(): void {
     this.form.reset();

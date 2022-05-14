@@ -7,7 +7,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from 'src/shared/services';
-import { DEFAULT_ERROR_MSG, EMAIL_FORMAT_MSG, EMAIL_REQUIRED_MSG, PASSWORD_FORMAT_MSG, PASSWORD_LENGTH_MSG, PASSWORD_REGEXP, PASSWORD_REQUIRED_MSG } from '../constants';
+import {
+  DEFAULT_ERROR_MSG,
+  EMAIL_FORMAT_MSG,
+  EMAIL_REQUIRED_MSG,
+  PASSWORD_FORMAT_MSG,
+  PASSWORD_LENGTH_MSG,
+  PASSWORD_REGEXP,
+  PASSWORD_REQUIRED_MSG,
+} from '../constants';
 
 function isInvalid(control: AbstractControl): boolean {
   return control.invalid && control.touched;
