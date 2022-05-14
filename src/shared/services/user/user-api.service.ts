@@ -7,6 +7,8 @@ import { IS_ACCESS_TOKEN_REQURED } from 'src/shared/interceptors';
 import { IUserApiService } from 'src/shared/interfaces';
 import { User, UserGenresStats, UserStats, UserTopEntry, UserTopOption } from 'src/shared/models';
 import { ErrorService } from '../error.service';
+import { constructRequestUrl } from '../functions';
+import { USER_ERROR_MSG, USER_GENRES_ERROR_MSG, USER_GENRES_PATH, USER_PATH, USER_STATS_ERROR_MSG, USER_STATS_PATH, USER_TOP_ERROR_MSG, USER_TOP_PATH } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +22,15 @@ export class UserApiService implements IUserApiService {
 
   getUserById$(id: number): Observable<User | undefined> {
     return this.httpClient.get<User>(
-      `${environment.serverUrl}/user/${id}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        USER_PATH,
+        `/${id}`
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get user.');
+        this.errorService.showError(error, USER_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -32,10 +38,14 @@ export class UserApiService implements IUserApiService {
 
   getUserStats$(id: number): Observable<UserStats | undefined> {
     return this.httpClient.get<UserStats>(
-      `${environment.serverUrl}/user/stats/${id}`
+      constructRequestUrl(
+        environment.serverUrl,
+        USER_STATS_PATH,
+        `/${id}`
+      ),
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get user statistics.');
+        this.errorService.showError(error, USER_STATS_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -43,10 +53,14 @@ export class UserApiService implements IUserApiService {
 
   getUserGenresStats$(id: number): Observable<UserGenresStats[]> {
     return this.httpClient.get<UserGenresStats[]>(
-      `${environment.serverUrl}/user/genres/${id}`
+      constructRequestUrl(
+        environment.serverUrl,
+        USER_GENRES_PATH,
+        `/${id}`
+      ),
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get user statistics.');
+        this.errorService.showError(error, USER_GENRES_ERROR_MSG);
         return of([]);
       })
     );
@@ -54,10 +68,18 @@ export class UserApiService implements IUserApiService {
 
   getUserTop$(top: UserTopOption, limit: number): Observable<UserTopEntry[]> {
     return this.httpClient.get<UserTopEntry[]>(
-      `${environment.serverUrl}/user/top?by=${top}&limit=${limit}`
+      constructRequestUrl(
+        environment.serverUrl,
+        USER_TOP_PATH,
+        undefined,
+        {
+          'by': top,
+          'limit': limit
+        }
+      ),
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get user top.');
+        this.errorService.showError(error, USER_TOP_ERROR_MSG);
         return of([]);
       })
     );

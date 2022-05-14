@@ -7,9 +7,9 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { of } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 import { ListsService } from 'src/shared/services';
+import { VISIBILITY_PRIVATE, VISIBILITY_PUBLIC } from '../../constants';
 
 @Component({
   selector: 'app-create-list',
@@ -23,8 +23,10 @@ export class CreateListComponent implements OnInit {
 
   form = this.fb.group({
     name: [null, Validators.required],
-    visibility: ['public', Validators.required],
+    visibility: [VISIBILITY_PUBLIC, Validators.required],
   });
+
+  visibility = [VISIBILITY_PUBLIC, VISIBILITY_PRIVATE];
 
   unsuccessful: boolean = false;
 
@@ -40,7 +42,7 @@ export class CreateListComponent implements OnInit {
     const listData = this.form.getRawValue();
 
     this.listsService
-      .createList$(listData.name, listData.visibility === 'public')
+      .createList$(listData.name, listData.visibility === VISIBILITY_PUBLIC)
       .pipe(
         concatMap(list =>
           this.listsService.addMovieToList$(this.movieId, list.listId!),

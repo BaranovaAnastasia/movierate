@@ -9,6 +9,7 @@ import {
 import { FormBuilder, Validators } from '@angular/forms';
 import { Review } from 'src/shared/models';
 import { UserMovieInteractionService } from 'src/shared/services';
+import { REVIEW_MIN_LENGTH, REVIEW_TITLE_MIN_LENGTH } from '../constants';
 
 @Component({
   selector: 'app-review-form',
@@ -22,14 +23,20 @@ export class ReviewFormComponent implements OnChanges {
 
   form = this.fb.group({
     rating: [null, Validators.required],
-    title: [null, [Validators.required, Validators.minLength(3)]],
-    review: [null, [Validators.required, Validators.minLength(20)]],
+    title: [null, [
+      Validators.required,
+      Validators.minLength(REVIEW_TITLE_MIN_LENGTH)]
+    ],
+    review: [null, [
+      Validators.required,
+      Validators.minLength(REVIEW_MIN_LENGTH)]
+    ],
   });
 
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
     private fb: FormBuilder,
-  ) {}
+  ) { }
 
   ngOnChanges(): void {
     this.form.reset();

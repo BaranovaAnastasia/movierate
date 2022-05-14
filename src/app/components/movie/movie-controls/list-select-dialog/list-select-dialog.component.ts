@@ -1,6 +1,5 @@
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 import { TuiDialogContext } from '@taiga-ui/core';
 
 @Component({
@@ -12,13 +11,7 @@ import { TuiDialogContext } from '@taiga-ui/core';
 export class ListSelectDialogComponent {
   activeItemIndex = 0;
 
-  form = this.fb.group({
-    name: [null, Validators.required],
-    visibility: ['Public', Validators.required],
-  });
-
   constructor(
-    private fb: FormBuilder,
     @Inject(POLYMORPHEUS_CONTEXT) readonly context: TuiDialogContext<boolean>,
   ) {}
 

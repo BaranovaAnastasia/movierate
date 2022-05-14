@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { UserTopEntry, UserTopOption } from 'src/shared/models';
+import { TOP_BY_MOVIES_TITLE, TOP_BY_REVIEWS_TITLE, TOP_BY_TIME_TITLE } from './constants';
 
 @Component({
   selector: 'app-user-top',
@@ -14,11 +15,11 @@ export class UserTopComponent {
   get topTitle() {
     switch (this.topOption) {
       case 'movies':
-        return 'Watched the most movies';
+        return TOP_BY_MOVIES_TITLE;
       case 'minutes':
-        return 'Spent the most time';
+        return TOP_BY_TIME_TITLE;
       case 'reviews':
-        return 'Wrote the most reviews';
+        return TOP_BY_REVIEWS_TITLE;
     }
   }
 }

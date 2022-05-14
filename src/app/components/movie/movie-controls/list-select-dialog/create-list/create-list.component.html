@@ -6,21 +6,21 @@
     <tui-radio-block
       contentAlign="right"
       formControlName="visibility"
-      item="public"
+      [item]="visibility[0]"
       size="m"
       tuiMode="onDark"
     >
-      Public
+      {{ visibility[0] }}
     </tui-radio-block>
 
     <tui-radio-block
       contentAlign="right"
       formControlName="visibility"
-      item="private"
+      [item]="visibility[1]"
       size="m"
       tuiMode="onDark"
     >
-      Private
+      {{ visibility[1] }}
     </tui-radio-block>
   </div>
 

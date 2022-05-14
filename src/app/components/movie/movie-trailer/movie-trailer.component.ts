@@ -5,10 +5,11 @@ import {
   OnChanges,
 } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Trailer } from 'src/shared/models';
 import { MovieService } from 'src/shared/services';
+import { TRAILER_PREVIEW_QUALITY_URL, TRAILER_PREVIEW_URL, TRAILER_URL } from './constants';
 
 @Component({
   selector: 'app-movie-trailer',
@@ -36,12 +37,12 @@ export class MovieTrailerComponent implements OnChanges {
       tap(trailer => {
         this.safeUrl = trailer
           ? this.sanitizer.bypassSecurityTrustResourceUrl(
-              `http://www.youtube.com/embed/${trailer.key}`,
+              `${TRAILER_URL}${trailer.key}`,
             )
           : undefined;
 
         this.previewUrl = trailer
-          ? `https://img.youtube.com/vi/${trailer.key}/maxresdefault.jpg`
+          ? `${TRAILER_PREVIEW_URL}${trailer.key}${TRAILER_PREVIEW_QUALITY_URL}`
           : undefined;
 
         this.name = trailer?.name;

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { User } from 'src/shared/models';
 import { AuthService } from 'src/shared/services';
+import { FOLLOW, UNFOLLOW } from '../constants';
 
 @Component({
   selector: 'app-user-profile-controls',
@@ -18,7 +19,7 @@ export class UserProfileControlsComponent {
   }
 
   get followText(): string {
-    return this.isFollowing ? 'Unfollow' : 'Follow';
+    return this.isFollowing ? UNFOLLOW : FOLLOW;
   }
 
   logout() {

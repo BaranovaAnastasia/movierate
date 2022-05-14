@@ -6,7 +6,7 @@ import {
   OnChanges,
 } from '@angular/core';
 import { forkJoin } from 'rxjs';
-import { concatMap, filter, map } from 'rxjs/operators';
+import { concatMap } from 'rxjs/operators';
 import { MoviesList, User } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
 

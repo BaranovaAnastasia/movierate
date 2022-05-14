@@ -7,6 +7,8 @@ import { IS_API_REQUEST } from 'src/shared/interceptors';
 import { IMainListsApiService } from 'src/shared/interfaces';
 import { Movie, MoviesList, TMDBMoviesList } from 'src/shared/models';
 import { ErrorService } from '../error.service';
+import { constructRequestUrl } from '../functions';
+import { POPULAR_ERROR_MSG, POPULAR_PATH, POPULAR_TITLE, TOP_ERROR_MSG, TOP_PATH, TOP_TITLE, UPCOMING_ERROR_MSG, UPCOMING_PATH, UPCOMING_TITLE } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +22,18 @@ export class MainListsApiService implements IMainListsApiService {
 
   getPopular$(): Observable<MoviesList | undefined> {
     return this.httpClient.get<TMDBMoviesList>(
-      `${environment.tmdbApiUrl}/movie/popular?api_key=${environment.tmdbApiKey}`,
+      constructRequestUrl(
+        environment.tmdbApiUrl,
+        POPULAR_PATH,
+        undefined,
+        { 'api_key': environment.tmdbApiKey }
+      ),
       { context: new HttpContext().set(IS_API_REQUEST, true) }
     ).pipe(
-      map(result => this.tmdbList2List(result, 'Popular')),
+      map(result => this.tmdbList2List(result, POPULAR_TITLE)),
 
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get popular movies.');
+        this.errorService.showError(error, POPULAR_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -37,14 +44,22 @@ export class MainListsApiService implements IMainListsApiService {
     const todayReq = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 
     return this.httpClient.get<TMDBMoviesList>(
-      `${environment.tmdbApiUrl}/discover/movie?api_key=${environment.tmdbApiKey}&primary_release_date.gte=${todayReq}`,
+      constructRequestUrl(
+        environment.tmdbApiUrl,
+        UPCOMING_PATH,
+        undefined,
+        {
+          'api_key': environment.tmdbApiKey,
+          'primary_release_date.gte': todayReq
+        }
+      ),
       { context: new HttpContext().set(IS_API_REQUEST, true) }
     ).pipe(
-      map(result => this.tmdbList2List(result, 'Coming Soon')),
+      map(result => this.tmdbList2List(result, UPCOMING_TITLE)),
       map(result => this.sortMoviesByDate(result)),
 
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get upcoming movies.');
+        this.errorService.showError(error, UPCOMING_ERROR_MSG);
         return of(undefined);
       })
     )
@@ -52,12 +67,15 @@ export class MainListsApiService implements IMainListsApiService {
 
   getTopRated$(): Observable<MoviesList | undefined> {
     return this.httpClient.get<Movie[]>(
-      `${environment.serverUrl}/movie/top`
+      constructRequestUrl(
+        environment.serverUrl,
+        TOP_PATH
+      )
     ).pipe(
-      map(result => this.getList('Highest Ranked', result)),
+      map(result => this.getList(TOP_TITLE, result)),
 
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get top rated movies.');
+        this.errorService.showError(error, TOP_ERROR_MSG);
         return of(undefined);
       })
     )

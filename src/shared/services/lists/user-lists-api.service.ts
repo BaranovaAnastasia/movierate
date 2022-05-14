@@ -7,6 +7,8 @@ import { IS_ACCESS_TOKEN_REQURED } from 'src/shared/interceptors';
 import { IUserListsApiService } from 'src/shared/interfaces';
 import { MoviesList } from 'src/shared/models';
 import { ErrorService } from '../error.service';
+import { constructRequestUrl } from '../functions';
+import { ADD_TO_LIST_ERROR_MSG, ADD_TO_LIST_PATH, CREATE_LIST_ERROR_MSG, CREATE_LIST_URL, CURRENT_LISTS_PATH, DELETE_LIST_ERROR_MSG, EDIT_LIST_ERROR_MSG, EDIT_LIST_PATH, LISTS_ERROR_MSG, LIST_ERROR_MSG, LIST_PATH, LIST_URL, REMOVE_FROM_LIST_ERROR_MSG, REMOVE_FROM_LIST_PATH, USER_LISTS_URL } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +22,14 @@ export class UserListsApiService implements IUserListsApiService {
 
   getAllListsCurrent$(): Observable<MoviesList[]> {
     return this.httpClient.get<MoviesList[]>(
-      `${environment.serverUrl}/lists/all/current`,
+      constructRequestUrl(
+        environment.serverUrl,
+        CURRENT_LISTS_PATH
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get lists.');
+        this.errorService.showError(error, LISTS_ERROR_MSG);
         return of([]);
       })
     );
@@ -32,11 +37,15 @@ export class UserListsApiService implements IUserListsApiService {
 
   getAllUserLists$(userId: number): Observable<MoviesList[]> {
     return this.httpClient.get<MoviesList[]>(
-      `${environment.serverUrl}/lists/all/${userId}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        USER_LISTS_URL,
+        `/${userId}`
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get lists.');
+        this.errorService.showError(error, LISTS_ERROR_MSG);
         return of([]);
       })
     );
@@ -44,11 +53,15 @@ export class UserListsApiService implements IUserListsApiService {
 
   getList$(listId: number): Observable<MoviesList | undefined> {
     return this.httpClient.get<MoviesList>(
-      `${environment.serverUrl}/lists/${listId}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        LIST_URL,
+        `/${listId}`
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get list.');
+        this.errorService.showError(error, LIST_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -56,12 +69,15 @@ export class UserListsApiService implements IUserListsApiService {
 
   createList$(listName: string, isPublic: boolean): Observable<MoviesList> {
     return this.httpClient.post<MoviesList>(
-      `${environment.serverUrl}/lists/create`,
+      constructRequestUrl(
+        environment.serverUrl,
+        CREATE_LIST_URL
+      ),
       { listName, isPublic },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot create list.');
+        this.errorService.showError(error, CREATE_LIST_ERROR_MSG);
         return throwError(error);
       })
     );
@@ -69,12 +85,15 @@ export class UserListsApiService implements IUserListsApiService {
 
   addMovieToList$(movieId: string, listId: number): Observable<void> {
     return this.httpClient.post<void>(
-      `${environment.serverUrl}/lists/add`,
+      constructRequestUrl(
+        environment.serverUrl,
+        ADD_TO_LIST_PATH
+      ),
       { movieId, listId },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot add movie to list.');
+        this.errorService.showError(error, ADD_TO_LIST_ERROR_MSG);
         return throwError(error);
       })
     );
@@ -82,12 +101,16 @@ export class UserListsApiService implements IUserListsApiService {
 
   editList$(listId: number, listName: string, isPublic: boolean): Observable<void> {
     return this.httpClient.post<void>(
-      `${environment.serverUrl}/lists/edit/${listId}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        EDIT_LIST_PATH,
+        `/${listId}`
+      ),
       { listName, isPublic },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot edit list.');
+        this.errorService.showError(error, EDIT_LIST_ERROR_MSG);
         return throwError(error);
       })
     );
@@ -95,12 +118,15 @@ export class UserListsApiService implements IUserListsApiService {
 
   removeMovieFromList$(movieId: string, listId: number): Observable<MoviesList | undefined> {
     return this.httpClient.post<MoviesList>(
-      `${environment.serverUrl}/lists/remove`,
+      constructRequestUrl(
+        environment.serverUrl,
+        REMOVE_FROM_LIST_PATH
+      ),
       { movieId, listId },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot remove movie from list.');
+        this.errorService.showError(error, REMOVE_FROM_LIST_ERROR_MSG);
         return throwError(error);
       })
     );
@@ -108,11 +134,15 @@ export class UserListsApiService implements IUserListsApiService {
 
   deleteList$(listId: number): Observable<void> {
     return this.httpClient.delete<void>(
-      `${environment.serverUrl}/lists/${listId}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        LIST_PATH,
+        `/${listId}`
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot delete list.');
+        this.errorService.showError(error, DELETE_LIST_ERROR_MSG);
         return throwError(error);
       })
     );

@@ -7,6 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { ADD_TO_FAVOURITE_TEXT, IS_FAVOURITE_TEXT } from '../constants';
 
 @Component({
   selector: 'app-movie-to-favourite',
@@ -26,7 +27,7 @@ export class MovieToFavouriteComponent implements OnChanges {
   }
 
   get favouritesText(): string {
-    return this.isFavourite ? 'favourite!' : 'add to favourites';
+    return this.isFavourite ? IS_FAVOURITE_TEXT : ADD_TO_FAVOURITE_TEXT;
   }
 
   addToFavourites(): void {

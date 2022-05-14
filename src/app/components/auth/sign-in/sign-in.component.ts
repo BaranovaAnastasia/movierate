@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/shared/services';
+import { DEFAULT_ERROR_MSG } from '../constants';
 
 @Component({
   selector: 'app-sign-in',
@@ -28,7 +29,7 @@ export class SignInComponent {
         this.form.controls.password.reset();
         this.signInErrorMsg = error.error.message
           ? error.error.message
-          : 'An error occured :(';
+          : DEFAULT_ERROR_MSG;
       },
     );
   }

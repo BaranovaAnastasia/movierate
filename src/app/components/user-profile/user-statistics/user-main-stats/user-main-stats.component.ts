@@ -7,6 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { UserStats } from 'src/shared/models';
 import { UserService } from 'src/shared/services';
+import { STATS_STEPS } from '../../constants';
 
 @Component({
   selector: 'app-user-main-stats',
@@ -25,13 +26,12 @@ export class UserMainStatsComponent implements OnChanges {
     this.stats$ = this.userService.getUserStats$(this.userId);
   }
 
-  getNextGoal(current: number): number {
-    const steps = [0, 10, 50, 100, 500, 1000, 2000, 5000];
-    const result = steps.reduce((prev, curr) =>
-      prev <= current || curr - current < prev - current ? curr : prev,
+  getNextGoal(value: number): number {
+    const result = STATS_STEPS.reduce((prev, curr) =>
+      prev <= value || curr - value < prev - value ? curr : prev,
     );
-    if (result === 0) {
-      return Math.ceil(current / 5000) * 5000;
+    if (result <= value) {
+      return Math.ceil(value / result) * result;
     }
     return result;
   }

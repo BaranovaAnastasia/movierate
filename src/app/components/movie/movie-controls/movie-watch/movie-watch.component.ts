@@ -7,6 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
+import { ADD_TO_WATCHED_TEXT, IS_WATCHED_TEXT } from '../constants';
 
 @Component({
   selector: 'app-movie-watch',
@@ -26,7 +27,7 @@ export class MovieWatchComponent implements OnChanges {
   }
 
   get watchedText(): string {
-    return this.isWatched ? 'watched!' : 'add to watched';
+    return this.isWatched ? IS_WATCHED_TEXT : ADD_TO_WATCHED_TEXT;
   }
 
   watch(): void {

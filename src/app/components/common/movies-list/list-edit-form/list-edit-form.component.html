@@ -11,19 +11,19 @@
   <tui-radio-labeled
     contentAlign="right"
     formControlName="visibility"
-    item="public"
+    [item]="visibility[0]"
     tuiMode="onDark"
   >
-    Public
+    {{ visibility[0] }}
   </tui-radio-labeled>
 
   <tui-radio-labeled
     contentAlign="right"
     formControlName="visibility"
-    item="private"
+    [item]="visibility[1]"
     tuiMode="onDark"
   >
-    Private
+    {{ visibility[1] }}
   </tui-radio-labeled>
 
   <button

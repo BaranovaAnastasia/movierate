@@ -7,6 +7,8 @@ import { IS_ACCESS_TOKEN_REQURED } from 'src/shared/interceptors';
 import { IUserMovieInteractionApiService } from 'src/shared/interfaces';
 import { Movie, MovieStats } from 'src/shared/models';
 import { ErrorService } from '../error.service';
+import { constructRequestUrl } from '../functions';
+import { ADD_TO_FAVOURITES_ERROR_MSG, FAVOURITES_PATH, GET_FAVOURITES_ERROR_MSG, RATE_ERROR_MSG, RATE_PATH, RATING_ERROR_MSG, RATING_PATH, REMOVE_FROM_FAVOURITES_ERROR_MSG, STATS_ERROR_MSG, STATS_PATH, UNWATCH_ERROR_MSG, UNWATCH_PATH, WATCH_ERROR_MSG, WATCH_PATH } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +22,15 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   getRating$(movieId: string): Observable<number | undefined> {
     return this.httpClient.get<number>(
-      `${environment.serverUrl}/movie/rating/${movieId}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        RATING_PATH,
+        `/${movieId}`
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get movie rating.');
+        this.errorService.showError(error, RATING_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -32,11 +38,15 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   getStats$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.get<MovieStats>(
-      `${environment.serverUrl}/movie/stats/${movieId}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        STATS_PATH,
+        `/${movieId}`
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get movie statistics.');
+        this.errorService.showError(error, STATS_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -44,12 +54,15 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   rateMovie$(movieId: string, rating: number): Observable<MovieStats | undefined> {
     return this.httpClient.post<MovieStats>(
-      `${environment.serverUrl}/movie/rate`,
+      constructRequestUrl(
+        environment.serverUrl,
+        RATE_PATH
+      ),
       { movieId: String(movieId), rating },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot rate movie.');
+        this.errorService.showError(error, RATE_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -57,12 +70,15 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   watchMovie$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.post<MovieStats>(
-      `${environment.serverUrl}/movie/watch`,
+      constructRequestUrl(
+        environment.serverUrl,
+        WATCH_PATH
+      ),
       { movieId: String(movieId) },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot mark movie as watched.');
+        this.errorService.showError(error, WATCH_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -70,12 +86,15 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   unwatchMovie$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.post<MovieStats>(
-      `${environment.serverUrl}/movie/unwatch`,
+      constructRequestUrl(
+        environment.serverUrl,
+        UNWATCH_PATH
+      ),
       { movieId: String(movieId) },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot remove movie from watched.');
+        this.errorService.showError(error, UNWATCH_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -83,12 +102,15 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   addMovieToFavourites$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.post<MovieStats>(
-      `${environment.serverUrl}/favourites`,
+      constructRequestUrl(
+        environment.serverUrl,
+        FAVOURITES_PATH
+      ),
       { movieId },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot add movie to favourites.');
+        this.errorService.showError(error, ADD_TO_FAVOURITES_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -96,11 +118,15 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   removeMovieFromFavourites$(movieId: string): Observable<MovieStats | undefined> {
     return this.httpClient.delete<MovieStats>(
-      `${environment.serverUrl}/favourites/${movieId}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        FAVOURITES_PATH,
+        `/${movieId}`
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot remove movie from favourites.');
+        this.errorService.showError(error, REMOVE_FROM_FAVOURITES_ERROR_MSG);
         return of(undefined);
       })
     );
@@ -108,11 +134,15 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
 
   getFavourites$(userId: number): Observable<Movie[]> {
     return this.httpClient.get<Movie[]>(
-      `${environment.serverUrl}/favourites/${userId}`,
+      constructRequestUrl(
+        environment.serverUrl,
+        FAVOURITES_PATH,
+        `/${userId}`
+      ),
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
-        this.errorService.showError(error, 'Cannot get favourites.');
+        this.errorService.showError(error, GET_FAVOURITES_ERROR_MSG);
         return of([]);
       })
     );

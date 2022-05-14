@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { BehaviorSubject, concat, forkJoin } from 'rxjs';
+import { BehaviorSubject, forkJoin } from 'rxjs';
 import { MoviesList } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
 

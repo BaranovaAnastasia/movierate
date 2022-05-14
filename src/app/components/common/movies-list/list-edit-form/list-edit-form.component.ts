@@ -7,9 +7,9 @@ import {
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
 import { MoviesList } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
+import { VISIBILITY_PRIVATE, VISIBILITY_PUBLIC } from '../constants';
 
 @Component({
   selector: 'app-list-edit-form',
@@ -26,16 +26,17 @@ export class ListEditFormComponent implements OnInit {
     visibility: [null, Validators.required],
   });
 
+  visibility = [VISIBILITY_PUBLIC, VISIBILITY_PRIVATE];
+
   constructor(
     private fb: FormBuilder,
-    private listsService: ListsService,
-    private readonly alertService: TuiAlertService,
+    private listsService: ListsService
   ) {}
 
   ngOnInit(): void {
     this.form.patchValue({
       name: this.list.listName,
-      visibility: this.list.isPublic ? 'public' : 'private',
+      visibility: this.list.isPublic ? VISIBILITY_PUBLIC : VISIBILITY_PRIVATE,
     });
   }
 
@@ -45,7 +46,7 @@ export class ListEditFormComponent implements OnInit {
 
   submit(): void {
     const data = this.form.getRawValue();
-    const newIsPublic = data.visibility === 'public';
+    const newIsPublic = data.visibility === VISIBILITY_PUBLIC;
 
     if (
       data.name === this.list.listName &&

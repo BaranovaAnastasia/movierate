@@ -1,10 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, concatMap, map, tap } from 'rxjs/operators';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from 'src/shared/constants';
 import { IAuthApiService, IAuthApiServiceToken } from 'src/shared/interfaces';
 import { Tokens, User } from 'src/shared/models';
 import { NavigationService } from '..';
 import { ErrorService } from '../error.service';
+import { LOGOUT_ERROR_MSG, SIGIN_ERROR_MSG, SIGNUP_ERROR_MSG } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,7 @@ export class AuthService {
   }
 
   initialize() {
-    if (!localStorage.getItem('access_token')) {
+    if (!localStorage.getItem(ACCESS_TOKEN)) {
       this.loggedInUser = null;
       return;
     }
@@ -50,7 +52,7 @@ export class AuthService {
       map(() => { }),
 
       catchError(error => {
-        this.errorService.showError(error, 'Cannot sign in.');
+        this.errorService.showError(error, SIGIN_ERROR_MSG);
         return throwError(error);
       })
     );
@@ -67,7 +69,7 @@ export class AuthService {
       map(() => { }),
 
       catchError(error => {
-        this.errorService.showError(error, 'Cannot sign up.');
+        this.errorService.showError(error, SIGNUP_ERROR_MSG);
         return throwError(error);
       })
     );
@@ -77,7 +79,7 @@ export class AuthService {
     return this.authApiService.logout$().pipe(
       tap(() => this.logout()),
       catchError(error => {
-        this.errorService.showError(error, 'Cannot logout.');
+        this.errorService.showError(error, LOGOUT_ERROR_MSG);
         return of(void 0);
       })
     );
@@ -101,13 +103,13 @@ export class AuthService {
   private logout(): void {
     this.loggedInUser = null;
     this.navigationService.toMain();
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
   }
 
   private static set tokens(tokens: Tokens) {
-    localStorage.setItem('access_token', tokens.access_token);
-    localStorage.setItem('refresh_token', tokens.refresh_token);
+    localStorage.setItem(ACCESS_TOKEN, tokens.access_token);
+    localStorage.setItem(REFRESH_TOKEN, tokens.refresh_token);
   }
 
 }

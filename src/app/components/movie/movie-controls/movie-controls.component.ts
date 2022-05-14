@@ -4,8 +4,7 @@ import {
   Input,
   OnChanges,
 } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { MovieStats } from 'src/shared/models';
 import { UserMovieInteractionService } from 'src/shared/services';
 
@@ -22,7 +21,7 @@ export class MovieControlsComponent implements OnChanges {
 
   constructor(
     private userMovieInteractionService: UserMovieInteractionService,
-  ) { }
+  ) {}
 
   ngOnChanges(): void {
     this.movieStats$ = this.userMovieInteractionService.getStats$(this.movieId);

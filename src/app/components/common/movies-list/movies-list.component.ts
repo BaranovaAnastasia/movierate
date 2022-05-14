@@ -9,6 +9,7 @@ import {
 import { concat } from 'rxjs';
 import { Movie, MoviesList } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
+import { VISIBILITY_PRIVATE, VISIBILITY_PUBLIC } from './constants';
 
 @Component({
   selector: 'app-movies-list',
@@ -32,7 +33,7 @@ export class MoviesListComponent {
   ) {}
 
   get visibilityText(): string {
-    return this.list!.isPublic ? 'Public' : 'Private';
+    return this.list!.isPublic ? VISIBILITY_PUBLIC : VISIBILITY_PRIVATE;
   }
 
   get isEmpty(): boolean {

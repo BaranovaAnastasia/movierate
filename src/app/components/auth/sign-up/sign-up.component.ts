@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from 'src/shared/services';
+import { DEFAULT_ERROR_MSG, EMAIL_FORMAT_MSG, EMAIL_REQUIRED_MSG, PASSWORD_FORMAT_MSG, PASSWORD_LENGTH_MSG, PASSWORD_REGEXP, PASSWORD_REQUIRED_MSG } from '../constants';
 
 function isInvalid(control: AbstractControl): boolean {
   return control.invalid && control.touched;
@@ -27,7 +28,7 @@ export class SignUpComponent {
       [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(new RegExp(`^(?=.*[a-z])(?=.*[0-9]).{8}`)),
+        Validators.pattern(new RegExp(PASSWORD_REGEXP)),
       ],
     ],
     confirmPassword: [null, [Validators.required, this.checkPasswords()]],
@@ -41,10 +42,10 @@ export class SignUpComponent {
     const email = this.form.controls.email;
 
     if (email?.errors?.['required']) {
-      return 'Email is required';
+      return EMAIL_REQUIRED_MSG;
     }
     if (email?.errors?.['email']) {
-      return 'Invalid email address format';
+      return EMAIL_FORMAT_MSG;
     }
     return undefined;
   }
@@ -53,13 +54,13 @@ export class SignUpComponent {
     const password = this.form.controls.password;
 
     if (password?.errors?.['required']) {
-      return 'Password is required';
+      return PASSWORD_REQUIRED_MSG;
     }
     if (password?.errors?.['minlength']) {
-      return 'The password should be at least 8 characters long';
+      return PASSWORD_LENGTH_MSG;
     }
     if (password?.errors?.['pattern']) {
-      return `The password should contain letters and numbers`;
+      return PASSWORD_FORMAT_MSG;
     }
     return undefined;
   }
@@ -90,7 +91,7 @@ export class SignUpComponent {
         this.form.controls.confirmPassword.reset();
         this.signUpErrorMsg = error.error.message
           ? error.error.message
-          : 'An error occured :(';
+          : DEFAULT_ERROR_MSG;
       },
     );
   }
