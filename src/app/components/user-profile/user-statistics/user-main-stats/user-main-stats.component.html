@@ -1,6 +1,6 @@
-<div *tuiLet="stats$ | async as stats">
-  <tui-loader [showLoader]="stats === null">
-    <div *ngIf="stats$ | async as stats" class="container">
+<div *tuiLet="stats$ | async as stats" class="container">
+  <tui-loader [showLoader]="stats === null" class="loader">
+    <div *ngIf="stats$ | async as stats" class="content">
       <div class="stats__movies">
         <div class="stats-data">
           <span class="tui-text_body-s">
