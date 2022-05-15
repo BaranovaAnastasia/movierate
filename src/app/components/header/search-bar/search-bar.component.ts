@@ -27,6 +27,8 @@ export class SearchBarComponent implements OnDestroy {
     takeUntil(this.destroy$),
   );
 
+  expanded: boolean = false;
+
   constructor(private fb: FormBuilder, private movieService: MovieService) {}
 
   ngOnDestroy(): void {
@@ -34,6 +36,12 @@ export class SearchBarComponent implements OnDestroy {
   }
 
   reset(): void {
+    this.expanded = false;
     this.search.reset();
+  }
+
+  expand(): void {
+    console.log('here')
+    this.expanded = true;
   }
 }

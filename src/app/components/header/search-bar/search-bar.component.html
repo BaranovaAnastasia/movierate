@@ -1,5 +1,7 @@
-<div class="container">
-  <tui-svg src="tuiIconSearchLarge" class="icon"> </tui-svg>
+<div
+  class="container"
+  [ngClass]="{'expanded' : expanded}">
+  <tui-svg src="tuiIconSearchLarge" class="icon" (click)="expand()"></tui-svg>
 
   <input
     tuiTextfield
@@ -7,6 +9,15 @@
     placeholder="search movies"
     [formControl]="search"
   />
+
+  <button
+    class="cancel"
+    tuiIconButton
+    type="button"
+    appearance="icon"
+    icon="tuiIconCloseLarge"
+    (click)="reset()"
+  ></button>
 
   <app-search-results
     *ngIf="results$ | async as results"

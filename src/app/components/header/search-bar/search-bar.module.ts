@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SearchBarComponent } from './search-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
+  TuiButtonModule,
   TuiDataListModule,
   TuiSvgModule,
   TuiTextfieldControllerModule,
@@ -24,6 +25,7 @@ import { StringifyPipesModule } from 'src/app/pipes';
     StringifyPipesModule,
     AppRoutingModule,
     SearchResultsModule,
+    TuiButtonModule
   ],
   exports: [SearchBarComponent],
 })

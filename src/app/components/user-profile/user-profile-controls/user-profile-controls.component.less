@@ -103,10 +103,15 @@ hr {
 }
 
 @media @mobile {
+  .controls {
+    flex-wrap: wrap;
+    row-gap: 5px;
+  }
+
   .controls__follow {
     width: 120px;
   }
   .controls__links {
-    width: calc(100% - 120px);
+    width: 100%;
   }
 }

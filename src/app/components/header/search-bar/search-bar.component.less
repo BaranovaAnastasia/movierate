@@ -39,6 +39,10 @@ input:focus {
   flex-grow: 1;
 }
 
+.cancel {
+  display: none;
+}
+
 app-search-results {
   width: 100%;
   margin-top: 10px;
@@ -49,5 +53,32 @@ app-search-results {
 @media @mobile {
   input {
     display: none;
+  }
+
+  .expanded {
+    box-sizing: border-box;
+    width: 100%;
+    height: 72px;
+    padding: 0px 10px 0px 10px;
+    justify-content: flex-start;
+    border-bottom: 2px solid #90cea1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    background-color: #252525;
+
+    app-search-results {
+      display: block;
+    }
+
+    input {
+      display: block;
+      flex-grow: 1;
+    }
+
+    .cancel {
+      display: block;
+    }
   }
 }
