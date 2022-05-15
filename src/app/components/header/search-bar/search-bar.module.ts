@@ -25,7 +25,7 @@ import { StringifyPipesModule } from 'src/app/pipes';
     StringifyPipesModule,
     AppRoutingModule,
     SearchResultsModule,
-    TuiButtonModule
+    TuiButtonModule,
   ],
   exports: [SearchBarComponent],
 })

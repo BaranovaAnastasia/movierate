@@ -41,7 +41,7 @@ export class SearchBarComponent implements OnDestroy {
   }
 
   expand(): void {
-    console.log('here')
+    console.log('here');
     this.expanded = true;
   }
 }
