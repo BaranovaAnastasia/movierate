@@ -7,7 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { User } from 'src/shared/models';
 import { AuthService, UserService } from 'src/shared/services';
 import { FOLLOW, UNFOLLOW } from '../constants';

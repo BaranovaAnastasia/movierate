@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FollowsComponent } from './follows.component';
 import { TuiTabsModule } from '@taiga-ui/kit';
 import { UserPreviewModule } from '../../common';
-import { TuiButtonModule, TuiModeModule, TuiSvgModule } from '@taiga-ui/core';
+import { TuiButtonModule, TuiModeModule } from '@taiga-ui/core';
 
 @NgModule({
   declarations: [FollowsComponent],
@@ -11,7 +11,6 @@ import { TuiButtonModule, TuiModeModule, TuiSvgModule } from '@taiga-ui/core';
     CommonModule,
     TuiTabsModule,
     UserPreviewModule,
-    TuiSvgModule,
     TuiModeModule,
     TuiButtonModule,
   ],

@@ -20,20 +20,26 @@ export class FollowsComponent implements OnChanges {
   activeItemIndex = -1;
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     this.activeItemIndex = -1;
 
     this.following = Array.isArray(changes.following?.currentValue)
       ? changes.following?.currentValue
       : this.following;
 
-    this.following = this.following ? this.following : [];
-
     this.followers = Array.isArray(changes.followers?.currentValue)
       ? changes.followers?.currentValue
       : this.followers;
+  }
 
-    this.followers = this.followers ? this.followers : [];
+  get displayFollowing(): boolean {
+    return (
+      this.activeItemIndex === 0 && this.following && this.following.length > 0
+    );
+  }
+  get displayFollowers(): boolean {
+    return (
+      this.activeItemIndex === 1 && this.followers && this.followers.length > 0
+    );
   }
 
   cancelTabs(): void {

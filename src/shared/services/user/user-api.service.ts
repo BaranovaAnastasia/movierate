@@ -1,6 +1,6 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IS_ACCESS_TOKEN_REQURED } from 'src/shared/interceptors';
@@ -98,7 +98,7 @@ export class UserApiService implements IUserApiService {
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, FOLLOW_ERROR_MSG);
-        return of([]);
+        return throwError(error);
       })
     );
   }
@@ -114,7 +114,7 @@ export class UserApiService implements IUserApiService {
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, UNFOLLOW_ERROR_MSG);
-        return of([]);
+        return throwError(error);
       })
     );
   }

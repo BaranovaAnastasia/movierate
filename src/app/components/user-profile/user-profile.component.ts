@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { mergeMap, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, mergeMap, tap } from 'rxjs/operators';
 import { User } from 'src/shared/models';
 import { UserMovieInteractionService, UserService } from 'src/shared/services';
 
@@ -23,12 +23,10 @@ export class UserProfileComponent {
     mergeMap(params => this.favouritesService.getWatched$(params.id)),
   );
 
-  following$ = this.activatedroute.params.pipe(
+  following$: Observable<User[]> = this.activatedroute.params.pipe(
     mergeMap(params => this.userService.getFollowing$(params.id)),
   );
-  followers$ = this.activatedroute.params.pipe(
-    mergeMap(params => this.userService.getFollowedBy$(params.id)),
-  );
+  followers$: Observable<User[] | undefined> = this.getFollowers$();
 
   constructor(
     private userService: UserService,
@@ -37,9 +35,15 @@ export class UserProfileComponent {
   ) {}
 
   follow(newFollowers: Observable<User[]>): void {
-    this.followers$ = newFollowers;
+    this.followers$ = newFollowers.pipe(catchError(() => this.getFollowers$()));
   }
   unfollow(newFollowers: Observable<User[]>): void {
-    this.followers$ = newFollowers;
+    this.followers$ = newFollowers.pipe(catchError(() => this.getFollowers$()));
+  }
+
+  private getFollowers$(): Observable<User[]> {
+    return this.activatedroute.params.pipe(
+      mergeMap(params => this.userService.getFollowedBy$(params.id)),
+    );
   }
 }

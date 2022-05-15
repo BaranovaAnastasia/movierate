@@ -1,29 +1,26 @@
-<div *ngIf="following && followers" class="container" tuiMode="onDark">
+<div class="container" tuiMode="onDark">
   <tui-tabs [(activeItemIndex)]="activeItemIndex">
-    <button tuiTab>Following: {{ following.length }}</button>
-    <button tuiTab>Followers: {{ followers.length }}</button>
+    <button tuiTab>
+      Following<span *ngIf="following">: {{ following.length }}</span>
+    </button>
+    <button tuiTab>
+      Followers<span *ngIf="followers">: {{ followers.length }}</span>
+    </button>
     <button
       *ngIf="activeItemIndex >= 0"
       tuiIconButton
       type="button"
+      icon="tuiIconCloseLarge"
       appearance="icon"
       (click)="cancelTabs()"
-    >
-      <tui-svg src="tuiIconCloseLarge"></tui-svg>
-    </button>
+    ></button>
   </tui-tabs>
 
-  <div
-    class="follows-list"
-    *ngIf="activeItemIndex === 0 && following.length > 0"
-  >
+  <div class="follows-list" *ngIf="displayFollowing">
     <app-user-preview *ngFor="let user of following" [user]="user">
     </app-user-preview>
   </div>
-  <div
-    class="follows-list"
-    *ngIf="activeItemIndex === 1 && followers.length > 0"
-  >
+  <div class="follows-list" *ngIf="displayFollowers">
     <app-user-preview *ngFor="let user of followers" [user]="user">
     </app-user-preview>
   </div>
