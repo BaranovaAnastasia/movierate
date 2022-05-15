@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { mergeMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { mergeMap, tap } from 'rxjs/operators';
+import { User } from 'src/shared/models';
 import { UserMovieInteractionService, UserService } from 'src/shared/services';
 
 @Component({
@@ -21,9 +23,23 @@ export class UserProfileComponent {
     mergeMap(params => this.favouritesService.getWatched$(params.id)),
   );
 
+  following$ = this.activatedroute.params.pipe(
+    mergeMap(params => this.userService.getFollowing$(params.id)),
+  );
+  followers$ = this.activatedroute.params.pipe(
+    mergeMap(params => this.userService.getFollowedBy$(params.id)),
+  );
+
   constructor(
     private userService: UserService,
     private favouritesService: UserMovieInteractionService,
     private activatedroute: ActivatedRoute,
   ) {}
+
+  follow(newFollowers: Observable<User[]>): void {
+    this.followers$ = newFollowers;
+  }
+  unfollow(newFollowers: Observable<User[]>): void {
+    this.followers$ = newFollowers;
+  }
 }

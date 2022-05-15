@@ -8,7 +8,7 @@ import { IUserApiService } from 'src/shared/interfaces';
 import { User, UserGenresStats, UserStats, UserTopEntry, UserTopOption } from 'src/shared/models';
 import { ErrorService } from '../error.service';
 import { constructRequestUrl } from '../functions';
-import { USER_ERROR_MSG, USER_GENRES_ERROR_MSG, USER_GENRES_PATH, USER_PATH, USER_STATS_ERROR_MSG, USER_STATS_PATH, USER_TOP_ERROR_MSG, USER_TOP_PATH } from './constants';
+import { FOLLOWED_BY_ERROR_MSG, FOLLOWED_BY_PATH, FOLLOWING_ERROR_MSG, FOLLOWING_PATH, FOLLOW_ERROR_MSG, FOLLOW_PATH, UNFOLLOW_ERROR_MSG, UNFOLLOW_PATH, USER_ERROR_MSG, USER_GENRES_ERROR_MSG, USER_GENRES_PATH, USER_PATH, USER_STATS_ERROR_MSG, USER_STATS_PATH, USER_TOP_ERROR_MSG, USER_TOP_PATH } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -80,6 +80,70 @@ export class UserApiService implements IUserApiService {
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, USER_TOP_ERROR_MSG);
+        return of([]);
+      })
+    );
+  }
+
+
+
+  follow$(userId: number): Observable<User[]> {
+    return this.httpClient.post<User[]>(
+      constructRequestUrl(
+        environment.serverUrl,
+        FOLLOW_PATH,
+        `/${userId}`
+      ), {},
+      { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
+    ).pipe(
+      catchError(error => {
+        this.errorService.showError(error, FOLLOW_ERROR_MSG);
+        return of([]);
+      })
+    );
+  }
+
+  unfollow$(userId: number): Observable<User[]> {
+    return this.httpClient.post<User[]>(
+      constructRequestUrl(
+        environment.serverUrl,
+        UNFOLLOW_PATH,
+        `/${userId}`
+      ), {},
+      { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
+    ).pipe(
+      catchError(error => {
+        this.errorService.showError(error, UNFOLLOW_ERROR_MSG);
+        return of([]);
+      })
+    );
+  }
+
+  getFollowing$(userId: number): Observable<User[]> {
+    return this.httpClient.get<User[]>(
+      constructRequestUrl(
+        environment.serverUrl,
+        FOLLOWING_PATH,
+        `/${userId}`
+      )
+    ).pipe(
+      catchError(error => {
+        this.errorService.showError(error, FOLLOWING_ERROR_MSG);
+        return of([]);
+      })
+    );
+  }
+
+  getFollowedBy$(userId: number): Observable<User[]> {
+    return this.httpClient.get<User[]>(
+      constructRequestUrl(
+        environment.serverUrl,
+        FOLLOWED_BY_PATH,
+        `/${userId}`
+      )
+    ).pipe(
+      catchError(error => {
+        this.errorService.showError(error, FOLLOWED_BY_ERROR_MSG);
         return of([]);
       })
     );

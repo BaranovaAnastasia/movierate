@@ -11,7 +11,26 @@
         </div>
       </div>
 
-      <app-user-profile-controls [user]="user"> </app-user-profile-controls>
+      <app-user-profile-controls
+        [user]="user"
+        (follow)="follow($event)"
+        (unfollow)="unfollow($event)"
+      >
+      </app-user-profile-controls>
+
+      <div
+        class="follows"
+        *tuiLet="{
+          following: following$ | async,
+          followers: followers$ | async
+        } as follows"
+      >
+        <app-follows
+          [following]="follows.following!"
+          [followers]="follows.followers!"
+        >
+        </app-follows>
+      </div>
     </div>
 
     <div class="list-wrapper" id="favourites">

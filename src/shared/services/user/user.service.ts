@@ -28,4 +28,20 @@ export class UserService {
   getUserTop$(top: UserTopOption, limit: number): Observable<UserTopEntry[]> {
     return this.userApiService.getUserTop$(top, limit);
   }
+
+  follow$(userId: number): Observable<User[]> {
+    return this.userApiService.follow$(userId);
+  }
+
+  unfollow$(userId: number): Observable<User[]> {
+    return this.userApiService.unfollow$(userId);
+  }
+
+  getFollowing$(userId: number): Observable<User[]> {
+    return this.userApiService.getFollowing$(userId);
+  }
+
+  getFollowedBy$(userId: number): Observable<User[]> {
+    return this.userApiService.getFollowedBy$(userId);
+  }
 }

@@ -2,7 +2,7 @@
   <button
     *ngIf="!user.isCurrentUser"
     class="controls__follow"
-    [disabled]="true"
+    (click)="followClick()"
   >
     {{ followText }}
   </button>

@@ -13,4 +13,9 @@ export interface IUserApiService {
   getUserStats$(id: number): Observable<UserStats | undefined>;
   getUserGenresStats$(id: number): Observable<UserGenresStats[]>;
   getUserTop$(top: UserTopOption, limit: number): Observable<UserTopEntry[]>;
+
+  follow$(userId: number): Observable<User[]>;
+  unfollow$(userId: number): Observable<User[]>;
+  getFollowing$(userId: number): Observable<User[]>;
+  getFollowedBy$(userId: number): Observable<User[]>;
 }
