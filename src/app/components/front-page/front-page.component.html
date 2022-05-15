@@ -2,28 +2,26 @@
   <tui-loader [showLoader]="highestRanked === null">
     <div *ngIf="highestRanked !== null" id="top" class="list-wrapper">
       <app-movies-list [list]="highestRanked"></app-movies-list>
-  
+
       <div *tuiLet="popular$ | async as popular">
         <tui-loader [showLoader]="popular === null">
           <div *ngIf="popular !== null" id="popular" class="list-wrapper">
             <app-movies-list [list]="popular"></app-movies-list>
-    
+
             <div *tuiLet="upcoming$ | async as upcoming">
               <tui-loader [showLoader]="upcoming === null">
                 <div *ngIf="upcoming !== null" id="soon" class="list-wrapper">
                   <app-movies-list [list]="upcoming"></app-movies-list>
-      
+
                   <div id="leaderboard">
                     <app-leaderboard></app-leaderboard>
                   </div>
                 </div>
               </tui-loader>
             </div>
-
           </div>
         </tui-loader>
       </div>
-
     </div>
   </tui-loader>
 </div>
