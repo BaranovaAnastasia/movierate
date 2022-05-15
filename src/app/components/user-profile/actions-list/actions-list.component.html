@@ -1,7 +1,7 @@
 <div *ngIf="actions$ | async as actions">
-  <div *ngIf="actions.length > 0">
-    <app-section-title title="Latest News"></app-section-title>
+  <app-section-title title="Latest News"></app-section-title>
 
+  <div *ngIf="actions.length > 0">
     <div *ngIf="groups" class="actions-wrapper">
       <div *ngFor="let date of groups.keys()">
         <div class="header">
@@ -14,5 +14,9 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="actions.length === 0" class="content__empty tui-text_body-m">
+    No activity so far
   </div>
 </div>
