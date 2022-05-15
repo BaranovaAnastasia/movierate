@@ -20,8 +20,7 @@ import { FOLLOW, UNFOLLOW } from '../constants';
 })
 export class UserProfileControlsComponent {
   @Input() user!: User;
-  @Output() follow = new EventEmitter<Observable<User[]>>();
-  @Output() unfollow = new EventEmitter<Observable<User[]>>();
+  @Output() followChanges = new EventEmitter();
 
   constructor(
     private userService: UserService,
@@ -46,23 +45,24 @@ export class UserProfileControlsComponent {
   }
 
   private followUser(): void {
-    this.unfollow.emit(
-      this.userService.follow$(this.user.id).pipe(
-        tap(() => {
-          this.user.isFollowed = true;
-          this.changeDetectorRef.detectChanges();
-        }),
-      ),
+    this.userService.follow$(this.user.id).subscribe(
+      () => {
+        this.user.isFollowed = true;
+        this.followChanges.emit();
+        this.changeDetectorRef.detectChanges();
+      },
+      () => {},
     );
   }
+
   private unfollowUser(): void {
-    this.unfollow.emit(
-      this.userService.unfollow$(this.user.id).pipe(
-        tap(() => {
-          this.user.isFollowed = false;
-          this.changeDetectorRef.detectChanges();
-        }),
-      ),
+    this.userService.unfollow$(this.user.id).subscribe(
+      () => {
+        this.user.isFollowed = false;
+        this.followChanges.emit();
+        this.changeDetectorRef.detectChanges();
+      },
+      () => {},
     );
   }
 }

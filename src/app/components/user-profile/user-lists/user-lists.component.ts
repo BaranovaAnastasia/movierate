@@ -5,7 +5,7 @@ import {
   Input,
   OnChanges,
 } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
 import { MoviesList, User } from 'src/shared/models';
 import { ListsService } from 'src/shared/services';
@@ -31,7 +31,11 @@ export class UserListsComponent implements OnChanges {
       .getAllUserLists$(this.user.id)
       .pipe(
         concatMap(lists =>
-          forkJoin(lists.map(list => this.listsService.getList$(list.listId!))),
+          lists.length > 0
+            ? forkJoin(
+                lists.map(list => this.listsService.getList$(list.listId!)),
+              )
+            : of([]),
         ),
       )
       .subscribe(result => {

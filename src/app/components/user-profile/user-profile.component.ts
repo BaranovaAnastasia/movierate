@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError, mergeMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 import { User } from 'src/shared/models';
 import { UserMovieInteractionService, UserService } from 'src/shared/services';
 
@@ -34,11 +34,8 @@ export class UserProfileComponent {
     private activatedroute: ActivatedRoute,
   ) {}
 
-  follow(newFollowers: Observable<User[]>): void {
-    this.followers$ = newFollowers.pipe(catchError(() => this.getFollowers$()));
-  }
-  unfollow(newFollowers: Observable<User[]>): void {
-    this.followers$ = newFollowers.pipe(catchError(() => this.getFollowers$()));
+  followChanges(): void {
+    this.followers$ = this.getFollowers$();
   }
 
   private getFollowers$(): Observable<User[]> {

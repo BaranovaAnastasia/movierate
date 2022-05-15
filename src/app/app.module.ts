@@ -34,6 +34,7 @@ import { MovieModule } from './components/movie/movie.module';
 import { UserProfileModule } from './components/user-profile/user-profile.module';
 import { MoviesListModule } from './components/common';
 import { AppRoutingModule } from './app-routing.module';
+import { FooterModule } from './components/footer/footer.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     AppRoutingModule,
     HeaderModule,
+    FooterModule,
     TuiRootModule,
     BrowserAnimationsModule,
     TuiDialogModule,

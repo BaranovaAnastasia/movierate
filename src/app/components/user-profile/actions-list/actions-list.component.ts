@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
+  OnChanges,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { UserAction } from 'src/shared/models';
 import { UserActionService } from 'src/shared/services';
 
 function getDateKey(date: Date): string {
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 }
 
 function groupByDate(actions: UserAction[]): Map<string, UserAction[]> {
@@ -35,7 +35,7 @@ function groupByDate(actions: UserAction[]): Map<string, UserAction[]> {
   styleUrls: ['./actions-list.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActionstComponent implements OnInit {
+export class ActionstComponent implements OnChanges {
   @Input() userId!: number;
 
   actions$?: Observable<UserAction[] | undefined>;
@@ -44,7 +44,7 @@ export class ActionstComponent implements OnInit {
 
   constructor(private actionService: UserActionService) {}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.actions$ = this.actionService
       .getUserAction$(this.userId)
       .pipe(tap(actions => (this.groups = groupByDate(actions!))));

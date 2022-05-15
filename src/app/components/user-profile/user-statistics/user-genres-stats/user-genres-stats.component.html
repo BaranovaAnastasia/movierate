@@ -1,5 +1,5 @@
 <tui-pie-chart
-  *ngIf="genresCounts"
+  *ngIf="genresCounts && genresCounts.length > 0"
   size="m"
   [value]="genresCounts"
   [hintContent]="content"

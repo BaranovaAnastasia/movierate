@@ -29,11 +29,11 @@ export class UserService {
     return this.userApiService.getUserTop$(top, limit);
   }
 
-  follow$(userId: number): Observable<User[]> {
+  follow$(userId: number): Observable<void> {
     return this.userApiService.follow$(userId);
   }
 
-  unfollow$(userId: number): Observable<User[]> {
+  unfollow$(userId: number): Observable<void> {
     return this.userApiService.unfollow$(userId);
   }
 

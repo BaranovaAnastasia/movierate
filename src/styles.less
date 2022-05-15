@@ -1,14 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+@mobile: ~'only screen and (max-width: 719px)';
 
 tui-wrapper[data-appearance='auth-submit'] {
-  background: #FDCE25;
+  background: #90cea1;
   color: #000;
   height: 40px;
   font-weight: bold;
   width: fit-content;
 
   &[data-state='hovered'] {
-    background: #fdce25dd;
+    background: #90cea1dd;
   }
 
   &[data-state='disabled'] {
@@ -45,7 +46,7 @@ tui-wrapper[data-appearance='delete-list'] {
 }
 
 tui-dialog {
-  background-color: rgb(253, 206, 37);
+  background-color: #90cea1;
   border: 15px solid transparent !important;
 }
 
@@ -68,14 +69,24 @@ tui-dialog div.t-content {
 
 .movie-control:hover * {
   opacity: 1 !important;
-  color: #FDCE25;
-  stroke: #FDCE25;
-  fill: #FDCE25;
+  color: #90cea1;
+  stroke: #90cea1;
+  fill: #90cea1;
 }
 
 .movie-control_active * {
   opacity: 1;
-  color: #FDCE25;
-  stroke: #FDCE25;
-  fill: #FDCE25;
+  color: #90cea1;
+  stroke: #90cea1;
+  fill: #90cea1;
+}
+
+@media @mobile {
+  app-header {
+    app-user-preview {
+      .image-link {
+        display: none;
+      }
+    }
+  }
 }

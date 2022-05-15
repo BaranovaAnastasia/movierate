@@ -87,8 +87,8 @@ export class UserApiService implements IUserApiService {
 
 
 
-  follow$(userId: number): Observable<User[]> {
-    return this.httpClient.post<User[]>(
+  follow$(userId: number): Observable<void> {
+    return this.httpClient.post<void>(
       constructRequestUrl(
         environment.serverUrl,
         FOLLOW_PATH,
@@ -103,8 +103,8 @@ export class UserApiService implements IUserApiService {
     );
   }
 
-  unfollow$(userId: number): Observable<User[]> {
-    return this.httpClient.post<User[]>(
+  unfollow$(userId: number): Observable<void> {
+    return this.httpClient.post<void>(
       constructRequestUrl(
         environment.serverUrl,
         UNFOLLOW_PATH,

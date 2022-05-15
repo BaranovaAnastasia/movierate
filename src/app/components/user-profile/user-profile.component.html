@@ -13,8 +13,7 @@
 
       <app-user-profile-controls
         [user]="user"
-        (follow)="follow($event)"
-        (unfollow)="unfollow($event)"
+        (followChanges)="followChanges()"
       >
       </app-user-profile-controls>
 
@@ -55,5 +54,7 @@
     </div>
   </div>
 
-  <div *ngIf="!user" class="not-found tui-text_body-xl">User Not Found</div>
+  <div *ngIf="user === undefined" class="not-found tui-text_body-xl">
+    User Not Found
+  </div>
 </div>
