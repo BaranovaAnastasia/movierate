@@ -22,7 +22,18 @@
       </app-movies-list>
     </div>
 
-    <app-user-lists [user]="user"></app-user-lists>
+    <div class="list-wrapper" id="watched">
+      <app-movies-list *ngIf="watched$ | async as watched" [list]="watched">
+      </app-movies-list>
+    </div>
+
+    <div class="list-wrapper" id="lists">
+      <app-user-lists [user]="user"></app-user-lists>
+    </div>
+
+    <div class="list-wrapper" id="actions">
+      <app-actions-list [userId]="user.id"></app-actions-list>
+    </div>
   </div>
 
   <div *ngIf="!user" class="not-found tui-text_body-xl">User Not Found</div>

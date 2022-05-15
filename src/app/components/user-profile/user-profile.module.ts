@@ -8,6 +8,7 @@ import { UserProfileControlsModule } from './user-profile-controls/user-profile-
 import { UserListsModule } from './user-lists/user-lists.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { UserPreviewModule } from '../common';
+import { ActionsListModule } from './actions-list/actions-list.module';
 
 @NgModule({
   declarations: [UserProfileComponent],
@@ -20,6 +21,7 @@ import { UserPreviewModule } from '../common';
     UserStatisticsModule,
     UserProfileControlsModule,
     UserListsModule,
+    ActionsListModule,
   ],
   exports: [UserProfileComponent],
 })

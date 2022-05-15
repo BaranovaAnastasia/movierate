@@ -50,6 +50,10 @@ export class MoviesListComponent {
     );
   }
 
+  get id(): string {
+    return `list${this.list?.listId}`;
+  }
+
   startEditing(): void {
     if (!this.editable) return;
     this.nowEditing = true;

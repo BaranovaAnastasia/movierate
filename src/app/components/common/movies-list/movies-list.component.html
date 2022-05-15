@@ -1,4 +1,4 @@
-<div *ngIf="list" class="container" [ngClass]="{ empty: isEmpty }">
+<div [id]="id" *ngIf="list" class="container" [ngClass]="{ empty: isEmpty }">
   <div *ngIf="!nowEditing" class="title tui-text_body-xl">
     <app-section-title [title]="list.listName" (dblclick)="startEditing()">
     </app-section-title>

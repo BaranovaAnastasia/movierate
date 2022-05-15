@@ -16,5 +16,8 @@ export * from './movie/user-movie-interaction.service';
 export * from './lists/user-lists-api.service';
 export * from './lists/lists.service';
 
+export * from './user-action/user-action-api.service';
+export * from './user-action/user-action.service';
+
 export * from './movie/movie.service';
 export * from './navigation.service';

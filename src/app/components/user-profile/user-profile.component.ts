@@ -17,6 +17,9 @@ export class UserProfileComponent {
   favourites$ = this.activatedroute.params.pipe(
     mergeMap(params => this.favouritesService.getFavourites$(params.id)),
   );
+  watched$ = this.activatedroute.params.pipe(
+    mergeMap(params => this.favouritesService.getWatched$(params.id)),
+  );
 
   constructor(
     private userService: UserService,

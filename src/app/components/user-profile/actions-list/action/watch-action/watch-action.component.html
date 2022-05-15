@@ -1,0 +1,7 @@
+<div class="container">
+  <div class="time">{{ action.createdAt | timeStrigify }}</div>
+  Watched
+  <a [routerLink]="['/movie', action.movieId]" class="movie">
+    {{ action.title }}
+  </a>
+</div>

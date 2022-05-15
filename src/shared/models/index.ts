@@ -18,5 +18,6 @@ export * from './user/user-genre-stats';
 export * from './user/user-stats';
 export * from './user/user-top-entry';
 export * from './user/user-top-option';
+export * from './user/user-action';
 
 export * from './tokens';

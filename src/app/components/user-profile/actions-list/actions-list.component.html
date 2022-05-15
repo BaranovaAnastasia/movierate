@@ -1,0 +1,18 @@
+<div *ngIf="actions$ | async as actions">
+  <div *ngIf="actions.length > 0">
+    <app-section-title title="Latest News"></app-section-title>
+
+    <div *ngIf="groups" class="actions-wrapper">
+      <div *ngFor="let date of groups.keys()">
+        <div class="header">
+          <app-user-dated-preview [user]="actions[0].author" [date]="date">
+          </app-user-dated-preview>
+        </div>
+        <div class="actions">
+          <app-action *ngFor="let action of groups.get(date)" [action]="action">
+          </app-action>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

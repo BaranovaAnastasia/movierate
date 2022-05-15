@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="time">{{ action.createdAt | timeStrigify }}</div>
+  Created List
+  <a
+    [routerLink]="['/user', action.author.id]"
+    [fragment]="fragment"
+    class="list"
+  >
+    {{ action.list!.listName }}
+  </a>
+</div>

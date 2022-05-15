@@ -42,9 +42,11 @@ export class ReviewFormComponent implements OnChanges {
     this.form.reset();
     this.userMovieInteractionService
       .getRating$(this.movieId!)
-      .subscribe(rating =>
-        this.form.patchValue({ rating: rating! / 2 }, { emitEvent: false }),
-      );
+      .subscribe(rating => {
+        if (rating) {
+          this.form.patchValue({ rating: rating / 2 }, { emitEvent: false });
+        }
+      });
   }
 
   submit() {

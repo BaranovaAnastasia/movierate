@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ReviewDto } from 'src/shared/dto';
 import { IS_ACCESS_TOKEN_REQURED } from 'src/shared/interceptors';
 import { IReviewsApiService } from 'src/shared/interfaces';
 import { Review } from 'src/shared/models';
@@ -20,8 +21,8 @@ export class ReviewsApiService implements IReviewsApiService {
     private errorService: ErrorService
   ) { }
 
-  getMovieReviews$(movieId: string): Observable<Review[]> {
-    return this.httpClient.get<Review[]>(
+  getMovieReviews$(movieId: string): Observable<ReviewDto[]> {
+    return this.httpClient.get<ReviewDto[]>(
       constructRequestUrl(
         environment.serverUrl,
         REVIEW_PATH,
@@ -36,8 +37,8 @@ export class ReviewsApiService implements IReviewsApiService {
     );
   }
 
-  postReview$(movieId: string, review: Review): Observable<Review[]> {
-    return this.httpClient.post<Review[]>(
+  postReview$(movieId: string, review: Review): Observable<ReviewDto[]> {
+    return this.httpClient.post<ReviewDto[]>(
       constructRequestUrl(
         environment.serverUrl,
         REVIEW_PATH
@@ -54,7 +55,7 @@ export class ReviewsApiService implements IReviewsApiService {
     );
   }
 
-  getUserReviews$(username: string): Observable<Review[]> {
+  getUserReviews$(username: string): Observable<ReviewDto[]> {
     throw new Error('Method not implemented.');
   }
 }

@@ -22,16 +22,20 @@
 
     <a
       [routerLink]="['/user', user.id]"
-      fragment="lists"
+      fragment="watched"
       class="controls__links__item tui-text_body-m"
     >
-      Lists
+      Watched
     </a>
 
     <hr />
 
-    <a class="controls__links__item tui-text_body-m">
-      {{ user.isCurrentUser ? 'Friends Activity' : 'Activity' }}
+    <a
+      [routerLink]="['/user', user.id]"
+      fragment="actions"
+      class="controls__links__item tui-text_body-m"
+    >
+      Latest News
     </a>
 
     <hr *ngIf="user.isCurrentUser" />

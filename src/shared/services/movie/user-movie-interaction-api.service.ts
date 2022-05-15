@@ -8,7 +8,7 @@ import { IUserMovieInteractionApiService } from 'src/shared/interfaces';
 import { Movie, MovieStats } from 'src/shared/models';
 import { ErrorService } from '../error.service';
 import { constructRequestUrl } from '../functions';
-import { ADD_TO_FAVOURITES_ERROR_MSG, FAVOURITES_PATH, GET_FAVOURITES_ERROR_MSG, RATE_ERROR_MSG, RATE_PATH, RATING_ERROR_MSG, RATING_PATH, REMOVE_FROM_FAVOURITES_ERROR_MSG, STATS_ERROR_MSG, STATS_PATH, UNWATCH_ERROR_MSG, UNWATCH_PATH, WATCH_ERROR_MSG, WATCH_PATH } from './constants';
+import { ADD_TO_FAVOURITES_ERROR_MSG, FAVOURITES_PATH, GET_FAVOURITES_ERROR_MSG, GET_WATCHED_ERROR_MSG, RATE_ERROR_MSG, RATE_PATH, RATING_ERROR_MSG, RATING_PATH, REMOVE_FROM_FAVOURITES_ERROR_MSG, STATS_ERROR_MSG, STATS_PATH, UNWATCH_ERROR_MSG, WATCHED_PATH, WATCH_ERROR_MSG } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -72,9 +72,10 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
     return this.httpClient.post<MovieStats>(
       constructRequestUrl(
         environment.serverUrl,
-        WATCH_PATH
+        WATCHED_PATH,
+        `/${movieId}`
       ),
-      { movieId: String(movieId) },
+      { },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
@@ -85,17 +86,33 @@ export class UserMovieInteractionApiService implements IUserMovieInteractionApiS
   }
 
   unwatchMovie$(movieId: string): Observable<MovieStats | undefined> {
-    return this.httpClient.post<MovieStats>(
+    return this.httpClient.delete<MovieStats>(
       constructRequestUrl(
         environment.serverUrl,
-        UNWATCH_PATH
+        WATCHED_PATH,
+        `/${movieId}`
       ),
-      { movieId: String(movieId) },
       { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
     ).pipe(
       catchError(error => {
         this.errorService.showError(error, UNWATCH_ERROR_MSG);
         return of(undefined);
+      })
+    );
+  }
+
+  getWatched$(userId: number): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>(
+      constructRequestUrl(
+        environment.serverUrl,
+        WATCHED_PATH,
+        `/${userId}`
+      ),
+      { context: new HttpContext().set(IS_ACCESS_TOKEN_REQURED, true) }
+    ).pipe(
+      catchError(error => {
+        this.errorService.showError(error, GET_WATCHED_ERROR_MSG);
+        return of([]);
       })
     );
   }

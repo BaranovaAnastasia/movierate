@@ -16,6 +16,7 @@ import {
   IUserApiServiceToken,
   IUserMovieInteractionApiServiceToken,
   IUserListsApiServiceToken,
+  IUserActionApiServiceToken,
 } from 'src/shared/interfaces';
 import {
   AuthApiService,
@@ -25,6 +26,7 @@ import {
   UserApiService,
   UserMovieInteractionApiService,
   UserListsApiService,
+  UserActionApiService,
 } from 'src/shared/services';
 import { ErrorInterceptor, AuthInterceptor } from 'src/shared/interceptors';
 import { HeaderModule } from './components/header/header.module';
@@ -61,6 +63,7 @@ import { AppRoutingModule } from './app-routing.module';
       provide: IUserMovieInteractionApiServiceToken,
       useClass: UserMovieInteractionApiService,
     },
+    { provide: IUserActionApiServiceToken, useClass: UserActionApiService },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],

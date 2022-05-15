@@ -9,5 +9,4 @@ import { Review, User } from 'src/shared/models';
 })
 export class ReviewComponent {
   @Input() review!: Review;
-  @Input() author!: User;
 }

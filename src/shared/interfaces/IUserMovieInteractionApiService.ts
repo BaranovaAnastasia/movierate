@@ -12,6 +12,7 @@ export interface IUserMovieInteractionApiService {
   rateMovie$(movieId: string, rating: number ): Observable<MovieStats | undefined>;
   watchMovie$(movieId: string): Observable<MovieStats | undefined>;
   unwatchMovie$(movieId: string): Observable<MovieStats | undefined>;
+  getWatched$(userId: number): Observable<Movie[]>;
   
   addMovieToFavourites$(movieId: string): Observable<MovieStats | undefined>;
   removeMovieFromFavourites$(movieId: string): Observable<MovieStats | undefined>;

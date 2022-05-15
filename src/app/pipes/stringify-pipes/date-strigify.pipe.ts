@@ -6,7 +6,10 @@ import { MONTHS } from './constants';
   name: 'dateStrigify',
 })
 export class DateStrigifyPipe implements PipeTransform {
-  transform(value: Date | undefined, onlyYear: boolean = false): string {
+  transform(
+    value: Date | string | undefined,
+    onlyYear: boolean = false,
+  ): string {
     if (!value) return '';
 
     const { year, month, day } = TuiDay.fromLocalNativeDate(new Date(value));
