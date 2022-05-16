@@ -25,7 +25,7 @@ function groupByDate(actions: UserAction[]): Map<string, UserAction[]> {
     }
   });
   return new Map(
-    [...map.entries()].sort(value => new Date(value[0]).getTime()).reverse(),
+    [...map.entries()].sort(value => new Date(value[0]).getTime()),
   );
 }
 
