@@ -1,14 +1,14 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IS_API_REQUEST } from 'src/shared/interceptors';
 import { IMovieApiService } from 'src/shared/interfaces';
-import { Credits, Movie, TMDBCredits, TMDBMovie, TMDBSearchResult, TMDBVideos, Trailer } from 'src/shared/models';
+import { Credits, Movie, Trailer } from 'src/shared/models';
 import { ErrorService } from '../error.service';
 import { constructRequestUrl } from '../functions';
-import { CREDITS_ERROR_MSG, MOVIE_DIRECTOR, MOVIE_ERROR_MSG, MOVIE_PATH, MOVIE_WRITER, SEARCH_ERROR_MSG, SEARCH_PATH, TRAILER_ERROR_MSG, TRAILER_TYPE } from './constants';
+import { CREDITS_ERROR_MSG, CREDITS_PATH, MOVIE_ERROR_MSG, MOVIE_PATH, SEARCH_ERROR_MSG, SEARCH_PATH, TRAILER_ERROR_MSG, TRAILER_PATH } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +21,14 @@ export class TMDBMovieApiService implements IMovieApiService {
   ) { }
 
   getMovie$(id: string): Observable<Movie | undefined> {
-    return this.httpClient.get<TMDBMovie>(
+    return this.httpClient.get<Movie>(
       constructRequestUrl(
-        environment.tmdbApiUrl,
+        environment.serverUrl,
         MOVIE_PATH,
-        `/${id}`,
-        { 'api_key': environment.tmdbApiKey }
+        `/${id}`
       ),
       { context: new HttpContext().set(IS_API_REQUEST, true) }
     ).pipe(
-      map(result => this.TMDBMovie2Movie(result)),
-
       catchError(error => {
         this.errorService.showError(error, MOVIE_ERROR_MSG);
         return of(undefined);
@@ -40,17 +37,14 @@ export class TMDBMovieApiService implements IMovieApiService {
   }
 
   getTrailer$(id: string): Observable<Trailer | undefined> {
-    return this.httpClient.get<TMDBVideos>(
+    return this.httpClient.get<Trailer>(
       constructRequestUrl(
-        environment.tmdbApiUrl,
-        MOVIE_PATH,
-        `/${id}/videos`,
-        { 'api_key': environment.tmdbApiKey }
+        environment.serverUrl,
+        TRAILER_PATH,
+        `/${id}`
       ),
       { context: new HttpContext().set(IS_API_REQUEST, true) }
     ).pipe(
-      map(result => result.results.find(video => video.type === TRAILER_TYPE)),
-
       catchError(error => {
         this.errorService.showError(error, TRAILER_ERROR_MSG);
         return of(undefined);
@@ -59,33 +53,14 @@ export class TMDBMovieApiService implements IMovieApiService {
   }
 
   getCredits$(id: string): Observable<Credits | undefined> {
-    return this.httpClient.get<TMDBCredits>(
+    return this.httpClient.get<Credits>(
       constructRequestUrl(
-        environment.tmdbApiUrl,
-        MOVIE_PATH,
-        `/${id}/credits`,
-        { 'api_key': environment.tmdbApiKey }
+        environment.serverUrl,
+        CREDITS_PATH,
+        `/${id}`
       ),
       { context: new HttpContext().set(IS_API_REQUEST, true) }
     ).pipe(
-      map(result => Object.assign(
-        {
-          cast: result.cast
-            .filter(member => member.order < 4)
-            .map(value => value.name)
-        },
-        {
-          directors: result.crew
-            .filter(member => member.job === MOVIE_DIRECTOR)
-            .map(value => value.name)
-        },
-        {
-          writers: result.crew
-            .filter(member => member.department === MOVIE_WRITER)
-            .map(value => value.name)
-        }
-      )),
-
       catchError(error => {
         this.errorService.showError(error, CREDITS_ERROR_MSG);
         return of(undefined);
@@ -94,40 +69,19 @@ export class TMDBMovieApiService implements IMovieApiService {
   }
 
   searchMovies$(query: string, page: number): Observable<Movie[]> {
-    return this.httpClient.get<TMDBSearchResult>(
+    return this.httpClient.get<Movie[]>(
       constructRequestUrl(
-        environment.tmdbApiUrl,
+        environment.serverUrl,
         SEARCH_PATH,
         undefined,
-        {
-          'api_key': environment.tmdbApiKey,
-          'query': query,
-          'page': page
-        }
+        { 'term': query, 'page': page }
       ),
       { context: new HttpContext().set(IS_API_REQUEST, true) }
     ).pipe(
-      map(result => result.results),
-      map(result => result.sort(
-        (a, b) => a.popularity && b.popularity ? b.popularity - a.popularity : 0
-      )),
-      map(result => result.map(tmdbMovie => this.TMDBMovie2Movie(tmdbMovie))),
-
       catchError(error => {
         this.errorService.showError(error, SEARCH_ERROR_MSG);
         return of([]);
       })
-    );
-  }
-
-  private TMDBMovie2Movie(tmdbMovie: TMDBMovie): Movie {
-    return Object.assign(
-      { ...tmdbMovie },
-      {
-        id: String(tmdbMovie.id),
-        poster_path: tmdbMovie.poster_path ? `${environment.tmdbPosterUrl}/${tmdbMovie.poster_path}` : undefined
-      },
-      tmdbMovie.genres && { genres: tmdbMovie.genres.map(genre => genre.name).slice(0, 2) }
     );
   }
 

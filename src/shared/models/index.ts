@@ -6,13 +6,6 @@ export * from './movie/trailer';
 
 export * from './movies-list/movies-list';
 
-export * from './tmdb/tmdb-credits';
-export * from './tmdb/tmdb-movie';
-export * from './tmdb/tmdb-movies-list';
-export * from './tmdb/tmdb-reviews';
-export * from './tmdb/tmdb-search-result';
-export * from './tmdb/tmdb-videos';
-
 export * from './user/user';
 export * from './user/user-genre-stats';
 export * from './user/user-stats';

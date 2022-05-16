@@ -1,5 +1,8 @@
-export const MOVIE_PATH = '/movie';
-export const SEARCH_PATH = '/search/movie';
+export const MOVIE_PATH = '/tmdb/movie';
+export const SEARCH_PATH = '/tmdb/search';
+export const TRAILER_PATH = '/tmdb/trailer';
+export const CREDITS_PATH = '/tmdb/credits';
+
 export const RATING_PATH = '/movie/rating';
 export const STATS_PATH = '/movie/stats';
 export const RATE_PATH = '/movie/rate';

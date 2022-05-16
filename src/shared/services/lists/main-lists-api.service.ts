@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IS_API_REQUEST } from 'src/shared/interceptors';
 import { IMainListsApiService } from 'src/shared/interfaces';
-import { Movie, MoviesList, TMDBMoviesList } from 'src/shared/models';
+import { Movie, MoviesList } from 'src/shared/models';
 import { ErrorService } from '../error.service';
 import { constructRequestUrl } from '../functions';
 import { POPULAR_ERROR_MSG, POPULAR_PATH, POPULAR_TITLE, TOP_ERROR_MSG, TOP_PATH, TOP_TITLE, UPCOMING_ERROR_MSG, UPCOMING_PATH, UPCOMING_TITLE } from './constants';
@@ -21,12 +21,10 @@ export class MainListsApiService implements IMainListsApiService {
   ) { }
 
   getPopular$(): Observable<MoviesList | undefined> {
-    return this.httpClient.get<TMDBMoviesList>(
+    return this.httpClient.get<Movie[]>(
       constructRequestUrl(
-        environment.tmdbApiUrl,
-        POPULAR_PATH,
-        undefined,
-        { 'api_key': environment.tmdbApiKey }
+        environment.serverUrl,
+        POPULAR_PATH
       ),
       { context: new HttpContext().set(IS_API_REQUEST, true) }
     ).pipe(
@@ -43,15 +41,10 @@ export class MainListsApiService implements IMainListsApiService {
     const today = new Date();
     const todayReq = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
 
-    return this.httpClient.get<TMDBMoviesList>(
+    return this.httpClient.get<Movie[]>(
       constructRequestUrl(
-        environment.tmdbApiUrl,
-        UPCOMING_PATH,
-        undefined,
-        {
-          'api_key': environment.tmdbApiKey,
-          'primary_release_date.gte': todayReq
-        }
+        environment.serverUrl,
+        UPCOMING_PATH
       ),
       { context: new HttpContext().set(IS_API_REQUEST, true) }
     ).pipe(
@@ -81,19 +74,17 @@ export class MainListsApiService implements IMainListsApiService {
     )
   }
 
-  private tmdbList2List(tmdbList: TMDBMoviesList, listName: string): MoviesList {
+  private tmdbList2List(movies: Movie[], listName: string): MoviesList {
     return {
       listName: listName,
-      movies: tmdbList.results.map(movie =>
-        Object.assign(
-          { ...movie },
-          {
-            poster_path: movie.poster_path ? `${environment.tmdbPosterUrl}${movie.poster_path}` : undefined,
-            vote_average: undefined,
-            vote_count: undefined
-          }
-        )
-      )
+      movies: movies.map(movie => Object.assign(
+        { ...movie },
+        {
+          vote_average: undefined,
+          vote_count: undefined,
+          watched: undefined
+        }
+      ))
     }
   }
 

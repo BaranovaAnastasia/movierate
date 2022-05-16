@@ -1,5 +1,5 @@
-export const POPULAR_PATH = '/movie/popular';
-export const UPCOMING_PATH = '/discover/movie';
+export const POPULAR_PATH = '/tmdb/popular';
+export const UPCOMING_PATH = '/tmdb/upcoming';
 export const TOP_PATH = '/movie/top';
 export const LIST_PATH = '/lists';
 export const CURRENT_LISTS_PATH = '/lists/all/current';
