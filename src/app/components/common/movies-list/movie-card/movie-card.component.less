@@ -1,0 +1,124 @@
+@desktop: ~'only screen and (min-width: 1011px)';
+@tablet: ~'only screen and (min-width: 720px) and (max-width: 1010px)';
+@mobile: ~'only screen and (max-width: 719px)';
+
+.container {
+  position: relative;
+  border-radius: 10px;
+  height: fit-content;
+}
+
+.link {
+  position: relative;
+  display: block;
+}
+
+.black-screen {
+  display: none;
+  position: absolute;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.4);
+}
+.link:hover .black-screen {
+  display: block;
+}
+
+.poster,
+.no-poster {
+  position: absolute;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.no-poster {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  background-color: #252525;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+.delete-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.info {
+  border-radius: 10px;
+  padding: 10px 0px 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-end;
+}
+.info * {
+  color: #ffffff;
+  opacity: 0.9;
+}
+.container:hover {
+  .info * {
+    opacity: 1;
+  }
+}
+
+.info__right {
+  text-align: right;
+  text-decoration: none;
+  flex-grow: 1;
+}
+.info__title {
+  font-weight: bold;
+  text-decoration: none;
+}
+.info__title:hover {
+  text-decoration: underline;
+}
+
+@media @desktop {
+  @card-width: 189px;
+  @card-height: 280px;
+
+  .link,
+  .black-screen,
+  .poster,
+  .no-poster {
+    width: @card-width;
+    height: @card-height;
+  }
+  .info {
+    width: @card-width;
+  }
+}
+
+@media @tablet {
+  @card-width: 155px;
+  @card-height: 230px;
+
+  .link,
+  .black-screen,
+  .poster,
+  .no-poster {
+    width: @card-width;
+    height: @card-height;
+  }
+  .info {
+    width: @card-width;
+  }
+}
+
+@media @mobile {
+  @card-width: 135px;
+  @card-height: 200px;
+
+  .link,
+  .black-screen,
+  .poster,
+  .no-poster {
+    width: @card-width;
+    height: @card-height;
+  }
+  .info {
+    width: @card-width;
+  }
+}

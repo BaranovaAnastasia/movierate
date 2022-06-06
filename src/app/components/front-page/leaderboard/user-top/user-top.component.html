@@ -1,0 +1,13 @@
+<div *ngIf="users && users.length > 0" class="container">
+  <div class="top__title tui-text_body-l">
+    {{ topTitle }}
+  </div>
+
+  <app-user-top-entry
+    *ngFor="let user of users; let i = index"
+    [user]="user"
+    [topOption]="topOption"
+    [position]="i"
+  >
+  </app-user-top-entry>
+</div>

@@ -1,0 +1,19 @@
+<div
+  *ngIf="{
+    topByMovies: topByMovies$ | async,
+    topByTime: topByTime$ | async,
+    topByReviews: topByReviews$ | async
+  } as userTops"
+  class="container"
+>
+  <app-section-title title="Leaderboard"> </app-section-title>
+
+  <div class="leaders">
+    <app-user-top topOption="movies" [users]="userTops.topByMovies!">
+    </app-user-top>
+    <app-user-top topOption="minutes" [users]="userTops.topByTime!">
+    </app-user-top>
+    <app-user-top topOption="reviews" [users]="userTops.topByReviews!">
+    </app-user-top>
+  </div>
+</div>

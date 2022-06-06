@@ -1,0 +1,37 @@
+<div *tuiLet="trailer$ | async as trailer" class="container">
+  <div *ngIf="!videoShown" class="preview">
+    <div class="preview-warpper">
+      <img *ngIf="previewUrl" class="preview__image" [src]="previewUrl" />
+
+      <div class="preview__black-screen">
+        <div *ngIf="trailer" class="wrapper">
+          <button class="preview__play" (click)="showVideo()">
+            <img class="preview__play__icon" src="assets/icons/play.svg" />
+          </button>
+
+          <div>
+            <div *ngIf="name" class="preview__name">
+              {{ name }}
+            </div>
+            <div class="preview__text">Watch the Trailer</div>
+          </div>
+        </div>
+
+        <div *ngIf="!trailer" class="wrapper">
+          <div class="preview__name">No Trailer Available :(</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="videoShown" class="trailer-wrapper">
+    <iframe
+      *ngIf="safeUrl"
+      class="trailer"
+      [src]="safeUrl"
+      frameborder="0"
+      allowfullscreen
+    >
+    </iframe>
+  </div>
+</div>

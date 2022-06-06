@@ -1,0 +1,22 @@
+<div *ngIf="actions$ | async as actions">
+  <app-section-title title="Latest News"></app-section-title>
+
+  <div *ngIf="actions.length > 0">
+    <div *ngIf="groups" class="actions-wrapper">
+      <div *ngFor="let date of groups.keys()">
+        <div class="header">
+          <app-user-dated-preview [user]="actions[0].author" [date]="date">
+          </app-user-dated-preview>
+        </div>
+        <div class="actions">
+          <app-action *ngFor="let action of groups.get(date)" [action]="action">
+          </app-action>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="actions.length === 0" class="content__empty tui-text_body-m">
+    No activity so far
+  </div>
+</div>

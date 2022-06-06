@@ -1,0 +1,92 @@
+/* You can add global styles to this file, and also import other style files */
+@mobile: ~'only screen and (max-width: 719px)';
+
+tui-wrapper[data-appearance='auth-submit'] {
+  background: #90cea1;
+  color: #000;
+  height: 40px;
+  font-weight: bold;
+  width: fit-content;
+
+  &[data-state='hovered'] {
+    background: #90cea1dd;
+  }
+
+  &[data-state='disabled'] {
+    opacity: 0.5;
+  }
+}
+
+tui-wrapper[data-appearance='icon-delete'] {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &[data-state='hovered'] {
+    color: #fff;
+  }
+}
+
+tui-wrapper[data-appearance='delete-list'] {
+  width: fit-content;
+  background: none;
+  color: #fff;
+  opacity: 0.5;
+
+  .delete-button__hint {
+    display: none;
+  }
+
+  &[data-state='hovered'] {
+    color: var(--tui-negative-night);
+
+    .delete-button__hint {
+      display: block;
+    }
+  }
+}
+
+tui-dialog {
+  background-color: #90cea1;
+  border: 15px solid transparent !important;
+}
+
+tui-dialog div.t-content {
+  background-color: #1C1C1C !important;
+}
+
+.movie-control {
+  position: relative;
+  height: 40px;
+
+  background: none;
+  border: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.movie-control:hover * {
+  opacity: 1 !important;
+  color: #90cea1;
+  stroke: #90cea1;
+  fill: #90cea1;
+}
+
+.movie-control_active * {
+  opacity: 1;
+  color: #90cea1;
+  stroke: #90cea1;
+  fill: #90cea1;
+}
+
+@media @mobile {
+  app-header {
+    app-user-preview {
+      .image-link {
+        display: none;
+      }
+    }
+  }
+}

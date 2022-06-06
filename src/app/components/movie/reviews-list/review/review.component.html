@@ -1,0 +1,23 @@
+<div class="review">
+  <div class="review__header">
+    <app-user-dated-preview [user]="review.author" [date]="review.created_at">
+    </app-user-dated-preview>
+    <tui-rating
+      class="review__rating"
+      iconNormal="/assets/icons/star.svg"
+      iconFilled="/assets/icons/star-filled.svg"
+      [(ngModel)]="review.rating"
+      [disabled]="true"
+    >
+    </tui-rating>
+  </div>
+
+  <div class="review__content">
+    <div class="review__content__title tui-text_body-l">
+      {{ review.title }}
+    </div>
+    <div class="review__content__text">
+      {{ review.review }}
+    </div>
+  </div>
+</div>

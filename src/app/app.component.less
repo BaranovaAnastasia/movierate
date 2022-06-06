@@ -1,0 +1,33 @@
+@desktop: ~'only screen and (min-width: 1011px)';
+@tablet: ~'only screen and (min-width: 720px) and (max-width: 1010px)';
+@mobile: ~'only screen and (max-width: 719px)';
+
+.container {
+  min-height: 100vh;
+  background: #1c1c1c;
+  position: relative;
+  padding-bottom: 100px;
+}
+
+.content {
+  max-width: 1280px;
+  margin: auto;
+}
+
+app-footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+@media @desktop, @tablet {
+  .content {
+    padding: 24px;
+  }
+}
+
+@media @mobile {
+  .content {
+    padding: 10px;
+  }
+}

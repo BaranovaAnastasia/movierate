@@ -1,0 +1,50 @@
+@import '~@taiga-ui/core/styles/taiga-ui-local';
+
+.form {
+  max-width: 380px;
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  color: #ffffff;
+}
+
+.form__field {
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.form__field_invalid {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
+  border: solid 1px var(--tui-negative-night);
+  border-radius: var(--tui-radius-m);
+  margin: 0;
+}
+
+.form__footer {
+  width: 100%;
+  margin-top: 25px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+a {
+  color: #ffffff;
+}
+
+.error,
+.signup-error {
+  align-self: flex-start;
+  color: var(--tui-negative-night);
+}
+.error {
+  margin-bottom: 15px;
+}

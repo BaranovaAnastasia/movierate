@@ -1,0 +1,73 @@
+<form class="form" [formGroup]="form" (submit)="signup()">
+  <div class="tui-form__header">Create Account</div>
+
+  <tui-input
+    class="form__field"
+    [ngClass]="{ form__field_invalid: getIsInvalid('name') }"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="name"
+  >
+    Name
+  </tui-input>
+  <div *ngIf="getIsInvalid('name')" class="error">Name is required</div>
+
+  <tui-input
+    class="form__field"
+    [ngClass]="{ form__field_invalid: getIsInvalid('email') }"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="email"
+  >
+    Email
+  </tui-input>
+  <div *ngIf="getIsInvalid('email')" class="error">
+    {{ emailError }}
+  </div>
+
+  <tui-input-password
+    class="form__field"
+    [ngClass]="{ form__field_invalid: getIsInvalid('password') }"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="password"
+  >
+    Password
+  </tui-input-password>
+  <div *ngIf="getIsInvalid('password')" class="error">
+    {{ passwordError }}
+  </div>
+
+  <tui-input-password
+    class="form__field"
+    [ngClass]="{ form__field_invalid: getIsInvalid('confirmPassword') }"
+    tuiTextfieldSize="s"
+    tuiMode="onDark"
+    formControlName="confirmPassword"
+  >
+    Confirm password
+  </tui-input-password>
+  <div *ngIf="getIsInvalid('confirmPassword')" class="error">
+    Passwords do not match
+  </div>
+
+  <div *ngIf="signUpErrorMsg" class="signup-error">
+    {{ signUpErrorMsg }}
+  </div>
+
+  <div class="form__footer">
+    <div>
+      Already have an account?<br />
+      <a routerLink="/signin"> Log-In </a>
+    </div>
+
+    <button
+      tuiButton
+      type="submit"
+      appearance="auth-submit"
+      [disabled]="form.invalid"
+    >
+      Sign Up
+    </button>
+  </div>
+</form>

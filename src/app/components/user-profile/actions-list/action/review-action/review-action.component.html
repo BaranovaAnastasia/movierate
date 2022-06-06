@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="time">{{ action.createdAt | timeStrigify }}</div>
+  <div class="content">
+    Reviewed
+    <a [routerLink]="['/movie', action.movieId]" class="content__movie">
+      {{ action.title }}
+    </a>
+    <div>
+      <tui-rating
+        class="content__rating"
+        iconNormal="/assets/icons/star.svg"
+        iconFilled="/assets/icons/star-filled.svg"
+        [(ngModel)]="action.review!.rating"
+        [disabled]="true"
+      ></tui-rating>
+    </div>
+
+    <div class="review__content">
+      <div class="review__content__title tui-text_body-l">
+        {{ action.review!.title }}
+      </div>
+      <div class="review__content__text">
+        {{ action.review!.review }}
+      </div>
+    </div>
+  </div>
+</div>

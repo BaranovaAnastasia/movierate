@@ -1,0 +1,15 @@
+<div *ngIf="action.type === types[0]" class="container">
+  <app-list-action [action]="action"></app-list-action>
+</div>
+
+<div *ngIf="action.type === types[1]" class="container">
+  <app-review-action [action]="action"></app-review-action>
+</div>
+
+<div *ngIf="action.type === types[2]" class="container">
+  <app-rating-action [action]="action"></app-rating-action>
+</div>
+
+<div *ngIf="action.type === types[3]" class="container">
+  <app-watch-action [action]="action"></app-watch-action>
+</div>

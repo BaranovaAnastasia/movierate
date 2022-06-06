@@ -1,0 +1,49 @@
+<div class="container">
+  <a class="link" [routerLink]="['/movie', movie.id]">
+    <div *ngIf="!movie.poster_path" class="no-poster">No poster :(</div>
+    <img
+      *ngIf="movie.poster_path"
+      class="poster"
+      [src]="movie.poster_path"
+      alt="poster"
+    />
+    <div class="black-screen"></div>
+  </a>
+
+  <button
+    tuiIconButton
+    *ngIf="canDelete"
+    class="delete-button"
+    size="s"
+    type="button"
+    appearance="icon-delete"
+    icon="tuiIconCloseLarge"
+    tuiMode="onDark"
+    (click)="deleteMovie(); $event.stopPropagation()"
+  ></button>
+
+  <div class="info">
+    <div class="info__rating" *ngIf="movie.vote_average">
+      <label tuiProgressLabel>
+        <span class="percent">{{ formattedRating }}</span>
+
+        <tui-progress-circle
+          [color]="ratingColor"
+          size="m"
+          [max]="10"
+          [value]="movie.vote_average!"
+        >
+        </tui-progress-circle>
+      </label>
+    </div>
+
+    <div class="info__right">
+      <a class="info__title" [routerLink]="['/movie', movie.id]">
+        {{ movie.title }}
+      </a>
+      <div class="info__date tui-text_body-xs">
+        {{ movie.release_date | dateStrigify: !isUpcoming }}
+      </div>
+    </div>
+  </div>
+</div>

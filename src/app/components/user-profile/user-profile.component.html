@@ -1,0 +1,60 @@
+<div *tuiLet="user$ | async as user" class="container">
+  <div *ngIf="user" class="wrapper">
+    <div class="main">
+      <div class="picture-stats-wrapper">
+        <img class="picture" [src]="user.avatar_path" />
+        <div class="name-stats-wrapper">
+          <div class="name tui-text_h6">
+            {{ user.name }}
+          </div>
+          <app-user-statistics [userId]="user.id"> </app-user-statistics>
+        </div>
+      </div>
+
+      <app-user-profile-controls
+        [user]="user"
+        (followChanges)="followChanges()"
+      >
+      </app-user-profile-controls>
+
+      <div
+        class="follows"
+        *tuiLet="{
+          following: following$ | async,
+          followers: followers$ | async
+        } as follows"
+      >
+        <app-follows
+          [following]="follows.following!"
+          [followers]="follows.followers!"
+        >
+        </app-follows>
+      </div>
+    </div>
+
+    <div class="list-wrapper" id="favourites">
+      <app-movies-list
+        *ngIf="favourites$ | async as favourites"
+        [list]="favourites"
+      >
+      </app-movies-list>
+    </div>
+
+    <div class="list-wrapper" id="watched">
+      <app-movies-list *ngIf="watched$ | async as watched" [list]="watched">
+      </app-movies-list>
+    </div>
+
+    <div class="list-wrapper" id="lists">
+      <app-user-lists [user]="user"></app-user-lists>
+    </div>
+
+    <div class="actions-wrapper" id="actions">
+      <app-actions-list [userId]="user.id"></app-actions-list>
+    </div>
+  </div>
+
+  <div *ngIf="user === undefined" class="not-found tui-text_body-xl">
+    User Not Found
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="controls">
+  <button
+    *ngIf="!user.isCurrentUser"
+    class="controls__follow"
+    (click)="followClick()"
+  >
+    {{ followText }}
+  </button>
+
+  <div class="controls__links">
+    <hr *ngIf="user.isCurrentUser" />
+
+    <a
+      [routerLink]="['/user', user.id]"
+      fragment="favourites"
+      class="controls__links__item tui-text_body-m"
+    >
+      Favourites
+    </a>
+
+    <hr />
+
+    <a
+      [routerLink]="['/user', user.id]"
+      fragment="watched"
+      class="controls__links__item tui-text_body-m"
+    >
+      Watched
+    </a>
+
+    <hr />
+
+    <a
+      [routerLink]="['/user', user.id]"
+      fragment="actions"
+      class="controls__links__item tui-text_body-m"
+    >
+      Latest News
+    </a>
+
+    <hr *ngIf="user.isCurrentUser" />
+
+    <button
+      class="controls__links__item logout tui-text_body-m"
+      *ngIf="user.isCurrentUser"
+      (click)="logout()"
+    >
+      Log Out
+    </button>
+
+    <hr *ngIf="user.isCurrentUser" />
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<form class="title tui-text_body-xl" [formGroup]="form" (submit)="submit()">
+  <div class="title__tag"></div>
+  <input
+    appAutofocus
+    formControlName="name"
+    class="title__input"
+    placeholder="Title"
+    [style.width.ch]="inputWidth"
+  />
+
+  <tui-radio-labeled
+    contentAlign="right"
+    formControlName="visibility"
+    [item]="visibility[0]"
+    tuiMode="onDark"
+  >
+    {{ visibility[0] }}
+  </tui-radio-labeled>
+
+  <tui-radio-labeled
+    contentAlign="right"
+    formControlName="visibility"
+    [item]="visibility[1]"
+    tuiMode="onDark"
+  >
+    {{ visibility[1] }}
+  </tui-radio-labeled>
+
+  <button
+    tuiIconButton
+    size="s"
+    type="submit"
+    appearance="icon"
+    icon="tuiIconCheckLarge"
+  ></button>
+  <button
+    tuiIconButton
+    size="s"
+    type="button"
+    appearance="icon"
+    icon="tuiIconCloseLarge"
+    (click)="cancelEditing()"
+  ></button>
+</form>

@@ -1,0 +1,52 @@
+@desktop: ~'only screen and (min-width: 960px)';
+
+.movie {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #ffffff;
+}
+
+.movie__main {
+  width: 100%;
+}
+.movie__info {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.movie__poster {
+  width: 25%;
+}
+
+.movie__trailer {
+  width: 75%;
+}
+
+.movie__info {
+  flex-grow: 1;
+}
+
+.movie__controls {
+  width: 100%;
+}
+
+@media @desktop {
+  .movie__main,
+  .movie__reviews {
+    width: 63%;
+  }
+  .movie__info {
+    width: 33%;
+  }
+  app-reviews {
+    width: 63%;
+  }
+}
